@@ -9,3 +9,87 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Hod {
+  id         String    @id @unique @default(dbgenerated())
+  name       String
+  email      String    @unique
+  gender     String
+  address    String
+  portfolio  String
+  pictureUrl String
+  bio        String
+  department String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  Student    Student[]
+}
+
+model TgIncharge {
+  id         String   @id @unique @default(dbgenerated())
+  name       String
+  email      String   @unique
+  pictureUrl String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Tg {
+  id         String    @id @unique @default(dbgenerated())
+  name       String
+  email      String    @unique
+  phoneNo    String
+  pictureUrl String
+  gender     String
+  department String
+  bio        String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  Student    Student[]
+}
+
+model Teacher {
+  id         String   @id @unique @default(dbgenerated())
+  name       String
+  email      String   @unique
+  phoneNo    String
+  pictureUrl String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Parents {
+  id        String   @id @unique @default(dbgenerated())
+  name      String
+  phoneNo   String
+  address   String
+  student   Student  @relation(fields: [studentId], references: [id])
+  studentId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Student {
+  id            String    @id @unique @default(dbgenerated())
+  name          String
+  pictureUrl    String
+  email         String    @unique
+  phoneNo       Int
+  gender        String
+  age           Int
+  dateOfBirth   String
+  department    String
+  rollNo        Int
+  address       String
+  cast          String
+  religion      String
+  seatType      String
+  admissionDate String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  hod           Hod       @relation(fields: [hodId], references: [id])
+  hodId         String
+  Tg            Tg        @relation(fields: [tgId], references: [id])
+  tgId          String
+  Parents       Parents[]
+}
