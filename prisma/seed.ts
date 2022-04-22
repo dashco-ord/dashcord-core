@@ -63,6 +63,17 @@ const seed = async () => {
       },
     });
   }
+
+  console.log("Creating Parents...");
+  for (let i = 0; i <= 10; i++) {
+    await prisma.parents.create({
+      data: {
+        name: faker.name.findName(),
+        phoneNo: faker.phone.phoneNumber(),
+        address: faker.address.streetAddress(),
+      },
+    });
+  }
 };
 
 seed();
