@@ -11,7 +11,7 @@ const seed = async () => {
 
   console.log("\n🐧 Starting seed...\n");
 
-  console.log("🤵 Creating HOD...");
+  console.log("Creating HOD...");
   for (let i = 0; i <= 10; i++) {
     await prisma.hod.create({
       //@ts-ignore
@@ -27,7 +27,7 @@ const seed = async () => {
     });
   }
 
-  console.log("👨 Creating TG Incharge's...");
+  console.log("Creating TG Incharge's...");
   for (let i = 0; i <= 10; i++) {
     await prisma.tgIncharge.create({
       data: {
@@ -38,7 +38,21 @@ const seed = async () => {
     });
   }
 
-  console.log("👨‍🏫 Creating Teachers...");
+  console.log("Creating TG...");
+  for (let i = 0; i <= 10; i++) {
+    await prisma.tg.create({
+      data: {
+        name: faker.name.findName(),
+        email: faker.internet.email(),
+        phoneNo: faker.phone.phoneNumber(),
+        pictureUrl: faker.internet.url(),
+        gender: faker.address.countryCode(),
+        department: faker.address.countryCode(),
+      },
+    });
+  }
+
+  console.log("Creating Teachers...");
   for (let i = 0; i <= 10; i++) {
     await prisma.teacher.create({
       data: {
