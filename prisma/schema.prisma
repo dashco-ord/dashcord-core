@@ -12,11 +12,11 @@ model Hod {
   name       String
   email      String    @unique
   gender     String
-  address    String
+  address    String?
   portfolio  String
   pictureUrl String
-  bio        String
-  department String
+  bio        String?
+  department String?
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
   Student    Student[]
@@ -39,7 +39,7 @@ model Tg {
   pictureUrl String
   gender     String
   department String
-  bio        String
+  bio        String?
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
   Student    Student[]
