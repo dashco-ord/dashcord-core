@@ -63,10 +63,10 @@ model Parents {
   name      String
   phoneNo   String
   address   String
-  student   Student  @relation(fields: [studentId], references: [id])
-  studentId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  student   Student? @relation(fields: [studentId], references: [id])
+  studentId String?
 }
 
 model Student {
@@ -87,9 +87,9 @@ model Student {
   admissionDate String
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  hod           Hod       @relation(fields: [hodId], references: [id])
-  hodId         String
-  Tg            Tg        @relation(fields: [tgId], references: [id])
-  tgId          String
+  hod           Hod?      @relation(fields: [hodId], references: [id])
+  hodId         String?
+  Tg            Tg?       @relation(fields: [tgId], references: [id])
+  tgId          String?
   Parents       Parents[]
 }
