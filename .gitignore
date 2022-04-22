@@ -39,3 +39,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# database files
+/dev.db
+/dev.db-journal
