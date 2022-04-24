@@ -7,6 +7,7 @@ const seed = async () => {
   console.log("🪓 Deleting existing Data..");
   await prisma.hod.deleteMany();
   await prisma.tgIncharge.deleteMany();
+  await prisma.tg.deleteMany();
   await prisma.teacher.deleteMany();
 
   console.log("\n🐧 Starting seed...\n");
