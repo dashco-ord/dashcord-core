@@ -9,6 +9,8 @@ const seed = async () => {
   await prisma.tgIncharge.deleteMany();
   await prisma.tg.deleteMany();
   await prisma.teacher.deleteMany();
+  await prisma.parents.deleteMany();
+  await prisma.student.deleteMany();
 
   console.log("\n🐧 Starting seed...\n");
 
@@ -41,14 +43,18 @@ const seed = async () => {
 
   console.log("Creating TG...");
   for (let i = 0; i <= 10; i++) {
+    let gender = "male";
+    if (i % 2 == 0) {
+      gender = "female";
+    }
     await prisma.tg.create({
       data: {
         name: faker.name.findName(),
         email: faker.internet.email(),
         phoneNo: faker.phone.phoneNumber(),
         pictureUrl: faker.internet.url(),
-        gender: faker.address.countryCode(),
-        department: faker.address.countryCode(),
+        gender: gender,
+        department: "CSE",
       },
     });
   }
@@ -72,6 +78,32 @@ const seed = async () => {
         name: faker.name.findName(),
         phoneNo: faker.phone.phoneNumber(),
         address: faker.address.streetAddress(),
+      },
+    });
+  }
+
+  console.log("Creating Students...");
+  for (let i = 0; i <= 10; i++) {
+    let gender = "male";
+    if (i % 2 == 0) {
+      gender = "female";
+    }
+    await prisma.student.create({
+      data: {
+        name: faker.name.findName(),
+        pictureUrl: faker.internet.url(),
+        email: faker.internet.email(),
+        phoneNo: faker.phone.phoneNumber(),
+        gender: gender,
+        age: faker.datatype.number({ min: 18, max: 23 }),
+        dateOfBirth: new Date().toISOString(),
+        department: "CSE",
+        rollNo: `CS${faker.internet.port()}`,
+        address: faker.address.streetAddress(),
+        cast: faker.address.countryCode(),
+        religion: faker.address.direction(),
+        seatType: "Seat Type",
+        admissionDate: faker.date.between("june", "august").toString(),
       },
     });
   }

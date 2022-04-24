@@ -71,12 +71,12 @@ model Student {
   name          String
   pictureUrl    String
   email         String    @unique
-  phoneNo       Int
+  phoneNo       String
   gender        String
   age           Int
   dateOfBirth   String
   department    String
-  rollNo        Int
+  rollNo        String?
   address       String
   cast          String
   religion      String
