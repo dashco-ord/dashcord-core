@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -15,11 +12,11 @@ model Hod {
   name       String
   email      String    @unique
   gender     String
-  address    String
+  address    String?
   portfolio  String
   pictureUrl String
-  bio        String
-  department String
+  bio        String?
+  department String?
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
   Student    Student[]
@@ -42,7 +39,7 @@ model Tg {
   pictureUrl String
   gender     String
   department String
-  bio        String
+  bio        String?
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
   Student    Student[]
@@ -63,10 +60,10 @@ model Parents {
   name      String
   phoneNo   String
   address   String
-  student   Student  @relation(fields: [studentId], references: [id])
-  studentId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  student   Student? @relation(fields: [studentId], references: [id])
+  studentId String?
 }
 
 model Student {
@@ -74,12 +71,12 @@ model Student {
   name          String
   pictureUrl    String
   email         String    @unique
-  phoneNo       Int
+  phoneNo       String
   gender        String
   age           Int
   dateOfBirth   String
   department    String
-  rollNo        Int
+  rollNo        String?
   address       String
   cast          String
   religion      String
@@ -87,9 +84,9 @@ model Student {
   admissionDate String
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  hod           Hod       @relation(fields: [hodId], references: [id])
-  hodId         String
-  Tg            Tg        @relation(fields: [tgId], references: [id])
-  tgId          String
+  hod           Hod?      @relation(fields: [hodId], references: [id])
+  hodId         String?   @map("hod_id")
+  Tg            Tg?       @relation(fields: [tgId], references: [id])
+  tgId          String?   @map("tg_id")
   Parents       Parents[]
 }
