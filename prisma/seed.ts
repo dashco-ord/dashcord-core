@@ -83,7 +83,7 @@ const seed = async () => {
   }
 
   console.log("Creating Students...");
-  for (let i = 0; i <= 10; i++) {
+  for (let i = 0; i <= 100; i++) {
     let gender = "male";
     if (i % 2 == 0) {
       gender = "female";
