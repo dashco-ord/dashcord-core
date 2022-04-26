@@ -71,7 +71,7 @@ const Sidebar = () => {
 
       <div
         className={isActive("/logout") ? "bg-purple-500 rounded-md p-2" : ""}>
-        <Link href={"/logout"}>
+        <Link href={"/api/auth/logout"}>
           <a>
             <BiLogOut />
           </a>
