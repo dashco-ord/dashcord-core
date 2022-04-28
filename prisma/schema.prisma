@@ -67,10 +67,10 @@ model Parents {
 }
 
 model Student {
-  id            String    @id @default(cuid())
+  id            String      @id @default(cuid())
   name          String
   pictureUrl    String
-  email         String    @unique
+  email         String      @unique
   phoneNo       String
   gender        String
   age           Int
@@ -82,11 +82,24 @@ model Student {
   religion      String
   seatType      String
   admissionDate String
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  hod           Hod?      @relation(fields: [hodId], references: [id])
-  hodId         String?   @map("hod_id")
-  Tg            Tg?       @relation(fields: [tgId], references: [id])
-  tgId          String?   @map("tg_id")
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  hod           Hod?        @relation(fields: [hodId], references: [id])
+  hodId         String?     @map("hod_id")
+  Tg            Tg?         @relation(fields: [tgId], references: [id])
+  tgId          String?     @map("tg_id")
   Parents       Parents[]
+  Attendance    Attendance?
+}
+
+model Attendance {
+  id        String   @id @default(cuid())
+  lecture1  String
+  lecture2  String
+  lecture3  String
+  lecture4  String
+  lecture5  String
+  lecture6  String
+  student   Student? @relation(fields: [studentId], references: [id])
+  studentId String?  @unique
 }
