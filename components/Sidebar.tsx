@@ -44,8 +44,9 @@ const Sidebar = () => {
         </Link>
       </div>
 
-      <div className={isActive("/all") ? "bg-purple-500 rounded-md p-2" : ""}>
-        <Link href={"/all"}>
+      <div
+        className={isActive("/students") ? "bg-purple-500 rounded-md p-2" : ""}>
+        <Link href={"/students"}>
           <a>
             <BsTable />
           </a>
