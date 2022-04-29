@@ -16,6 +16,10 @@ const Home: NextPage = () => {
             <td className='pl-5 p-2 whitespace-nowrap'>Student Name</td>
             <td className='p-2 whitespace-nowrap'>Achievement</td>
           </tr>
+          <tr className='divide-black'>
+            <td className='pl-5 p-2 whitespace-nowrap'>Student Name</td>
+            <td className='p-2 whitespace-nowrap'>Achievement</td>
+          </tr>
         </Table>
       </div>
     </Layout>

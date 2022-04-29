@@ -11,6 +11,7 @@ model Hod {
   id         String    @id @default(cuid())
   name       String
   email      String    @unique
+  passHash   String
   gender     String
   address    String?
   portfolio  String
@@ -26,6 +27,7 @@ model TgIncharge {
   id         String   @id @default(cuid())
   name       String
   email      String   @unique
+  passHash   String
   pictureUrl String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -35,6 +37,7 @@ model Tg {
   id         String    @id @default(cuid())
   name       String
   email      String    @unique
+  passHash   String
   phoneNo    String
   pictureUrl String
   gender     String
@@ -49,6 +52,7 @@ model Teacher {
   id         String   @id @default(cuid())
   name       String
   email      String   @unique
+  passHash   String
   phoneNo    String
   pictureUrl String
   createdAt  DateTime @default(now())
@@ -59,6 +63,8 @@ model Parents {
   id        String   @id @default(cuid())
   name      String
   phoneNo   String
+  email     String
+  passHash  String
   address   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -71,6 +77,7 @@ model Student {
   name          String
   pictureUrl    String
   email         String      @unique
+  passHash      String
   phoneNo       String
   gender        String
   age           Int
