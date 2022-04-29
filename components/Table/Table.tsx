@@ -8,7 +8,7 @@ type TableProps = {
 
 const Table = ({ title = "", headings, children }: TableProps) => {
   return (
-    <div className=' col-span-full bg-[#1E1D1D] shadow-lg rounded-md text-white w-1/3'>
+    <div className=' col-span-full bg-[#1E1D1D] shadow-lg rounded-md text-white min-w-1/3'>
       <header className='px-5 py-4 flex items-center'>
         <h2 className='font-bold text-2xl mr-auto'>{title}</h2>
         <FcRefresh className='text-2xl font-bold' />
