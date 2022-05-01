@@ -1,49 +1,45 @@
-import { useState, useEffect } from "react";
 import Layout from "components/Layout";
-import { useRouter } from "next/router";
-import axios from "axios";
+import prisma from "lib/prisma";
 import { Student } from "@prisma/client";
-import Toast, { ToastParams } from "components/Toast";
 
-const SingleStudentPage = () => {
-  const router = useRouter();
-  const id = router.query.slug;
-  const [student, setStudent] = useState<Student>();
-  const [toast, setToast] = useState<ToastParams>();
+interface studentProps {
+  student: Student;
+}
 
-  const fetchStudent = async () => {
-    try {
-      const res = await axios.get(`/api/students/${id}`);
-      setStudent(res.data);
-    } catch (error) {
-      setToast({
-        type: "error",
-        message: "There was an error while fetching the student",
-      });
-    }
+export async function getStaticPaths() {
+  const students = await prisma.student.findMany();
+  const paths = students.map((student) => ({
+    params: {
+      slug: student.id,
+    },
+  }));
+  return {
+    paths,
+    fallback: true,
   };
+}
 
-  useEffect(() => {
-    fetchStudent();
-  }, []);
+export async function getStaticProps({ params }: any) {
+  const rawStudent = await prisma.student.findUnique({
+    where: {
+      id: params.slug,
+    },
+  });
+  return {
+    props: {
+      student: JSON.parse(JSON.stringify(rawStudent)),
+    },
+  };
+}
 
+const SingleStudentPage = ({ student }: studentProps) => {
   return (
     <Layout>
-      <div>
-        {toast && (
-          <Toast
-            type={toast.type}
-            className='mb-5'
-            open={true}
-            setOpen={() => setToast(undefined)}>
-            {toast.message}
-          </Toast>
-        )}
-      </div>
-      <div className='text-white list-none'>
-        <li>{student?.id}</li>
-        <li>{student?.name}</li>
-      </div>
+      <div className='text-white'>{student.id}</div>
+      <div className='text-white'>{student.name}</div>
+      <div className='text-white'>{student.gender}</div>
+      <div className='text-white'>{student.age}</div>
+      <div className='text-white'>{student.dateOfBirth}</div>
     </Layout>
   );
 };

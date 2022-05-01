@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { faker } from "@faker-js/faker";
+import { UserRole } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -26,6 +27,7 @@ const seed = async () => {
         pictureUrl: faker.internet.url(),
         bio: faker.address.secondaryAddress(),
         department: faker.address.countryCode(),
+        role: UserRole.hod,
       },
     });
   }
@@ -37,6 +39,7 @@ const seed = async () => {
         name: faker.name.findName(),
         email: faker.internet.email(),
         pictureUrl: faker.internet.url(),
+        role: UserRole.incharge,
       },
     });
   }
@@ -55,6 +58,7 @@ const seed = async () => {
         pictureUrl: faker.internet.url(),
         gender: gender,
         department: "CSE",
+        role: UserRole.tg,
       },
     });
   }
@@ -67,6 +71,7 @@ const seed = async () => {
         email: faker.internet.email(),
         phoneNo: faker.phone.phoneNumber(),
         pictureUrl: faker.internet.url(),
+        role: UserRole.teacher,
       },
     });
   }
@@ -78,6 +83,7 @@ const seed = async () => {
         name: faker.name.findName(),
         phoneNo: faker.phone.phoneNumber(),
         address: faker.address.streetAddress(),
+        role: UserRole.parent,
       },
     });
   }
@@ -104,6 +110,7 @@ const seed = async () => {
         religion: faker.address.direction(),
         seatType: "Seat Type",
         admissionDate: faker.date.between("june", "august").toString(),
+        role: UserRole.student,
       },
     });
   }

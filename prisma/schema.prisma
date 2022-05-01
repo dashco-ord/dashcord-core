@@ -18,19 +18,21 @@ model Hod {
   pictureUrl String
   bio        String?
   department String?
+  role       UserRole?
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
   Student    Student[]
 }
 
 model TgIncharge {
-  id         String   @id @default(cuid())
+  id         String    @id @default(cuid())
   name       String
-  email      String   @unique
+  email      String    @unique
   passHash   String?
   pictureUrl String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  role       UserRole?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
 }
 
 model Tg {
@@ -43,32 +45,35 @@ model Tg {
   gender     String
   department String
   bio        String?
+  role       UserRole?
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
   Student    Student[]
 }
 
 model Teacher {
-  id         String   @id @default(cuid())
+  id         String    @id @default(cuid())
   name       String
-  email      String   @unique
+  email      String    @unique
   passHash   String?
   phoneNo    String
   pictureUrl String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  role       UserRole?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
 }
 
 model Parents {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   name      String
   phoneNo   String
   email     String?
   passHash  String?
   address   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  student   Student? @relation(fields: [studentId], references: [id])
+  role      UserRole?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  student   Student?  @relation(fields: [studentId], references: [id])
   studentId String?
 }
 
@@ -89,6 +94,7 @@ model Student {
   religion      String
   seatType      String
   admissionDate String
+  role          UserRole?
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
   hod           Hod?        @relation(fields: [hodId], references: [id])
@@ -100,13 +106,27 @@ model Student {
 }
 
 model Attendance {
-  id        String   @id @default(cuid())
-  lecture1  String
-  lecture2  String
-  lecture3  String
-  lecture4  String
-  lecture5  String
-  lecture6  String
-  student   Student? @relation(fields: [studentId], references: [id])
-  studentId String?  @unique
+  id        String         @id @default(cuid())
+  lecture1  AttendanceType
+  lecture2  AttendanceType
+  lecture3  AttendanceType
+  lecture4  AttendanceType
+  lecture5  AttendanceType
+  lecture6  AttendanceType
+  student   Student?       @relation(fields: [studentId], references: [id])
+  studentId String?        @unique
+}
+
+enum UserRole {
+  hod
+  incharge
+  tg
+  teacher
+  parent
+  student
+}
+
+enum AttendanceType {
+  Present
+  Absent
 }
