@@ -1,10 +1,9 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const maxLimit = 50;
 
 const StudentsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
-  const prisma = new PrismaClient();
   if (req.method == "GET") {
     //@ts-ignore
     const page = parseInt(req.query?.page ?? "1") ?? 1; // @ts-ignore

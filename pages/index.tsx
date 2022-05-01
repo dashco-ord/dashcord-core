@@ -6,21 +6,28 @@ import Table from "components/Table/Table";
 const Home: NextPage = () => {
   return (
     <Layout>
-      <div className=' flex justify-evenly'>
-        <Card title='All Students' value={20} />
+      <div className=' flex '>
+        <Card title='All Students' value={20} link={`/students`} />
         <Card title='Weak Students' value={20} />
         <Card title='Avg. Students' value={20} />
         <Card title='Good Students' value={20} />
-        <Table title='Achievements' headings={["Name", "Achievement"]}>
-          <tr className='divide-black'>
-            <td className='pl-5 p-2 whitespace-nowrap'>Student Name</td>
-            <td className='p-2 whitespace-nowrap'>Achievement</td>
-          </tr>
-          <tr className='divide-black'>
-            <td className='pl-5 p-2 whitespace-nowrap'>Student Name</td>
-            <td className='p-2 whitespace-nowrap'>Achievement</td>
-          </tr>
-        </Table>
+      </div>
+      <div className='mt-10 flex'>
+        <div className='mr-10'>
+          <Table title='Achievements' headings={["Name", "Achievement"]}>
+            <tr className='divide-black'>
+              <td className='pl-5 p-2 whitespace-nowrap'>Student Name</td>
+              <td className='p-2 whitespace-nowrap'>won a hackathon</td>
+            </tr>
+            <tr className='divide-black'>
+              <td className='pl-5 p-2 whitespace-nowrap'>Student Name</td>
+              <td className='p-2 whitespace-nowrap'>Won a hackathon</td>
+            </tr>
+          </Table>
+        </div>
+        <div>
+          <Card title='Good Students' value={20} />
+        </div>
       </div>
     </Layout>
   );
