@@ -3,10 +3,35 @@ import Layout from "components/Layout";
 import Card from "components/cards/Card";
 import Table from "components/Table/Table";
 import { useSession } from "next-auth/react";
+import Pagination from "components/Pagination";
+import { useEffect, useState } from "react";
+import { Attendance } from "@prisma/client";
+import axios from "axios";
 
 const Home: NextPage = () => {
   const { data: session } = useSession();
-  console.log(session);
+  const [attendances, setAttendances] = useState<Attendance[]>([]);
+
+  const getAttendance = async () => {
+    const res = await axios.get("/api/attendances");
+    setAttendances(res.data);
+  };
+
+  useEffect(() => {
+    getAttendance();
+  }, []);
+
+  if (!session) {
+    return (
+      <Layout>
+        <div className='flex items-center justify-center h-4/5'>
+          <h1 className='text-2xl font-semibold text-white'>
+            Please Login first !!!
+          </h1>
+        </div>
+      </Layout>
+    );
+  }
   return (
     <Layout>
       <div className=' flex '>
@@ -31,6 +56,25 @@ const Home: NextPage = () => {
         <div>
           <Card title='Good Students' value={20} />
         </div>
+      </div>
+      <div className='pt-11'>
+        <Table
+          title='Attendance per Lecture'
+          headings={[
+            "name",
+            "rollNo",
+            "lecture1",
+            "lecture2",
+            "lecture3",
+            "lecture4",
+            "lecture5",
+            "lecture6",
+          ]}>
+          {/* {attendances.map((attendance) => (
+            <tr key={attendance.id}></tr>
+          ))} */}
+        </Table>
+        {/* <Pagination /> */}
       </div>
     </Layout>
   );

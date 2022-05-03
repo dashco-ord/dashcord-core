@@ -1,9 +1,10 @@
-import { BiHome, BiUser, BiChat, BiLogOut } from "react-icons/bi";
+import { BiHome, BiUser, BiChat, BiLogOut, BiLogIn } from "react-icons/bi";
 import { FiSettings } from "react-icons/fi";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { BsTable } from "react-icons/bs";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 const Sidebar = () => {
   const router = useRouter();
@@ -14,6 +15,8 @@ const Sidebar = () => {
       return false;
     }
   };
+
+  const { data: session } = useSession();
 
   return (
     <div className='flex flex-col justify-around items-center py-64 w-16 h-screen bg-[#1E1D1D] text-white text-3xl px-7'>
@@ -72,10 +75,8 @@ const Sidebar = () => {
 
       <div
         className={isActive("/logout") ? "bg-purple-500 rounded-md p-2" : ""}>
-        <Link href={"/api/auth/logout"}>
-          <a>
-            <BiLogOut />
-          </a>
+        <Link href={session?.user ? "/api/auth/signout" : "/api/auth/signin"}>
+          <a>{session?.user ? <BiLogOut /> : <BiLogIn />}</a>
         </Link>
       </div>
     </div>

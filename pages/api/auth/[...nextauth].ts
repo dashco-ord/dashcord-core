@@ -21,7 +21,7 @@ export default NextAuth({
       },
       //@ts-ignore
       async authorize(credentials) {
-        const user = await prisma.student.findUnique({
+        const user = await prisma.tg.findUnique({
           where: { email: credentials?.email },
         });
         //@ts-ignore
@@ -31,7 +31,6 @@ export default NextAuth({
             name: user?.name,
             email: user?.email,
             role: user?.role,
-            rollNo: user?.rollNo,
           };
         } else {
           return null;
