@@ -1,9 +1,16 @@
 import Link from "next/link";
+import { getCsrfToken } from "next-auth/react";
 
-const LoginPage = () => {
+const LoginPage = ({ csrfToken }: any) => {
   return (
     <div className='flex flex-col h-screen w-full items-center justify-center'>
-      <form className=' border-2 border-slate-200 p-10 rounded-lg lg:w-1/5 sm:w-10/12 xl:w-1/5 '>
+      <form
+        className=' border-2 border-slate-200 p-10 rounded-lg lg:w-1/5 sm:w-10/12 xl:w-1/5'
+        method='post'
+        action='/api/auth/callback/credentials'>
+        {/* This hidden input field is need for passing csrfToken that is received from getServerSidePRops */}
+        <input name='csrfToken' type='hidden' defaultValue={csrfToken} />
+
         <div className='flex flex-col pb-6'>
           <label className='text-xl text-slate-600 font-semibold mr-5 pb-2'>
             Email :
@@ -13,6 +20,7 @@ const LoginPage = () => {
             type='email'
             placeholder='Enter your Email'
             required
+            name='email'
           />
         </div>
 
@@ -33,6 +41,7 @@ const LoginPage = () => {
             type='password'
             placeholder='Enter your Password'
             required
+            name='password'
           />
         </div>
 
@@ -55,3 +64,11 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
+export async function getServerSideProps(context: any) {
+  return {
+    props: {
+      csrfToken: await getCsrfToken(context),
+    },
+  };
+}

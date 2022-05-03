@@ -2,8 +2,11 @@ import type { NextPage } from "next";
 import Layout from "components/Layout";
 import Card from "components/cards/Card";
 import Table from "components/Table/Table";
+import { useSession } from "next-auth/react";
 
 const Home: NextPage = () => {
+  const { data: session } = useSession();
+  console.log(session);
   return (
     <Layout>
       <div className=' flex '>
