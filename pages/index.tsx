@@ -3,14 +3,21 @@ import Layout from "components/Layout";
 import Card from "components/cards/Card";
 import Table from "components/Table/Table";
 import { useSession } from "next-auth/react";
-import Pagination from "components/Pagination";
 import { useEffect, useState } from "react";
 import { Attendance } from "@prisma/client";
 import axios from "axios";
+import Link from "next/link";
+
+type attendanceProps = {
+  id: String;
+  name: String;
+  rollNo: String;
+  Attendance: Attendance;
+};
 
 const Home: NextPage = () => {
   const { data: session } = useSession();
-  const [attendances, setAttendances] = useState<Attendance[]>([]);
+  const [attendances, setAttendances] = useState<attendanceProps[]>([]);
 
   const getAttendance = async () => {
     const res = await axios.get("/api/attendances");
@@ -70,9 +77,48 @@ const Home: NextPage = () => {
             "lecture5",
             "lecture6",
           ]}>
-          {/* {attendances.map((attendance) => (
-            <tr key={attendance.id}></tr>
-          ))} */}
+          {attendances.map((attendance) =>
+            attendance.Attendance ? (
+              <tr key={attendance.Attendance.id}>
+                <td className='pl-5 p-2 whitespace-nowrap text-violet-500'>
+                  {attendance.Attendance && (
+                    <Link href={`/students/${attendance.id}`}>
+                      <a>{attendance.name}</a>
+                    </Link>
+                  )}
+                </td>
+                <td className='p-2 whitespace-nowrap'>{attendance.rollNo}</td>
+                <td className='p-2 whitespace-nowrap'>
+                  {attendance.Attendance.lecture1}
+                </td>
+                <td className='p-2 whitespace-nowrap'>
+                  {attendance.Attendance.lecture2}
+                </td>
+                <td className='p-2 whitespace-nowrap'>
+                  {attendance.Attendance.lecture3}
+                </td>
+                <td className='p-2 whitespace-nowrap'>
+                  {attendance.Attendance.lecture4}
+                </td>
+                <td className='p-2 whitespace-nowrap'>
+                  {attendance.Attendance.lecture5}
+                </td>
+                <td className='p-2 whitespace-nowrap'>
+                  {attendance.Attendance.lecture6}
+                </td>
+              </tr>
+            ) : (
+              //@ts-ignore
+              <tr key={attendance.name}>
+                <td className='pl-5 p-2 whitespace-nowrap text-violet-500'>
+                  <Link href={`/students/${attendance.id}`}>
+                    <a>{attendance.name}</a>
+                  </Link>
+                </td>
+                <td className='p-2 whitespace-nowrap'>{attendance.rollNo}</td>
+              </tr>
+            )
+          )}
         </Table>
         {/* <Pagination /> */}
       </div>
