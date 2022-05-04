@@ -131,4 +131,5 @@ enum UserRole {
 enum AttendanceType {
   Present
   Absent
+  Informed
 }

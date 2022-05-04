@@ -1,17 +1,24 @@
+import { MouseEventHandler } from "react";
 import { FcRefresh } from "react-icons/fc";
 
 type TableProps = {
   title: string;
   headings: string[];
   children: JSX.Element | JSX.Element[];
+  refresh?: MouseEventHandler;
 };
 
-const Table = ({ title = "", headings, children }: TableProps) => {
+const Table = ({ title = "", headings, children, refresh }: TableProps) => {
   return (
     <div className=' col-span-full bg-[#1E1D1D] shadow-lg rounded-md text-white min-w-1/3'>
       <header className='px-5 py-4 flex items-center'>
         <h2 className='font-bold text-2xl mr-auto'>{title}</h2>
-        <FcRefresh className='text-2xl font-bold' />
+        {refresh && (
+          <FcRefresh
+            className='text-2xl font-bold hover:scale-110'
+            onClick={refresh}
+          />
+        )}
       </header>
       <div className='overflow-x-auto'>
         <table className='table-auto w-full divide-y'>

@@ -17,26 +17,17 @@ const getAttendenceRoute = async (
           Student: {
             select: {
               id: true,
+              name: true,
+              rollNo: true,
+              Attendance: true,
             },
           },
         },
       });
-      const studentIds: any[] = [];
+      const attendances: any[] = [];
       //@ts-ignore
-      tg.Student.map((student) => studentIds.push(student.id));
-
-      const findAttendance = async (studentId: string) => {
-        const attendance = await prisma.attendance.findFirst({
-          where: { studentId: studentId },
-        });
-        return attendance;
-      };
-      const attendances: any[] = studentIds.map((studentId) => {
-        findAttendance(studentId);
-      });
-      console.log(attendances);
-
-      console.log(attendances);
+      tg.Student.map((attendance) => attendances.push(attendance));
+      res.json(attendances);
       res.status(200).end();
       return;
     } catch (error) {
