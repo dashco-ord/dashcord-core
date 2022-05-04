@@ -78,31 +78,33 @@ model Parents {
 }
 
 model Student {
-  id            String      @id @default(cuid())
-  name          String
-  pictureUrl    String
-  email         String      @unique
-  passHash      String?
-  phoneNo       String
-  gender        String
-  age           Int
-  dateOfBirth   String
-  department    String
-  rollNo        String?
-  address       String
-  cast          String
-  religion      String
-  seatType      String
-  admissionDate String
-  role          UserRole?
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
-  hod           Hod?        @relation(fields: [hodId], references: [id])
-  hodId         String?     @map("hod_id")
-  Tg            Tg?         @relation(fields: [tgId], references: [id])
-  tgId          String?     @map("tg_id")
-  Parents       Parents[]
-  Attendance    Attendance?
+  id                     String      @id @default(cuid())
+  name                   String
+  pictureUrl             String
+  email                  String      @unique
+  passHash               String?
+  phoneNo                String
+  gender                 String
+  age                    Int
+  dateOfBirth            String
+  department             String
+  rollNo                 String?
+  address                String
+  cast                   String
+  religion               String
+  seatType               String
+  admissionDate          String
+  achivement             String?     @db.VarChar(200)
+  achivement_description String?     @db.LongText
+  role                   UserRole?
+  createdAt              DateTime    @default(now())
+  updatedAt              DateTime    @updatedAt
+  hod                    Hod?        @relation(fields: [hodId], references: [id])
+  hodId                  String?     @map("hod_id")
+  Tg                     Tg?         @relation(fields: [tgId], references: [id])
+  tgId                   String?     @map("tg_id")
+  Parents                Parents[]
+  Attendance             Attendance?
 }
 
 model Attendance {
