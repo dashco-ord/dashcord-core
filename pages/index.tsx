@@ -42,10 +42,14 @@ const Home: NextPage = () => {
   return (
     <Layout>
       <div className=' flex '>
-        <Card title='All Students' value={20} link={`/students`} />
-        <Card title='Weak Students' value={20} />
-        <Card title='Avg. Students' value={20} />
-        <Card title='Good Students' value={20} />
+        <Card
+          title='All Students'
+          value={attendances.length}
+          link={`/students`}
+        />
+        <Card title='Weak Students' value={attendances.length / 3} />
+        <Card title='Avg. Students' value={attendances.length / 3} />
+        <Card title='Good Students' value={attendances.length} />
       </div>
       <div className='mt-10 flex'>
         <div className='mr-10'>
@@ -66,6 +70,7 @@ const Home: NextPage = () => {
       </div>
       <div className='pt-11'>
         <Table
+          refresh={getAttendance}
           title='Attendance per Lecture'
           headings={[
             "name",
