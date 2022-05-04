@@ -4,7 +4,7 @@ import Card from "components/cards/Card";
 import Table from "components/Table/Table";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { Attendance } from "@prisma/client";
+import { Attendance, AttendanceType } from "@prisma/client";
 import axios from "axios";
 import Link from "next/link";
 
@@ -27,6 +27,19 @@ const Home: NextPage = () => {
   useEffect(() => {
     getAttendance();
   }, []);
+
+  const attendanceColors = (attendance: any) => {
+    switch (attendance) {
+      case AttendanceType.Present:
+        return "bg-green-500 text-white rounded-full text-center";
+      case AttendanceType.Absent:
+        return "bg-red-700 text-white rounded-full text-center";
+      case AttendanceType.Informed:
+        return "bg-purple-700 text-white rounded-full text-center";
+      default:
+        return "bg-gray-400 text-white rounded-full text-center";
+    }
+  };
 
   if (!session) {
     return (
@@ -94,22 +107,64 @@ const Home: NextPage = () => {
                 </td>
                 <td className='p-2 whitespace-nowrap'>{attendance.rollNo}</td>
                 <td className='p-2 whitespace-nowrap'>
-                  {attendance.Attendance.lecture1}
+                  <div className='flex items-center'>
+                    <div
+                      className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
+                        attendance.Attendance.lecture1
+                      )}`}>
+                      {attendance.Attendance.lecture1}
+                    </div>
+                  </div>
                 </td>
                 <td className='p-2 whitespace-nowrap'>
-                  {attendance.Attendance.lecture2}
+                  <div className='flex items-center'>
+                    <div
+                      className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
+                        attendance.Attendance.lecture2
+                      )}`}>
+                      {attendance.Attendance.lecture2}
+                    </div>
+                  </div>
                 </td>
                 <td className='p-2 whitespace-nowrap'>
-                  {attendance.Attendance.lecture3}
+                  <div className='flex items-center'>
+                    <div
+                      className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
+                        attendance.Attendance.lecture3
+                      )}`}>
+                      {attendance.Attendance.lecture3}
+                    </div>
+                  </div>
                 </td>
                 <td className='p-2 whitespace-nowrap'>
-                  {attendance.Attendance.lecture4}
+                  <div className='flex items-center'>
+                    <div
+                      className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
+                        attendance.Attendance.lecture4
+                      )}`}>
+                      {attendance.Attendance.lecture4}
+                    </div>
+                  </div>
                 </td>
                 <td className='p-2 whitespace-nowrap'>
-                  {attendance.Attendance.lecture5}
+                  <div className='flex items-center'>
+                    <div
+                      className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
+                        attendance.Attendance.lecture5
+                      )}`}>
+                      {attendance.Attendance.lecture5}
+                    </div>
+                  </div>
                 </td>
                 <td className='p-2 whitespace-nowrap'>
-                  {attendance.Attendance.lecture6}
+                  <div className='flex items-center'>
+                    <div
+                      className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
+                        attendance.Attendance.lecture6
+                      )}`}>
+                      {attendance.Attendance.lecture6}
+                    </div>
+                  </div>
                 </td>
               </tr>
             ) : (
