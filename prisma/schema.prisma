@@ -1,11 +1,132 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model Hod {
+  id         String    @id @default(cuid())
+  name       String
+  email      String    @unique
+  passHash   String?
+  gender     String
+  address    String?
+  portfolio  String
+  pictureUrl String
+  bio        String?
+  department String?
+  role       UserRole?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  Student    Student[]
+}
+
+model TgIncharge {
+  id         String    @id @default(cuid())
+  name       String
+  email      String    @unique
+  passHash   String?
+  pictureUrl String
+  role       UserRole?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Tg {
+  id         String    @id @default(cuid())
+  name       String
+  email      String    @unique
+  passHash   String?
+  phoneNo    String
+  pictureUrl String
+  gender     String
+  department String
+  bio        String?
+  role       UserRole?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  Student    Student[]
+}
+
+model Teacher {
+  id         String    @id @default(cuid())
+  name       String
+  email      String    @unique
+  passHash   String?
+  phoneNo    String
+  pictureUrl String
+  role       UserRole?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Parents {
+  id        String    @id @default(cuid())
+  name      String
+  phoneNo   String
+  email     String?
+  passHash  String?
+  address   String
+  role      UserRole?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  student   Student?  @relation(fields: [studentId], references: [id])
+  studentId String?
+}
+
+model Student {
+  id            String      @id @default(cuid())
+  name          String
+  pictureUrl    String
+  email         String      @unique
+  passHash      String?
+  phoneNo       String
+  gender        String
+  age           Int
+  dateOfBirth   String
+  department    String
+  rollNo        String?
+  address       String
+  cast          String
+  religion      String
+  seatType      String
+  admissionDate String
+  role          UserRole?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  hod           Hod?        @relation(fields: [hodId], references: [id])
+  hodId         String?     @map("hod_id")
+  Tg            Tg?         @relation(fields: [tgId], references: [id])
+  tgId          String?     @map("tg_id")
+  Parents       Parents[]
+  Attendance    Attendance?
+}
+
+model Attendance {
+  id        String         @id @default(cuid())
+  lecture1  AttendanceType
+  lecture2  AttendanceType
+  lecture3  AttendanceType
+  lecture4  AttendanceType
+  lecture5  AttendanceType
+  lecture6  AttendanceType
+  student   Student?       @relation(fields: [studentId], references: [id])
+  studentId String?        @unique
+}
+
+enum UserRole {
+  hod
+  incharge
+  tg
+  teacher
+  parent
+  student
+}
+
+enum AttendanceType {
+  Present
+  Absent
 }

@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+# migrations
+/prisma/migrations
+
 # next.js
 /.next/
 /out/
@@ -36,3 +39,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# database files
+/dev.db
+/dev.db-journal
