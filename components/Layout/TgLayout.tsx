@@ -1,4 +1,4 @@
-import Sidebar from "./Sidebar";
+import Sidebar from "components/Sidebar/TgSidebar";
 
 const Layout = ({ children }: any) => {
   return (
