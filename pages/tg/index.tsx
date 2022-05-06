@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import Layout from "components/Layout";
+import Layout from "components/Layout/TgLayout";
 import Card from "components/cards/Card";
 import Table from "components/Table/Table";
 import { useSession } from "next-auth/react";

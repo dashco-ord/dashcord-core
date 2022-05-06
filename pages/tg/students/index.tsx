@@ -1,4 +1,4 @@
-import Layout from "components/Layout";
+import Layout from "components/Layout/TgLayout";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Student } from "@prisma/client";
