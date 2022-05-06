@@ -100,7 +100,7 @@ const Home: NextPage = () => {
               <tr key={attendance.Attendance.id}>
                 <td className='pl-5 p-2 whitespace-nowrap text-violet-500'>
                   {attendance.Attendance && (
-                    <Link href={`/students/${attendance.id}`}>
+                    <Link href={`/tg/students/${attendance.id}`}>
                       <a>{attendance.name}</a>
                     </Link>
                   )}
@@ -171,7 +171,7 @@ const Home: NextPage = () => {
               //@ts-ignore
               <tr key={attendance.name}>
                 <td className='pl-5 p-2 whitespace-nowrap text-violet-500'>
-                  <Link href={`/students/${attendance.id}`}>
+                  <Link href={`/tg/students/${attendance.id}`}>
                     <a>{attendance.name}</a>
                   </Link>
                 </td>

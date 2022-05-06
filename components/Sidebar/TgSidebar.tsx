@@ -59,14 +59,14 @@ const Sidebar = () => {
         </Link>
       </div>
 
-      <div
+      {/* <div
         className={isActive("/tg/chat") ? "bg-purple-500 rounded-md p-2" : ""}>
         <Link href={"/tg/chat"}>
           <a>
             <BiChat />
           </a>
         </Link>
-      </div>
+      </div> */}
 
       <div
         className={

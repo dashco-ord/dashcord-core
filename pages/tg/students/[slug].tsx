@@ -1,5 +1,5 @@
 import Layout from "components/Layout/TgLayout";
-import { prisma } from "lib/prisma";
+import prisma from "lib/prisma";
 import { Student } from "@prisma/client";
 
 interface studentProps {
@@ -8,7 +8,7 @@ interface studentProps {
 
 export async function getStaticPaths() {
   const students = await prisma.student.findMany();
-  const paths = students.map((student: any) => ({
+  const paths = students.map((student) => ({
     params: {
       slug: student.id,
     },
