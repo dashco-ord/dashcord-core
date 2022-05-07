@@ -20,16 +20,17 @@ const Sidebar = () => {
 
   return (
     <div className='flex flex-col justify-around items-center py-64 w-16 h-screen bg-[#1E1D1D] text-white text-3xl px-7'>
-      <div className={isActive("/") ? "bg-purple-500 rounded-md p-2" : ""}>
-        <Link href={"/"}>
+      <div className={isActive("/tg") ? "bg-purple-500 rounded-md p-2" : ""}>
+        <Link href={"/tg"}>
           <a>
             <BiHome />
           </a>
         </Link>
       </div>
 
-      <div className={isActive("/user") ? "bg-purple-500 rounded-md p-2" : ""}>
-        <Link href={"/user"}>
+      <div
+        className={isActive("/tg/user") ? "bg-purple-500 rounded-md p-2" : ""}>
+        <Link href={"/tg/user"}>
           <a>
             <BiUser />
           </a>
@@ -38,9 +39,9 @@ const Sidebar = () => {
 
       <div
         className={
-          isActive("/notifications") ? "bg-purple-500 rounded-md p-2" : ""
+          isActive("/tg/notifications") ? "bg-purple-500 rounded-md p-2" : ""
         }>
-        <Link href={"/notifications"}>
+        <Link href={"/tg/notifications"}>
           <a>
             <IoNotificationsOutline />
           </a>
@@ -48,25 +49,30 @@ const Sidebar = () => {
       </div>
 
       <div
-        className={isActive("/students") ? "bg-purple-500 rounded-md p-2" : ""}>
-        <Link href={"/students"}>
+        className={
+          isActive("/tg/students") ? "bg-purple-500 rounded-md p-2" : ""
+        }>
+        <Link href={"/tg/students"}>
           <a>
             <BsTable />
           </a>
         </Link>
       </div>
 
-      <div className={isActive("/chat") ? "bg-purple-500 rounded-md p-2" : ""}>
-        <Link href={"/chat"}>
+      {/* <div
+        className={isActive("/tg/chat") ? "bg-purple-500 rounded-md p-2" : ""}>
+        <Link href={"/tg/chat"}>
           <a>
             <BiChat />
           </a>
         </Link>
-      </div>
+      </div> */}
 
       <div
-        className={isActive("/settings") ? "bg-purple-500 rounded-md p-2" : ""}>
-        <Link href={"/settings"}>
+        className={
+          isActive("/tg/settings") ? "bg-purple-500 rounded-md p-2" : ""
+        }>
+        <Link href={"/tg/settings"}>
           <a>
             <FiSettings />
           </a>
