@@ -47,7 +47,7 @@ const StudentsPage = () => {
           <Toast
             type={toast.type}
             className='mb-5'
-            open={true}
+            open={true} 
             setOpen={() => setToast(undefined)}>
             {toast.message}
           </Toast>

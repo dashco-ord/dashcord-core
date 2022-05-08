@@ -80,20 +80,20 @@ model Parents {
 model Student {
   id                     String      @id @default(cuid())
   name                   String
-  pictureUrl             String
+  pictureUrl             String?
   email                  String      @unique
-  passHash               String?
+  passHash               String
   phoneNo                String
-  gender                 String
-  age                    Int
-  dateOfBirth            String
-  department             String
+  gender                 String?
+  age                    Int?
+  dateOfBirth            String?
+  department             String?
   rollNo                 String?
-  address                String
-  cast                   String
-  religion               String
-  seatType               String
-  admissionDate          String
+  address                String?
+  cast                   String?
+  religion               String?
+  seatType               String?
+  admissionDate          String?
   achivement             String?     @db.VarChar(200)
   achivement_description String?     @db.LongText
   role                   UserRole?
