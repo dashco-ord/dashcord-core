@@ -4,6 +4,7 @@ import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
+
 export default NextAuth({
   providers: [
     CredentialsProvider({
@@ -25,6 +26,7 @@ export default NextAuth({
         const user = await prisma.tgIncharge.findUnique({
           where: { email: credentials?.email },
         });
+        console.log(user);
         //@ts-ignore
         if (bcrypt.compare(credentials?.password, user?.passHash)) {
           return {

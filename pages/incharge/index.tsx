@@ -46,8 +46,8 @@ const Home = () => {
   if (!session) {
     return (
       <Layout>
-        <div className='flex items-center justify-center h-4/5'>
-          <h1 className='text-2xl font-semibold text-white'>
+        <div className="flex items-center justify-center h-4/5">
+          <h1 className="text-2xl font-semibold text-white">
             Please Login first !!!
           </h1>
         </div>
@@ -57,37 +57,37 @@ const Home = () => {
   if (session.role == UserRole.incharge) {
     return (
       <Layout>
-        <div className=' flex '>
+        <div className=" flex ">
           <Card
-            title='All Students'
+            title="All Students"
             value={attendances.length}
             link={`/students`}
           />
-          <Card title='Weak Students' value={attendances.length / 3} />
-          <Card title='Avg. Students' value={attendances.length / 3} />
-          <Card title='Good Students' value={attendances.length} />
+          <Card title="Weak Students" value={attendances.length / 3} />
+          <Card title="Avg. Students" value={attendances.length / 3} />
+          <Card title="Good Students" value={attendances.length} />
         </div>
-        <div className='mt-10 flex'>
-          <div className='mr-10'>
-            <Table title='Achievements' headings={["Name", "Achievement"]}>
-              <tr className='divide-black'>
-                <td className='pl-5 p-2 whitespace-nowrap'>Student Name</td>
-                <td className='p-2 whitespace-nowrap'>won a hackathon</td>
+        <div className="mt-10 flex">
+          <div className="mr-10">
+            <Table title="Achievements" headings={["Name", "Achievement"]}>
+              <tr className="divide-black">
+                <td className="pl-5 p-2 whitespace-nowrap">Student Name</td>
+                <td className="p-2 whitespace-nowrap">won a hackathon</td>
               </tr>
-              <tr className='divide-black'>
-                <td className='pl-5 p-2 whitespace-nowrap'>Student Name</td>
-                <td className='p-2 whitespace-nowrap'>Won a hackathon</td>
+              <tr className="divide-black">
+                <td className="pl-5 p-2 whitespace-nowrap">Student Name</td>
+                <td className="p-2 whitespace-nowrap">Won a hackathon</td>
               </tr>
             </Table>
           </div>
           <div>
-            <Card title='Good Students' value={20} />
+            <Card title="Good Students" value={20} />
           </div>
         </div>
-        <div className='pt-11'>
+        <div className="pt-11">
           <Table
             refresh={getAttendance}
-            title='Attendance per Lecture'
+            title="Attendance per Lecture"
             headings={[
               "name",
               "rollNo",
@@ -97,74 +97,81 @@ const Home = () => {
               "lecture4",
               "lecture5",
               "lecture6",
-            ]}>
+            ]}
+          >
             {attendances.map((attendance) =>
               attendance.Attendance ? (
                 <tr key={attendance.Attendance.id}>
-                  <td className='pl-5 p-2 whitespace-nowrap text-violet-500'>
+                  <td className="pl-5 p-2 whitespace-nowrap text-violet-500">
                     {attendance.Attendance && (
                       <Link href={`/tg/students/${attendance.id}`}>
                         <a>{attendance.name}</a>
                       </Link>
                     )}
                   </td>
-                  <td className='p-2 whitespace-nowrap'>{attendance.rollNo}</td>
-                  <td className='p-2 whitespace-nowrap'>
-                    <div className='flex items-center'>
+                  <td className="p-2 whitespace-nowrap">{attendance.rollNo}</td>
+                  <td className="p-2 whitespace-nowrap">
+                    <div className="flex items-center">
                       <div
                         className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
                           attendance.Attendance.lecture1
-                        )}`}>
+                        )}`}
+                      >
                         {attendance.Attendance.lecture1}
                       </div>
                     </div>
                   </td>
-                  <td className='p-2 whitespace-nowrap'>
-                    <div className='flex items-center'>
+                  <td className="p-2 whitespace-nowrap">
+                    <div className="flex items-center">
                       <div
                         className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
                           attendance.Attendance.lecture2
-                        )}`}>
+                        )}`}
+                      >
                         {attendance.Attendance.lecture2}
                       </div>
                     </div>
                   </td>
-                  <td className='p-2 whitespace-nowrap'>
-                    <div className='flex items-center'>
+                  <td className="p-2 whitespace-nowrap">
+                    <div className="flex items-center">
                       <div
                         className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
                           attendance.Attendance.lecture3
-                        )}`}>
+                        )}`}
+                      >
                         {attendance.Attendance.lecture3}
                       </div>
                     </div>
                   </td>
-                  <td className='p-2 whitespace-nowrap'>
-                    <div className='flex items-center'>
+                  <td className="p-2 whitespace-nowrap">
+                    <div className="flex items-center">
                       <div
                         className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
                           attendance.Attendance.lecture4
-                        )}`}>
+                        )}`}
+                      >
                         {attendance.Attendance.lecture4}
                       </div>
                     </div>
                   </td>
-                  <td className='p-2 whitespace-nowrap'>
-                    <div className='flex items-center'>
+                  <td className="p-2 whitespace-nowrap">
+                    <div className="flex items-center">
                       <div
                         className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
                           attendance.Attendance.lecture5
-                        )}`}>
+                        )}`}
+                      >
                         {attendance.Attendance.lecture5}
                       </div>
                     </div>
                   </td>
-                  <td className='p-2 whitespace-nowrap'>
-                    <div className='flex items-center'>
+                  <td className="p-2 whitespace-nowrap">
+                    <div className="flex items-center">
                       <div
                         className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
                           attendance.Attendance.lecture6
-                        )}`}>
+                        )}`}
+                      >
                         {attendance.Attendance.lecture6}
                       </div>
                     </div>
@@ -173,12 +180,12 @@ const Home = () => {
               ) : (
                 //@ts-ignore
                 <tr key={attendance.name}>
-                  <td className='pl-5 p-2 whitespace-nowrap text-violet-500'>
+                  <td className="pl-5 p-2 whitespace-nowrap text-violet-500">
                     <Link href={`/tg/students/${attendance.id}`}>
                       <a>{attendance.name}</a>
                     </Link>
                   </td>
-                  <td className='p-2 whitespace-nowrap'>{attendance.rollNo}</td>
+                  <td className="p-2 whitespace-nowrap">{attendance.rollNo}</td>
                 </tr>
               )
             )}
