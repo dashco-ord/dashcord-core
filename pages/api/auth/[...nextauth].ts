@@ -22,7 +22,7 @@ export default NextAuth({
       },
       //@ts-ignore
       async authorize(credentials) {
-        const user = await prisma.tgIncharge.findUnique({
+        const user = await prisma.student.findUnique({
           where: { email: credentials?.email },
         });
         //@ts-ignore

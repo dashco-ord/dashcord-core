@@ -23,20 +23,23 @@ export default NextAuth({
       },
       //@ts-ignore
       async authorize(credentials) {
-        const user = await prisma.tg.findUnique({
-          where: { email: credentials?.email },
-        });
-        console.log(user);
-        //@ts-ignore
-        if (bcrypt.compare(credentials?.password, user?.passHash)) {
-          return {
-            id: user?.id,
-            name: user?.name,
-            email: user?.email,
-            role: user?.role,
-          };
-        } else {
-          return null;
+        try {
+          const user = await prisma.tg.findUnique({
+            where: { email: credentials?.email },
+          });
+          //@ts-ignore
+          if (bcrypt.compare(credentials?.password, user?.passHash)) {
+            return {
+              id: user?.id,
+              name: user?.name,
+              email: user?.email,
+              role: user?.role,
+            };
+          } else {
+            return null;
+          }
+        } catch (error) {
+          console.log(error);
         }
       },
     }),
@@ -67,6 +70,6 @@ export default NextAuth({
   },
 
   pages: {
-    signIn: "/login",
+    signIn: "/tg/login",
   },
 });
