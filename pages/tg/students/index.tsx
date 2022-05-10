@@ -3,10 +3,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Student } from "@prisma/client";
 import Table from "components/Table/Table";
-import Pagination from "components/Pagination";
 import Card from "components/cards/Card";
 import Toast, { ToastParams } from "components/Toast";
-import FilterItem from "components/FilterItem";
 import Link from "next/link";
 
 const StudentsPage = () => {
@@ -47,7 +45,7 @@ const StudentsPage = () => {
           <Toast
             type={toast.type}
             className='mb-5'
-            open={true} 
+            open={true}
             setOpen={() => setToast(undefined)}>
             {toast.message}
           </Toast>
@@ -75,6 +73,7 @@ const StudentsPage = () => {
             </td>
             <td
               className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2.5 py-0.5 ${genderColor(
+                //@ts-ignore
                 student.gender
               )}`}>
               {student.gender}

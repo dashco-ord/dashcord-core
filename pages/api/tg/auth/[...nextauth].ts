@@ -39,7 +39,7 @@ export default NextAuth({
             return null;
           }
         } catch (error) {
-          console.log(error);
+          //Todo : Send an error to the frontend
         }
       },
     }),
