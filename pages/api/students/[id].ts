@@ -21,7 +21,6 @@ const SingleStudentRoute = async (
       res.status(200).end();
       return;
     } catch (error) {
-      console.log(error);
       res.status(500).end();
     }
   }

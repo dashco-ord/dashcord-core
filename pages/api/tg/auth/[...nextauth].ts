@@ -26,6 +26,7 @@ export default NextAuth({
         const user = await prisma.tg.findUnique({
           where: { email: credentials?.email },
         });
+        console.log(user);
         //@ts-ignore
         if (bcrypt.compare(credentials?.password, user?.passHash)) {
           return {

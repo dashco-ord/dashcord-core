@@ -5,7 +5,6 @@ import { BsTable } from "react-icons/bs";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { UserRole } from "@prisma/client";
 
 const Sidebar = () => {
   const router = useRouter();
@@ -20,12 +19,11 @@ const Sidebar = () => {
   const { data: session } = useSession();
 
   return (
-    <div className="flex flex-col justify-around items-center py-64 w-16 h-screen bg-[#1E1D1D] text-white text-3xl px-7">
+    <div className='flex flex-col justify-around items-center py-64 w-16 h-screen bg-[#1E1D1D] text-white text-3xl px-7'>
       <div
         className={
           isActive(`/${session?.role}`) ? "bg-purple-500 rounded-md p-2" : ""
-        }
-      >
+        }>
         <Link href={`/${session?.role}`}>
           <a>
             <BiHome />
@@ -38,8 +36,7 @@ const Sidebar = () => {
           isActive(`/${session?.role}/user`)
             ? "bg-purple-500 rounded-md p-2"
             : ""
-        }
-      >
+        }>
         <Link href={`/${session?.role}/user`}>
           <a>
             <BiUser />
@@ -52,8 +49,7 @@ const Sidebar = () => {
           isActive(`/${session?.role}/notifications`)
             ? "bg-purple-500 rounded-md p-2"
             : ""
-        }
-      >
+        }>
         <Link href={`/${session?.role}/notifications`}>
           <a>
             <IoNotificationsOutline />
@@ -66,8 +62,7 @@ const Sidebar = () => {
           isActive(`/${session?.role}/students`)
             ? "bg-purple-500 rounded-md p-2"
             : ""
-        }
-      >
+        }>
         <Link href={`/${session?.role}/students`}>
           <a>
             <BsTable />
@@ -89,8 +84,7 @@ const Sidebar = () => {
           isActive(`/${session?.role}/settings`)
             ? "bg-purple-500 rounded-md p-2"
             : ""
-        }
-      >
+        }>
         <Link href={`/${session?.role}/settings`}>
           <a>
             <FiSettings />
@@ -99,15 +93,8 @@ const Sidebar = () => {
       </div>
 
       <div
-        className={isActive("/logout") ? "bg-purple-500 rounded-md p-2" : ""}
-      >
-        <Link
-          href={
-            session?.user
-              ? `/api/auth/signout`
-              : `/api/${session?.role}/auth/signin`
-          }
-        >
+        className={isActive("/logout") ? "bg-purple-500 rounded-md p-2" : ""}>
+        <Link href={session?.user ? `/api/auth/signout` : `/api/auth/signin`}>
           <a>{session?.user ? <BiLogOut /> : <BiLogIn />}</a>
         </Link>
       </div>

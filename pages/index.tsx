@@ -5,7 +5,6 @@ import { useSession } from "next-auth/react";
 const HomePage = () => {
   const { data: session } = useSession();
   validateUser(session?.role);
-  console.log(session);
   return <Layout></Layout>;
 };
 

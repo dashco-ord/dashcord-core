@@ -17,22 +17,10 @@ const SignUpRoute = async (req: NextApiRequest, res: NextApiResponse) => {
           email: email,
           passHash: await hashPassword(password),
           phoneNo: contact,
-          address: "",
-          admissionDate: "",
-          age: 0,
-          cast: "",
-          dateOfBirth: "",
-          department: "",
-          gender: "",
-          pictureUrl: "",
-          religion: "",
-          seatType: "",
-          rollNo: "",
         },
       });
       res.status(200).end();
     } catch (error) {
-      console.log(error);
       res.status(500).end();
     }
     res.status(200).end();
