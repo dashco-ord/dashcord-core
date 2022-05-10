@@ -1,9 +1,7 @@
 import Layout from "components/Layout/TgLayout";
-import prisma from "lib/prisma";
+import { prisma } from "lib/prisma";
 import { Student } from "@prisma/client";
-import Image from "next/image";
 import moment from "moment";
-import Link from "next/link";
 
 interface studentProps {
   student: Student;

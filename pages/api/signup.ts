@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "lib/prisma";
 import bcrypt from "bcrypt";
 
 export const hashPassword = async (password: string) => {
@@ -7,7 +7,6 @@ export const hashPassword = async (password: string) => {
 };
 
 const SignUpRoute = async (req: NextApiRequest, res: NextApiResponse) => {
-  const prisma = new PrismaClient();
   if (req.method == "POST") {
     const { name, contact, email, password } = await req.body;
     try {

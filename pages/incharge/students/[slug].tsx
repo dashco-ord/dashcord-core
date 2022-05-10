@@ -1,5 +1,5 @@
 import Layout from "components/Layout/TgLayout";
-import prisma from "lib/prisma";
+import { prisma } from "lib/prisma";
 import { Student } from "@prisma/client";
 import moment from "moment";
 
