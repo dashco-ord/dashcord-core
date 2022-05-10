@@ -1,9 +1,10 @@
 import Layout from "components/Layout/TgLayout";
 import { prisma } from "lib/prisma";
-import { Student } from "@prisma/client";
+import { Attendance, Student, AttendanceType } from "@prisma/client";
 import moment from "moment";
+import Table from "components/Table/Table";
 
-interface studentProps {
+interface studentProps extends Student {
   student: Student;
 }
 
@@ -25,6 +26,9 @@ export async function getStaticProps({ params }: any) {
     where: {
       id: params.slug,
     },
+    include: {
+      Attendance: true,
+    },
   });
   return {
     props: {
@@ -32,6 +36,19 @@ export async function getStaticProps({ params }: any) {
     },
   };
 }
+
+const attendanceColors = (attendance: any) => {
+  switch (attendance) {
+    case AttendanceType.Present:
+      return "bg-green-500 text-white rounded-full text-center";
+    case AttendanceType.Absent:
+      return "bg-red-700 text-white rounded-full text-center";
+    case AttendanceType.Informed:
+      return "bg-purple-700 text-white rounded-full text-center";
+    default:
+      return "bg-gray-400 text-white rounded-full text-center";
+  }
+};
 
 const SingleStudentPage = ({ student }: studentProps) => {
   return (
@@ -198,9 +215,130 @@ const SingleStudentPage = ({ student }: studentProps) => {
                   />
                 </div>
               </div>
+              <div className='mt-2 mb-2 shadow-md'>
+                <Table
+                  title='Attendance Today : '
+                  headings={[
+                    "date",
+                    "lecture 1",
+                    "lecture 2",
+                    "lecture 3",
+                    "lecture 4",
+                    "lecture 5",
+                    "lecture 6",
+                  ]}>
+                  {
+                    //@ts-ignore
+                    student.Attendance ? (
+                      <tr className='font-semibold'>
+                        <td className='pl-5 p-2 whitespace-nowrap'>
+                          <div>
+                            {
+                              //@ts-ignore
+                              moment(student.Attendance.updatedAt).format(
+                                "MMM Do YYYY"
+                              )
+                            }
+                          </div>
+                        </td>
+                        <td className='p-2 whitespace-nowrap'>
+                          <div className='flex items-center'>
+                            <div
+                              className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
+                                //@ts-ignore
+                                student.Attendance.lecture1
+                              )}`}>
+                              {
+                                //@ts-ignore
+                                student.Attendance.lecture1
+                              }
+                            </div>
+                          </div>
+                        </td>
+                        <td className='p-2 whitespace-nowrap'>
+                          <div className='flex items-center'>
+                            <div
+                              className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
+                                //@ts-ignore
+                                student.Attendance.lecture2
+                              )}`}>
+                              {
+                                //@ts-ignore
+                                student.Attendance.lecture2
+                              }
+                            </div>
+                          </div>
+                        </td>
+                        <td className='p-2 whitespace-nowrap'>
+                          <div className='flex items-center'>
+                            <div
+                              className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
+                                //@ts-ignore
+                                student.Attendance.lecture3
+                              )}`}>
+                              {
+                                //@ts-ignore
+                                student.Attendance.lecture3
+                              }
+                            </div>
+                          </div>
+                        </td>
+                        <td className='p-2 whitespace-nowrap'>
+                          <div className='flex items-center'>
+                            <div
+                              className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
+                                //@ts-ignore
+                                student.Attendance.lecture4
+                              )}`}>
+                              {
+                                //@ts-ignore
+                                student.Attendance.lecture4
+                              }
+                            </div>
+                          </div>
+                        </td>
+                        <td className='p-2 whitespace-nowrap'>
+                          <div className='flex items-center'>
+                            <div
+                              className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
+                                //@ts-ignore
+                                student.Attendance.lecture5
+                              )}`}>
+                              {
+                                //@ts-ignore
+                                student.Attendance.lecture5
+                              }
+                            </div>
+                          </div>
+                        </td>
+                        <td className='p-2 whitespace-nowrap'>
+                          <div className='flex items-center'>
+                            <div
+                              className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
+                                //@ts-ignore
+                                student.Attendance.lecture6
+                              )}`}>
+                              {
+                                //@ts-ignore
+                                student.Attendance.lecture6
+                              }
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    ) : (
+                      <tr>
+                        <td className='pl-5 p-2 whitespace-nowrap font-semibold'>
+                          Attendance is yet to be Marked
+                        </td>
+                      </tr>
+                    )
+                  }
+                </Table>
+              </div>
               <div>
                 <input
-                  className='mt-5 p-2 rounded-xl text-xl text-white bg-purple-600 hover:bg-purple-700 cursor-pointer'
+                  className='mt-10 p-2 rounded-xl font-semibold text-md text-white bg-purple-600 hover:bg-purple-700 cursor-pointer'
                   type='submit'
                   value='Save Changes'
                 />

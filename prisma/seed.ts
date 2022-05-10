@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { Hod, PrismaClient, Student, Tg } from "@prisma/client";
 import { faker } from "@faker-js/faker";
 import { UserRole } from "@prisma/client";
 import bcrypt from "bcrypt";
@@ -22,7 +22,7 @@ const seed = async () => {
 
   console.log("Creating HOD...");
   const hodAttributes = [];
-  for (let i = 0; i <= 10; i++) {
+  for (let i = 0; i <= 4; i++) {
     const email = faker.internet.email().toLowerCase();
     hodAttributes.push({
       name: faker.name.findName(),
@@ -36,11 +36,13 @@ const seed = async () => {
       role: UserRole.hod,
     });
   }
-  await prisma.hod.createMany({ data: hodAttributes });
+  await prisma.hod.createMany({
+    data: hodAttributes,
+  });
 
   console.log("Creating TG Incharge's...");
   const tgInchargeAttributes = [];
-  for (let i = 0; i <= 10; i++) {
+  for (let i = 0; i <= 4; i++) {
     const email = faker.internet.email();
     tgInchargeAttributes.push({
       name: faker.name.findName(),
@@ -50,6 +52,7 @@ const seed = async () => {
       role: UserRole.incharge,
     });
   }
+  //@ts-ignore
   await prisma.tgIncharge.createMany({ data: tgInchargeAttributes });
 
   console.log("Creating TG...");
@@ -128,9 +131,20 @@ const seed = async () => {
       seatType: "Seat Type",
       admissionDate: faker.date.between("june", "august").toString(),
       role: UserRole.student,
+      year: faker.datatype.number({ min: 1, max: 4 }),
+      section: i % 2 == 0 ? "A" : "B",
     });
   }
-  await prisma.student.createMany({ data: studentAttributes });
+  await prisma.student.createMany({
+    data: studentAttributes,
+  });
+
+  console.log("Creating Attendances");
+  for (let i = 0; i <= 100; i++) {
+    await prisma.attendance.create({
+      data: {},
+    });
+  }
 };
 
 seed();

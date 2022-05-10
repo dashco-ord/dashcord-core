@@ -96,6 +96,8 @@ model Student {
   admissionDate          String?
   achivement             String?     @db.VarChar(200)
   achivement_description String?     @db.LongText
+  year                   Int?
+  section                String?
   role                   UserRole?
   createdAt              DateTime    @default(now())
   updatedAt              DateTime    @updatedAt
@@ -108,15 +110,15 @@ model Student {
 }
 
 model Attendance {
-  id        String         @id @default(cuid())
-  lecture1  AttendanceType
-  lecture2  AttendanceType
-  lecture3  AttendanceType
-  lecture4  AttendanceType
-  lecture5  AttendanceType
-  lecture6  AttendanceType
-  student   Student?       @relation(fields: [studentId], references: [id])
-  studentId String?        @unique
+  id        String          @id @default(cuid())
+  lecture1  AttendanceType?
+  lecture2  AttendanceType?
+  lecture3  AttendanceType?
+  lecture4  AttendanceType?
+  lecture5  AttendanceType?
+  lecture6  AttendanceType?
+  student   Student?        @relation(fields: [studentId], references: [id])
+  studentId String?         @unique
 }
 
 enum UserRole {
