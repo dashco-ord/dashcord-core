@@ -30,6 +30,7 @@ const getAttendenceRoute = async (
       res.status(200).end();
       return;
     } catch (error) {
+      console.log(error);
       res.status(404).end();
     }
   }

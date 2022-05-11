@@ -7,7 +7,7 @@ const User = () => {
   const [user, setUser] = useState<Tg>();
 
   const fetchUSer = async () => {
-    const res = await axios.get("/api/tg");
+    const res = await axios.get("/api/incharge");
     setUser(res.data);
   };
 
@@ -46,19 +46,6 @@ const User = () => {
                 </div>
                 <div className="flex flex-col pb-6 mr-8">
                   <label className="text-2xl text-white font-semibold mr-5 pb-2">
-                    Phone.no :
-                  </label>
-                  <input
-                    className="p-2 pl-0 rounded-sm bg-[#1E1D1D] text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75 caret-white text-white"
-                    type="text"
-                    placeholder="Enter your Roll.No"
-                    //@ts-ignore
-                    defaultValue={user?.phoneNo}
-                    required
-                  />
-                </div>
-                <div className="flex flex-col pb-6 mr-8">
-                  <label className="text-2xl text-white font-semibold mr-5 pb-2">
                     Email :
                   </label>
                   <input
@@ -86,16 +73,16 @@ const User = () => {
                   />
                 </div>
 
-                <div className="flex flex-col pb-6 mr-8">
+                <div className="flex flex-col pb-6 mr-8 w-fit">
                   <label className="text-2xl text-white font-semibold mr-5 pb-2">
-                    Gender :
+                    Picture url :
                   </label>
                   <input
                     className="p-2 pl-0 rounded-sm bg-[#1E1D1D] text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75 caret-white text-white"
                     type="text"
-                    placeholder="Enter your Gender"
+                    placeholder="Enter your Picture Url"
                     //@ts-ignore
-                    defaultValue={user?.gender}
+                    defaultValue={user?.pictureUrl}
                     required
                   />
                 </div>
