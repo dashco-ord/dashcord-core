@@ -20,8 +20,6 @@ const User = () => {
       <div className='text-white'>{user?.id}</div>
       <div className='text-white'>{user?.name}</div>
       <div className='text-white'>{user?.email}</div>
-      <div className='text-white'>{user?.createdAt}</div>
-      <div className='text-white'>{user?.updatedAt}</div>
     </Layout>
   );
 };

@@ -12,7 +12,6 @@ const getTg = async (req: NextApiRequest, res: NextApiResponse) => {
         id: session?.id,
       },
     });
-    console.log(tg);
     res.json(tg);
     res.status(200).end();
   }

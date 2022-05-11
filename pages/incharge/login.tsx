@@ -7,7 +7,7 @@ const LoginPage = ({ csrfToken }: any) => {
       <form
         className=' border-2 border-slate-200 p-10 rounded-lg lg:w-1/5 sm:w-10/12 xl:w-1/5'
         method='post'
-        action='/api/tg/auth/callback/credentials'>
+        action='/api/incharge/auth/callback/credentials'>
         {/* This hidden input field is need for passing csrfToken that is received from getServerSidePRops */}
         <input name='csrfToken' type='hidden' defaultValue={csrfToken} />
 

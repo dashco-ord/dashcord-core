@@ -26,7 +26,7 @@ export default NextAuth({
         const user = await prisma.tgIncharge.findUnique({
           where: { email: credentials?.email },
         });
-        console.log(user);
+
         //@ts-ignore
         if (bcrypt.compare(credentials?.password, user?.passHash)) {
           return {
@@ -67,6 +67,6 @@ export default NextAuth({
   },
 
   pages: {
-    signIn: "/login",
+    signIn: "/incharge/login",
   },
 });
