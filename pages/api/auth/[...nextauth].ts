@@ -22,6 +22,7 @@ export default NextAuth({
       },
       //@ts-ignore
       async authorize(credentials) {
+        console.log(credentials);
         const user = await prisma.student.findUnique({
           where: { email: credentials?.email },
         });
