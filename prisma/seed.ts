@@ -33,7 +33,7 @@ const seed = async () => {
       pictureUrl: faker.internet.url(),
       bio: faker.address.secondaryAddress(),
       department: faker.address.countryCode(),
-      role: UserRole.hod,
+      role: UserRole.HOD,
     });
   }
   await prisma.hod.createMany({
@@ -49,7 +49,7 @@ const seed = async () => {
       email: email,
       passHash: await hashPassword(email),
       pictureUrl: faker.internet.url(),
-      role: UserRole.incharge,
+      role: UserRole.INCHARGE,
     });
   }
   //@ts-ignore
@@ -71,7 +71,7 @@ const seed = async () => {
       pictureUrl: faker.internet.url(),
       gender: gender,
       department: "CSE",
-      role: UserRole.tg,
+      role: UserRole.TG,
     });
   }
   await prisma.tg.createMany({ data: tgAttributes });
@@ -86,7 +86,7 @@ const seed = async () => {
       passHash: await hashPassword(email),
       phoneNo: faker.phone.phoneNumber(),
       pictureUrl: faker.internet.url(),
-      role: UserRole.teacher,
+      role: UserRole.TEACHER,
     });
   }
   await prisma.teacher.createMany({ data: teacherAttributes });
@@ -101,7 +101,7 @@ const seed = async () => {
       passHash: await hashPassword(email),
       phoneNo: faker.phone.phoneNumber(),
       address: faker.address.streetAddress(),
-      role: UserRole.parent,
+      role: UserRole.PARENT,
     });
   }
   await prisma.parents.createMany({ data: parentsAttributes });
@@ -130,7 +130,7 @@ const seed = async () => {
       religion: faker.address.direction(),
       seatType: "Seat Type",
       admissionDate: faker.date.between("june", "august").toString(),
-      role: UserRole.student,
+      role: UserRole.STUDENT,
       year: faker.datatype.number({ min: 1, max: 4 }),
       section: i % 2 == 0 ? "A" : "B",
     });

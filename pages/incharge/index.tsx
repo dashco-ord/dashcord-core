@@ -16,8 +16,8 @@ const InchargeHome = () => {
   if (!session) {
     return (
       <Layout>
-        <div className="flex items-center justify-center h-4/5">
-          <h1 className="text-2xl font-semibold text-white">
+        <div className='flex items-center justify-center h-4/5'>
+          <h1 className='text-2xl font-semibold text-white'>
             Please Login first !!!
           </h1>
         </div>
@@ -25,25 +25,25 @@ const InchargeHome = () => {
     );
   }
 
-  if (session.role == UserRole.incharge) {
+  if (session.role == UserRole.INCHARGE) {
     return (
       <Layout>
-        <div className=" flex ">
-          <Card title="All Students" link={`/students`} />
-          <Card title="Weak Students" />
-          <Card title="Avg. Students" />
-          <Card title="Good Students" />
+        <div className=' flex '>
+          <Card title='All Students' link={`/students`} />
+          <Card title='Weak Students' />
+          <Card title='Avg. Students' />
+          <Card title='Good Students' />
         </div>
-        <div className="mt-10 flex">
-          <div className="mr-10">
-            <Table title="Achievements" headings={["Name", "Achievement"]}>
-              <tr className="divide-black">
-                <td className="pl-5 p-2 whitespace-nowrap">Student Name</td>
-                <td className="p-2 whitespace-nowrap">won a hackathon</td>
+        <div className='mt-10 flex'>
+          <div className='mr-10'>
+            <Table title='Achievements' headings={["Name", "Achievement"]}>
+              <tr className='divide-black'>
+                <td className='pl-5 p-2 whitespace-nowrap'>Student Name</td>
+                <td className='p-2 whitespace-nowrap'>won a hackathon</td>
               </tr>
-              <tr className="divide-black">
-                <td className="pl-5 p-2 whitespace-nowrap">Student Name</td>
-                <td className="p-2 whitespace-nowrap">Won a hackathon</td>
+              <tr className='divide-black'>
+                <td className='pl-5 p-2 whitespace-nowrap'>Student Name</td>
+                <td className='p-2 whitespace-nowrap'>Won a hackathon</td>
               </tr>
             </Table>
           </div>

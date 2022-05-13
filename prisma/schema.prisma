@@ -107,6 +107,7 @@ model Student {
   tgId                   String?     @map("tg_id")
   Parents                Parents[]
   Attendance             Attendance?
+  Exams                  Exams[]
 }
 
 model Attendance {
@@ -121,17 +122,42 @@ model Attendance {
   studentId String?         @unique
 }
 
+model Exams {
+  id        String    @id @default(cuid())
+  name      ExamType
+  subject1  Subjects?
+  subject2  Subjects?
+  subject3  Subjects?
+  subject4  Subjects?
+  subject5  Subjects?
+  student   Student   @relation(fields: [studentId], references: [id])
+  studentId String    @unique
+}
+
 enum UserRole {
-  hod
-  incharge
-  tg
-  teacher
-  parent
-  student
+  HOD
+  INCHARGE
+  TG
+  TEACHER
+  PARENT
+  STUDENT
 }
 
 enum AttendanceType {
-  Present
-  Absent
-  Informed
+  PRESENT
+  ABSENT
+  INFORMED
+}
+
+enum Subjects {
+  AI
+  CN
+  SEPM
+  DP
+  FE
+}
+
+enum ExamType {
+  MidSem
+  EndSem
 }

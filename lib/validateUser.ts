@@ -3,22 +3,22 @@ import Router from "next/router";
 
 export default function validateUser(role: any) {
   switch (role) {
-    case UserRole.tg:
+    case UserRole.TG:
       Router.push("/tg");
       break;
-    case UserRole.hod:
+    case UserRole.HOD:
       Router.push("/hod");
       break;
-    case UserRole.teacher:
+    case UserRole.TEACHER:
       Router.push("/teacher");
       break;
-    case UserRole.student:
+    case UserRole.STUDENT:
       Router.push("/");
       break;
-    case UserRole.parent:
+    case UserRole.PARENT:
       Router.push("/parent");
       break;
-    case UserRole.incharge:
+    case UserRole.INCHARGE:
       Router.push("/incharge");
       break;
   }
