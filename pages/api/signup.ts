@@ -18,7 +18,7 @@ const SignUpRoute = async (req: NextApiRequest, res: NextApiResponse) => {
           email: email,
           passHash: await hashPassword(password),
           phoneNo: contact,
-          role: UserRole.student,
+          role: UserRole.STUDENT,
         },
       });
       res.status(200).end();
