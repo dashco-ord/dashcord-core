@@ -135,18 +135,18 @@ model Exams {
 }
 
 enum UserRole {
-  hod
-  incharge
-  tg
-  teacher
-  parent
-  student
+  HOD
+  INCHARGE
+  TG
+  TEACHER
+  PARENT
+  STUDENT
 }
 
 enum AttendanceType {
-  Present
-  Absent
-  Informed
+  PRESENT
+  ABSENT
+  INFORMED
 }
 
 enum Subjects {
