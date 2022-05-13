@@ -3,7 +3,7 @@ import { prisma } from "lib/prisma";
 import { Attendance, Student, AttendanceType } from "@prisma/client";
 import moment from "moment";
 import Table from "components/Table/Table";
-
+import attendanceColors from "components/AttendanceColor";
 interface studentProps extends Student {
   student: Student;
 }
@@ -36,19 +36,6 @@ export async function getStaticProps({ params }: any) {
     },
   };
 }
-
-const attendanceColors = (attendance: any) => {
-  switch (attendance) {
-    case AttendanceType.Present:
-      return "bg-green-500 text-white rounded-full text-center";
-    case AttendanceType.Absent:
-      return "bg-red-700 text-white rounded-full text-center";
-    case AttendanceType.Informed:
-      return "bg-purple-700 text-white rounded-full text-center";
-    default:
-      return "bg-gray-400 text-white rounded-full text-center";
-  }
-};
 
 const SingleStudentPage = ({ student }: studentProps) => {
   return (

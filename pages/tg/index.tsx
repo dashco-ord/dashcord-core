@@ -9,6 +9,7 @@ import axios from "axios";
 import Link from "next/link";
 import validateUser from "lib/validateUser";
 import Toast, { ToastParams } from "components/Toast";
+import attendanceColors from "components/AttendanceColor";
 
 type attendanceProps = {
   id: String;
@@ -38,19 +39,6 @@ const Home: NextPage = () => {
     getAttendance();
     validateUser(session?.role);
   }, [session]);
-
-  const attendanceColors = (attendance: any) => {
-    switch (attendance) {
-      case AttendanceType.Present:
-        return "bg-green-500 text-white rounded-full text-center";
-      case AttendanceType.Absent:
-        return "bg-red-700 text-white rounded-full text-center";
-      case AttendanceType.Informed:
-        return "bg-purple-700 text-white rounded-full text-center";
-      default:
-        return "bg-gray-400 text-white rounded-full text-center";
-    }
-  };
 
   if (!session) {
     return (
