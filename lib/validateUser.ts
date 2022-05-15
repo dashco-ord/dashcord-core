@@ -4,22 +4,22 @@ import Router from "next/router";
 export default function validateUser(role: any) {
   switch (role) {
     case UserRole.TG:
-      Router.push("/tg");
+      Router.push("/TG");
       break;
     case UserRole.HOD:
-      Router.push("/hod");
+      Router.push("/HOD");
       break;
     case UserRole.TEACHER:
-      Router.push("/teacher");
+      Router.push("/TEACHER");
       break;
     case UserRole.STUDENT:
-      Router.push("/");
+      Router.push("/STUDENT");
       break;
     case UserRole.PARENT:
-      Router.push("/parent");
+      Router.push("/PARENT");
       break;
     case UserRole.INCHARGE:
-      Router.push("/incharge");
+      Router.push("/INCHARGE");
       break;
   }
 }
