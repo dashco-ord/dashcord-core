@@ -5,8 +5,11 @@ import { Student } from "@prisma/client";
 import moment from "moment";
 import Table from "components/Table/Table";
 import attendanceColors from "components/AttendanceColor";
+import validateUser from "lib/validateUser";
+import { useSession } from "next-auth/react";
 
 const User = () => {
+  const { data: session } = useSession();
   const [user, setUser] = useState<Student>();
 
   const fetchUSer = async () => {
@@ -16,7 +19,8 @@ const User = () => {
 
   useEffect(() => {
     fetchUSer();
-  }, []);
+    validateUser(session?.role);
+  }, [session]);
 
   return (
     <Layout>
