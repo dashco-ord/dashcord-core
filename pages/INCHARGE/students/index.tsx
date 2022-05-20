@@ -66,39 +66,38 @@ const StudentsPage = () => {
         {toast && (
           <Toast
             type={toast.type}
-            className="mb-5"
+            className='mb-5'
             open={true}
-            setOpen={() => setToast(undefined)}
-          >
+            setOpen={() => setToast(undefined)}>
             {toast.message}
           </Toast>
         )}
       </div>
-      <div className="flex mb-10">
-        <Card title="All Students" value={stats.total} />
-        <Card title="All Male Students" value={stats.totalMale} />
-        <Card title="All Female Students" value={stats.totalFemale} />
+      <div className='flex mb-10'>
+        <Card title='All Students' value={stats.total} />
+        <Card title='All Male Students' value={stats.totalMale} />
+        <Card title='All Female Students' value={stats.totalFemale} />
       </div>
 
-      <div className="sm:flex sm:justify-between sm:items-center mb-10">
+      <div className='sm:flex sm:justify-between sm:items-center mb-10'>
         {/* Left side */}
-        <div className="mb-4 sm:mb-0">
-          <ul className="flex flex-wrap -m-1">
+        <div className='mb-4 sm:mb-0'>
+          <ul className='flex flex-wrap -m-1'>
             <FilterItem
               name={"all"}
-              label="All"
+              label='All'
               onSelect={setSelectedGenderFilter}
               selected={selectedGenderFilter == "all"}
             />
             <FilterItem
               name={"male"}
-              label="Male"
+              label='Male'
               onSelect={setSelectedGenderFilter}
               selected={selectedGenderFilter == "male"}
             />
             <FilterItem
               name={"female"}
-              label="Female"
+              label='Female'
               onSelect={setSelectedGenderFilter}
               selected={selectedGenderFilter == "female"}
             />
@@ -107,30 +106,28 @@ const StudentsPage = () => {
       </div>
 
       <Table
-        title="All Students"
-        headings={["id", "name", "rollNo", "email", "gender", "department"]}
-      >
+        title='All Students'
+        headings={["id", "name", "rollNo", "email", "gender", "department"]}>
         {students.map((student) => (
           <tr key={student.id}>
-            <td className="pl-5 p-2 whitespace-nowrap text-violet-400">
-              <Link href={`/incharge/students/${student.id}`}>
+            <td className='pl-5 p-2 whitespace-nowrap text-violet-400'>
+              <Link href={`/INCHARGE/students/${student.id}`}>
                 <a>{student.id}</a>
               </Link>
             </td>
-            <td className="p-2 whitespace-nowrap">{student.name}</td>
-            <td className="p-2 whitespace-nowrap">{student.rollNo}</td>
-            <td className="p-2 whitespace-nowrap text-indigo-300">
+            <td className='p-2 whitespace-nowrap'>{student.name}</td>
+            <td className='p-2 whitespace-nowrap'>{student.rollNo}</td>
+            <td className='p-2 whitespace-nowrap text-indigo-300'>
               <a href={`mailto:${student.email}`}>{student.email}</a>
             </td>
             <td
               className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2.5 py-0.5 ${genderColor(
                 //@ts-ignore
                 student?.gender
-              )}`}
-            >
+              )}`}>
               {student.gender}
             </td>
-            <td className="p-2 whitespace-nowrap">{student.department}</td>
+            <td className='p-2 whitespace-nowrap'>{student.department}</td>
           </tr>
         ))}
       </Table>
