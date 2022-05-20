@@ -62,7 +62,7 @@ const StudentsPage = () => {
         {students.map((student) => (
           <tr key={student?.id}>
             <td className='pl-5 p-2 whitespace-nowrap text-violet-400'>
-              <Link href={`/tg/students/${student?.id}`}>
+              <Link href={`/TG/students/${student?.id}`}>
                 <a>{student?.id}</a>
               </Link>
             </td>
