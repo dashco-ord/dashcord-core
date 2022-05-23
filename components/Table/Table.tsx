@@ -6,12 +6,23 @@ type TableProps = {
   headings: string[];
   children: JSX.Element | JSX.Element[];
   refresh?: MouseEventHandler;
+  noShadow?: boolean;
 };
 
-const Table = ({ title = "", headings, children, refresh }: TableProps) => {
+const Table = ({
+  title = "",
+  headings,
+  children,
+  refresh,
+  noShadow,
+}: TableProps) => {
   return (
-    <div className=' col-span-full bg-white shadow-md rounded-md min-w-1/3'>
-      <header className='px-5 py-4 flex items-center'>
+    <div
+      className={`col-span-full bg-white shadow-md rounded-md min-w-1/3 ${
+        noShadow ? "shadow-none" : ""
+      }`}>
+      <header
+        className={`py-4 flex items-center ${noShadow ? "px-0" : "px-5 "}`}>
         <h2 className='font-bold text-2xl mr-auto'>{title}</h2>
         {refresh && (
           <FcRefresh

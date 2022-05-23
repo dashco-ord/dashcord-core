@@ -4,6 +4,16 @@ import { Attendance, Student, AttendanceType } from "@prisma/client";
 import moment from "moment";
 import Table from "components/Table/Table";
 import attendanceColors from "components/AttendanceColor";
+import {
+  Chart as ChartJS,
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Radar } from "react-chartjs-2";
 interface studentProps extends Student {
   student: Student;
 }
@@ -37,6 +47,42 @@ export async function getStaticProps({ params }: any) {
   };
 }
 
+ChartJS.register(
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+  Tooltip,
+  Legend
+);
+const data = {
+  labels: [
+    "Subject 1",
+    "Subject 2",
+    "Subject 3",
+    "Subject 4",
+    "Subject 5",
+    "Subject 6",
+  ],
+  datasets: [
+    {
+      label: "UT",
+      data: [10, 14, 12, 15, 17, 13],
+      backgroundColor: "rgba(128, 0, 128, 0.3)",
+    },
+    {
+      label: "MSE",
+      data: [25, 15, 22, 20, 20, 18],
+      backgroundColor: "rgba(255, 99, 128, 0.3)",
+    },
+    {
+      label: "ESE",
+      data: [35, 25, 28, 32, 22, 20],
+      backgroundColor: "rgba(0, 0, 254, 0.3)",
+    },
+  ],
+};
+
 const SingleStudentPage = ({ student }: studentProps) => {
   return (
     <Layout>
@@ -44,7 +90,7 @@ const SingleStudentPage = ({ student }: studentProps) => {
         <div className='flex flex-wrap bg-white rounded-lg p-8'>
           <form className='flex flex-row-reverse'>
             <div>
-              <div className='flex w-80 h-80 bg-slate-200  rounded-md ml-60'>
+              <div className='flex w-80 h-80 bg-slate-200 rounded-md ml-60'>
                 <img
                   //@ts-ignore
                   src={student.pictureUrl}
@@ -52,7 +98,12 @@ const SingleStudentPage = ({ student }: studentProps) => {
                   height={350}
                 />
               </div>
+              <div className='mt-2 ml-auto mb-2 w-[30rem] rounded-md p-8'>
+                <p className='text-2xl font-semibold mr-5 pb-2'>Exam Stats :</p>
+                <Radar data={data} />
+              </div>
             </div>
+
             <div>
               <div className='flex'>
                 <div className='flex flex-col pb-6 mr-8'>
@@ -215,7 +266,8 @@ const SingleStudentPage = ({ student }: studentProps) => {
                     "lecture 4",
                     "lecture 5",
                     "lecture 6",
-                  ]}>
+                  ]}
+                  noShadow={true}>
                   {
                     //@ts-ignore
                     student.Attendance ? (
@@ -327,7 +379,7 @@ const SingleStudentPage = ({ student }: studentProps) => {
               </div>
               <div>
                 <input
-                  className='mt-10 p-2 rounded-xl font-semibold text-md bg-purple-600 hover:bg-purple-700 cursor-pointer'
+                  className='mt-10 p-2 rounded-xl font-semibold text-md bg-purple-600 hover:bg-purple-700 cursor-pointer text-white'
                   type='submit'
                   value='Save Changes'
                 />
