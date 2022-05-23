@@ -61,14 +61,14 @@ const StudentsPage = () => {
         headings={["id", "name", "rollNo", "email", "gender", "department"]}>
         {students.map((student) => (
           <tr key={student?.id}>
-            <td className='pl-5 p-2 whitespace-nowrap text-violet-400'>
+            <td className='pl-5 p-2 whitespace-nowrap text-violet-700'>
               <Link href={`/TG/students/${student?.id}`}>
                 <a>{student?.id}</a>
               </Link>
             </td>
             <td className='p-2 whitespace-nowrap'>{student?.name}</td>
             <td className='p-2 whitespace-nowrap'>{student?.rollNo}</td>
-            <td className='p-2 whitespace-nowrap text-indigo-300'>
+            <td className='p-2 whitespace-nowrap text-indigo-500'>
               <a href={`mailto:${student?.email}`}>{student?.email}</a>
             </td>
             <td

@@ -19,7 +19,7 @@ const Sidebar = () => {
   const { data: session } = useSession();
 
   return (
-    <div className='flex flex-col justify-around items-center py-64 w-16 h-screen bg-[#1E1D1D] text-white text-3xl px-7'>
+    <div className='flex flex-col justify-around items-center py-64 w-16 h-screen bg-white text-3xl px-7'>
       <div
         className={
           isActive(`/${session?.role}`) ? "bg-purple-500 rounded-md p-2" : ""

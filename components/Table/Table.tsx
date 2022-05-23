@@ -10,7 +10,7 @@ type TableProps = {
 
 const Table = ({ title = "", headings, children, refresh }: TableProps) => {
   return (
-    <div className=' col-span-full bg-[#1E1D1D] shadow-lg rounded-md text-white min-w-1/3'>
+    <div className=' col-span-full bg-white shadow-md rounded-md min-w-1/3'>
       <header className='px-5 py-4 flex items-center'>
         <h2 className='font-bold text-2xl mr-auto'>{title}</h2>
         {refresh && (
@@ -22,7 +22,7 @@ const Table = ({ title = "", headings, children, refresh }: TableProps) => {
       </header>
       <div className='overflow-x-auto'>
         <table className='table-auto w-full divide-y'>
-          <thead className='text-xs uppercase text-gray-500 bg-[#1E1D1D] border-t-2 border-black mt-0'>
+          <thead className='text-xs uppercase text-gray-500 bg-white border-t-2 border-black mt-0'>
             <tr>
               {headings.map((heading) => (
                 <th key={heading} className='px-2 first:pl-5 last:pr-5 py-3'>

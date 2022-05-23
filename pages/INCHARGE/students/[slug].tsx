@@ -44,7 +44,7 @@ const SingleStudentPage = ({ student }: studentProps) => {
         <div className='flex flex-wrap bg-[#1E1D1D] rounded-lg p-8'>
           <form className='flex flex-row-reverse'>
             <div>
-              <div className='flex w-80 h-80 bg-black rounded-md ml-60'>
+              <div className='flex w-80 h-80 bg-slate-200 rounded-md ml-60'>
                 <img
                   //@ts-ignore
                   src={student.pictureUrl}
