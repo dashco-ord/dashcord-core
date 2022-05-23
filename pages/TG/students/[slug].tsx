@@ -56,28 +56,21 @@ ChartJS.register(
   Legend
 );
 const data = {
-  labels: [
-    "Subject 1",
-    "Subject 2",
-    "Subject 3",
-    "Subject 4",
-    "Subject 5",
-    "Subject 6",
-  ],
+  labels: ["Subject 1", "Subject 2", "Subject 3", "Subject 4", "Subject 5"],
   datasets: [
     {
       label: "UT",
-      data: [10, 14, 12, 15, 17, 13],
+      data: [10, 14, 12, 15, 17],
       backgroundColor: "rgba(128, 0, 128, 0.3)",
     },
     {
       label: "MSE",
-      data: [25, 15, 22, 20, 20, 18],
+      data: [25, 15, 22, 20, 20],
       backgroundColor: "rgba(255, 99, 128, 0.3)",
     },
     {
       label: "ESE",
-      data: [35, 25, 28, 32, 22, 20],
+      data: [35, 25, 28, 32, 22],
       backgroundColor: "rgba(0, 0, 254, 0.3)",
     },
   ],
