@@ -9,14 +9,14 @@ type CardProps = {
 const Card = ({ title, value, link }: CardProps) => {
   return (
     <>
-      <div className='bg-[#1E1D1D] mr-10 px-6 py-4 rounded-md shadow-md'>
-        <h2 className='text-white text-2xl font-black py-2'>{title}</h2>
+      <div className='bg-white mr-10 px-6 py-4 rounded-md shadow-md'>
+        <h2 className='text-2xl font-black py-2'>{title}</h2>
         <p className='text-xl font-bold text-gray-500 pb-2'>Total</p>
         <div className='flex items-baseline'>
-          <p className='text-4xl font-black text-white pt-2'>{value}</p>
+          <p className='text-4xl font-black pt-2'>{value}</p>
           {link && (
             <Link href={`/${link}`}>
-              <a className='ml-auto text-lg text-gray-500 flex items-center hover:underline'>
+              <a className='ml-2 text-lg text-gray-500 flex items-center hover:underline'>
                 see all
                 <svg
                   xmlns='http://www.w3.org/2000/svg'

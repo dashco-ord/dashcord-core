@@ -29,7 +29,7 @@ const InchargeHome = () => {
     return (
       <Layout>
         <div className=' flex '>
-          <Card title='All Students' link={`/students`} />
+          <Card title='All Students' link={`/students`} value={200} />
           <Card title='Weak Students' />
           <Card title='Avg. Students' />
           <Card title='Good Students' />
