@@ -16,6 +16,7 @@ const LoginPage = ({ csrfToken }: any) => {
             Email :
           </label>
           <input
+            id='email'
             className='p-2 rounded-sm border-b-2 border-b-gray-300 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 bg-slate-100 duration-75'
             type='email'
             placeholder='Enter your Email'
@@ -37,6 +38,7 @@ const LoginPage = ({ csrfToken }: any) => {
           </div>
 
           <input
+            id='password'
             className='p-2 rounded-sm border-b-2 border-b-gray-300 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 bg-slate-100 duration-75'
             type='password'
             placeholder='Enter your Password'
@@ -46,6 +48,7 @@ const LoginPage = ({ csrfToken }: any) => {
         </div>
 
         <input
+          id='login'
           className='mt-5 p-2 w-24 text-white text-md font-semibold bg-purple-500 rounded-full'
           type='submit'
           value='Sign In'

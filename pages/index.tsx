@@ -10,7 +10,11 @@ const HomePage = () => {
     validateUser(session?.role);
   }, [session]);
 
-  return <Layout></Layout>;
+  return (
+    <Layout>
+      <h1>Please Login</h1>
+    </Layout>
+  );
 };
 
 export default HomePage;
