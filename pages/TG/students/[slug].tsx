@@ -1,6 +1,6 @@
 import Layout from "components/Layout/TgLayout";
 import { prisma } from "lib/prisma";
-import { Attendance, Student, AttendanceType } from "@prisma/client";
+import { Student, Subjects } from "@prisma/client";
 import moment from "moment";
 import Table from "components/Table/Table";
 import attendanceColors from "components/AttendanceColor";
@@ -38,6 +38,7 @@ export async function getStaticProps({ params }: any) {
     },
     include: {
       Attendance: true,
+      Exams: true,
     },
   });
   return {
@@ -55,28 +56,46 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-const data = {
-  labels: ["Subject 1", "Subject 2", "Subject 3", "Subject 4", "Subject 5"],
-  datasets: [
-    {
-      label: "UT",
-      data: [10, 14, 12, 15, 17],
-      backgroundColor: "rgba(128, 0, 128, 0.3)",
-    },
-    {
-      label: "MSE",
-      data: [25, 15, 22, 20, 20],
-      backgroundColor: "rgba(255, 99, 128, 0.3)",
-    },
-    {
-      label: "ESE",
-      data: [35, 25, 28, 32, 22],
-      backgroundColor: "rgba(0, 0, 254, 0.3)",
-    },
-  ],
-};
 
 const SingleStudentPage = ({ student }: studentProps) => {
+  const data = {
+    labels: [Subjects.AI, Subjects.SEPM, Subjects.CN, Subjects.DP, Subjects.FE],
+    datasets: [
+      {
+        label: "UT",
+        data: [10, 14, 12, 15, 17],
+        backgroundColor: "rgba(128, 0, 128, 0.2)",
+        pointHoverBackgroundColor: "#fff",
+        borderColor: "rgb(54, 162, 235)",
+      },
+      {
+        label: "MSE",
+        data: [25, 15, 22, 20, 20],
+        backgroundColor: "rgba(255, 99, 128, 0.2)",
+        pointHoverBackgroundColor: "#fff",
+      },
+      {
+        label: "ESE",
+        data: [35, 25, 28, 32, 22],
+        backgroundColor: "rgba(0, 0, 254, 0.2)",
+        pointHoverBackgroundColor: "#fff",
+      },
+    ],
+    options: {
+      plugins: {
+        legend: {
+          labels: {
+            // This more specific font property overrides the global property
+            font: {
+              size: 500,
+              weight: "bold",
+            },
+          },
+        },
+      },
+    },
+  };
+
   return (
     <Layout>
       <main>

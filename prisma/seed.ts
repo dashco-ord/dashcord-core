@@ -116,7 +116,7 @@ const seed = async () => {
     }
     studentAttributes.push({
       name: faker.name.findName(),
-      pictureUrl: faker.internet.url(),
+      pictureUrl: "https://github.com/noormoh786.png",
       email: email,
       passHash: await hashPassword(email),
       phoneNo: faker.phone.phoneNumber(),

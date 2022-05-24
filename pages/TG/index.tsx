@@ -68,7 +68,7 @@ const Home: NextPage = () => {
         <Card
           title='All Students'
           value={attendances.length}
-          link={`/tg/students`}
+          link={`/TG/students`}
         />
         <Card
           title='Weak Students'
@@ -125,7 +125,7 @@ const Home: NextPage = () => {
               <tr key={attendance.Attendance.id}>
                 <td className='pl-5 p-2 whitespace-nowrap text-violet-500'>
                   {attendance.Attendance && (
-                    <Link href={`/tg/students/${attendance.id}`}>
+                    <Link href={`/TG/students/${attendance.id}`}>
                       <a>{attendance.name}</a>
                     </Link>
                   )}

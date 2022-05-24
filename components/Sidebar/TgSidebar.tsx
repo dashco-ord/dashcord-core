@@ -95,7 +95,9 @@ const Sidebar = () => {
       <div
         className={isActive("/logout") ? "bg-purple-500 rounded-md p-2" : ""}>
         <Link href={session?.user ? `/api/auth/signout` : `/api/auth/signin`}>
-          <a>{session?.user ? <BiLogOut /> : <BiLogIn />}</a>
+          <a>
+            {session?.user ? <BiLogOut id='logout' /> : <BiLogIn id='login' />}
+          </a>
         </Link>
       </div>
     </div>
