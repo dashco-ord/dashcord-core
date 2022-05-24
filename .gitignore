@@ -43,3 +43,7 @@ yarn-error.log*
 # database files
 /dev.db
 /dev.db-journal
+
+# cypress
+/cypress/videos
+/cypress/screenshots
