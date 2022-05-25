@@ -13,7 +13,7 @@ const HomePage = () => {
 
   return (
     <div className='w-full h-screen flex items-center justify-center'>
-      <h1 className='text-3xl font-bold sm:text-2xl'>
+      <h1 className='text-3xl font-bold sm:text-2xl' id='heading'>
         Please{" "}
         <Link href='/login'>
           <a className='text-blue-500 underline'>Login</a>
