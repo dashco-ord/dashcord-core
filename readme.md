@@ -2,7 +2,7 @@
 The in house student performance monitor made specificly with our college needs in mind
 
 ## ❔ What is this project about ? 
-This is a student performance monitor for Teacher Incharge scheme at our college
+This is a student performance monitor for Teacher Guardian scheme at our college
 
 ## 🚀 Setting up
 1. clone the repo 
