@@ -14,4 +14,4 @@ This is a student performance monitor for Teacher Guardian scheme at our college
 > Note : Make sure to provide the database connection string as DATABASE_URL in the .env file before step 4
 
 ## 📜 Licence 
-This project is Licenced under [BSD 3-Clause License](./LICENSE)
+This project is Licenced under [GNU GPL v3 Licence](./LICENSE)
