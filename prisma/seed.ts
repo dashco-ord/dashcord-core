@@ -1,10 +1,18 @@
 import { prisma } from "../lib/prisma";
-import { teacherGuardians } from "./data";
+import { teacherGuardians, hods } from "./data";
 
 const main = async () => {
-  await prisma.tg.deleteMany()
-  console.log("\n Createing TG's")
-  await prisma.tg.createMany({data:teacherGuardians})
-}
+  console.log("\n Deleting existing Data... \n");
+  await prisma.tg.deleteMany();
+  await prisma.hod.deleteMany();
 
-main()
+  console.log("Creating new data \n");
+
+  console.log("Createing HOD's");
+  await prisma.hod.createMany({ data: hods });
+
+  console.log("Createing TG's");
+  await prisma.tg.createMany({ data: teacherGuardians });
+};
+
+main();
