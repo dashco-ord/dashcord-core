@@ -10,6 +10,7 @@
 
 # migrations
 /prisma/migrations
+/prisma/data.ts
 
 # next.js
 /.next/
