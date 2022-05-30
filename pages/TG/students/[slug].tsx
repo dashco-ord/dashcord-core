@@ -101,8 +101,8 @@ const SingleStudentPage = ({ student }: studentProps) => {
       <main>
         <div className='flex flex-wrap bg-white rounded-lg p-8'>
           <form className='flex flex-row-reverse'>
-            <div>
-              <div className='flex w-80 h-80 bg-slate-200 rounded-md ml-60'>
+            <div className='flex flex-col items-end'>
+              <div className='flex w-80 h-80 bg-slate-200 rounded-md ml-60 md:w-40 md:h-40 md:ml-0 md:mr-12'>
                 <img
                   //@ts-ignore
                   src={student.pictureUrl}
@@ -110,8 +110,10 @@ const SingleStudentPage = ({ student }: studentProps) => {
                   height={350}
                 />
               </div>
-              <div className='mt-2 ml-auto mb-2 w-[30rem] rounded-md p-8'>
-                <p className='text-2xl font-semibold mr-5 pb-2'>Exam Stats :</p>
+              <div className='mt-2 ml-auto mb-2 w-[30rem] md:w-[25rem] md:ml-3 rounded-md p-8'>
+                <p className='text-2xl md:text-lg font-semibold mr-5 pb-2'>
+                  Exam Stats :
+                </p>
                 <Radar data={data} />
               </div>
             </div>
@@ -119,11 +121,11 @@ const SingleStudentPage = ({ student }: studentProps) => {
             <div>
               <div className='flex'>
                 <div className='flex flex-col pb-6 mr-8'>
-                  <label className='text-2xl font-semibold mr-5 pb-2'>
+                  <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
                     Name :
                   </label>
                   <input
-                    className='p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
+                    className='w-36 p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
                     type='text'
                     placeholder='Enter your Name'
                     defaultValue={student.name}
@@ -131,11 +133,11 @@ const SingleStudentPage = ({ student }: studentProps) => {
                   />
                 </div>
                 <div className='flex flex-col pb-6 mr-8'>
-                  <label className='text-2xl font-semibold mr-5 pb-2'>
+                  <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
                     Phone.no :
                   </label>
                   <input
-                    className='p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
+                    className='w-36 p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75 md:text-lg'
                     type='text'
                     placeholder='Enter your Roll.No'
                     //@ts-ignore
@@ -144,11 +146,11 @@ const SingleStudentPage = ({ student }: studentProps) => {
                   />
                 </div>
                 <div className='flex flex-col pb-6 mr-8'>
-                  <label className='text-2xl font-semibold mr-5 pb-2'>
+                  <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
                     Email :
                   </label>
                   <input
-                    className='w-96 p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
+                    className='w-96 md:w-72 md:text-lg p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
                     type='email'
                     placeholder='Enter your Email'
                     defaultValue={student.email}
@@ -159,11 +161,11 @@ const SingleStudentPage = ({ student }: studentProps) => {
 
               <div className='flex'>
                 <div className='flex flex-col pb-6 mr-8'>
-                  <label className='text-2xl font-semibold mr-5 pb-2'>
+                  <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
                     Age :
                   </label>
                   <input
-                    className='p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
+                    className='w-36 p-2 pl-0 rounded-sm bg-white text-xl md:text-lg border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
                     type='text'
                     placeholder='Enter your Age'
                     //@ts-ignore
@@ -172,11 +174,11 @@ const SingleStudentPage = ({ student }: studentProps) => {
                   />
                 </div>
                 <div className='flex flex-col pb-6 mr-8'>
-                  <label className='text-2xl font-semibold mr-5 pb-2'>
+                  <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
                     Gender :
                   </label>
                   <input
-                    className='p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
+                    className='w-36 p-2 pl-0 rounded-sm bg-white text-xl md:text-lg border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
                     type='text'
                     placeholder='Enter your Gender'
                     //@ts-ignore
@@ -186,11 +188,11 @@ const SingleStudentPage = ({ student }: studentProps) => {
                   />
                 </div>
                 <div className='flex flex-col pb-6 mr-8'>
-                  <label className='text-2xl font-semibold mr-5 pb-2'>
+                  <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
                     Date Of Birth :
                   </label>
                   <input
-                    className='p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
+                    className='w-36 p-2 pl-0 rounded-sm bg-white text-xl md:text-lg border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
                     type='text'
                     placeholder='Enter your  Date Of Birth'
                     defaultValue={moment(student.dateOfBirth).format(
@@ -200,11 +202,11 @@ const SingleStudentPage = ({ student }: studentProps) => {
                   />
                 </div>
                 <div className='flex flex-col pb-6 mr-8'>
-                  <label className='text-2xl font-semibold mr-5 pb-2'>
+                  <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
                     Date Of Addmission :
                   </label>
                   <input
-                    className='p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
+                    className='w-36 p-2 pl-0 rounded-sm bg-white text-xl md:text-lg border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
                     type='text'
                     placeholder='Enter your Date Of Addmission'
                     value={moment(student.admissionDate).format("MMM Do YYYY")}
@@ -215,11 +217,11 @@ const SingleStudentPage = ({ student }: studentProps) => {
 
               <div className='flex'>
                 <div className='flex flex-col pb-6 mr-8'>
-                  <label className='text-2xl font-semibold mr-5 pb-2'>
+                  <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
                     Address :
                   </label>
                   <input
-                    className='p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
+                    className='w-36 p-2 pl-0 rounded-sm bg-white text-xl md:text-lg border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
                     type='text'
                     placeholder='Enter your Address'
                     //@ts-ignore
@@ -228,11 +230,11 @@ const SingleStudentPage = ({ student }: studentProps) => {
                   />
                 </div>
                 <div className='flex flex-col pb-6 mr-8'>
-                  <label className='text-2xl font-semibold mr-5 pb-2'>
+                  <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
                     Cast :
                   </label>
                   <input
-                    className='p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
+                    className='w-36 p-2 pl-0 rounded-sm bg-white text-xl md:text-lg border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
                     type='text'
                     placeholder='Enter your Cast'
                     //@ts-ignore
@@ -241,11 +243,11 @@ const SingleStudentPage = ({ student }: studentProps) => {
                   />
                 </div>
                 <div className='flex flex-col pb-6 mr-8'>
-                  <label className='text-2xl font-semibold mr-5 pb-2'>
+                  <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
                     Religion :
                   </label>
                   <input
-                    className='p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
+                    className=' w-20 p-2 pl-0 rounded-sm bg-white text-xl md:text-lg md:w-fit border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
                     type='text'
                     placeholder='Enter your Religion'
                     //@ts-ignore
@@ -254,11 +256,11 @@ const SingleStudentPage = ({ student }: studentProps) => {
                   />
                 </div>
                 <div className='flex flex-col pb-6 mr-8'>
-                  <label className='text-2xl font-semibold mr-5 pb-2'>
+                  <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
                     Seat Type :
                   </label>
                   <input
-                    className='p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
+                    className=' w-20 p-2 pl-0 rounded-sm bg-white text-xl md:text-lg border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
                     type='text'
                     placeholder='Enter your Religion'
                     //@ts-ignore
@@ -267,7 +269,7 @@ const SingleStudentPage = ({ student }: studentProps) => {
                   />
                 </div>
               </div>
-              <div className='mt-2 mb-2'>
+              <div className='mt-2 mb-2 md:w-[50rem]'>
                 <Table
                   title='Attendance Today : '
                   headings={[
@@ -279,7 +281,8 @@ const SingleStudentPage = ({ student }: studentProps) => {
                     "lecture 5",
                     "lecture 6",
                   ]}
-                  noShadow={true}>
+                  noShadow={true}
+                >
                   {
                     //@ts-ignore
                     student.Attendance ? (
@@ -300,7 +303,8 @@ const SingleStudentPage = ({ student }: studentProps) => {
                               className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
                                 //@ts-ignore
                                 student.Attendance.lecture1
-                              )}`}>
+                              )}`}
+                            >
                               {
                                 //@ts-ignore
                                 student.Attendance.lecture1
@@ -314,7 +318,8 @@ const SingleStudentPage = ({ student }: studentProps) => {
                               className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
                                 //@ts-ignore
                                 student.Attendance.lecture2
-                              )}`}>
+                              )}`}
+                            >
                               {
                                 //@ts-ignore
                                 student.Attendance.lecture2
@@ -328,7 +333,8 @@ const SingleStudentPage = ({ student }: studentProps) => {
                               className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
                                 //@ts-ignore
                                 student.Attendance.lecture3
-                              )}`}>
+                              )}`}
+                            >
                               {
                                 //@ts-ignore
                                 student.Attendance.lecture3
@@ -342,7 +348,8 @@ const SingleStudentPage = ({ student }: studentProps) => {
                               className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
                                 //@ts-ignore
                                 student.Attendance.lecture4
-                              )}`}>
+                              )}`}
+                            >
                               {
                                 //@ts-ignore
                                 student.Attendance.lecture4
@@ -356,7 +363,8 @@ const SingleStudentPage = ({ student }: studentProps) => {
                               className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
                                 //@ts-ignore
                                 student.Attendance.lecture5
-                              )}`}>
+                              )}`}
+                            >
                               {
                                 //@ts-ignore
                                 student.Attendance.lecture5
@@ -370,7 +378,8 @@ const SingleStudentPage = ({ student }: studentProps) => {
                               className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2 py-0.3 ${attendanceColors(
                                 //@ts-ignore
                                 student.Attendance.lecture6
-                              )}`}>
+                              )}`}
+                            >
                               {
                                 //@ts-ignore
                                 student.Attendance.lecture6
