@@ -5,6 +5,7 @@ const main = async () => {
   console.log("\n Deleting existing Data... \n");
   await prisma.tg.deleteMany();
   await prisma.hod.deleteMany();
+  await prisma.student.deleteMany();
 
   console.log("Creating new data \n");
 
