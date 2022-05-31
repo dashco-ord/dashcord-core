@@ -17,6 +17,9 @@ const main = async () => {
 
   console.log("Createing students");
   await prisma.student.createMany({ data: students });
+
+  console.log("Creating Family Details");
+  for (let i = 0; i < students.length;i++){}
 };
 
 main();
