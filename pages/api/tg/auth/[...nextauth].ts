@@ -28,7 +28,7 @@ export default NextAuth({
             where: { email: credentials?.email },
           });
           //@ts-ignore
-          if (bcrypt.compare(credentials?.password, user?.passHash)) {
+          if (credentials?.password == user?.passHash) {
             return {
               id: user?.id,
               name: user?.name,
@@ -62,6 +62,9 @@ export default NextAuth({
       }
       return session;
     },
+    // redirect: () => {
+    //   return "https://takshakramteke-dashcord-q595r5p729pjr-3000.githubpreview.dev/";
+    // },
   },
 
   secret: process.env.NEXT_AUTH_SECRET,
