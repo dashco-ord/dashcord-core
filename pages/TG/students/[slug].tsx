@@ -134,7 +134,7 @@ const SingleStudentPage = ({
           </div>
           <div>
             <FamilyDetailForm familyDetails={familyDetails} />
-            <FriendsDetailForm friends={friends} />
+            <FriendsDetailForm friends={friends} username={student.name} />
             <AttendanceTable
               attendance={
                 //@ts-ignore
