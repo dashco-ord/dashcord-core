@@ -318,34 +318,74 @@ const PersonalDetailForm = ({ student }: PersonalDetailProps) => {
               <div>Score</div>
             </td>
             <td className='p-2 whitespace-nowrap'>
-              <div>{`${student.tenthScore} %`}</div>
+              {student.tenthScore ? (
+                <div>{`${student.tenthScore} %`}</div>
+              ) : (
+                <div> - %</div>
+              )}
             </td>
             <td className='p-2 whitespace-nowrap'>
-              <div>{`${student.twelthScore} %`}</div>
+              {student.twelthScore ? (
+                <div>{`${student.twelthScore} %`}</div>
+              ) : (
+                <div> - %</div>
+              )}
             </td>
             <td className='p-2 whitespace-nowrap'>
-              <div>{`${student.sem1Score}`}</div>
+              {student.sem1Score ? (
+                <div>{student.sem1Score}</div>
+              ) : (
+                <div> - </div>
+              )}
             </td>
             <td className='p-2 whitespace-nowrap'>
-              <div>{`${student.sem2Score}`}</div>
+              {student.sem2Score ? (
+                <div>{student.sem2Score}</div>
+              ) : (
+                <div> - </div>
+              )}
             </td>
             <td className='p-2 whitespace-nowrap'>
-              <div>{`${student.sem3Score}`}</div>
+              {student.sem3Score ? (
+                <div>{student.sem3Score}</div>
+              ) : (
+                <div> - </div>
+              )}
             </td>
             <td className='p-2 whitespace-nowrap'>
-              <div>{`${student.sem4Score}`}</div>
+              {student.sem4Score ? (
+                <div>{student.sem4Score}</div>
+              ) : (
+                <div> - </div>
+              )}
             </td>
             <td className='p-2 whitespace-nowrap'>
-              <div>{`${student.sem5Score}`}</div>
+              {student.sem5Score ? (
+                <div>{student.sem5Score}</div>
+              ) : (
+                <div> - </div>
+              )}
             </td>
             <td className='p-2 whitespace-nowrap'>
-              <div>{`${student.sem6Score}`}</div>
+              {student.sem6Score ? (
+                <div>{student.sem6Score}</div>
+              ) : (
+                <div> - </div>
+              )}
             </td>
             <td className='p-2 whitespace-nowrap'>
-              <div>{`${student.sem7Score}`}</div>
+              {student.sem7Score ? (
+                <div>{student.sem7Score}</div>
+              ) : (
+                <div> - </div>
+              )}
             </td>
             <td className='p-2 whitespace-nowrap'>
-              <div>{`${student.sem8Score}`}</div>
+              {student.sem8Score ? (
+                <div>{student.sem8Score}</div>
+              ) : (
+                <div> - </div>
+              )}
             </td>
           </tr>
         </Table>
