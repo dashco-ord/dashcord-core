@@ -68,11 +68,11 @@ const Sidebar = () => {
 
       <div
         className={
-          isActive(`/${session?.role}/notifications`)
+          isActive(`/${session?.role}/tasks`)
             ? "bg-purple-500 rounded-md p-2 text-white"
             : ""
         }>
-        <Link href={`/${session?.role}/notifications`}>
+        <Link href={`/${session?.role}/tasks`}>
           <a>
             <svg
               xmlns='http://www.w3.org/2000/svg'
