@@ -20,8 +20,8 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Radar } from "react-chartjs-2";
-import { students } from "prisma/data";
+// import { Radar } from "react-chartjs-2";
+// import { students } from "prisma/data";
 
 export async function getStaticPaths() {
   const students = await prisma.student.findMany();
@@ -73,57 +73,57 @@ export async function getStaticProps({ params }: any) {
   };
 }
 
-ChartJS.register(
-  RadialLinearScale,
-  PointElement,
-  LineElement,
-  Filler,
-  Tooltip,
-  Legend
-);
+// ChartJS.register(
+//   RadialLinearScale,
+//   PointElement,
+//   LineElement,
+//   Filler,
+//   Tooltip,
+//   Legend
+// );
 
 const SingleStudentPage = ({
   student,
   familyDetails,
   friends,
 }: StudentPageProps) => {
-  const data = {
-    labels: [Subjects.AI, Subjects.SEPM, Subjects.CN, Subjects.DP, Subjects.FE],
-    datasets: [
-      {
-        label: "UT",
-        data: [10, 14, 12, 15, 17],
-        backgroundColor: "rgba(128, 0, 128, 0.2)",
-        pointHoverBackgroundColor: "#fff",
-        borderColor: "rgb(54, 162, 235)",
-      },
-      {
-        label: "MSE",
-        data: [25, 15, 22, 20, 20],
-        backgroundColor: "rgba(255, 99, 128, 0.2)",
-        pointHoverBackgroundColor: "#fff",
-      },
-      {
-        label: "ESE",
-        data: [35, 25, 28, 32, 22],
-        backgroundColor: "rgba(0, 0, 254, 0.2)",
-        pointHoverBackgroundColor: "#fff",
-      },
-    ],
-    options: {
-      plugins: {
-        legend: {
-          labels: {
-            // This more specific font property overrides the global property
-            font: {
-              size: 500,
-              weight: "bold",
-            },
-          },
-        },
-      },
-    },
-  };
+  // const data = {
+  //   labels: [Subjects.AI, Subjects.SEPM, Subjects.CN, Subjects.DP, Subjects.FE],
+  //   datasets: [
+  //     {
+  //       label: "UT",
+  //       data: [10, 14, 12, 15, 17],
+  //       backgroundColor: "rgba(128, 0, 128, 0.2)",
+  //       pointHoverBackgroundColor: "#fff",
+  //       borderColor: "rgb(54, 162, 235)",
+  //     },
+  //     {
+  //       label: "MSE",
+  //       data: [25, 15, 22, 20, 20],
+  //       backgroundColor: "rgba(255, 99, 128, 0.2)",
+  //       pointHoverBackgroundColor: "#fff",
+  //     },
+  //     {
+  //       label: "ESE",
+  //       data: [35, 25, 28, 32, 22],
+  //       backgroundColor: "rgba(0, 0, 254, 0.2)",
+  //       pointHoverBackgroundColor: "#fff",
+  //     },
+  //   ],
+  //   options: {
+  //     plugins: {
+  //       legend: {
+  //         labels: {
+  //           // This more specific font property overrides the global property
+  //           font: {
+  //             size: 500,
+  //             weight: "bold",
+  //           },
+  //         },
+  //       },
+  //     },
+  //   },
+  // };
 
   return (
     <Layout>
