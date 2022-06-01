@@ -5,7 +5,7 @@ import moment from "moment";
 
 const AttendanceTable = ({ attendance }: AttendanceTableProps) => {
   return (
-    <div className='ml-10 mt-2 mb-2 md:w-[50rem]'>
+    <div className='ml-10 mt-2 mb-2 md:w-[50rem] md:ml-0 md:mt-4'>
       <Table
         title='Attendance Today : '
         headings={[

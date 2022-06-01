@@ -2,7 +2,7 @@ import { FamilyDetails } from "@prisma/client";
 
 const FamilyDetailForm = ({ familyDetails }: FamilyDetailProps) => {
   return (
-    <form className='ml-10'>
+    <form className='ml-10 md:ml-0 md:mt-4'>
       <h1 className='text-2xl font-bold mb-6'>Family Details :</h1>
       <div className='flex'>
         <div className='flex flex-col pb-6 mr-8'>

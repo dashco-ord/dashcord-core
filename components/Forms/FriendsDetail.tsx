@@ -2,7 +2,7 @@ import { Friends } from "@prisma/client";
 
 const FriendsDetailForm = ({ friends, username }: FriendsDetailProps) => {
   return (
-    <form className='ml-10'>
+    <form className='ml-10 md:ml-0 md:mt-4'>
       <h1 className='text-2xl font-bold mb-6'>Friends Details :</h1>
       <h1 className='text-lg font-semibold mb-5 text-slate-600'>
         College Friends
