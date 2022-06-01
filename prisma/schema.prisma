@@ -49,7 +49,6 @@ model Tg {
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
   Student    Student[]
-  Tasks      Tasks[]
 }
 
 model Teacher {
@@ -139,8 +138,6 @@ model Student {
   Exams                  Exams[]
   Friends                Friends?       @relation(fields: [friendsId], references: [id])
   friendsId              String?
-  Tasks                  Tasks?         @relation(fields: [tasksId], references: [id])
-  tasksId                String?
 }
 
 model Friends {
@@ -179,15 +176,13 @@ model Exams {
 }
 
 model Tasks {
-  id           String    @id @default(cuid())
+  id           String   @id @default(cuid())
   title        String
   description  String
-  createdBy    Tg?       @relation(fields: [tgId], references: [id])
   tgId         String?
   deadlineDate String
   deadlineTime String
-  assignedTo   Student[]
-  createdAt    DateTime  @default(now())
+  createdAt    DateTime @default(now())
 }
 
 enum UserRole {
