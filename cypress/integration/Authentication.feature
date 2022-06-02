@@ -13,3 +13,7 @@ Feature: Authentication System
   Scenario: Login as A TG
     When I try to login with "Ronaldo_Lehner@gmail.com" as email and "Ronaldo_Lehner@gmail.com" as password
     Then I should see "Dashcord - Home" as the "title"
+
+    Scenario: Login as A incharge
+        When I try to login with "Rick.Leffler@yahoo.com" as email and "Rick.Leffler@yahoo.com" as password
+        Then I should see "Dashcord - Home" as the "title"
