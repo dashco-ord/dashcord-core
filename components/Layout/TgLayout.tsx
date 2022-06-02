@@ -1,14 +1,14 @@
 import Sidebar from "components/Sidebar/TgSidebar";
-import Head from "next/head";
 
 const Layout = ({ children }: any) => {
   return (
-    <div className='flex bg-slate-200 h-screen'>
-      <Head>
-        <title>Dashcord - Home</title>
-      </Head>
-      <Sidebar />
-      <main className='m-14 h-100 w-full overflow-y-visible'>{children}</main>
+    <div className='flex'>
+      <section className='fixed h-screen overflow-hidden'>
+        <Sidebar />
+      </section>
+      <section className='ml-16 w-[95rem] flex flex-col flex-1 overflow-y-auto overflow-x-hidden p-10 h-screen bg-slate-100'>
+        <main>{children}</main>
+      </section>
     </div>
   );
 };

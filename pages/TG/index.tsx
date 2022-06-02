@@ -64,6 +64,11 @@ const Home: NextPage = () => {
           </Toast>
         )}
       </div>
+      <div>
+        <h1 className='mb-5 text-xl font-bold'>
+          Welcome, {session.user?.name} 👋
+        </h1>
+      </div>
       <div className=' flex '>
         <Card
           title='All Students'
@@ -92,20 +97,20 @@ const Home: NextPage = () => {
           }
         />
       </div>
-      <div className='mt-10 flex'>
-        <div className='mr-10'>
-          <Table title='Achievements' headings={["Name", "Achievement"]}>
-            <tr className='divide-black'>
-              <td className='pl-5 p-2 whitespace-nowrap'>Student Name</td>
-              <td className='p-2 whitespace-nowrap'>won a hackathon</td>
+      {/* <div className="mt-10 flex">
+        <div className="mr-10">
+          <Table title="Achievements" headings={["Name", "Achievement"]}>
+            <tr className="divide-black">
+              <td className="pl-5 p-2 whitespace-nowrap">Student Name</td>
+              <td className="p-2 whitespace-nowrap">won a hackathon</td>
             </tr>
-            <tr className='divide-black'>
-              <td className='pl-5 p-2 whitespace-nowrap'>Student Name</td>
-              <td className='p-2 whitespace-nowrap'>Won a hackathon</td>
+            <tr className="divide-black">
+              <td className="pl-5 p-2 whitespace-nowrap">Student Name</td>
+              <td className="p-2 whitespace-nowrap">Won a hackathon</td>
             </tr>
           </Table>
         </div>
-      </div>
+      </div> */}
       <div className='pt-11'>
         <Table
           refresh={getAttendance}
@@ -124,11 +129,9 @@ const Home: NextPage = () => {
             attendance.Attendance ? (
               <tr key={attendance.Attendance.id}>
                 <td className='pl-5 p-2 whitespace-nowrap text-violet-500'>
-                  {attendance.Attendance && (
-                    <Link href={`/TG/students/${attendance.id}`}>
-                      <a>{attendance.name}</a>
-                    </Link>
-                  )}
+                  <Link href={`TG/students/${attendance.id}`}>
+                    <a>{attendance.name}</a>
+                  </Link>
                 </td>
                 <td className='p-2 whitespace-nowrap'>{attendance.rollNo}</td>
                 <td className='p-2 whitespace-nowrap'>
@@ -196,7 +199,7 @@ const Home: NextPage = () => {
               //@ts-ignore
               <tr key={attendance.name}>
                 <td className='pl-5 p-2 whitespace-nowrap text-violet-500'>
-                  <Link href={`/tg/students/${attendance.id}`}>
+                  <Link href={`/TG/students/${attendance.id}`}>
                     <a>{attendance.name}</a>
                   </Link>
                 </td>
