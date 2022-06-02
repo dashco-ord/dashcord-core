@@ -6,6 +6,8 @@ import {
   FamilyDetails,
   Friends,
   Attendance,
+  Goals,
+  GoalType,
 } from "@prisma/client";
 import PersonalDetailForm from "components/Forms/PersonalDetail";
 import FamilyDetailForm from "components/Forms/FamilyDetail";
@@ -20,6 +22,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { useState } from "react";
 // import { Radar } from "react-chartjs-2";
 // import { students } from "prisma/data";
 
@@ -44,6 +47,7 @@ export async function getStaticProps({ params }: any) {
     include: {
       Attendance: true,
       Exams: true,
+      Goals: true,
     },
   });
 
@@ -69,6 +73,7 @@ export async function getStaticProps({ params }: any) {
       student: JSON.parse(JSON.stringify(rawStudent)),
       familyDetails: JSON.parse(JSON.stringify(familyDetails)),
       friends: JSON.parse(JSON.stringify(friends)),
+      goals: JSON.parse(JSON.stringify(rawStudent?.Goals)),
     },
   };
 }
@@ -86,6 +91,7 @@ const SingleStudentPage = ({
   student,
   familyDetails,
   friends,
+  goals,
 }: StudentPageProps) => {
   // const data = {
   //   labels: [Subjects.AI, Subjects.SEPM, Subjects.CN, Subjects.DP, Subjects.FE],
@@ -125,10 +131,15 @@ const SingleStudentPage = ({
   //   },
   // };
 
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [deadline, setDeadline] = useState("");
+  const [goalType, setGoalType] = useState<GoalType>();
+
   return (
     <Layout>
       <main>
-        <div className='flex flex-wrap bg-white rounded-lg p-8'>
+        <div className="flex flex-wrap bg-white rounded-lg p-8">
           <div>
             <PersonalDetailForm student={student} />
           </div>
@@ -141,6 +152,114 @@ const SingleStudentPage = ({
                 student.Attendance
               }
             />
+          </div>
+          <div className="w-full flex flex-wrap flex-col">
+            <div>
+              <h2 className="text-2xl font-bold mt-8">Current Goals : </h2>
+              <div className="flex flex-wrap">
+                {goals
+                  .slice(0)
+                  .reverse()
+                  .map((goal) => (
+                    <div key={goal.id}>
+                      <div className="flex flex-col break-words w-[20rem] font-semibold mt-5 mr-10 border border-black p-5 rounded-lg">
+                        <div className="flex items-center">
+                          <div className="text-3xl mb-2 font-bold p-1">
+                            {goal.title}
+                          </div>
+                          <div
+                            className={`ml-auto border p-1 px-2 w-fit text-sm rounded-full ${
+                              goal.type == GoalType.LongTerm
+                                ? "border-yellow-400 text-yellow-400"
+                                : "border-green-400 text-green-400"
+                            }`}
+                          >
+                            {goal.type}
+                          </div>
+                        </div>
+                        <div className="flex">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                            />
+                          </svg>
+                          <div className="ml-2">{goal.deadline}</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+            <div className="mt-8">
+              <h2 className="text-2xl font-bold">Create Goals : </h2>
+              <form className="mt-5">
+                <div className="flex items-center">
+                  <div className="flex flex-col pb-6 mr-8">
+                    <label className="text-2xl font-semibold mr-5 pb-2 md:text-lg">
+                      Goal Title :
+                    </label>
+                    <input
+                      className="w-42 p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75"
+                      type="text"
+                      placeholder="Enter Goal Title"
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col pb-6 mr-8">
+                    <label className="text-2xl font-semibold mr-5 pb-2 md:text-lg">
+                      Goal Description :
+                    </label>
+                    <textarea
+                      className="w-80 h-10 p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75"
+                      placeholder="Enter Goal Description"
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col pb-6 mr-8">
+                    <label className="text-2xl font-semibold mr-5 pb-2 md:text-lg">
+                      Goal DeadLine :
+                    </label>
+                    <input
+                      className="w-42 p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75"
+                      type="date"
+                      placeholder="Enter Goal DeadLine"
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col pb-6 mr-8">
+                    <label className="text-2xl font-semibold mr-5 pb-2 md:text-lg">
+                      Goal Type :
+                    </label>
+                    <select className="w-42 p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75">
+                      <option value={GoalType.LongTerm}>Long Term</option>
+                      <option>Short Term</option>
+                    </select>
+                    {/* <input
+                      className="w-42 p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75"
+                      type="date"
+                      placeholder="Enter Goal DeadLine"
+                      required
+                    /> */}
+                  </div>
+                  <div className="p-2 w-fit h-fit bg-purple-600 rounded-lg">
+                    <input
+                      type="submit"
+                      className="text-white font-bold"
+                      value={`+ Create Goal`}
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </main>
@@ -155,4 +274,5 @@ type StudentPageProps = {
   familyDetails: FamilyDetails;
   friends: Friends;
   attendance: Attendance;
+  goals: Goals[];
 };
