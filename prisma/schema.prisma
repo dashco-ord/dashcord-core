@@ -138,6 +138,7 @@ model Student {
   Exams                  Exams[]
   Friends                Friends?       @relation(fields: [friendsId], references: [id])
   friendsId              String?
+  Goals                  Goals[]
 }
 
 model Friends {
@@ -186,6 +187,16 @@ model Tasks {
   createdAt    DateTime @default(now())
 }
 
+model Goals {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  deadline    String
+  type        GoalType
+  Student     Student? @relation(fields: [studentId], references: [id])
+  studentId   String?
+}
+
 enum UserRole {
   HOD
   INCHARGE
@@ -217,4 +228,9 @@ enum ExamType {
 enum Status {
   InProgress
   Done
+}
+
+enum GoalType {
+  LongTerm
+  ShortTerm
 }
