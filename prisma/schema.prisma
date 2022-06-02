@@ -182,6 +182,7 @@ model Tasks {
   tgId         String?
   deadlineDate String
   deadlineTime String
+  taskStatus   Status
   createdAt    DateTime @default(now())
 }
 
@@ -211,4 +212,9 @@ enum Subjects {
 enum ExamType {
   MidSem
   EndSem
+}
+
+enum Status {
+  InProgress
+  Done
 }
