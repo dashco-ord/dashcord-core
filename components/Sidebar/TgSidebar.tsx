@@ -15,13 +15,25 @@ const Sidebar = () => {
   const { data: session } = useSession();
 
   return (
-    <div className='flex flex-col justify-around items-center py-64 w-16 h-screen bg-white text-3xl px-7'>
+    <div className='flex flex-col pt-8 pb-5 items-center w-16 h-screen bg-white text-3xl px-7'>
+      <div className='mb-10'>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          className='h-9 w-9 text-slate-500'
+          fill='none'
+          viewBox='0 0 24 24'
+          stroke='currentColor'
+          strokeWidth={2}>
+          <circle r={20} fill='#000028' />
+          <circle cx={30} cy={30} r={20} fill='#000028' />
+        </svg>
+      </div>
       <div
-        className={
+        className={`my-5 ${
           isActive(`/${session?.role}`)
             ? "bg-purple-500 rounded-md p-2 text-white"
             : ""
-        }>
+        }`}>
         <Link href={`/${session?.role}`}>
           <a>
             <svg
@@ -42,11 +54,11 @@ const Sidebar = () => {
       </div>
 
       <div
-        className={
+        className={`my-5 ${
           isActive(`/${session?.role}/user`)
             ? "bg-purple-500 rounded-md p-2 text-white"
             : ""
-        }>
+        }`}>
         <Link href={`/${session?.role}/user`}>
           <a>
             <svg
@@ -67,11 +79,12 @@ const Sidebar = () => {
       </div>
 
       <div
-        className={
-          isActive(`/${session?.role}/tasks`)
-            ? "bg-purple-500 rounded-md p-2 text-white"
-            : ""
-        }>
+        className={`my-5
+         ${
+           isActive(`/${session?.role}/tasks`)
+             ? "bg-purple-500 rounded-md p-2 text-white"
+             : ""
+         }`}>
         <Link href={`/${session?.role}/tasks`}>
           <a>
             <svg
@@ -92,11 +105,11 @@ const Sidebar = () => {
       </div>
 
       <div
-        className={
+        className={`my-5 ${
           isActive(`/${session?.role}/students`)
             ? "bg-purple-500 rounded-md p-2 text-white"
             : ""
-        }>
+        }`}>
         <Link href={`/${session?.role}/students`}>
           <a>
             <svg
@@ -117,11 +130,11 @@ const Sidebar = () => {
       </div>
 
       <div
-        className={
+        className={`my-5 mt-auto ${
           isActive(`/${session?.role}/settings`)
             ? "bg-purple-500 rounded-md p-2 text-white"
             : ""
-        }>
+        }`}>
         <Link href={`/${session?.role}/settings`}>
           <a>
             <svg
@@ -147,9 +160,9 @@ const Sidebar = () => {
       </div>
 
       <div
-        className={
+        className={`my-5 ${
           isActive("/logout") ? "bg-purple-500 rounded-md p-2 text-white" : ""
-        }>
+        }`}>
         <Link href={session?.user ? `/api/auth/signout` : `/api/auth/signin`}>
           <a>
             {session?.user ? (
