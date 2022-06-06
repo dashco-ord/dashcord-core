@@ -8,6 +8,7 @@ import {
   Attendance,
   Goals,
   GoalType,
+  Exams,
 } from "@prisma/client";
 import PersonalDetailForm from "components/Forms/PersonalDetail";
 import FamilyDetailForm from "components/Forms/FamilyDetail";
@@ -22,12 +23,14 @@ import {
   Legend,
   CategoryScale,
   LinearScale,
+  BarElement,
 } from "chart.js";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { Radar } from "react-chartjs-2";
+// import { Radar } from "react-chartjs-2";
 import { Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 
 export async function getStaticPaths() {
   const students = await prisma.student.findMany();
@@ -77,6 +80,7 @@ export async function getStaticProps({ params }: any) {
       familyDetails: JSON.parse(JSON.stringify(familyDetails)),
       friends: JSON.parse(JSON.stringify(friends)),
       goals: JSON.parse(JSON.stringify(rawStudent?.Goals)),
+      exams: JSON.parse(JSON.stringify(rawStudent?.Exams)),
     },
     revalidate: 5,
   };
@@ -89,7 +93,8 @@ ChartJS.register(
   Tooltip,
   Legend,
   CategoryScale,
-  LinearScale
+  LinearScale,
+  BarElement
 );
 
 const SingleStudentPage = ({
@@ -97,30 +102,36 @@ const SingleStudentPage = ({
   familyDetails,
   friends,
   goals,
+  exams,
 }: StudentPageProps) => {
   const data = {
     labels: [Subjects.AI, Subjects.SEPM, Subjects.CN, Subjects.DP, Subjects.FE],
     datasets: [
       {
-        label: "UT",
-        data: [10, 14, 12, 15, 17],
-        backgroundColor: "rgba(128, 0, 128, 0.2)",
+        label: exams[0].name,
+        data: [
+          exams[0].score1,
+          exams[0].score2,
+          exams[0].score3,
+          exams[0].score4,
+          exams[0].score5,
+        ],
+        backgroundColor: "rgba(128, 0, 128, 0.5)",
         pointHoverBackgroundColor: "#fff",
-        borderColor: "rgb(128, 0, 128)",
+        borderColor: "rgba(128, 0, 128, 0.3)",
       },
       {
-        label: "MSE",
-        data: [25, 15, 22, 20, 20],
-        backgroundColor: "rgba(255, 99, 128, 0.2)",
+        label: exams[1].name,
+        data: [
+          exams[1].score1,
+          exams[1].score2,
+          exams[1].score3,
+          exams[1].score4,
+          exams[1].score5,
+        ],
+        backgroundColor: "rgba(0, 0, 254, 0.5)",
         pointHoverBackgroundColor: "#fff",
-        borderColor: "rgb(255, 99, 128)",
-      },
-      {
-        label: "ESE",
-        data: [35, 25, 28, 32, 22],
-        backgroundColor: "rgba(0, 0, 254, 0.2)",
-        pointHoverBackgroundColor: "#fff",
-        borderColor: "rgb(0, 0, 254)",
+        borderColor: "rgba(0, 0, 254, 0.3)",
       },
     ],
     options: {
@@ -136,6 +147,35 @@ const SingleStudentPage = ({
         },
       },
     },
+  };
+
+  const barData = {
+    labels: [
+      "Sem 1",
+      "Sem 2",
+      "Sem 3",
+      "Sem 4",
+      "Sem 5",
+      "Sem 6",
+      "Sem 7",
+      "Sem 8",
+    ],
+    datasets: [
+      {
+        label: "Overall",
+        data: [
+          student.sem1Score,
+          student.sem2Score,
+          student.sem3Score,
+          student.sem4Score,
+          student.sem5Score,
+          student.sem6Score,
+          student.sem7Score,
+          student.sem8Score,
+        ],
+        backgroundColor: "rgba(0, 0, 255, 0.5)",
+      },
+    ],
   };
 
   const [title, setTitle] = useState("");
@@ -186,12 +226,12 @@ const SingleStudentPage = ({
             <h1 className='text-2xl font-semibold mb-4'>Stats : </h1>
             <div className='flex'>
               <div className='w-[30rem] mr-5'>
-                <h1 className='text-xl font-bold'>Exam Stats : </h1>
-                <Line data={data} />
+                <h1 className='text-xl font-bold'>Overall Exam Stats : </h1>
+                <Bar data={barData} />
               </div>
               <div className='w-[30rem] mr-5'>
-                {/* <h1 className='text-xl font-bold'>Exam Stats : </h1>
-                <Radar data={data} /> */}
+                <h1 className='text-xl font-bold'>Exam Stats : </h1>
+                <Bar data={data} />
               </div>
             </div>
           </div>
@@ -330,4 +370,5 @@ type StudentPageProps = {
   friends: Friends;
   attendance: Attendance;
   goals: Goals[];
+  exams: Exams[];
 };
