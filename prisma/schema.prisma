@@ -135,10 +135,10 @@ model Student {
   familyDetails          FamilyDetails? @relation(fields: [familyDetailsId], references: [id])
   familyDetailsId        String?        @unique
   Attendance             Attendance?
-  Exams                  Exams[]
-  Friends                Friends?       @relation(fields: [friendsId], references: [id])
-  friendsId              String?
   Goals                  Goals[]
+  Friends                Friends?       @relation(fields: [friendsId], references: [id])
+  Exams                  Exams[]
+  friendsId              String?
 }
 
 model Friends {
@@ -171,9 +171,9 @@ model Exams {
   score3    Int
   score4    Int
   score5    Int
-  studentId String    @unique
-  Student   Student   @relation(fields: [studentId], references: [id])
   updatedAt DateTime  @updatedAt
+  Student   Student   @relation(fields: [studentId], references: [id])
+  studentId String
 }
 
 model Tasks {
