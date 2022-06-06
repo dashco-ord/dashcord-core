@@ -106,19 +106,21 @@ const SingleStudentPage = ({
         data: [10, 14, 12, 15, 17],
         backgroundColor: "rgba(128, 0, 128, 0.2)",
         pointHoverBackgroundColor: "#fff",
-        borderColor: "rgb(54, 162, 235)",
+        borderColor: "rgb(128, 0, 128)",
       },
       {
         label: "MSE",
         data: [25, 15, 22, 20, 20],
         backgroundColor: "rgba(255, 99, 128, 0.2)",
         pointHoverBackgroundColor: "#fff",
+        borderColor: "rgb(255, 99, 128)",
       },
       {
         label: "ESE",
         data: [35, 25, 28, 32, 22],
         backgroundColor: "rgba(0, 0, 254, 0.2)",
         pointHoverBackgroundColor: "#fff",
+        borderColor: "rgb(0, 0, 254)",
       },
     ],
     options: {
@@ -178,8 +180,10 @@ const SingleStudentPage = ({
               }
             />
           </div>
-          <div className='flex flex-col'>
-            <h1 className='text-2xl font-bold mb-4'>Stats : </h1>
+
+          {/* Graph's */}
+          <div className='flex flex-col mt-5'>
+            <h1 className='text-2xl font-semibold mb-4'>Stats : </h1>
             <div className='flex'>
               <div className='w-[30rem] mr-5'>
                 <h1 className='text-xl font-bold'>Exam Stats : </h1>
@@ -191,6 +195,8 @@ const SingleStudentPage = ({
               </div>
             </div>
           </div>
+
+          {/* Goals */}
           <div className='w-full flex flex-wrap flex-col'>
             <div>
               <h2 className='text-2xl font-bold mt-8'>Current Goals : </h2>
