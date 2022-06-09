@@ -224,7 +224,6 @@ enum AssesmentType {
   CAE1
   CAE2
   TAE
-  EndSem
 }
 
 enum Status {
