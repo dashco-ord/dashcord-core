@@ -8,7 +8,7 @@ import {
   Attendance,
   Goals,
   GoalType,
-  Exams,
+  Assesments,
 } from "@prisma/client";
 import PersonalDetailForm from "components/Forms/PersonalDetail";
 import FamilyDetailForm from "components/Forms/FamilyDetail";
@@ -52,9 +52,9 @@ export async function getStaticProps({ params }: any) {
     include: {
       familyDetails: true,
       Attendance: true,
-      Exams: true,
       Goals: true,
       Friends: true,
+      Assesments: true,
     },
   });
 
@@ -74,7 +74,7 @@ export async function getStaticProps({ params }: any) {
       familyDetails: JSON.parse(JSON.stringify(rawStudent?.familyDetails)),
       friends: JSON.parse(JSON.stringify(friends)),
       goals: JSON.parse(JSON.stringify(rawStudent?.Goals)),
-      exams: JSON.parse(JSON.stringify(rawStudent?.Exams)),
+      assesments: JSON.parse(JSON.stringify(rawStudent?.Assesments)),
     },
     revalidate: 5,
   };
@@ -96,7 +96,7 @@ const SingleStudentPage = ({
   familyDetails,
   friends,
   goals,
-  exams,
+  assesments,
 }: StudentPageProps) => {
   let data = {
     labels: [Subjects.AI, Subjects.CN, Subjects.DP, Subjects.FE, Subjects.SEPM],
@@ -116,50 +116,50 @@ const SingleStudentPage = ({
     },
   };
 
-  exams.map((exam) =>
+  assesments.map((assesment) =>
     data.datasets.push(
       //@ts-ignore
-      exam.name == AssesmentType.CAE1
+      assesment.name == AssesmentType.CAE1
         ? {
             //@ts-ignore
-            label: exam.name,
+            label: assesment.name,
             //@ts-ignore
             data: [
-              exam.score1,
-              exam.score2,
-              exam.score3,
-              exam.score4,
-              exam.score5,
+              assesment.score1,
+              assesment.score2,
+              assesment.score3,
+              assesment.score4,
+              assesment.score5,
             ],
             backgroundColor: "rgba(128, 0, 128, 0.5)",
             pointHoverBackgroundColor: "#fff",
             borderColor: "rgba(128, 0, 128, 0.3)",
           }
-        : exam.name == AssesmentType.CAE2
+        : assesment.name == AssesmentType.CAE2
         ? {
             //@ts-ignore
-            label: exam.name,
+            label: assesment.name,
             //@ts-ignore
             data: [
-              exam.score1,
-              exam.score2,
-              exam.score3,
-              exam.score4,
-              exam.score5,
+              assesment.score1,
+              assesment.score2,
+              assesment.score3,
+              assesment.score4,
+              assesment.score5,
             ],
             backgroundColor: "rgba(128, 0, 254, 0.5)",
             pointHoverBackgroundColor: "#fff",
             borderColor: "rgba(128, 0, 128, 0.3)",
           }
         : {
-            label: exam.name,
+            label: assesment.name,
             //@ts-ignore
             data: [
-              exam.score1,
-              exam.score2,
-              exam.score3,
-              exam.score4,
-              exam.score5,
+              assesment.score1,
+              assesment.score2,
+              assesment.score3,
+              assesment.score4,
+              assesment.score5,
             ],
             backgroundColor: "rgba(255, 220, 20 , 0.5)",
             pointHoverBackgroundColor: "#fff",
@@ -245,7 +245,9 @@ const SingleStudentPage = ({
             <h1 className='text-2xl font-semibold mb-4'>Stats : </h1>
             <div className='flex'>
               <div className='w-[30rem] mr-5'>
-                <h1 className='text-xl font-bold'>Overall Exam Stats : </h1>
+                <h1 className='text-xl font-bold'>
+                  Overall assesment Stats :{" "}
+                </h1>
                 <Bar data={barData} />
               </div>
               <div className='w-[30rem] mr-5'>
@@ -389,5 +391,5 @@ type StudentPageProps = {
   friends: Friends;
   attendance: Attendance;
   goals: Goals[];
-  exams: Exams[];
+  assesments: Assesments[];
 };
