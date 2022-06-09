@@ -84,11 +84,21 @@ model FamilyDetails {
   Student           Student?
 }
 
+model MedicalHistory {
+  id          String   @id @default(cuid())
+  name        String?
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Student     Student  @relation(fields: [studentId], references: [id])
+  studentId   String   @unique
+}
+
 model Student {
-  id                     String         @id @default(cuid())
+  id                     String          @id @default(cuid())
   name                   String
   pictureUrl             String?
-  email                  String         @unique
+  email                  String          @unique
   passHash               String
   phoneNo                String
   gender                 String?
@@ -101,8 +111,8 @@ model Student {
   religion               String?
   seatType               String?
   admissionDate          String?
-  achivement             String?        @db.VarChar(200)
-  achivement_description String?        @db.LongText
+  achivement             String?         @db.VarChar(200)
+  achivement_description String?         @db.LongText
   year                   Int?
   section                String?
   bloodGroup             String?
@@ -125,20 +135,21 @@ model Student {
   sem6Score              Float?
   sem7Score              Float?
   sem8Score              Float?
-  createdAt              DateTime       @default(now())
-  updatedAt              DateTime       @updatedAt
+  createdAt              DateTime        @default(now())
+  updatedAt              DateTime        @updatedAt
   role                   UserRole?
-  hod                    Hod?           @relation(fields: [hodId], references: [id])
-  hodId                  String?        @map("hod_id")
-  Tg                     Tg?            @relation(fields: [tgId], references: [id])
-  tgId                   String?        @map("tg_id")
-  familyDetails          FamilyDetails? @relation(fields: [familyDetailsId], references: [id])
-  familyDetailsId        String?        @unique
+  hod                    Hod?            @relation(fields: [hodId], references: [id])
+  hodId                  String?         @map("hod_id")
+  Tg                     Tg?             @relation(fields: [tgId], references: [id])
+  tgId                   String?         @map("tg_id")
+  familyDetails          FamilyDetails?  @relation(fields: [familyDetailsId], references: [id])
+  familyDetailsId        String?         @unique
   Attendance             Attendance?
   Goals                  Goals[]
-  Friends                Friends?       @relation(fields: [friendsId], references: [id])
+  Friends                Friends?        @relation(fields: [friendsId], references: [id])
   Assesments             Assesments[]
   friendsId              String?
+  MedicalHistory         MedicalHistory?
 }
 
 model Friends {
