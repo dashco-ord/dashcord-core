@@ -8,7 +8,7 @@ import {
   Attendance,
   Goals,
   GoalType,
-  Exams,
+  Assesments,
 } from "@prisma/client";
 import PersonalDetailForm from "components/Forms/PersonalDetail";
 import FamilyDetailForm from "components/Forms/FamilyDetail";
@@ -28,9 +28,8 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-// import { Radar } from "react-chartjs-2";
-import { Line } from "react-chartjs-2";
 import { Bar } from "react-chartjs-2";
+import { AssesmentType } from "@prisma/client";
 
 export async function getStaticPaths() {
   const students = await prisma.student.findMany();
@@ -51,16 +50,11 @@ export async function getStaticProps({ params }: any) {
       id: params.slug,
     },
     include: {
+      familyDetails: true,
       Attendance: true,
-      Exams: true,
       Goals: true,
-    },
-  });
-
-  const familyDetails = await prisma.familyDetails.findUnique({
-    where: {
-      //@ts-ignore
-      id: rawStudent?.familyDetailsId,
+      Friends: true,
+      Assesments: true,
     },
   });
 
@@ -77,10 +71,10 @@ export async function getStaticProps({ params }: any) {
   return {
     props: {
       student: JSON.parse(JSON.stringify(rawStudent)),
-      familyDetails: JSON.parse(JSON.stringify(familyDetails)),
+      familyDetails: JSON.parse(JSON.stringify(rawStudent?.familyDetails)),
       friends: JSON.parse(JSON.stringify(friends)),
       goals: JSON.parse(JSON.stringify(rawStudent?.Goals)),
-      exams: JSON.parse(JSON.stringify(rawStudent?.Exams)),
+      assesments: JSON.parse(JSON.stringify(rawStudent?.Assesments)),
     },
     revalidate: 5,
   };
@@ -102,38 +96,11 @@ const SingleStudentPage = ({
   familyDetails,
   friends,
   goals,
-  exams,
+  assesments,
 }: StudentPageProps) => {
-  const data = {
-    labels: [Subjects.AI, Subjects.SEPM, Subjects.CN, Subjects.DP, Subjects.FE],
-    datasets: [
-      {
-        label: exams[0].name,
-        data: [
-          exams[0].score1,
-          exams[0].score2,
-          exams[0].score3,
-          exams[0].score4,
-          exams[0].score5,
-        ],
-        backgroundColor: "rgba(128, 0, 128, 0.5)",
-        pointHoverBackgroundColor: "#fff",
-        borderColor: "rgba(128, 0, 128, 0.3)",
-      },
-      {
-        label: exams[1].name,
-        data: [
-          exams[1].score1,
-          exams[1].score2,
-          exams[1].score3,
-          exams[1].score4,
-          exams[1].score5,
-        ],
-        backgroundColor: "rgba(0, 0, 254, 0.5)",
-        pointHoverBackgroundColor: "#fff",
-        borderColor: "rgba(0, 0, 254, 0.3)",
-      },
-    ],
+  let data = {
+    labels: [Subjects.AI, Subjects.CN, Subjects.DP, Subjects.FE, Subjects.SEPM],
+    datasets: [],
     options: {
       plugins: {
         legend: {
@@ -148,6 +115,58 @@ const SingleStudentPage = ({
       },
     },
   };
+
+  assesments.map((assesment) =>
+    data.datasets.push(
+      //@ts-ignore
+      assesment.name == AssesmentType.CAE1
+        ? {
+            //@ts-ignore
+            label: assesment.name,
+            //@ts-ignore
+            data: [
+              assesment.score1,
+              assesment.score2,
+              assesment.score3,
+              assesment.score4,
+              assesment.score5,
+            ],
+            backgroundColor: "rgba(128, 0, 128, 0.5)",
+            pointHoverBackgroundColor: "#fff",
+            borderColor: "rgba(128, 0, 128, 0.3)",
+          }
+        : assesment.name == AssesmentType.CAE2
+        ? {
+            //@ts-ignore
+            label: assesment.name,
+            //@ts-ignore
+            data: [
+              assesment.score1,
+              assesment.score2,
+              assesment.score3,
+              assesment.score4,
+              assesment.score5,
+            ],
+            backgroundColor: "rgba(128, 0, 254, 0.5)",
+            pointHoverBackgroundColor: "#fff",
+            borderColor: "rgba(128, 0, 128, 0.3)",
+          }
+        : {
+            label: assesment.name,
+            //@ts-ignore
+            data: [
+              assesment.score1,
+              assesment.score2,
+              assesment.score3,
+              assesment.score4,
+              assesment.score5,
+            ],
+            backgroundColor: "rgba(255, 220, 20 , 0.5)",
+            pointHoverBackgroundColor: "#fff",
+            borderColor: "rgba(128, 0, 128, 0.3)",
+          }
+    )
+  );
 
   const barData = {
     labels: [
@@ -226,11 +245,13 @@ const SingleStudentPage = ({
             <h1 className='text-2xl font-semibold mb-4'>Stats : </h1>
             <div className='flex'>
               <div className='w-[30rem] mr-5'>
-                <h1 className='text-xl font-bold'>Overall Exam Stats : </h1>
+                <h1 className='text-xl font-bold'>
+                  Overall assesment Stats :{" "}
+                </h1>
                 <Bar data={barData} />
               </div>
               <div className='w-[30rem] mr-5'>
-                <h1 className='text-xl font-bold'>Exam Stats : </h1>
+                <h1 className='text-xl font-bold'>Assesment Stats : </h1>
                 <Bar data={data} />
               </div>
             </div>
@@ -370,5 +391,5 @@ type StudentPageProps = {
   friends: Friends;
   attendance: Attendance;
   goals: Goals[];
-  exams: Exams[];
+  assesments: Assesments[];
 };
