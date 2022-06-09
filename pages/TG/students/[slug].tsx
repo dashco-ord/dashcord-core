@@ -28,9 +28,8 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-// import { Radar } from "react-chartjs-2";
-import { Line } from "react-chartjs-2";
 import { Bar } from "react-chartjs-2";
+import { AssesmentType } from "@prisma/client";
 
 export async function getStaticPaths() {
   const students = await prisma.student.findMany();
@@ -51,16 +50,11 @@ export async function getStaticProps({ params }: any) {
       id: params.slug,
     },
     include: {
+      familyDetails: true,
       Attendance: true,
       Exams: true,
       Goals: true,
-    },
-  });
-
-  const familyDetails = await prisma.familyDetails.findUnique({
-    where: {
-      //@ts-ignore
-      id: rawStudent?.familyDetailsId,
+      Friends: true,
     },
   });
 
@@ -77,7 +71,7 @@ export async function getStaticProps({ params }: any) {
   return {
     props: {
       student: JSON.parse(JSON.stringify(rawStudent)),
-      familyDetails: JSON.parse(JSON.stringify(familyDetails)),
+      familyDetails: JSON.parse(JSON.stringify(rawStudent?.familyDetails)),
       friends: JSON.parse(JSON.stringify(friends)),
       goals: JSON.parse(JSON.stringify(rawStudent?.Goals)),
       exams: JSON.parse(JSON.stringify(rawStudent?.Exams)),
@@ -104,36 +98,9 @@ const SingleStudentPage = ({
   goals,
   exams,
 }: StudentPageProps) => {
-  const data = {
-    labels: [Subjects.AI, Subjects.SEPM, Subjects.CN, Subjects.DP, Subjects.FE],
-    datasets: [
-      {
-        label: exams[0].name,
-        data: [
-          exams[0].score1,
-          exams[0].score2,
-          exams[0].score3,
-          exams[0].score4,
-          exams[0].score5,
-        ],
-        backgroundColor: "rgba(128, 0, 128, 0.5)",
-        pointHoverBackgroundColor: "#fff",
-        borderColor: "rgba(128, 0, 128, 0.3)",
-      },
-      {
-        label: exams[1].name,
-        data: [
-          exams[1].score1,
-          exams[1].score2,
-          exams[1].score3,
-          exams[1].score4,
-          exams[1].score5,
-        ],
-        backgroundColor: "rgba(0, 0, 254, 0.5)",
-        pointHoverBackgroundColor: "#fff",
-        borderColor: "rgba(0, 0, 254, 0.3)",
-      },
-    ],
+  let data = {
+    labels: [Subjects.AI, Subjects.CN, Subjects.DP, Subjects.FE, Subjects.SEPM],
+    datasets: [],
     options: {
       plugins: {
         legend: {
@@ -148,6 +115,58 @@ const SingleStudentPage = ({
       },
     },
   };
+
+  exams.map((exam) =>
+    data.datasets.push(
+      //@ts-ignore
+      exam.name == AssesmentType.CAE1
+        ? {
+            //@ts-ignore
+            label: exam.name,
+            //@ts-ignore
+            data: [
+              exam.score1,
+              exam.score2,
+              exam.score3,
+              exam.score4,
+              exam.score5,
+            ],
+            backgroundColor: "rgba(128, 0, 128, 0.5)",
+            pointHoverBackgroundColor: "#fff",
+            borderColor: "rgba(128, 0, 128, 0.3)",
+          }
+        : exam.name == AssesmentType.CAE2
+        ? {
+            //@ts-ignore
+            label: exam.name,
+            //@ts-ignore
+            data: [
+              exam.score1,
+              exam.score2,
+              exam.score3,
+              exam.score4,
+              exam.score5,
+            ],
+            backgroundColor: "rgba(128, 0, 254, 0.5)",
+            pointHoverBackgroundColor: "#fff",
+            borderColor: "rgba(128, 0, 128, 0.3)",
+          }
+        : {
+            label: exam.name,
+            //@ts-ignore
+            data: [
+              exam.score1,
+              exam.score2,
+              exam.score3,
+              exam.score4,
+              exam.score5,
+            ],
+            backgroundColor: "rgba(255, 220, 20 , 0.5)",
+            pointHoverBackgroundColor: "#fff",
+            borderColor: "rgba(128, 0, 128, 0.3)",
+          }
+    )
+  );
 
   const barData = {
     labels: [
@@ -230,7 +249,7 @@ const SingleStudentPage = ({
                 <Bar data={barData} />
               </div>
               <div className='w-[30rem] mr-5'>
-                <h1 className='text-xl font-bold'>Exam Stats : </h1>
+                <h1 className='text-xl font-bold'>Assesment Stats : </h1>
                 <Bar data={data} />
               </div>
             </div>
