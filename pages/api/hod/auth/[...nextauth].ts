@@ -1,9 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
-
-const prisma = new PrismaClient();
+import { prisma } from "lib/prisma";
 
 export default NextAuth({
   providers: [
@@ -23,23 +21,19 @@ export default NextAuth({
       },
       //@ts-ignore
       async authorize(credentials) {
-        try {
-          const user = await prisma.tg.findUnique({
-            where: { email: credentials?.email },
-          });
-          //@ts-ignore
-          if (bcrypt.compare(credentials?.password == user?.passHash)) {
-            return {
-              id: user?.id,
-              name: user?.name,
-              email: user?.email,
-              role: user?.role,
-            };
-          } else {
-            return null;
-          }
-        } catch (error) {
-          //Todo : Send an error to the frontend
+        const user = await prisma.hod.findUnique({
+          where: { email: credentials?.email },
+        });
+        //@ts-ignore
+        if (bcrypt.compare(credentials?.password, user?.passHash)) {
+          return {
+            id: user?.id,
+            name: user?.name,
+            email: user?.email,
+            role: user?.role,
+          };
+        } else {
+          return null;
         }
       },
     }),
@@ -62,9 +56,6 @@ export default NextAuth({
       }
       return session;
     },
-    // redirect: () => {
-    //   return "https://takshakramteke-dashcord-q595r5p729pjr-3000.githubpreview.dev/";
-    // },
   },
 
   secret: process.env.NEXT_AUTH_SECRET,
@@ -73,6 +64,7 @@ export default NextAuth({
   },
 
   pages: {
-    signIn: "/tg/login",
+    signIn: "/login",
+    signOut: "/signout",
   },
 });
