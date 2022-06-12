@@ -31,10 +31,10 @@ const Pagination = ({
           <li className='ml-3 first:ml-0'>
             <button
               disabled={isFirstPage}
-              className={`btn p-2 rounded-lg bg-[#1E1D1D] ${
+              className={`btn p-2 rounded-lg bg-white ${
                 isFirstPage
-                  ? "text-gray-500 cursor-not-allowed"
-                  : "text-gray-300"
+                  ? "bg-slate-200 text-gray-500 cursor-not-allowed"
+                  : "text-black"
               }`}
               onClick={handlePrevious}>
               &lt;- Previous
@@ -44,10 +44,10 @@ const Pagination = ({
           <li className='ml-3 first:ml-0'>
             <button
               disabled={isLastPage}
-              className={`btn p-2 rounded-lg bg-[#1E1D1D] hover:border-slate-300 ${
+              className={`btn p-2 rounded-lg bg-white hover:border-slate-300 ${
                 isLastPage
-                  ? "text-gray-500 cursor-not-allowed"
-                  : "text-gray-300"
+                  ? "bg-slate-200 text-gray-500 cursor-not-allowed"
+                  : "text-black"
               }`}
               onClick={handleNext}>
               Next -&gt;
