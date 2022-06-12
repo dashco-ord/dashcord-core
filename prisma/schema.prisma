@@ -49,6 +49,7 @@ model Tg {
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
   Student    Student[]
+  Tasks      Tasks[]
 }
 
 model Teacher {
@@ -144,11 +145,12 @@ model Student {
   tgId                   String?         @map("tg_id")
   familyDetails          FamilyDetails?  @relation(fields: [familyDetailsId], references: [id])
   familyDetailsId        String?         @unique
-  Attendance             Attendance?
-  Goals                  Goals[]
   Friends                Friends?        @relation(fields: [friendsId], references: [id])
-  Assesments             Assesments[]
   friendsId              String?
+  Goals                  Goals[]
+  Tasks                  Tasks[]
+  Attendance             Attendance?
+  Assesments             Assesments[]
   MedicalHistory         MedicalHistory?
 }
 
@@ -191,11 +193,14 @@ model Tasks {
   id           String   @id @default(cuid())
   title        String
   description  String
-  tgId         String?
   deadlineDate String
   deadlineTime String
+  TG           Tg?      @relation(fields: [createdBy], references: [id])
+  createdBy    String?
   taskStatus   Status
   createdAt    DateTime @default(now())
+  Student      Student? @relation(fields: [studentId], references: [id])
+  studentId    String?
 }
 
 model Goals {
