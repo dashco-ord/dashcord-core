@@ -25,11 +25,9 @@ import {
   LinearScale,
   BarElement,
 } from "chart.js";
-import { useState } from "react";
-import axios from "axios";
-import { useRouter } from "next/router";
 import { Bar } from "react-chartjs-2";
 import { AssesmentType } from "@prisma/client";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
 export async function getStaticPaths() {
   const students = await prisma.student.findMany();
@@ -88,7 +86,8 @@ ChartJS.register(
   Legend,
   CategoryScale,
   LinearScale,
-  BarElement
+  BarElement,
+  ChartDataLabels
 );
 
 const SingleStudentPage = ({
@@ -134,6 +133,11 @@ const SingleStudentPage = ({
             backgroundColor: "rgba(128, 0, 128, 0.5)",
             pointHoverBackgroundColor: "#fff",
             borderColor: "rgba(128, 0, 128, 0.3)",
+            datalabels: {
+              color: "gray",
+              anchor: "end",
+              align: "end",
+            },
           }
         : assesment.name == AssesmentType.CAE2
         ? {
@@ -150,25 +154,21 @@ const SingleStudentPage = ({
             backgroundColor: "rgba(128, 0, 254, 0.5)",
             pointHoverBackgroundColor: "#fff",
             borderColor: "rgba(128, 0, 128, 0.3)",
+            datalabels: {
+              color: "gray",
+              anchor: "end",
+              align: "end",
+            },
           }
         : {
             label: assesment.name,
             //@ts-ignore
-            data: [
-              assesment.score1,
-              assesment.score2,
-              assesment.score3,
-              assesment.score4,
-              assesment.score5,
-            ],
-            backgroundColor: "rgba(255, 220, 20 , 0.5)",
-            pointHoverBackgroundColor: "#fff",
-            borderColor: "rgba(128, 0, 128, 0.3)",
+            data: [],
           }
     )
   );
 
-  const barData = {
+  const overallData = {
     labels: [
       "Sem 1",
       "Sem 2",
@@ -193,50 +193,13 @@ const SingleStudentPage = ({
           student.sem8Score,
         ],
         backgroundColor: "rgba(0, 0, 255, 0.5)",
+        datalabels: {
+          color: "gray",
+          anchor: "end",
+          align: "end",
+        },
       },
     ],
-  };
-
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [deadline, setDeadline] = useState("");
-  const [goalType, setGoalType] = useState<GoalType>();
-  const router = useRouter();
-
-  const handleCreate = async (e: any) => {
-    e.preventDefault();
-    const data = {
-      id: student.id,
-      title,
-      description,
-      deadline,
-      goalType,
-    };
-    try {
-      const res = await axios.post("/api/tg/create-goal", data);
-      if (res.status == 200) {
-        router.reload();
-      }
-    } catch (error) {
-      //Handle this error
-    }
-  };
-
-  const [cert, setCert] = useState("");
-
-  const handleCert = async (e: any) => {
-    e.preventDefault();
-    const data = new FormData();
-    data.append("file", cert);
-    data.append("upload_preset", "certificates");
-    const res = await fetch(
-      "https://api.cloudinary.com/v1_1/dashcord/image/upload",
-      {
-        method: "POST",
-        body: data,
-      }
-    ).then((res) => res.json());
-    console.log(res);
   };
 
   return (
@@ -265,7 +228,10 @@ const SingleStudentPage = ({
                 <h1 className='text-xl font-bold'>
                   Overall assesment Stats :{" "}
                 </h1>
-                <Bar data={barData} />
+                <Bar
+                  //@ts-ignore
+                  data={overallData}
+                />
               </div>
               <div className='w-[30rem] mr-5'>
                 <h1 className='text-xl font-bold'>Assesment Stats : </h1>
@@ -318,95 +284,6 @@ const SingleStudentPage = ({
                     </div>
                   ))}
               </div>
-            </div>
-            <div className='mt-8'>
-              <h2 className='text-2xl font-bold'>Create Goals : </h2>
-              <form className='mt-5' onSubmit={handleCreate}>
-                <div className='flex items-center flex-wrap'>
-                  <div className='flex flex-col pb-6 mr-8'>
-                    <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
-                      Goal Title :
-                    </label>
-                    <input
-                      className='w-42 p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
-                      type='text'
-                      placeholder='Enter Goal Title'
-                      required
-                      onChange={(e) => setTitle(e.target.value)}
-                    />
-                  </div>
-                  <div className='flex flex-col pb-6 mr-8'>
-                    <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
-                      Goal Description :
-                    </label>
-                    <textarea
-                      className='w-80 h-10 p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
-                      placeholder='Enter Goal Description'
-                      required
-                      onChange={(e) => setDescription(e.target.value)}
-                    />
-                  </div>
-                  <div className='flex flex-col pb-6 mr-8'>
-                    <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
-                      Goal DeadLine :
-                    </label>
-                    <input
-                      className='w-42 p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
-                      type='date'
-                      placeholder='Enter Goal DeadLine'
-                      required
-                      onChange={(e) => setDeadline(e.target.value)}
-                    />
-                  </div>
-                  <div className='flex flex-col pb-6 mr-8'>
-                    <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
-                      Goal Type :
-                    </label>
-                    <select
-                      name='select goal Type'
-                      className='w-42 p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
-                      onChange={(e) =>
-                        setGoalType(
-                          //@ts-ignore
-                          e.target.value
-                        )
-                      }
-                      required>
-                      <option>Select Goal Type</option>
-                      <option value={GoalType.LongTerm}>Long Term</option>
-                      <option value={GoalType.ShortTerm}>Short Term</option>
-                    </select>
-                    {/* <input
-                      className="w-42 p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75"
-                      type="date"
-                      placeholder="Enter Goal DeadLine"
-                      required
-                    /> */}
-                  </div>
-                  <div className='p-2 w-fit h-fit bg-purple-600 rounded-lg'>
-                    <input
-                      type='submit'
-                      className='text-white font-bold'
-                      value={`+ Create Goal`}
-                    />
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div>
-              <h1>Certificates : </h1>
-              <form onSubmit={handleCert}>
-                <input
-                  type='file'
-                  onChange={(e) =>
-                    setCert(
-                      //@ts-ignore
-                      e.target.files[0]
-                    )
-                  }
-                />
-                <input type='submit' value='Upload.' />
-              </form>
             </div>
           </div>
         </div>
