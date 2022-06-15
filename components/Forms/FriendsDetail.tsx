@@ -1,6 +1,10 @@
 import { Friends } from "@prisma/client";
 
-const FriendsDetailForm = ({ friends, username }: FriendsDetailProps) => {
+const FriendsDetailForm = ({
+  friends,
+  username,
+  noSave,
+}: FriendsDetailProps) => {
   return (
     <form className='ml-10 md:ml-0 md:mt-4'>
       <h1 className='text-2xl font-bold mb-6'>Friends Details :</h1>
@@ -51,7 +55,9 @@ const FriendsDetailForm = ({ friends, username }: FriendsDetailProps) => {
       </div>
       <div>
         <input
-          className='mb-4 p-2 rounded-xl font-semibold text-md bg-purple-600 hover:bg-purple-700 cursor-pointer text-white'
+          className={`mb-4 p-2 rounded-xl font-semibold text-md bg-purple-600 hover:bg-purple-700 cursor-pointer text-white ${
+            noSave ? "hidden" : ""
+          }`}
           type='submit'
           value='Save Changes'
         />
@@ -65,4 +71,5 @@ export default FriendsDetailForm;
 type FriendsDetailProps = {
   friends: Friends;
   username: string;
+  noSave?: boolean;
 };

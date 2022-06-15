@@ -57,21 +57,11 @@ export async function getStaticProps({ params }: any) {
     },
   });
 
-  const friends = await prisma.friends.findUnique({
-    where: {
-      //@ts-ignore
-      id: rawStudent?.friendsId,
-    },
-    include: {
-      collegeFriend: true,
-    },
-  });
-
   return {
     props: {
       student: JSON.parse(JSON.stringify(rawStudent)),
       familyDetails: JSON.parse(JSON.stringify(rawStudent?.familyDetails)),
-      friends: JSON.parse(JSON.stringify(friends)),
+      friends: JSON.parse(JSON.stringify(rawStudent?.Friends)),
       goals: JSON.parse(JSON.stringify(rawStudent?.Goals)),
       assesments: JSON.parse(JSON.stringify(rawStudent?.Assesments)),
     },
@@ -299,11 +289,15 @@ const SingleStudentPage = ({
         </ul>
         <div className='flex flex-wrap bg-white rounded-lg rounded-tl-none p-8'>
           <div className={personalView ? "" : "hidden"}>
-            <PersonalDetailForm student={student} />
+            <PersonalDetailForm noSave={true} student={student} />
           </div>
           <div className={personalView ? "" : "hidden"}>
-            <FamilyDetailForm familyDetails={familyDetails} />
-            <FriendsDetailForm friends={friends} username={student.name} />
+            <FamilyDetailForm noSave={true} familyDetails={familyDetails} />
+            <FriendsDetailForm
+              noSave={true}
+              friends={friends}
+              username={student.name}
+            />
             <AttendanceTable
               attendance={
                 //@ts-ignore
@@ -313,7 +307,7 @@ const SingleStudentPage = ({
           </div>
 
           {/* Graph's */}
-          <div className={`flex flex-col mt-5 ${statsView ? "" : "hidden"}`}>
+          <div className={`flex flex-col ${statsView ? "" : "hidden"}`}>
             <h1 className='text-2xl font-semibold mb-4'>Stats : </h1>
             <div className='flex'>
               <div className='w-[30rem] mr-5'>
@@ -338,7 +332,7 @@ const SingleStudentPage = ({
               goalsView ? "" : "hidden"
             }`}>
             <div>
-              <h2 className='text-2xl font-bold mt-8'>Current Goals : </h2>
+              <h2 className='text-2xl font-bold'>Current Goals : </h2>
               <div className='flex flex-wrap'>
                 {goals
                   .slice(0)
