@@ -1,6 +1,6 @@
 import { FamilyDetails } from "@prisma/client";
 
-const FamilyDetailForm = ({ familyDetails }: FamilyDetailProps) => {
+const FamilyDetailForm = ({ familyDetails, noSave }: FamilyDetailProps) => {
   if (familyDetails) {
     return (
       <form className='ml-10 md:ml-0 md:mt-4'>
@@ -156,7 +156,9 @@ const FamilyDetailForm = ({ familyDetails }: FamilyDetailProps) => {
         </div>
         <div>
           <input
-            className='mb-4 p-2 rounded-xl font-semibold text-md bg-purple-600 hover:bg-purple-700 cursor-pointer text-white'
+            className={`mb-4 p-2 rounded-xl font-semibold text-md bg-purple-600 hover:bg-purple-700 cursor-pointer text-white ${
+              noSave ? "hidden" : ""
+            }`}
             type='submit'
             value='Save Changes'
           />
@@ -178,4 +180,5 @@ export default FamilyDetailForm;
 
 type FamilyDetailProps = {
   familyDetails: FamilyDetails;
+  noSave?: boolean;
 };

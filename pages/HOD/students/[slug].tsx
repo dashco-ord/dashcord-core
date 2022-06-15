@@ -289,11 +289,15 @@ const SingleStudentPage = ({
         </ul>
         <div className='flex flex-wrap bg-white rounded-lg rounded-tl-none p-8'>
           <div className={personalView ? "" : "hidden"}>
-            <PersonalDetailForm student={student} />
+            <PersonalDetailForm noSave={true} student={student} />
           </div>
           <div className={personalView ? "" : "hidden"}>
-            <FamilyDetailForm familyDetails={familyDetails} />
-            <FriendsDetailForm friends={friends} username={student.name} />
+            <FamilyDetailForm noSave={true} familyDetails={familyDetails} />
+            <FriendsDetailForm
+              noSave={true}
+              friends={friends}
+              username={student.name}
+            />
             <AttendanceTable
               attendance={
                 //@ts-ignore
