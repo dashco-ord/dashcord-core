@@ -57,21 +57,11 @@ export async function getStaticProps({ params }: any) {
     },
   });
 
-  const friends = await prisma.friends.findUnique({
-    where: {
-      //@ts-ignore
-      id: rawStudent?.friendsId,
-    },
-    include: {
-      collegeFriend: true,
-    },
-  });
-
   return {
     props: {
       student: JSON.parse(JSON.stringify(rawStudent)),
       familyDetails: JSON.parse(JSON.stringify(rawStudent?.familyDetails)),
-      friends: JSON.parse(JSON.stringify(friends)),
+      friends: JSON.parse(JSON.stringify(rawStudent?.Friends)),
       goals: JSON.parse(JSON.stringify(rawStudent?.Goals)),
       assesments: JSON.parse(JSON.stringify(rawStudent?.Assesments)),
     },
