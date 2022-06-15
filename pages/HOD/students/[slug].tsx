@@ -303,7 +303,7 @@ const SingleStudentPage = ({
           </div>
 
           {/* Graph's */}
-          <div className={`flex flex-col mt-5 ${statsView ? "" : "hidden"}`}>
+          <div className={`flex flex-col ${statsView ? "" : "hidden"}`}>
             <h1 className='text-2xl font-semibold mb-4'>Stats : </h1>
             <div className='flex'>
               <div className='w-[30rem] mr-5'>
@@ -328,7 +328,7 @@ const SingleStudentPage = ({
               goalsView ? "" : "hidden"
             }`}>
             <div>
-              <h2 className='text-2xl font-bold mt-8'>Current Goals : </h2>
+              <h2 className='text-2xl font-bold'>Current Goals : </h2>
               <div className='flex flex-wrap'>
                 {goals
                   .slice(0)
