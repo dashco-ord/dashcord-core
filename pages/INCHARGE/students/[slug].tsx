@@ -222,7 +222,44 @@ const SingleStudentPage = ({ student, tg }: studentProps) => {
                   />
                 </div>
               </div>
-            
+              <div className="mt-2 flex flex-wrap">
+                <form onSubmit={handleTg}>
+                  <div className="flex flex-col pb-6 mr-8">
+                    <label className="text-2xl text-black font-semibold mr-5 pb-2">
+                      Tg ID :
+                    </label>
+                    <input
+                      className="w-fit p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75  text-black"
+                      type="text"
+                      placeholder="Enter Tg ID "
+                      //@ts-ignore
+                      defaultValue={tg?.id}
+                      required
+                      onChange={(e) => setTgId(e.target.value)}
+                    />
+                  </div>
+                  <div className="flex flex-col pb-6 mr-8">
+                    <label className="text-2xl text-black font-semibold mr-5 pb-2">
+                      Tg Name :
+                    </label>
+                    <input
+                      className="w-fit p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75 text-black"
+                      type="text"
+                      placeholder="Enter your Religion"
+                      //@ts-ignore
+                      defaultValue={tg?.name}
+                      required
+                      readOnly={true}
+                    />
+                  </div>
+                  <input
+                    className="mt-10 p-2 rounded-xl font-semibold text-md text-white bg-purple-600 hover:bg-purple-700 cursor-pointer"
+                    type="submit"
+                    value="Save Changes"
+                    onClick={handleTg}
+                  />
+                </form>
+              </div>
             </div>
           </form>
         </div>
