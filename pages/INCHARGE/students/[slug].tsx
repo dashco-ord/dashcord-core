@@ -8,20 +8,37 @@ interface studentProps extends Student {
   student: Student;
 }
 
-export async function getStaticPaths() {
-  const students = await prisma.student.findMany();
-  const paths = students.map((student) => ({
-    params: {
-      slug: student.id,
-    },
-  }));
-  return {
-    paths,
-    fallback: true,
-  };
-}
+// export async function getStaticPaths() {
+//   const students = await prisma.student.findMany();
+//   const paths = students.map((student) => ({
+//     params: {
+//       slug: student.id,
+//     },
+//   }));
+//   return {
+//     paths,
+//     fallback: true,
+//   };
+// }
 
-export async function getStaticProps({ params }: any) {
+// export async function getStaticProps({ params }: any) {
+//   const rawStudent = await prisma.student.findUnique({
+//     where: {
+//       id: params.slug,
+//     },
+//     include: {
+//       Attendance: true,
+//     },
+//   });
+//   return {
+//     props: {
+//       student: JSON.parse(JSON.stringify(rawStudent)),
+//     },
+//   };
+// }
+
+export const getServerSideProps = async (context: any) => {
+  const { params } = context;
   const rawStudent = await prisma.student.findUnique({
     where: {
       id: params.slug,
@@ -35,7 +52,7 @@ export async function getStaticProps({ params }: any) {
       student: JSON.parse(JSON.stringify(rawStudent)),
     },
   };
-}
+};
 
 const SingleStudentPage = ({ student }: studentProps) => {
   return (
