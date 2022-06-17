@@ -31,20 +31,57 @@ import { useRouter } from "next/router";
 import { Bar } from "react-chartjs-2";
 import { AssesmentType } from "@prisma/client";
 
-export async function getStaticPaths() {
-  const students = await prisma.student.findMany();
-  const paths = students.map((student) => ({
-    params: {
-      slug: student.id,
-    },
-  }));
-  return {
-    paths,
-    fallback: true,
-  };
-}
+// export async function getStaticPaths() {
+//   const students = await prisma.student.findMany();
+//   const paths = students.map((student) => ({
+//     params: {
+//       slug: student.id,
+//     },
+//   }));
+//   return {
+//     paths,
+//     fallback: true,
+//   };
+// }
 
-export async function getStaticProps({ params }: any) {
+// export async function getStaticProps({ params }: any) {
+//   const rawStudent = await prisma.student.findUnique({
+//     where: {
+//       id: params.slug,
+//     },
+//     include: {
+//       familyDetails: true,
+//       Attendance: true,
+//       Goals: true,
+//       Friends: true,
+//       Assesments: true,
+//     },
+//   });
+
+//   const friends = await prisma.friends.findUnique({
+//     where: {
+//       //@ts-ignore
+//       id: rawStudent?.friendsId,
+//     },
+//     include: {
+//       collegeFriend: true,
+//     },
+//   });
+
+//   return {
+//     props: {
+//       student: JSON.parse(JSON.stringify(rawStudent)),
+//       familyDetails: JSON.parse(JSON.stringify(rawStudent?.familyDetails)),
+//       friends: JSON.parse(JSON.stringify(friends)),
+//       goals: JSON.parse(JSON.stringify(rawStudent?.Goals)),
+//       assesments: JSON.parse(JSON.stringify(rawStudent?.Assesments)),
+//     },
+//     revalidate: 5,
+//   };
+// }
+
+export async function getServerSideProps(context: any) {
+  const { params } = context;
   const rawStudent = await prisma.student.findUnique({
     where: {
       id: params.slug,
@@ -57,26 +94,14 @@ export async function getStaticProps({ params }: any) {
       Assesments: true,
     },
   });
-
-  const friends = await prisma.friends.findUnique({
-    where: {
-      //@ts-ignore
-      id: rawStudent?.friendsId,
-    },
-    include: {
-      collegeFriend: true,
-    },
-  });
-
   return {
     props: {
       student: JSON.parse(JSON.stringify(rawStudent)),
       familyDetails: JSON.parse(JSON.stringify(rawStudent?.familyDetails)),
-      friends: JSON.parse(JSON.stringify(friends)),
+      friends: JSON.parse(JSON.stringify(rawStudent?.Friends)),
       goals: JSON.parse(JSON.stringify(rawStudent?.Goals)),
       assesments: JSON.parse(JSON.stringify(rawStudent?.Assesments)),
     },
-    revalidate: 5,
   };
 }
 
@@ -248,7 +273,13 @@ const SingleStudentPage = ({
           </div>
           <div>
             <FamilyDetailForm familyDetails={familyDetails} />
-            <FriendsDetailForm friends={friends} username={student.name} />
+            {
+              //@ts-ignore
+              friends.collegeFriend && (
+                <FriendsDetailForm friends={friends} username={student.name} />
+              )
+            }
+
             <AttendanceTable
               attendance={
                 //@ts-ignore

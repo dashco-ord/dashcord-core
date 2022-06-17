@@ -2,7 +2,7 @@ import { Student } from "@prisma/client";
 import moment from "moment";
 import Table from "components/Table/Table";
 
-const PersonalDetailForm = ({ student }: PersonalDetailProps) => {
+const PersonalDetailForm = ({ student, noSave }: PersonalDetailProps) => {
   return (
     <form>
       <h1 className='text-2xl font-bold mb-6'>Personal Details :</h1>
@@ -146,7 +146,7 @@ const PersonalDetailForm = ({ student }: PersonalDetailProps) => {
           <input
             className=' w-20 p-2 pl-0 rounded-sm bg-white text-xl md:text-lg border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
             type='text'
-            placeholder='Enter your Religion'
+            placeholder='Enter your Seat Type'
             //@ts-ignore
             defaultValue={student.seatType ? student.seatType : ""}
             required
@@ -174,7 +174,7 @@ const PersonalDetailForm = ({ student }: PersonalDetailProps) => {
           <input
             className=' w-46 p-2 pl-0 rounded-sm bg-white text-xl md:text-lg border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
             type='text'
-            placeholder='Enter your Religion'
+            placeholder='Enter your 10th School'
             //@ts-ignore
             defaultValue={student.tenthCollege ? student.tenthCollege : ""}
             required
@@ -187,7 +187,7 @@ const PersonalDetailForm = ({ student }: PersonalDetailProps) => {
           <input
             className=' w-56 p-2 pl-0 rounded-sm bg-white text-xl md:text-lg border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
             type='text'
-            placeholder='Enter your Religion'
+            placeholder='Enter your 12th School'
             //@ts-ignore
             defaultValue={student.twelthCollege ? student.twelthCollege : ""}
             required
@@ -202,7 +202,7 @@ const PersonalDetailForm = ({ student }: PersonalDetailProps) => {
           <input
             className=' w-44 p-2 pl-0 rounded-sm bg-white text-xl md:text-lg border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
             type='text'
-            placeholder='Enter your Religion'
+            placeholder='Enter your 10th Year of Passing'
             //@ts-ignore
             defaultValue={student.tenthYOP}
             required
@@ -215,7 +215,7 @@ const PersonalDetailForm = ({ student }: PersonalDetailProps) => {
           <input
             className=' w-44 p-2 pl-0 rounded-sm bg-white text-xl md:text-lg border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
             type='text'
-            placeholder='Enter your Religion'
+            placeholder='Enter your 12th year of passing'
             //@ts-ignore
             defaultValue={student.twelthYOP}
             required
@@ -228,7 +228,7 @@ const PersonalDetailForm = ({ student }: PersonalDetailProps) => {
           <input
             className=' w-20 p-2 pl-0 rounded-sm bg-white text-xl md:text-lg border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
             type='text'
-            placeholder='Enter your Religion'
+            placeholder='Enter your Current year'
             //@ts-ignore
             defaultValue={student.year}
             required
@@ -241,7 +241,7 @@ const PersonalDetailForm = ({ student }: PersonalDetailProps) => {
           <input
             className=' w-20 p-2 pl-0 rounded-sm bg-white text-xl md:text-lg border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
             type='text'
-            placeholder='Enter your Religion'
+            placeholder='Enter your Section'
             //@ts-ignore
             defaultValue={student.section}
             required
@@ -256,7 +256,7 @@ const PersonalDetailForm = ({ student }: PersonalDetailProps) => {
           <input
             className=' w-20 p-2 pl-0 rounded-sm bg-white text-xl md:text-lg border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
             type='text'
-            placeholder='Enter your Religion'
+            placeholder='Enter your Blood Type'
             //@ts-ignore
             defaultValue={student.bloodGroup}
             required
@@ -269,7 +269,7 @@ const PersonalDetailForm = ({ student }: PersonalDetailProps) => {
           <input
             className=' w-20 p-2 pl-0 rounded-sm bg-white text-xl md:text-lg border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
             type='text'
-            placeholder='Enter your Religion'
+            placeholder='Enter your Height'
             //@ts-ignore
             defaultValue={student.height}
             required
@@ -282,7 +282,7 @@ const PersonalDetailForm = ({ student }: PersonalDetailProps) => {
           <input
             className=' w-20 p-2 pl-0 rounded-sm bg-white text-xl md:text-lg border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
             type='text'
-            placeholder='Enter your Religion'
+            placeholder='Enter your Weight'
             //@ts-ignore
             defaultValue={`${student.weight} kg`}
             required
@@ -291,7 +291,9 @@ const PersonalDetailForm = ({ student }: PersonalDetailProps) => {
       </div>
       <div>
         <input
-          className='mt-3 p-2 rounded-xl font-semibold text-md bg-purple-600 hover:bg-purple-700 cursor-pointer text-white'
+          className={`mt-3 p-2 rounded-xl font-semibold text-md bg-purple-600 hover:bg-purple-700 cursor-pointer text-white ${
+            noSave ? "hidden" : ""
+          }`}
           type='submit'
           value='Save Changes'
         />
@@ -398,4 +400,5 @@ export default PersonalDetailForm;
 
 type PersonalDetailProps = {
   student: Student;
+  noSave?: boolean;
 };

@@ -30,20 +30,47 @@ import { AssesmentType } from "@prisma/client";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { useState } from "react";
 
-export async function getStaticPaths() {
-  const students = await prisma.student.findMany();
-  const paths = students.map((student) => ({
-    params: {
-      slug: student.id,
-    },
-  }));
-  return {
-    paths,
-    fallback: true,
-  };
-}
+// export async function getStaticPaths() {
+//   const students = await prisma.student.findMany();
+//   const paths = students.map((student) => ({
+//     params: {
+//       slug: student.id,
+//     },
+//   }));
+//   return {
+//     paths,
+//     fallback: true,
+//   };
+// }
 
-export async function getStaticProps({ params }: any) {
+// export async function getStaticProps({ params }: any) {
+//   const rawStudent = await prisma.student.findUnique({
+//     where: {
+//       id: params.slug,
+//     },
+//     include: {
+//       familyDetails: true,
+//       Attendance: true,
+//       Goals: true,
+//       Friends: true,
+//       Assesments: true,
+//     },
+//   });
+
+//   return {
+//     props: {
+//       student: JSON.parse(JSON.stringify(rawStudent)),
+//       familyDetails: JSON.parse(JSON.stringify(rawStudent?.familyDetails)),
+//       friends: JSON.parse(JSON.stringify(rawStudent?.Friends)),
+//       goals: JSON.parse(JSON.stringify(rawStudent?.Goals)),
+//       assesments: JSON.parse(JSON.stringify(rawStudent?.Assesments)),
+//     },
+//     revalidate: 5,
+//   };
+// }
+
+export async function getServerSideProps(context: any) {
+  const { params } = context;
   const rawStudent = await prisma.student.findUnique({
     where: {
       id: params.slug,
@@ -56,26 +83,14 @@ export async function getStaticProps({ params }: any) {
       Assesments: true,
     },
   });
-
-  const friends = await prisma.friends.findUnique({
-    where: {
-      //@ts-ignore
-      id: rawStudent?.friendsId,
-    },
-    include: {
-      collegeFriend: true,
-    },
-  });
-
   return {
     props: {
       student: JSON.parse(JSON.stringify(rawStudent)),
       familyDetails: JSON.parse(JSON.stringify(rawStudent?.familyDetails)),
-      friends: JSON.parse(JSON.stringify(friends)),
+      friends: JSON.parse(JSON.stringify(rawStudent?.Friends)),
       goals: JSON.parse(JSON.stringify(rawStudent?.Goals)),
       assesments: JSON.parse(JSON.stringify(rawStudent?.Assesments)),
     },
-    revalidate: 5,
   };
 }
 
@@ -299,11 +314,21 @@ const SingleStudentPage = ({
         </ul>
         <div className='flex flex-wrap bg-white rounded-lg rounded-tl-none p-8'>
           <div className={personalView ? "" : "hidden"}>
-            <PersonalDetailForm student={student} />
+            <PersonalDetailForm noSave={true} student={student} />
           </div>
           <div className={personalView ? "" : "hidden"}>
-            <FamilyDetailForm familyDetails={familyDetails} />
-            <FriendsDetailForm friends={friends} username={student.name} />
+            <FamilyDetailForm noSave={true} familyDetails={familyDetails} />
+            {
+              //@ts-ignore2
+              friends?.collegeFriend && (
+                <FriendsDetailForm
+                  noSave={true}
+                  friends={friends}
+                  username={student.name}
+                />
+              )
+            }
+
             <AttendanceTable
               attendance={
                 //@ts-ignore
@@ -313,7 +338,7 @@ const SingleStudentPage = ({
           </div>
 
           {/* Graph's */}
-          <div className={`flex flex-col mt-5 ${statsView ? "" : "hidden"}`}>
+          <div className={`flex flex-col ${statsView ? "" : "hidden"}`}>
             <h1 className='text-2xl font-semibold mb-4'>Stats : </h1>
             <div className='flex'>
               <div className='w-[30rem] mr-5'>
@@ -338,7 +363,7 @@ const SingleStudentPage = ({
               goalsView ? "" : "hidden"
             }`}>
             <div>
-              <h2 className='text-2xl font-bold mt-8'>Current Goals : </h2>
+              <h2 className='text-2xl font-bold'>Current Goals : </h2>
               <div className='flex flex-wrap'>
                 {goals
                   .slice(0)
