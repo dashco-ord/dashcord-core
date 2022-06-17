@@ -9,11 +9,11 @@ const TgsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
   //@ts-ignore
   const page = parseInt(req.query?.page ?? "1") ?? 1; // @ts-ignore
-  const limit = parseInt(req.query?.limit ?? "10") ?? 10; // @ts-ignore
+  const limit = parseInt(req.query?.limit ?? "11") ?? 11; // @ts-ignore
   const perPage = limit > maxLimit ? maxLimit : limit;
   const offset = (page - 1) * perPage;
 
-  if (session?.role == UserRole.HOD) {
+  if (session?.role == UserRole.HOD||UserRole.INCHARGE) {
     const tgs = await prisma.tg.findMany({
       include: { Student: true },
       skip: offset,

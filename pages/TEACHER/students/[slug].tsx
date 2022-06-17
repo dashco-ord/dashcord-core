@@ -1,10 +1,11 @@
 import Layout from "components/Layout/TgLayout";
 import { prisma } from "lib/prisma";
-import { Student, Tg } from "@prisma/client";
+import { Assesments, Student, Subjects, Tg } from "@prisma/client";
 import moment from "moment";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Table from "components/Table/Table";
 
 // export async function getStaticPaths() {
 //   const students = await prisma.student.findMany();
@@ -44,17 +45,19 @@ export const getServerSideProps = async (context: any) => {
     include: {
       Attendance: true,
       Tg: true,
+      Assesments:true
     },
   });
   return {
     props: {
       student: JSON.parse(JSON.stringify(rawStudent)),
       tg: JSON.parse(JSON.stringify(rawStudent?.Tg)),
+      assesments:JSON.parse(JSON.stringify(rawStudent?.Assesments))
     },
   };
 };
 
-const SingleStudentPage = ({ student, tg }: studentProps) => {
+const SingleStudentPage = ({ student, tg, assesments }: studentProps) => {
   const [tgId, setTgId] = useState("");
   const router = useRouter()
   const handleTg = async (e: any) => {
@@ -66,7 +69,7 @@ const SingleStudentPage = ({ student, tg }: studentProps) => {
     try {
       const res = await axios.post("/api/incharge/students/updateTg", data);
       if(res.status==200){
-        router.push('/INCHARGE/students')
+        router.reload()
       }
     } catch (error) {
       console.log(error);
@@ -231,20 +234,6 @@ const SingleStudentPage = ({ student, tg }: studentProps) => {
                 <form onSubmit={handleTg}>
                   <div className="flex flex-col pb-6 mr-8">
                     <label className="text-2xl text-black font-semibold mr-5 pb-2">
-                      Tg ID :
-                    </label>
-                    <input
-                      className="w-fit p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75  text-black"
-                      type="text"
-                      placeholder="Enter Tg ID "
-                      //@ts-ignore
-                      defaultValue={tg?.id}
-                      required
-                      onChange={(e) => setTgId(e.target.value)}
-                    />
-                  </div>
-                  <div className="flex flex-col pb-6 mr-8">
-                    <label className="text-2xl text-black font-semibold mr-5 pb-2">
                       Tg Name :
                     </label>
                     <input
@@ -257,17 +246,24 @@ const SingleStudentPage = ({ student, tg }: studentProps) => {
                       readOnly={true}
                     />
                   </div>
-                  <input
-                    className="mt-10 p-2 rounded-xl font-semibold text-md text-white bg-purple-600 hover:bg-purple-700 cursor-pointer"
-                    type="submit"
-                    value="Save Changes"
-                    onClick={handleTg}
-                  />
                 </form>
               </div>
             </div>
           </form>
         </div>
+        <form>
+            <Table title="Assesments" headings={["Name",Subjects.AI,Subjects.CN,Subjects.SEPM,Subjects.DP,Subjects.FE]}>
+              {assesments.map(assesment=>
+              <tr key={assesment.id}>
+                <td  className='pl-5 p-2 whitespace-nowrap text-violet-700'>{assesment.name}</td>
+                <td  className='p-2 whitespace-nowrap '>{assesment.score1 ? assesment.score1:(<input type='number' className="w-10 border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500"/>)}%</td>
+                <td  className='p-2 whitespace-nowrap '>{assesment.score2 ? assesment.score2:(<input type='number' className="w-10 border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500"/>)}%</td>
+                <td  className='p-2 whitespace-nowrap '>{assesment.score3 ? assesment.score3:(<input type='number' className="w-10 border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500"/>)}%</td>
+                <td  className='p-2 whitespace-nowrap '>{assesment.score4 ? assesment.score4:(<input type='number' className="w-10 border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500"/>)}%</td>
+                <td  className='p-2 whitespace-nowrap '>{assesment.score5 ? assesment.score5:(<input type='number' className="w-10 border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500"/>)}%</td>
+              </tr>)}
+            </Table>
+          </form>
       </main>
     </Layout>
   );
@@ -277,5 +273,6 @@ export default SingleStudentPage;
 
 type studentProps = {
   tg: Tg;
+  assesments:Assesments[]
   student: Student;
 };

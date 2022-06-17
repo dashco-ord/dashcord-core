@@ -18,7 +18,7 @@ const StudentsPage = () => {
     totalFemale: 0,
   });
   const [toast, setToast] = useState<ToastParams>();
-  const [selectedYearFilter, setSelectedYearFilter] = useState("all");
+  const [selectedGenderFilter, setSelectedGenderFilter] = useState("all");
 
   const fetchStudents = async ({ page } = { page: 1 }) => {
     const fetchStats = page == 1;
@@ -27,7 +27,7 @@ const StudentsPage = () => {
         params: {
           page,
           stats: fetchStats,
-          y: selectedYearFilter,
+          g: selectedGenderFilter,
         },
       });
       setPage(page);
@@ -45,13 +45,12 @@ const StudentsPage = () => {
 
   useEffect(() => {
     fetchStudents();
-  }, [setSelectedYearFilter]);
+  }, [selectedGenderFilter]);
 
   const handleNavigate = async (page: any) => {
     await fetchStudents({ page });
   };
 
-  console.log(students )
   const genderColor = (gender: string) => {
     switch (gender) {
       case "male":
@@ -82,48 +81,41 @@ const StudentsPage = () => {
 
       <div className='sm:flex sm:justify-between sm:items-center mb-10'>
         {/* Left side */}
-        <div className='mb-4 sm:mb-0'>
+        {/* <div className='mb-4 sm:mb-0'>
           <ul className='flex flex-wrap -m-1'>
             <FilterItem
               name={"all"}
               label='All'
-              onSelect={setSelectedYearFilter}
-              selected={selectedYearFilter == "all"}
+              onSelect={setSelectedGenderFilter}
+              selected={selectedGenderFilter == "all"}
             />
             <FilterItem
-              name={"2"}
-              label='2nd'
-              onSelect={setSelectedYearFilter}
-              selected={selectedYearFilter == "2"}
+              name={"male"}
+              label='Male'
+              onSelect={setSelectedGenderFilter}
+              selected={selectedGenderFilter == "male"}
             />
             <FilterItem
-              name={"3"}
-              label='3rd'
-              onSelect={setSelectedYearFilter}
-              selected={selectedYearFilter == "3"}
-            />
-             <FilterItem
-              name={"4"}
-              label='4th'
-              onSelect={setSelectedYearFilter}
-              selected={selectedYearFilter == "4"}
+              name={"female"}
+              label='Female'
+              onSelect={setSelectedGenderFilter}
+              selected={selectedGenderFilter == "female"}
             />
           </ul>
-        </div>
+        </div> */}
       </div>
 
       <Table
         title='All Students'
-        headings={[ "name","Year","Section","rollNo", "email", "gender", "department","TG Name"]}>
-        {students.sort().map((student) => (
+        headings={["id", "name", "rollNo", "email", "gender", "department"]}>
+        {students.map((student) => (
           <tr key={student.id}>
             <td className='pl-5 p-2 whitespace-nowrap text-violet-400'>
-              <Link href={`/INCHARGE/students/${student.id}`}>
-                <a>{student.name}</a>
+              <Link href={`/TEACHER/students/${student.id}`}>
+                <a>{student.id}</a>
               </Link>
             </td>
-            <td className='p-2 whitespace-nowrap'>{student.year}</td>
-            <td className='p-2 whitespace-nowrap'>{student.section}</td>
+            <td className='p-2 whitespace-nowrap'>{student.name}</td>
             <td className='p-2 whitespace-nowrap'>{student.rollNo}</td>
             <td className='p-2 whitespace-nowrap text-indigo-300'>
               <a href={`mailto:${student.email}`}>{student.email}</a>
@@ -136,10 +128,6 @@ const StudentsPage = () => {
               {student.gender}
             </td>
             <td className='p-2 whitespace-nowrap'>{student.department}</td>
-            <td className='p-2 whitespace-nowrap'>{
-              //@ts-ignore
-              student?.Tg?student.Tg.name:""
-            }</td>
           </tr>
         ))}
       </Table>

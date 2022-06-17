@@ -1,8 +1,10 @@
+import Layout from "components/Layout/TgLayout";
+
 const TeachersHome = () => {
   return (
-    <div>
+    <Layout>
       <h1>Home page for teachers</h1>
-    </div>
+    </Layout>
   );
 };
 

@@ -29,24 +29,8 @@ const InchargeHome = () => {
     return (
       <Layout>
         <div className=' flex '>
-          <Card title='All Students' link={`/students`} value={200} />
-          <Card title='Weak Students' />
-          <Card title='Avg. Students' />
-          <Card title='Good Students' />
-        </div>
-        <div className='mt-10 flex'>
-          <div className='mr-10'>
-            <Table title='Achievements' headings={["Name", "Achievement"]}>
-              <tr className='divide-black'>
-                <td className='pl-5 p-2 whitespace-nowrap'>Student Name</td>
-                <td className='p-2 whitespace-nowrap'>won a hackathon</td>
-              </tr>
-              <tr className='divide-black'>
-                <td className='pl-5 p-2 whitespace-nowrap'>Student Name</td>
-                <td className='p-2 whitespace-nowrap'>Won a hackathon</td>
-              </tr>
-            </Table>
-          </div>
+          <Card title='Students' link={`/INCHARGE/students`} value={200} />
+          <Card title='TGs' link={`/INCHARGE/tgs`} value={11}/>
         </div>
       </Layout>
     );

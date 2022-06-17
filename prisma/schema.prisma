@@ -114,7 +114,7 @@ model Student {
   admissionDate          String?
   achivement             String?         @db.VarChar(200)
   achivement_description String?         @db.LongText
-  year                   Int?
+  year                   String?
   section                String?
   bloodGroup             String?
   height                 Float?
@@ -239,7 +239,10 @@ enum Subjects {
 enum AssesmentType {
   CAE1
   CAE2
-  TAE
+  TAE1
+  TAE2
+  TAE3
+  TAE4
 }
 
 enum Status {
