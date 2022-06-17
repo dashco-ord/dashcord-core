@@ -267,7 +267,7 @@ const SingleStudentPage = ({
   return (
     <Layout>
       <main>
-        <div className='flex flex-wrap bg-white rounded-lg p-8'>
+        <div className="flex flex-wrap bg-white rounded-lg p-8">
           <div>
             <PersonalDetailForm student={student} />
           </div>
@@ -289,35 +289,35 @@ const SingleStudentPage = ({
           </div>
 
           {/* Graph's */}
-          <div className='flex flex-col mt-5'>
-            <h1 className='text-2xl font-semibold mb-4'>Stats : </h1>
-            <div className='flex'>
-              <div className='w-[30rem] mr-5'>
-                <h1 className='text-xl font-bold'>
+          <div className="flex flex-col mt-5">
+            <h1 className="text-2xl font-semibold mb-4">Stats : </h1>
+            <div className="flex">
+              <div className="w-[30rem] mr-5">
+                <h1 className="text-xl font-bold">
                   Overall assesment Stats :{" "}
                 </h1>
                 <Bar data={barData} />
               </div>
-              <div className='w-[30rem] mr-5'>
-                <h1 className='text-xl font-bold'>Assesment Stats : </h1>
+              <div className="w-[30rem] mr-5">
+                <h1 className="text-xl font-bold">Assesment Stats : </h1>
                 <Bar data={data} />
               </div>
             </div>
           </div>
 
           {/* Goals */}
-          <div className='w-full flex flex-wrap flex-col'>
+          <div className="w-full flex flex-wrap flex-col">
             <div>
-              <h2 className='text-2xl font-bold mt-8'>Current Goals : </h2>
-              <div className='flex flex-wrap'>
+              <h2 className="text-2xl font-bold mt-8">Current Goals : </h2>
+              <div className="flex flex-wrap">
                 {goals
                   .slice(0)
                   .reverse()
                   .map((goal) => (
                     <div key={goal.id}>
-                      <div className='flex flex-col break-words w-[20rem] font-semibold mt-5 mr-10 border border-black p-5 rounded-lg'>
-                        <div className='flex items-center'>
-                          <div className='text-3xl mb-2 font-bold p-1'>
+                      <div className="flex flex-col break-words w-[20rem] font-semibold mt-5 mr-10 border border-black p-5 rounded-lg">
+                        <div className="flex items-center">
+                          <div className="text-3xl mb-2 font-bold p-1">
                             {goal.title}
                           </div>
                           <div
@@ -325,84 +325,87 @@ const SingleStudentPage = ({
                               goal.type == GoalType.LongTerm
                                 ? "border-yellow-400 text-yellow-400"
                                 : "border-green-400 text-green-400"
-                            }`}>
+                            }`}
+                          >
                             {goal.type}
                           </div>
                         </div>
-                        <div className='flex'>
+                        <div className="flex">
                           <svg
-                            xmlns='http://www.w3.org/2000/svg'
-                            className='h-6 w-6'
-                            fill='none'
-                            viewBox='0 0 24 24'
-                            stroke='currentColor'
-                            strokeWidth={2}>
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
                             <path
-                              strokeLinecap='round'
-                              strokeLinejoin='round'
-                              d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                             />
                           </svg>
-                          <div className='ml-2'>{goal.deadline}</div>
+                          <div className="ml-2">{goal.deadline}</div>
                         </div>
                       </div>
                     </div>
                   ))}
               </div>
             </div>
-            <div className='mt-8'>
-              <h2 className='text-2xl font-bold'>Create Goals : </h2>
-              <form className='mt-5' onSubmit={handleCreate}>
-                <div className='flex items-center flex-wrap'>
-                  <div className='flex flex-col pb-6 mr-8'>
-                    <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
+            <div className="mt-8">
+              <h2 className="text-2xl font-bold">Create Goals : </h2>
+              <form className="mt-5" onSubmit={handleCreate}>
+                <div className="flex items-center flex-wrap">
+                  <div className="flex flex-col pb-6 mr-8">
+                    <label className="text-2xl font-semibold mr-5 pb-2 md:text-lg">
                       Goal Title :
                     </label>
                     <input
-                      className='w-42 p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
-                      type='text'
-                      placeholder='Enter Goal Title'
+                      className="w-42 p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75"
+                      type="text"
+                      placeholder="Enter Goal Title"
                       required
                       onChange={(e) => setTitle(e.target.value)}
                     />
                   </div>
-                  <div className='flex flex-col pb-6 mr-8'>
-                    <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
+                  <div className="flex flex-col pb-6 mr-8">
+                    <label className="text-2xl font-semibold mr-5 pb-2 md:text-lg">
                       Goal Description :
                     </label>
                     <textarea
-                      className='w-80 h-10 p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
-                      placeholder='Enter Goal Description'
+                      className="w-80 h-10 p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75"
+                      placeholder="Enter Goal Description"
                       required
                       onChange={(e) => setDescription(e.target.value)}
                     />
                   </div>
-                  <div className='flex flex-col pb-6 mr-8'>
-                    <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
+                  <div className="flex flex-col pb-6 mr-8">
+                    <label className="text-2xl font-semibold mr-5 pb-2 md:text-lg">
                       Goal DeadLine :
                     </label>
                     <input
-                      className='w-42 p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
-                      type='date'
-                      placeholder='Enter Goal DeadLine'
+                      className="w-42 p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75"
+                      type="date"
+                      placeholder="Enter Goal DeadLine"
                       required
                       onChange={(e) => setDeadline(e.target.value)}
                     />
                   </div>
-                  <div className='flex flex-col pb-6 mr-8'>
-                    <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
+                  <div className="flex flex-col pb-6 mr-8">
+                    <label className="text-2xl font-semibold mr-5 pb-2 md:text-lg">
                       Goal Type :
                     </label>
                     <select
-                      name='select goal Type'
-                      className='w-42 p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
+                      name="select goal Type"
+                      className="w-42 p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75"
                       onChange={(e) =>
                         setGoalType(
                           //@ts-ignore
                           e.target.value
                         )
                       }
-                      required>
+                      required
+                    >
                       <option>Select Goal Type</option>
                       <option value={GoalType.LongTerm}>Long Term</option>
                       <option value={GoalType.ShortTerm}>Short Term</option>
@@ -414,29 +417,14 @@ const SingleStudentPage = ({
                       required
                     /> */}
                   </div>
-                  <div className='p-2 w-fit h-fit bg-purple-600 rounded-lg'>
+                  <div className="p-2 w-fit h-fit bg-purple-600 rounded-lg">
                     <input
-                      type='submit'
-                      className='text-white font-bold'
+                      type="submit"
+                      className="text-white font-bold"
                       value={`+ Create Goal`}
                     />
                   </div>
                 </div>
-              </form>
-            </div>
-            <div>
-              <h1>Certificates : </h1>
-              <form onSubmit={handleCert}>
-                <input
-                  type='file'
-                  onChange={(e) =>
-                    setCert(
-                      //@ts-ignore
-                      e.target.files[0]
-                    )
-                  }
-                />
-                <input type='submit' value='Upload.' />
               </form>
             </div>
           </div>
