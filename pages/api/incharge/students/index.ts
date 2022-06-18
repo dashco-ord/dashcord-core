@@ -12,22 +12,23 @@ const StudentsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
     const fetchStats = req.query.stats == "true";
     const perPage = limit > maxLimit ? maxLimit : limit;
     const offset = (page - 1) * perPage;
-    const yearFilter = req.query.y ?? "all";
+    //@ts-ignore
+    const yearFilter = parseInt(req.query.y) ?? 0;
 
     const query = {
       where: {
         //@ts-ignore
-        year: yearFilter != "all" ? yearFilter : undefined,
+        year: yearFilter != 0 ? yearFilter : undefined,
       },
     };
 
     //@ts-ignore
     const students = await prisma.student.findMany({
       ...query,
-      include:{
-        Tg:true
+      include: {
+        Tg: true,
       },
-      orderBy:{rollNo:"asc"},
+      orderBy: { rollNo: "asc" },
       skip: offset,
       take: perPage,
     });

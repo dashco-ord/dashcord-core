@@ -18,7 +18,7 @@ const StudentsPage = () => {
     totalFemale: 0,
   });
   const [toast, setToast] = useState<ToastParams>();
-  const [selectedGenderFilter, setSelectedGenderFilter] = useState("all");
+  const [selectedYearFilter, setSelectedYearFilter] = useState(0);
 
   const fetchStudents = async ({ page } = { page: 1 }) => {
     const fetchStats = page == 1;
@@ -27,7 +27,7 @@ const StudentsPage = () => {
         params: {
           page,
           stats: fetchStats,
-          g: selectedGenderFilter,
+          y: selectedYearFilter,
         },
       });
       setPage(page);
@@ -45,7 +45,7 @@ const StudentsPage = () => {
 
   useEffect(() => {
     fetchStudents();
-  }, [selectedGenderFilter]);
+  }, [selectedYearFilter]);
 
   const handleNavigate = async (page: any) => {
     await fetchStudents({ page });
@@ -84,22 +84,28 @@ const StudentsPage = () => {
         <div className='mb-4 sm:mb-0'>
           <ul className='flex flex-wrap -m-1'>
             <FilterItem
-              name={"all"}
-              label='All'
-              onSelect={setSelectedGenderFilter}
-              selected={selectedGenderFilter == "all"}
+              name={"All"}
+              label={0}
+              onSelect={setSelectedYearFilter}
+              selected={selectedYearFilter == 0}
             />
             <FilterItem
-              name={"male"}
-              label='Male'
-              onSelect={setSelectedGenderFilter}
-              selected={selectedGenderFilter == "male"}
+              name={"2nd"}
+              label={2}
+              onSelect={setSelectedYearFilter}
+              selected={selectedYearFilter == 2}
             />
             <FilterItem
-              name={"female"}
-              label='Female'
-              onSelect={setSelectedGenderFilter}
-              selected={selectedGenderFilter == "female"}
+              name={"3rd"}
+              label={3}
+              onSelect={setSelectedYearFilter}
+              selected={selectedYearFilter == 3}
+            />
+            <FilterItem
+              name={"4th"}
+              label={4}
+              onSelect={setSelectedYearFilter}
+              selected={selectedYearFilter == 4}
             />
           </ul>
         </div>

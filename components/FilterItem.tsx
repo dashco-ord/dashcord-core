@@ -5,14 +5,14 @@ const FilterItem = ({
   selected = false,
 }: {
   name: string;
-  label: string;
-  onSelect: (name: string) => void;
+  label: number;
+  onSelect: (label: number) => void;
   selected: boolean;
 }) => {
   return (
     <li className='m-1'>
       <button
-        onClick={() => onSelect(name)}
+        onClick={() => onSelect(label)}
         className={`inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full mr-2 px-3 py-1 border shadow-sm duration-150 ease-in-out ${
           selected
             ? "text-white bg-indigo-500 border-indigo-500 hover:border-indigo-500"
