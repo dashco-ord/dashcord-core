@@ -114,7 +114,7 @@ model Student {
   admissionDate          String?
   achivement             String?         @db.VarChar(200)
   achivement_description String?         @db.LongText
-  year                   String?
+  year                   Int?
   section                String?
   bloodGroup             String?
   height                 Float?
