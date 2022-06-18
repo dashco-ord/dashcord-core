@@ -1,4 +1,4 @@
-const FilterItem = ({
+const NumericFilterItem = ({
   name,
   label,
   onSelect,
@@ -24,4 +24,4 @@ const FilterItem = ({
   );
 };
 
-export default FilterItem;
+export default NumericFilterItem;

@@ -5,7 +5,7 @@ import Table from "components/Table/Table";
 import Pagination from "components/Pagination";
 import Card from "components/cards/Card";
 import Toast, { ToastParams } from "components/Toast";
-import FilterItem from "components/FilterItem";
+import NumericFilterItem from "components/FilterItem/NumericFilterItem";
 import Link from "next/link";
 import HodLayout from "components/Layout/HodLayout";
 
@@ -83,25 +83,25 @@ const StudentsPage = () => {
         {/* Left side */}
         <div className='mb-4 sm:mb-0'>
           <ul className='flex flex-wrap -m-1'>
-            <FilterItem
+            <NumericFilterItem
               name={"All"}
               label={0}
               onSelect={setSelectedYearFilter}
               selected={selectedYearFilter == 0}
             />
-            <FilterItem
+            <NumericFilterItem
               name={"2nd"}
               label={2}
               onSelect={setSelectedYearFilter}
               selected={selectedYearFilter == 2}
             />
-            <FilterItem
+            <NumericFilterItem
               name={"3rd"}
               label={3}
               onSelect={setSelectedYearFilter}
               selected={selectedYearFilter == 3}
             />
-            <FilterItem
+            <NumericFilterItem
               name={"4th"}
               label={4}
               onSelect={setSelectedYearFilter}
