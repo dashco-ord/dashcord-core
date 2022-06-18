@@ -18,7 +18,7 @@ const FilterItem = ({
             ? "text-white bg-indigo-500 border-indigo-500 hover:border-indigo-500"
             : "text-gray-500 bg-white border-slate-200 hover:border-indigo-500"
         }`}>
-        {label}
+        {name}
       </button>
     </li>
   );
