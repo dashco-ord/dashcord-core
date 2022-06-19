@@ -73,7 +73,7 @@ const StudentsPage = () => {
           </Toast>
         )}
       </div>
-      <div className='flex mb-10'>
+      <div className='flex mb-10 overflow-x-scroll'>
         <Card title='All Students' value={stats.total} />
         <Card title='All Male Students' value={stats.totalMale} />
         <Card title='All Female Students' value={stats.totalFemale} />
@@ -109,6 +109,7 @@ const StudentsPage = () => {
             />
           </ul>
         </div>
+        <div className='ml-auto'></div>
       </div>
 
       <Table
