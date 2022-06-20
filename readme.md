@@ -20,5 +20,9 @@ This is a student performance monitor for Teacher Guardian scheme at our college
 
 > Note : Make sure to provide the database connection string as DATABASE_URL in the .env file before step 4
 
+OR
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/TakshakRamteke/dashcord)
+
 ## 📜 Licence 
 This project is Licenced under [GNU GPL v3 Licence](./licence)
