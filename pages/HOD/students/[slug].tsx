@@ -73,7 +73,7 @@ export async function getServerSideProps(context: any) {
   const { params } = context;
   const rawStudent = await prisma.student.findUnique({
     where: {
-      id: params.slug,
+      rollNo: params.slug,
     },
     include: {
       familyDetails: true,
@@ -159,29 +159,33 @@ const SingleStudentPage = ({
     },
   };
 
-  assesments.map(assesment=> TAEdata.datasets.push(
+  assesments.map((assesment) =>
+    TAEdata.datasets.push(
       //@ts-ignore
-    assesment.name== AssesmentType.TAE?{
-      //@ts-ignore
-      label: assesment.name,
-      //@ts-ignore
-      data: [
-        assesment.score1,
-        assesment.score2,
-        assesment.score3,
-        assesment.score4,
-        assesment.score5,
-      ],
-      backgroundColor: "rgba(128, 0, 128, 0.5)",
-      pointHoverBackgroundColor: "#fff",
-      borderColor: "rgba(128, 0, 128, 0.3)",
-      datalabels: {
-        color: "gray",
-        anchor: "end",
-        align: "end",
-      },
-    }:{}
-  ))
+      assesment.name == AssesmentType.TAE
+        ? {
+            //@ts-ignore
+            label: assesment.name,
+            //@ts-ignore
+            data: [
+              assesment.score1,
+              assesment.score2,
+              assesment.score3,
+              assesment.score4,
+              assesment.score5,
+            ],
+            backgroundColor: "rgba(128, 0, 128, 0.5)",
+            pointHoverBackgroundColor: "#fff",
+            borderColor: "rgba(128, 0, 128, 0.3)",
+            datalabels: {
+              color: "gray",
+              anchor: "end",
+              align: "end",
+            },
+          }
+        : {}
+    )
+  );
 
   assesments.map((assesment) =>
     data.datasets.push(
@@ -227,7 +231,8 @@ const SingleStudentPage = ({
               anchor: "end",
               align: "end",
             },
-          }:{}
+          }
+        : {}
     )
   );
 
@@ -391,11 +396,15 @@ const SingleStudentPage = ({
                 />
               </div>
               <div className='w-[30rem] mr-5'>
-                <h1 className='text-xl font-bsold'>Continous Assesment Stats : </h1>
+                <h1 className='text-xl font-bsold'>
+                  Continous Assesment Stats :{" "}
+                </h1>
                 <Bar data={data} />
               </div>
               <div className='w-[30rem] mr-5'>
-                <h1 className='text-xl font-bold'>Teacher Assesment Stats : </h1>
+                <h1 className='text-xl font-bold'>
+                  Teacher Assesment Stats :{" "}
+                </h1>
                 <Bar data={TAEdata} />
               </div>
             </div>

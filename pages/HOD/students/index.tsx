@@ -124,9 +124,9 @@ const StudentsPage = () => {
           "section",
         ]}>
         {students.map((student) => (
-          <tr key={student.id}>
+          <tr key={student.rollNo}>
             <td className='pl-5 p-2 whitespace-nowrap text-violet-400'>
-              <Link href={`/HOD/students/${student.id}`}>
+              <Link href={`/HOD/students/${student.rollNo}`}>
                 <a>{student.name}</a>
               </Link>
             </td>
