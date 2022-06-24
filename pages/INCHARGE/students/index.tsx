@@ -1,4 +1,3 @@
-import Layout from "components/Layout/TgLayout";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Student } from "@prisma/client";
@@ -6,8 +5,9 @@ import Table from "components/Table/Table";
 import Pagination from "components/Pagination";
 import Card from "components/cards/Card";
 import Toast, { ToastParams } from "components/Toast";
-import FilterItem from "components/FilterItem";
+import NumericFilterItem from "components/FilterItem/NumericFilterItem";
 import Link from "next/link";
+import HodLayout from "components/Layout/HodLayout";
 
 const StudentsPage = () => {
   const [students, setStudents] = useState<Student[]>([]);
@@ -18,7 +18,7 @@ const StudentsPage = () => {
     totalFemale: 0,
   });
   const [toast, setToast] = useState<ToastParams>();
-  const [selectedYearFilter, setSelectedYearFilter] = useState("all");
+  const [selectedYearFilter, setSelectedYearFilter] = useState(0);
 
   const fetchStudents = async ({ page } = { page: 1 }) => {
     const fetchStats = page == 1;
@@ -45,13 +45,12 @@ const StudentsPage = () => {
 
   useEffect(() => {
     fetchStudents();
-  }, [setSelectedYearFilter]);
+  }, [selectedYearFilter]);
 
   const handleNavigate = async (page: any) => {
     await fetchStudents({ page });
   };
 
-  console.log(students )
   const genderColor = (gender: string) => {
     switch (gender) {
       case "male":
@@ -62,7 +61,7 @@ const StudentsPage = () => {
   };
 
   return (
-    <Layout>
+    <HodLayout>
       <div>
         {toast && (
           <Toast
@@ -74,7 +73,7 @@ const StudentsPage = () => {
           </Toast>
         )}
       </div>
-      <div className='flex mb-10'>
+      <div className='flex mb-10 overflow-x-scroll'>
         <Card title='All Students' value={stats.total} />
         <Card title='All Male Students' value={stats.totalMale} />
         <Card title='All Female Students' value={stats.totalFemale} />
@@ -84,46 +83,53 @@ const StudentsPage = () => {
         {/* Left side */}
         <div className='mb-4 sm:mb-0'>
           <ul className='flex flex-wrap -m-1'>
-            <FilterItem
-              name={"all"}
-              label='All'
+            <NumericFilterItem
+              name={"All"}
+              label={0}
               onSelect={setSelectedYearFilter}
-              selected={selectedYearFilter == "all"}
+              selected={selectedYearFilter == 0}
             />
-            <FilterItem
-              name={"2"}
-              label='2nd'
+            <NumericFilterItem
+              name={"2nd"}
+              label={2}
               onSelect={setSelectedYearFilter}
-              selected={selectedYearFilter == "2"}
+              selected={selectedYearFilter == 2}
             />
-            <FilterItem
-              name={"3"}
-              label='3rd'
+            <NumericFilterItem
+              name={"3rd"}
+              label={3}
               onSelect={setSelectedYearFilter}
-              selected={selectedYearFilter == "3"}
+              selected={selectedYearFilter == 3}
             />
-             <FilterItem
-              name={"4"}
-              label='4th'
+            <NumericFilterItem
+              name={"4th"}
+              label={4}
               onSelect={setSelectedYearFilter}
-              selected={selectedYearFilter == "4"}
+              selected={selectedYearFilter == 4}
             />
           </ul>
         </div>
+        <div className='ml-auto'></div>
       </div>
 
       <Table
         title='All Students'
-        headings={[ "name","Year","Section","rollNo", "email", "gender", "department","TG Name"]}>
-        {students.sort().map((student) => (
-          <tr key={student.id}>
+        headings={[
+          "name",
+          "rollNo",
+          "email",
+          "gender",
+          "department",
+          "year",
+          "section",
+        ]}>
+        {students.map((student) => (
+          <tr key={student.rollNo}>
             <td className='pl-5 p-2 whitespace-nowrap text-violet-400'>
-              <Link href={`/INCHARGE/students/${student.id}`}>
+              <Link href={`/HOD/students/${student.rollNo}`}>
                 <a>{student.name}</a>
               </Link>
             </td>
-            <td className='p-2 whitespace-nowrap'>{student.year}</td>
-            <td className='p-2 whitespace-nowrap'>{student.section}</td>
             <td className='p-2 whitespace-nowrap'>{student.rollNo}</td>
             <td className='p-2 whitespace-nowrap text-indigo-300'>
               <a href={`mailto:${student.email}`}>{student.email}</a>
@@ -136,10 +142,8 @@ const StudentsPage = () => {
               {student.gender}
             </td>
             <td className='p-2 whitespace-nowrap'>{student.department}</td>
-            <td className='p-2 whitespace-nowrap'>{
-              //@ts-ignore
-              student?.Tg?student.Tg.name:""
-            }</td>
+            <td className='p-2 whitespace-nowrap'>{student.year}</td>
+            <td className='p-2 whitespace-nowrap'>{student.section}</td>
           </tr>
         ))}
       </Table>
@@ -148,7 +152,7 @@ const StudentsPage = () => {
         total={stats.total}
         onNavigation={handleNavigate}
       />
-    </Layout>
+    </HodLayout>
   );
 };
 
