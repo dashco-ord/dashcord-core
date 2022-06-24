@@ -1,4 +1,3 @@
-import Layout from "components/Layout/TgLayout";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Student } from "@prisma/client";
@@ -6,8 +5,9 @@ import Table from "components/Table/Table";
 import Pagination from "components/Pagination";
 import Card from "components/cards/Card";
 import Toast, { ToastParams } from "components/Toast";
-import FilterItem from "components/FilterItem";
+import NumericFilterItem from "components/FilterItem/NumericFilterItem";
 import Link from "next/link";
+import HodLayout from "components/Layout/HodLayout";
 
 const StudentsPage = () => {
   const [students, setStudents] = useState<Student[]>([]);
@@ -18,7 +18,7 @@ const StudentsPage = () => {
     totalFemale: 0,
   });
   const [toast, setToast] = useState<ToastParams>();
-  const [selectedGenderFilter, setSelectedGenderFilter] = useState("all");
+  const [selectedYearFilter, setSelectedYearFilter] = useState(0);
 
   const fetchStudents = async ({ page } = { page: 1 }) => {
     const fetchStats = page == 1;
@@ -27,7 +27,7 @@ const StudentsPage = () => {
         params: {
           page,
           stats: fetchStats,
-          g: selectedGenderFilter,
+          y: selectedYearFilter,
         },
       });
       setPage(page);
@@ -45,7 +45,7 @@ const StudentsPage = () => {
 
   useEffect(() => {
     fetchStudents();
-  }, [selectedGenderFilter]);
+  }, [selectedYearFilter]);
 
   const handleNavigate = async (page: any) => {
     await fetchStudents({ page });
@@ -61,7 +61,7 @@ const StudentsPage = () => {
   };
 
   return (
-    <Layout>
+    <HodLayout>
       <div>
         {toast && (
           <Toast
@@ -73,7 +73,7 @@ const StudentsPage = () => {
           </Toast>
         )}
       </div>
-      <div className='flex mb-10'>
+      <div className='flex mb-10 overflow-x-scroll'>
         <Card title='All Students' value={stats.total} />
         <Card title='All Male Students' value={stats.totalMale} />
         <Card title='All Female Students' value={stats.totalFemale} />
@@ -81,41 +81,55 @@ const StudentsPage = () => {
 
       <div className='sm:flex sm:justify-between sm:items-center mb-10'>
         {/* Left side */}
-        {/* <div className='mb-4 sm:mb-0'>
+        <div className='mb-4 sm:mb-0'>
           <ul className='flex flex-wrap -m-1'>
-            <FilterItem
-              name={"all"}
-              label='All'
-              onSelect={setSelectedGenderFilter}
-              selected={selectedGenderFilter == "all"}
+            <NumericFilterItem
+              name={"All"}
+              label={0}
+              onSelect={setSelectedYearFilter}
+              selected={selectedYearFilter == 0}
             />
-            <FilterItem
-              name={"male"}
-              label='Male'
-              onSelect={setSelectedGenderFilter}
-              selected={selectedGenderFilter == "male"}
+            <NumericFilterItem
+              name={"2nd"}
+              label={2}
+              onSelect={setSelectedYearFilter}
+              selected={selectedYearFilter == 2}
             />
-            <FilterItem
-              name={"female"}
-              label='Female'
-              onSelect={setSelectedGenderFilter}
-              selected={selectedGenderFilter == "female"}
+            <NumericFilterItem
+              name={"3rd"}
+              label={3}
+              onSelect={setSelectedYearFilter}
+              selected={selectedYearFilter == 3}
+            />
+            <NumericFilterItem
+              name={"4th"}
+              label={4}
+              onSelect={setSelectedYearFilter}
+              selected={selectedYearFilter == 4}
             />
           </ul>
-        </div> */}
+        </div>
+        <div className='ml-auto'></div>
       </div>
 
       <Table
         title='All Students'
-        headings={["id", "name", "rollNo", "email", "gender", "department"]}>
+        headings={[
+          "name",
+          "rollNo",
+          "email",
+          "gender",
+          "department",
+          "year",
+          "section",
+        ]}>
         {students.map((student) => (
-          <tr key={student.id}>
+          <tr key={student.rollNo}>
             <td className='pl-5 p-2 whitespace-nowrap text-violet-400'>
-              <Link href={`/TEACHER/students/${student.id}`}>
-                <a>{student.id}</a>
+              <Link href={`/HOD/students/${student.rollNo}`}>
+                <a>{student.name}</a>
               </Link>
             </td>
-            <td className='p-2 whitespace-nowrap'>{student.name}</td>
             <td className='p-2 whitespace-nowrap'>{student.rollNo}</td>
             <td className='p-2 whitespace-nowrap text-indigo-300'>
               <a href={`mailto:${student.email}`}>{student.email}</a>
@@ -128,6 +142,8 @@ const StudentsPage = () => {
               {student.gender}
             </td>
             <td className='p-2 whitespace-nowrap'>{student.department}</td>
+            <td className='p-2 whitespace-nowrap'>{student.year}</td>
+            <td className='p-2 whitespace-nowrap'>{student.section}</td>
           </tr>
         ))}
       </Table>
@@ -136,7 +152,7 @@ const StudentsPage = () => {
         total={stats.total}
         onNavigation={handleNavigate}
       />
-    </Layout>
+    </HodLayout>
   );
 };
 
