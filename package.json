@@ -1,0 +1,10 @@
+{
+  "name": "Dashcord",
+  "version": "1.0.0",
+  "description": "A student performance monitor and more",
+  "main": "index.js",
+  "repository": "git@github.com:TakshakRamteke/dashcord.git",
+  "author": "Takshak Ramteke",
+  "license": "MIT",
+  "private": false
+}
