@@ -5,5 +5,8 @@
   "repository": "git@github.com:TakshakRamteke/dashcord.git",
   "author": "Takshak Ramteke",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
 }
