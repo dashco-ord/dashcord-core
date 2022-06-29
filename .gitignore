@@ -8,6 +8,10 @@
 # testing
 /coverage
 
+# migrations
+/prisma/migrations
+/prisma/data.ts
+
 # next.js
 /.next/
 /out/
@@ -23,13 +27,24 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
 
 # local env files
-.env*.local
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
+
+# database files
+/dev.db
+/dev.db-journal
+
+# cypress
+/cypress/videos
+/cypress/screenshots
