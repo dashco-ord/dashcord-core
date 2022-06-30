@@ -17,5 +17,10 @@
   },
   "dependencies": {
     "@prisma/client": "4.0.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": [
+      "cypress/e2e/common/index.ts"
+    ]
   }
 }
