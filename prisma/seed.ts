@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import faker from "@faker-js/faker";
 import { teacherGuardians, hods, students } from "./data";
+import { faker } from "@faker-js/faker";
 
 const prisma = new PrismaClient();
 
@@ -36,10 +36,10 @@ const main = async () => {
           sistersName: faker.name.findName("", "", "female"),
           fathersOccupation: faker.company.companyName(),
           mothersOccupation: "HouseWife",
-          fathersPhoneNo: faker.phone.phoneNumber(),
-          mothersPhoneNo: faker.phone.phoneNumber(),
-          brothersPhoneNo: faker.phone.phoneNumber(),
-          sistersPhoneNo: faker.phone.phoneNumber(),
+          fathersPhoneNo: faker.phone.number(),
+          mothersPhoneNo: faker.phone.number(),
+          brothersPhoneNo: faker.phone.number(),
+          sistersPhoneNo: faker.phone.number(),
           noOfSiblings: 2,
           familyIncome: faker.datatype.number({ min: 30000 }),
         },
