@@ -18,7 +18,11 @@ const main = async () => {
     await prisma.hod.createMany({ data: hods });
 
     console.log("Createing TG's");
-    await prisma.tg.createMany({ data: teacherGuardians });
+    try {
+      await prisma.tg.createMany({ data: teacherGuardians });
+    } catch (error) {
+      console.log(error);
+    }
 
     console.log("Createing students");
     await prisma.student.createMany({ data: students });
