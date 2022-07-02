@@ -22,5 +22,8 @@
     "stepDefinitions": [
       "cypress/e2e/common/index.ts"
     ]
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   }
 }
