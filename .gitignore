@@ -8,6 +8,10 @@
 # testing
 /coverage
 
+# migrations
+/prisma/migrations
+/prisma/data.ts
+
 # next.js
 /.next/
 /out/
