@@ -1,14 +1,15 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "lib/prisma";
-import { UserRole } from "@prisma/client";
+import { Student, UserRole } from "@prisma/client";
 import { hashPassword } from "lib/passHash";
 
 const signUpRoute = async (req: NextApiRequest, res: NextApiResponse) => {
+  let newStudent: Student;
   if (req.method == "POST") {
     const { rollNo, name, contact, email, password } = await req.body;
     const passHash = await hashPassword(password);
     try {
-      await prisma.student.create({
+      newStudent = await prisma.student.create({
         data: {
           rollNo: rollNo,
           name: name,
