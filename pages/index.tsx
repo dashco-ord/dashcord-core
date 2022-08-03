@@ -60,6 +60,9 @@ const DefaultSignup: NextPage = () => {
     <>
       <Head>
         <title>Dashcord - Signup</title>
+        <meta
+          name='description'
+          content='A student performance Monitor (& more... )'></meta>
       </Head>
       <div className='flex flex-col h-screen w-full items-center justify-center'>
         <div>
