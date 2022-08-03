@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import Toast, { ToastParams } from "components/Toast";
 import { useRouter } from "next/router";
+import LoadingIcon from "components/LoadingIcon";
 
 const DefaultSignup = () => {
   const [rollNo, setRollNo] = useState("");
@@ -11,10 +12,12 @@ const DefaultSignup = () => {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [toast, setToast] = useState<ToastParams>();
+  const [isLoading, setLoading] = useState(false);
   const router = useRouter();
   let signUp = false;
 
   const handleSignUp = async (e: any) => {
+    setLoading(true);
     e.preventDefault();
     if (password == confirm) {
       signUp = true;
@@ -32,9 +35,17 @@ const DefaultSignup = () => {
       if (signUp) {
         const res = await axios.post("/api/signup", data);
         if (res.status == 200) {
-          router.push("/details");
+          setToast({
+            type: "success",
+            message: "Signed up",
+          });
+          // router.push("/details");
         }
       } else {
+        setToast({
+          type: "error",
+          message: "Password didn't match bitch",
+        });
         throw "password not matching";
       }
     } catch (error) {
@@ -42,6 +53,8 @@ const DefaultSignup = () => {
         type: "error",
         message: "There was an error while Signing you up",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -149,12 +162,29 @@ const DefaultSignup = () => {
           />
         </div>
 
-        <input
-          className='mt-5 p-2 w-24 text-white text-md font-semibold bg-purple-500 rounded-full'
+        <button
+          className='mt-5 p-2 w-fit flex items-center text-white text-md font-semibold bg-purple-500 rounded-full'
           type='submit'
-          value='Sign Up'
-          required
-        />
+          disabled={isLoading}>
+          <span className='pl-1 pr-1'>SignUp</span>
+          {isLoading ? (
+            <LoadingIcon />
+          ) : (
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              className='h-5 w-5'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
+              strokeWidth={2}>
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M14 5l7 7m0 0l-7 7m7-7H3'
+              />
+            </svg>
+          )}
+        </button>
       </form>
     </div>
   );
