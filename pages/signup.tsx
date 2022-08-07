@@ -38,7 +38,7 @@ const Signup: NextPage = () => {
       if (signUp) {
         const res = await axios.post("/api/signup", data);
         if (res.status == 200) {
-          router.push("/details");
+          router.push("/login");
         }
       } else {
         setToast({
