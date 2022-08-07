@@ -6,7 +6,7 @@ import LoadingIcon from "components/LoadingIcon";
 import Head from "next/head";
 import { NextPage } from "next";
 
-const DefaultSignup: NextPage = () => {
+const Signup: NextPage = () => {
   const [rollNo, setRollNo] = useState("");
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
@@ -202,4 +202,4 @@ const DefaultSignup: NextPage = () => {
   );
 };
 
-export default DefaultSignup;
+export default Signup;
