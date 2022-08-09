@@ -118,9 +118,9 @@ model Student {
   year                   Int?
   section                String?
   bloodGroup             String?
-  height                 Float?
-  weight                 Float?
-  addharNumber           BigInt?
+  height                 String?
+  weight                 String?
+  addharNumber           String?
   tenthCollege           String?
   tenthYOP               String?
   tenthScore             Float?
