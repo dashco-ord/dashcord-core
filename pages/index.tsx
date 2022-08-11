@@ -8,7 +8,7 @@ export const getServerSideProps = async (context: any) => {
   return checkUserRoleAndRedirect(context, UserRole.STUDENT, {});
 };
 
-const HomePage: NextPage = ({ user }) => {
+const HomePage: NextPage = ({ user }: any) => {
   return (
     <StudentsLayout>
       <div className="h-screen">
