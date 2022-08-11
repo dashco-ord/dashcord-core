@@ -16,6 +16,7 @@
     "@types/bcrypt": "^5.0.0",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
+    "chart.js": "^3.9.1",
     "chartjs": "^0.3.24",
     "chartjs-plugin-datalabels": "^2.0.0",
     "moment": "^2.29.4",
