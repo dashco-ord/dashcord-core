@@ -1,40 +1,32 @@
-import Layout from "components/Layout/TgLayout";
-import Card from "components/cards/Card";
-import Table from "components/Table/Table";
-import { useSession } from "next-auth/react";
+import { NextPage } from "next";
+import Card from "components/Cards/Card";
+import StudentsLayout from "components/Layouts/StudentsLayout";
+import { checkUserRoleAndRedirect } from "lib/checks";
 import { UserRole } from "@prisma/client";
-import validateUser from "lib/validateUser";
-import { useEffect } from "react";
 
-const InchargeHome = () => {
-  const { data: session } = useSession();
-
-  useEffect(() => {
-    validateUser(session?.role);
-  }, [session]);
-
-  if (!session) {
-    return (
-      <Layout>
-        <div className='flex items-center justify-center h-4/5'>
-          <h1 className='text-2xl font-semibold text-white'>
-            Please Login first !!!
-          </h1>
-        </div>
-      </Layout>
-    );
-  }
-
-  if (session.role == UserRole.INCHARGE) {
-    return (
-      <Layout>
-        <div className=' flex '>
-          <Card title='Students' link={`/INCHARGE/students`} value={200} />
-          <Card title='TGs' link={`/INCHARGE/tgs`} value={11}/>
-        </div>
-      </Layout>
-    );
-  }
+export const getServerSideProps = async (context: any) => {
+  return checkUserRoleAndRedirect(context, UserRole.INCHARGE, {});
 };
 
-export default InchargeHome;
+const HomePage: NextPage = ({ user }: any) => {
+  return (
+    <StudentsLayout>
+      <div className="h-screen">
+        <h1 className="font-semibold text-lg mb-4">Welcome, {user.name}!</h1>
+        <div className="flex overflow-x-scroll ">
+          <div className="shrink-0">
+            <Card value={"100 %"} title="Attendance" />
+          </div>
+          <div className="shrink-0">
+            <Card value={10} title="Tasks" />
+          </div>
+          <div className="shrink-0">
+            <Card value={10} title="Goals" />
+          </div>
+        </div>
+      </div>
+    </StudentsLayout>
+  );
+};
+
+export default HomePage;
