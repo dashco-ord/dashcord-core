@@ -5,7 +5,7 @@ import { checkUserRoleAndRedirect } from "lib/checks";
 import { UserRole } from "@prisma/client";
 
 export const getServerSideProps = async (context: any) => {
-  return checkUserRoleAndRedirect(context, UserRole.TG, "/404", {});
+  return checkUserRoleAndRedirect(context, UserRole.TG, {});
 };
 
 const HomePage: NextPage = ({ user }) => {

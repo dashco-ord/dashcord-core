@@ -4,7 +4,6 @@ import { getSession } from "next-auth/react";
 export const checkUserRoleAndRedirect = async (
   context: any,
   userRole: UserRole,
-  destination: string,
   { login = "/login", extra = {} }: any
 ) => {
   const session = await getSession(context);
@@ -14,10 +13,34 @@ export const checkUserRoleAndRedirect = async (
     };
   }
   if (session?.role != userRole) {
-    return {
-      redirect: { destination: destination },
-      props: {},
-    };
+    switch (session?.role) {
+      case UserRole.STUDENT:
+        return {
+          redirect: { destination: "/" },
+          props: {},
+        };
+      case UserRole.TG:
+        return {
+          redirect: { destination: "/tg" },
+          props: {},
+        };
+      case UserRole.INCHARGE:
+        return {
+          redirect: { destination: "/incharge" },
+          props: {},
+        };
+      case UserRole.HOD: {
+        return {
+          redirect: { destination: "/hod" },
+          props: {},
+        };
+      }
+      default:
+        return {
+          redirect: { destination: "/login" },
+          props: {},
+        };
+    }
   } else {
     return { props: { user: session?.user, extra } };
   }
