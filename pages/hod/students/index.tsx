@@ -159,7 +159,7 @@ const StudentsPage = () => {
         {students.map((student) => (
           <tr key={student.rollNo}>
             <td className="pl-5 p-2 whitespace-nowrap text-violet-400">
-              <Link href={`/HOD/students/${student.rollNo}`}>
+              <Link href={`/hod/students/${student.rollNo}`}>
                 <a>{student.name}</a>
               </Link>
             </td>
