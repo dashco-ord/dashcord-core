@@ -1,11 +1,11 @@
 import Header from "components/Header";
-import StudentSidebar from "components/Sidebar/StudentSidebar";
+import TgSidebar from "components/Sidebar/TGsidebar";
 
-const StudentsLayout = ({ children }: any) => {
+const TgsLayout = ({ children }: any) => {
   return (
     <div className="flex flex-col lg:flex-row">
       <section className="fixed h-screen overflow-hidden hidden lg:block">
-        <StudentSidebar />
+        <TgSidebar />
       </section>
       <section className="lg:hidden bg-white w-full h-12 p-2 z-30">
         <div className="mr-1">
@@ -19,4 +19,4 @@ const StudentsLayout = ({ children }: any) => {
   );
 };
 
-export default StudentsLayout;
+export default TgsLayout;
