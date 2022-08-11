@@ -1,11 +1,12 @@
-import { Tg } from "@prisma/client";
+import { Tg, UserRole } from "@prisma/client";
 import axios from "axios";
-import Layout from 'components/Layout/TgLayout';
-import Pagination from "components/Pagination";
-import Table from "components/Table/Table";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Toast, { ToastParams } from "components/Toast";
+import Table from "components/Tables/Table";
+import HodsLayout from "components/Layouts/HodsLayout";
+import Pagination from "components/Pagination";
+import { checkUserRoleAndRedirect } from "lib/checks";
 
 const TgsPage = () => {
   const [tgs, setTgs] = useState<Tg[]>([]);
@@ -36,25 +37,26 @@ const TgsPage = () => {
   };
 
   return (
-    <Layout>
+    <HodsLayout>
       <div>
         {toast && (
           <Toast
             type={toast.type}
-            className='mb-5'
+            className="mb-5"
             open={true}
-            setOpen={() => setToast(undefined)}>
+            setOpen={() => setToast(undefined)}
+          >
             {toast.message}
           </Toast>
         )}
       </div>
 
-      <div className='w-full flex flex-row mb-5'>
-        <form className=' ml-auto'>
+      <div className="w-full flex flex-row mb-5">
+        <form className=" ml-auto">
           <input
-            type='search'
+            type="search"
             placeholder={` Search by name or email`}
-            className='p-1 rounded-md shadow-sm'
+            className="p-1 rounded-md shadow-sm"
           />
         </form>
       </div>
@@ -69,21 +71,22 @@ const TgsPage = () => {
           "Gender",
           "No. of Students",
         ]}
-        refresh={() => fetchTgs()}>
+        refresh={() => fetchTgs()}
+      >
         {tgs?.map((tg) => (
           <tr key={tg.id}>
-            <td className='pl-5 p-2 whitespace-nowrap text-violet-400'>
-              <Link href={`/INCHARGE/tgs/${tg.id}`}>
+            <td className="pl-5 p-2 whitespace-nowrap text-violet-400">
+              <Link href={`/incharge/tgs/${tg.id}`}>
                 <a>{tg.name}</a>
               </Link>
             </td>
-            <td className='p-2 whitespace-nowrap text-indigo-300'>
+            <td className="p-2 whitespace-nowrap text-indigo-300">
               <a href={`mailto:${tg.email}`}>{tg.email}</a>
             </td>
-            <td className='p-2 whitespace-nowrap'>{tg.phoneNo}</td>
-            <td className='p-2 whitespace-nowrap'>{tg.department}</td>
-            <td className='p-2 whitespace-nowrap'>{tg.gender}</td>
-            <td className='p-2 whitespace-nowrap'>
+            <td className="p-2 whitespace-nowrap">{tg.phoneNo}</td>
+            <td className="p-2 whitespace-nowrap">{tg.department}</td>
+            <td className="p-2 whitespace-nowrap">{tg.gender}</td>
+            <td className="p-2 whitespace-nowrap">
               {
                 //@ts-ignore
                 tg.Student.length
@@ -97,8 +100,12 @@ const TgsPage = () => {
         onNavigation={handleNavigate}
         total={total}
       />
-    </Layout>
+    </HodsLayout>
   );
 };
 
 export default TgsPage;
+
+export async function getServerSideProps(context: any) {
+  return checkUserRoleAndRedirect(context, UserRole.INCHARGE, {});
+}
