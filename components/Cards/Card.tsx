@@ -9,7 +9,7 @@ type CardProps = {
 const Card = ({ title, value, link }: CardProps) => {
   return (
     <>
-      <div className="bg-white shrink-0 max-w-[13rem] mr-10 px-6 py-4 rounded shadow-md">
+      <div className="bg-white shrink-0 min-w-[13rem] mr-10 px-6 py-4 rounded shadow-md">
         <h2 className="text-2xl font-black py-2">{title}</h2>
         <p className="text-xl font-bold text-gray-500 pb-2">Total</p>
         <div className="flex items-baseline">
