@@ -15,7 +15,7 @@ const HodSidebar = () => {
   const { data: session } = useSession();
 
   return (
-    <div className="flex flex-col pt-8 pb-5 items-center w-16 h-screen bg-white text-3xl px-7">
+    <div className="flex flex-col pt-8 pb-5 items-center w-16 h-screen bg-white text-3xl px-7 overflow-y-scroll">
       <div className="mb-10">
         <svg
           xmlns="http://www.w3.org/2000/svg"
