@@ -78,7 +78,7 @@ const StudentsRoute = async (req: NextApiRequest, res: NextApiResponse) => {
 
         res.json(resData);
       } catch (error) {
-        console.log(error);
+        res.status(405).end();
       }
     }
   }
