@@ -11,9 +11,9 @@ import {
   Assesments,
   UserRole,
 } from "@prisma/client";
-import PersonalDetailForm from "components/Forms/PersonalDetail";
-import FamilyDetailForm from "components/Forms/FamilyDetail";
-import FriendsDetailForm from "components/Forms/FriendsDetail";
+import PersonalDetailForm from "components/DataForms/PersonalDetail";
+import FamilyDetailForm from "components/DataForms/FamilyDetail";
+import FriendsDetailForm from "components/DataForms/FriendsDetail";
 import AttendanceTable from "components/Tables/AttendanceTable";
 import {
   Chart as ChartJS,
@@ -47,13 +47,11 @@ export async function getServerSideProps(context: any) {
     },
   });
   return checkUserRoleAndRedirect(context, UserRole.HOD, {
-    extra: {
-      student: JSON.parse(JSON.stringify(rawStudent)),
-      familyDetails: JSON.parse(JSON.stringify(rawStudent?.familyDetails)),
-      friends: JSON.parse(JSON.stringify(rawStudent?.Friends)),
-      goals: JSON.parse(JSON.stringify(rawStudent?.Goals)),
-      assesments: JSON.parse(JSON.stringify(rawStudent?.Assesments)),
-    },
+    student: JSON.parse(JSON.stringify(rawStudent)),
+    familyDetails: JSON.parse(JSON.stringify(rawStudent?.familyDetails)),
+    friends: JSON.parse(JSON.stringify(rawStudent?.Friends)),
+    goals: JSON.parse(JSON.stringify(rawStudent?.Goals)),
+    assesments: JSON.parse(JSON.stringify(rawStudent?.Assesments)),
   });
 }
 
@@ -327,7 +325,22 @@ const SingleStudentPage = ({
           </li>
         </ul>
         <div className="flex flex-wrap bg-white rounded-lg rounded-tl-none p-8">
-          <div className={`${personalView ? "" : "hidden"}`}>
+          <div className={personalView ? "" : "hidden"}>
+            <PersonalDetailForm noSave={true} student={student} />
+          </div>
+          <div className={personalView ? "" : "hidden"}>
+            <FamilyDetailForm noSave={true} familyDetails={familyDetails} />
+            {
+              //@ts-ignore2
+              friends?.collegeFriend && (
+                <FriendsDetailForm
+                  noSave={true}
+                  friends={friends}
+                  username={student.name}
+                />
+              )
+            }
+
             <AttendanceTable
               attendance={
                 //@ts-ignore
@@ -335,80 +348,85 @@ const SingleStudentPage = ({
               }
             />
           </div>
-        </div>
-        {/* Graph's */}
-        <div className={`flex flex-col ${statsView ? "" : "hidden"}`}>
-          <h1 className="text-2xl font-semibold mb-4">Stats : </h1>
-          <div className="flex">
-            <div className="w-[30rem] mr-5">
-              <h1 className="text-xl font-bold">Overall assesment Stats : </h1>
-              <Bar
-                //@ts-ignore
-                data={overallData}
-              />
-            </div>
-            <div className="w-[30rem] mr-5">
-              <h1 className="text-xl font-bsold">
-                Continous Assesment Stats :{" "}
-              </h1>
-              <Bar data={data} />
-            </div>
-            <div className="w-[30rem] mr-5">
-              <h1 className="text-xl font-bold">Teacher Assesment Stats : </h1>
-              <Bar data={TAEdata} />
+
+          {/* Graph's */}
+          <div className={`flex flex-col ${statsView ? "" : "hidden"}`}>
+            <h1 className="text-2xl font-semibold mb-4">Stats : </h1>
+            <div className="flex">
+              <div className="w-[30rem] mr-5">
+                <h1 className="text-xl font-bold">
+                  Overall assesment Stats :{" "}
+                </h1>
+                <Bar
+                  //@ts-ignore
+                  data={overallData}
+                />
+              </div>
+              <div className="w-[30rem] mr-5">
+                <h1 className="text-xl font-bold">
+                  Continous Assesment Stats :{" "}
+                </h1>
+                <Bar data={data} />
+              </div>
+              <div className="w-[30rem] mr-5">
+                <h1 className="text-xl font-bold">
+                  Teacher Assesment Stats :{" "}
+                </h1>
+                <Bar data={TAEdata} />
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Goals */}
-        <div
-          className={`w-full flex flex-wrap flex-col ${
-            goalsView ? "" : "hidden"
-          }`}
-        >
-          <div>
-            <h2 className="text-2xl font-bold">Current Goals : </h2>
-            <div className="flex flex-wrap">
-              {goals
-                .slice(0)
-                .reverse()
-                .map((goal) => (
-                  <div key={goal.id}>
-                    <div className="flex flex-col break-words w-[20rem] font-semibold mt-5 mr-10 border border-black p-5 rounded-lg">
-                      <div className="flex items-center">
-                        <div className="text-3xl mb-2 font-bold p-1">
-                          {goal.title}
+          {/* Goals */}
+          <div
+            className={`w-full flex flex-wrap flex-col ${
+              goalsView ? "" : "hidden"
+            }`}
+          >
+            <div>
+              <h2 className="text-2xl font-bold">Current Goals : </h2>
+              <div className="flex flex-wrap">
+                {goals
+                  .slice(0)
+                  .reverse()
+                  .map((goal) => (
+                    <div key={goal.id}>
+                      <div className="flex flex-col break-words w-[20rem] font-semibold mt-5 mr-10 border border-black p-5 rounded-lg">
+                        <div className="flex items-center">
+                          <div className="text-3xl mb-2 font-bold p-1">
+                            {goal.title}
+                          </div>
+                          <div
+                            className={`ml-auto border p-1 px-2 w-fit text-sm rounded-full ${
+                              goal.type == GoalType.LongTerm
+                                ? "border-yellow-400 text-yellow-400"
+                                : "border-green-400 text-green-400"
+                            }`}
+                          >
+                            {goal.type}
+                          </div>
                         </div>
-                        <div
-                          className={`ml-auto border p-1 px-2 w-fit text-sm rounded-full ${
-                            goal.type == GoalType.LongTerm
-                              ? "border-yellow-400 text-yellow-400"
-                              : "border-green-400 text-green-400"
-                          }`}
-                        >
-                          {goal.type}
+                        <div className="flex">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                            />
+                          </svg>
+                          <div className="ml-2">{goal.deadline}</div>
                         </div>
-                      </div>
-                      <div className="flex">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                          />
-                        </svg>
-                        <div className="ml-2">{goal.deadline}</div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+              </div>
             </div>
           </div>
         </div>
