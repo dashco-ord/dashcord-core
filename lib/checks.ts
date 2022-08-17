@@ -42,6 +42,6 @@ export const checkUserRoleAndRedirect = async (
         };
     }
   } else {
-    return { props: { user: session?.user, extra } };
+    return { props: { ...extra, user: session.user } };
   }
 };
