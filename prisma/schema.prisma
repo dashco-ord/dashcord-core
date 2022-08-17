@@ -188,7 +188,7 @@ model Assesments {
   score5    Int
   updatedAt DateTime      @updatedAt
   Student   Student?      @relation(fields: [rollNo], references: [rollNo])
-  rollNo    String?       @unique
+  rollNo    String?
 }
 
 model Tasks {
