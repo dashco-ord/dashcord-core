@@ -20,7 +20,7 @@ const HomePage: NextPage = ({ user }: any) => {
           height={114}
         />
         <h1 className="font-semibold text-lg mb-4 mt-4">
-          Welcome, {user.name}!
+          Welcome, {user.name}! 👋
         </h1>
         <div className="flex overflow-x-scroll ">
           <div className="shrink-0">

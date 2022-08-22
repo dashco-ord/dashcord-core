@@ -4,12 +4,14 @@ WORKDIR /dashcord
 
 COPY package.json ./
 COPY yarn.lock ./
+COPY . .
+
 
 RUN yarn install
+RUN yarn prisma migrate dev --name init
 
-COPY . .
+RUN yarn build
 
 EXPOSE 3000
 
-RUN yarn build
 CMD ["yarn","start"]
