@@ -1,78 +1,81 @@
-import Link from "next/link";
-import { getCsrfToken } from "next-auth/react";
+import { UserRole } from "@prisma/client";
+import LoginForm from "components/login";
+import { useState } from "react";
 
-const LoginPage = ({ csrfToken }: any) => {
+const LoginPage = () => {
+  const [view, setView] = useState<UserRole>();
   return (
-    <div className="flex flex-col h-screen w-full items-center justify-center">
-      <form
-        className=" border-2 border-slate-200 p-10 rounded-lg lg:w-1/5 sm:w-10/12 xl:w-1/5"
-        method="post"
-        action="/api/auth/callback/credentials"
-      >
-        {/* This hidden input field is need for passing csrfToken that is received from getServerSidePRops */}
-        <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-
-        <div className="flex flex-col pb-6">
-          <label className="text-xl text-slate-600 font-semibold mr-5 pb-2">
-            Email :
-          </label>
-          <input
-            id="email"
-            className="p-2 rounded-sm border-b-2 border-b-gray-300 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 bg-slate-100 duration-75"
-            type="email"
-            placeholder="Enter your Email"
-            required
-            name="email"
-          />
-        </div>
-
-        <div className="flex flex-col pb-3">
-          <div className="flex flex-wrap items-baseline">
-            <label className="text-xl text-slate-600 font-semibold mr-auto pb-2">
-              Password :
-            </label>
-            <div>
-              <Link href="/password/forgot">
-                <a className="text-sm text-purple-500">Forgot password ?</a>
-              </Link>
-            </div>
+    <>
+      <div className="flex h-screen items-center justify-center flex-col">
+        <div className="min-w-[10em] min-h-[2em] border border-black flex rounded items-center justify-center">
+          <div
+            onClick={() => {
+              setView(UserRole.STUDENT);
+            }}
+            className={`border-r border-black p-1 ${
+              view == UserRole.STUDENT ? "bg-purple-700 text-white" : ""
+            }`}
+          >
+            Student
           </div>
-
-          <input
-            id="password"
-            className="p-2 rounded-sm border-b-2 border-b-gray-300 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 bg-slate-100 duration-75"
-            type="password"
-            placeholder="Enter your Password"
-            required
-            name="password"
-          />
+          <div
+            onClick={() => {
+              setView(UserRole.TG);
+            }}
+            className={`border-r border-black p-1 ${
+              view == UserRole.TG ? "bg-purple-700 text-white" : ""
+            }`}
+          >
+            Teacher Guard.
+          </div>
+          <div
+            onClick={() => {
+              setView(UserRole.HOD);
+            }}
+            className={`border-r border-black p-1 ${
+              view == UserRole.HOD ? "bg-purple-700 text-white" : ""
+            }`}
+          >
+            Hod
+          </div>
+          <div
+            onClick={() => {
+              setView(UserRole.INCHARGE);
+            }}
+            className={`p-1 ${
+              view == UserRole.INCHARGE ? "bg-purple-700 text-white" : ""
+            }`}
+          >
+            Incharge
+          </div>
         </div>
-
-        <input
-          id="login"
-          className="mt-5 p-2 w-24 text-white text-md font-semibold bg-purple-500 rounded-full"
-          type="submit"
-          value="Sign In"
-          required
-        />
-        <p className="text-slate-600 mt-5">
-          {"Got no account ? here "}
-          <Link href="/signup">
-            <a className="text-blue-500 hover:underline">sign up</a>
-          </Link>
-          {" for one"}
-        </p>
-      </form>
-    </div>
+        <div
+          className={`${
+            view == UserRole.STUDENT ? "w-full h-[15em]" : "hidden"
+          }`}
+        >
+          <LoginForm callback="/api/auth/callback/credentials" />
+        </div>
+        <div
+          className={`${view == UserRole.TG ? "w-full h-[15em]" : "hidden"}`}
+        >
+          <LoginForm callback="/api/tg/auth/callback/credentials" />
+        </div>
+        <div
+          className={`${view == UserRole.HOD ? "w-full h-[15em]" : "hidden"}`}
+        >
+          <LoginForm callback="/api/hod/auth/callback/credentials" />
+        </div>
+        <div
+          className={`${
+            view == UserRole.INCHARGE ? "w-full h-[15em]" : "hidden"
+          }`}
+        >
+          <LoginForm callback="/api/incharge/auth/callback/credentials" />
+        </div>
+      </div>
+    </>
   );
 };
 
 export default LoginPage;
-
-export async function getServerSideProps(context: any) {
-  return {
-    props: {
-      csrfToken: await getCsrfToken(context),
-    },
-  };
-}
