@@ -35,7 +35,7 @@ const HodsLayout = ({ children }: any) => {
         </div>
       </section>
       <section
-        className={`flex flex-col flex-1 overflow-y-auto overflow-x-hidden p-8 lg:p-10 h-screen bg-slate-100 lg:ml-16 lg:items-center lg:block ${
+        className={`flex flex-col flex-1 overflow-y-auto overflow-x-hidden p-8 lg:p-10 h-screen bg-slate-100 lg:ml-16 lg:justify-center lg:block ${
           show ? "hidden" : "block"
         }`}
       >
