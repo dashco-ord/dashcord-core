@@ -56,7 +56,7 @@ const LoginPage = ({ csrfToken }: any) => {
               setView(UserRole.HOD);
             }}
           >
-            <p>HOD's</p>
+            <p>HOD</p>
           </li>
         </ul>
       </div>
