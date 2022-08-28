@@ -3,25 +3,16 @@ import Card from "components/Cards/Card";
 import StudentsLayout from "components/Layouts/StudentsLayout";
 import { checkUserRoleAndRedirect } from "lib/checks";
 import { UserRole } from "@prisma/client";
-import Image from "next/image";
 
 export const getServerSideProps = async (context: any) => {
-  return checkUserRoleAndRedirect(context, UserRole.STUDENT, {});
+  return checkUserRoleAndRedirect(context, UserRole.INCHARGE, {});
 };
 
 const HomePage: NextPage = ({ user }: any) => {
   return (
     <StudentsLayout>
       <div className="h-screen">
-        <Image
-          src="/header.png"
-          alt="College Header"
-          width={625}
-          height={114}
-        />
-        <h1 className="font-semibold text-lg mb-4 mt-4">
-          Welcome, {user.name}! 👋
-        </h1>
+        <h1 className="font-semibold text-lg mb-4">Welcome, {user.name}!</h1>
         <div className="flex overflow-x-scroll ">
           <div className="shrink-0">
             <Card value={"100 %"} title="Attendance" />

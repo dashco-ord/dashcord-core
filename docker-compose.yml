@@ -1,0 +1,20 @@
+version: "0.1-alpha"
+services:
+  db:
+    image: "mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: enter_your_password
+    ports:
+      - 3307:3306
+      - 33070:33060
+    volumes:
+      - db:/dashcord
+      
+  dashcord:
+    build: .
+    ports:
+      - "3000:3000"
+
+
+volumes:
+  db:
