@@ -1,25 +1,29 @@
-import InchargesLayout from "components/Layouts/InchargesLayout";
-import { getSession } from "next-auth/react";
+import TgsLayout from "components/Layouts/TgsLayout";
 import { prisma } from "lib/prisma";
+import { Tg, UserRole } from "@prisma/client";
 import { checkUserRoleAndRedirect } from "lib/checks";
-import { UserRole } from "@prisma/client";
+import { getSession } from "next-auth/react";
 
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
-  const incharge = await prisma.tgIncharge.findUnique({
+  const tg = await prisma.tg.findUnique({
     where: {
       //@ts-ignore
       id: session?.id,
     },
   });
-  return checkUserRoleAndRedirect(context, UserRole.INCHARGE, {
-    extra: { incharge: JSON.parse(JSON.stringify(incharge)) },
+  return checkUserRoleAndRedirect(context, UserRole.TG, {
+    extra: { tg: JSON.parse(JSON.stringify(tg)) },
   });
 }
 
-const User = ({ incharge }: any) => {
+type userPageProps = {
+  tg: Tg;
+};
+
+const User = ({ tg }: userPageProps) => {
   return (
-    <InchargesLayout>
+    <TgsLayout>
       <main>
         <div className='flex flex-wrap bg-white rounded-lg p-8'>
           <form className='flex flex-row-reverse'>
@@ -27,7 +31,7 @@ const User = ({ incharge }: any) => {
               <div className='flex w-80 h-80 bg-slate-200  rounded-md ml-60'>
                 <img
                   //@ts-ignore
-                  src={incharge?.pictureUrl}
+                  src={tg?.pictureUrl}
                   width={350}
                   height={350}
                 />
@@ -43,7 +47,20 @@ const User = ({ incharge }: any) => {
                     className='p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
                     type='text'
                     placeholder='Enter your Name'
-                    defaultValue={incharge?.name}
+                    defaultValue={tg?.name}
+                    required
+                  />
+                </div>
+                <div className='flex flex-col pb-6 mr-8'>
+                  <label className='text-2xl font-semibold mr-5 pb-2'>
+                    Phone.no :
+                  </label>
+                  <input
+                    className='p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
+                    type='text'
+                    placeholder='Enter your Roll.No'
+                    //@ts-ignore
+                    defaultValue={tg?.phoneNo}
                     required
                   />
                 </div>
@@ -52,10 +69,10 @@ const User = ({ incharge }: any) => {
                     Email :
                   </label>
                   <input
-                    className='w-96 p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75 '
+                    className='w-96 p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
                     type='email'
                     placeholder='Enter your Email'
-                    defaultValue={incharge?.email}
+                    defaultValue={tg?.email}
                     required
                   />
                 </div>
@@ -67,25 +84,25 @@ const User = ({ incharge }: any) => {
                     Department :
                   </label>
                   <input
-                    className='p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75 '
+                    className='p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
                     type='text'
                     placeholder='Enter your Department'
                     //@ts-ignore
-                    defaultValue={incharge?.department}
+                    defaultValue={tg?.department}
                     required
                   />
                 </div>
 
-                <div className='flex flex-col pb-6 mr-8 w-fit'>
+                <div className='flex flex-col pb-6 mr-8'>
                   <label className='text-2xl font-semibold mr-5 pb-2'>
-                    Picture url :
+                    Gender :
                   </label>
                   <input
-                    className='p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75 '
+                    className='p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
                     type='text'
-                    placeholder='Enter your Picture Url'
+                    placeholder='Enter your Gender'
                     //@ts-ignore
-                    defaultValue={incharge?.pictureUrl}
+                    defaultValue={tg?.gender}
                     required
                   />
                 </div>
@@ -96,11 +113,11 @@ const User = ({ incharge }: any) => {
                     Bio :
                   </label>
                   <input
-                    className='p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75 '
+                    className='p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
                     type='text'
                     placeholder='Enter your Bio'
                     //@ts-ignore
-                    defaultValue={incharge?.bio}
+                    defaultValue={tg?.bio}
                     required
                   />
                 </div>
@@ -109,7 +126,7 @@ const User = ({ incharge }: any) => {
           </form>
         </div>
       </main>
-    </InchargesLayout>
+    </TgsLayout>
   );
 };
 
