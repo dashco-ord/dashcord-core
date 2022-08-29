@@ -1,9 +1,8 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { UserRole } from "@prisma/client";
 
-const TgSidebar = () => {
+const InchargesSidebar = () => {
   const router = useRouter();
   const isActive = (route: string) => {
     if (route === router.pathname) {
@@ -16,7 +15,7 @@ const TgSidebar = () => {
   const { data: session } = useSession();
 
   return (
-    <div className='flex flex-col pt-8 pb-5 items-center w-16 h-screen bg-white text-3xl px-7'>
+    <div className='flex flex-col pt-8 pb-5 lg:items-center lg:w-16 h-screen bg-white text-3xl lg:px-7 px-4 overflow-y-scroll'>
       <div className='mb-10'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -30,11 +29,11 @@ const TgSidebar = () => {
         </svg>
       </div>
       <div
-        className={`my-5 ${
-          isActive(`/tg`) ? "bg-purple-500 rounded-md p-2 text-white" : ""
+        className={`my-5 p-2 ${
+          isActive(`/incharge`) ? "bg-purple-500 rounded-md text-white" : ""
         }`}>
-        <Link href={`/tg`}>
-          <a>
+        <Link href={`/incharge`}>
+          <a className='flex items-center'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               className='h-7 w-7'
@@ -48,16 +47,19 @@ const TgSidebar = () => {
                 d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'
               />
             </svg>
+            <p className='lg:hidden text-[1.5rem] ml-2'>Dashboard</p>
           </a>
         </Link>
       </div>
 
       <div
-        className={`my-5 ${
-          isActive(`/tg/user`) ? "bg-purple-500 rounded-md p-2 text-white" : ""
+        className={`my-5 p-2 ${
+          isActive(`/incharge/user`)
+            ? "bg-purple-500 rounded-md  text-white"
+            : ""
         }`}>
-        <Link href={`/tg/user`}>
-          <a>
+        <Link href={`/incharge/user`}>
+          <a className='flex items-center'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               className='h-7 w-7'
@@ -71,6 +73,59 @@ const TgSidebar = () => {
                 d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
               />
             </svg>
+            <p className='lg:hidden text-[1.5rem] ml-2'>User</p>
+          </a>
+        </Link>
+      </div>
+
+      <div
+        className={`my-5 p-2 ${
+          isActive(`/incharge/tgs`) ? "bg-purple-500 rounded-md text-white" : ""
+        }`}>
+        <Link href={`/incharge/tgs`}>
+          <a className='flex items-center'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              className='h-7 w-7'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
+              strokeWidth={2}>
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'
+              />
+            </svg>
+            <p className='lg:hidden text-[1.5rem] ml-2'>TGs list</p>
+          </a>
+        </Link>
+      </div>
+
+      <div
+        className={`my-5 p-2 ${
+          isActive(`/incharge/students`)
+            ? "bg-purple-500 rounded-md text-white"
+            : ""
+        }`}>
+        <Link href={`/incharge/students`}>
+          <a className='flex items-center'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              className='h-7 w-7'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
+              strokeWidth={2}>
+              <path d='M12 14l9-5-9-5-9 5 9 5z' />
+              <path d='M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z' />
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222'
+              />
+            </svg>
+            <p className='lg:hidden text-[1.5rem] ml-2'>Students list</p>
           </a>
         </Link>
       </div>
@@ -78,9 +133,11 @@ const TgSidebar = () => {
       <div
         className={`my-5
          ${
-           isActive(`/tg/task`) ? "bg-purple-500 rounded-md p-2 text-white" : ""
+           isActive(`/incharge/create`)
+             ? "bg-purple-500 rounded-md p-2 text-white"
+             : ""
          }`}>
-        <Link href={`/tg/task`}>
+        <Link href={`/incharge/create`}>
           <a>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -100,40 +157,13 @@ const TgSidebar = () => {
       </div>
 
       <div
-        className={`my-5 ${
-          isActive(`/tg/students`)
-            ? "bg-purple-500 rounded-md p-2 text-white"
+        className={`my-5 mt-auto p-2 ${
+          isActive(`/incharge/settings`)
+            ? "bg-purple-500 rounded-md text-white"
             : ""
         }`}>
-        <Link href={`/tg/students`}>
-          <a>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              className='h-7 w-7'
-              fill='none'
-              viewBox='0 0 24 24'
-              stroke='currentColor'
-              strokeWidth={2}>
-              <path d='M12 14l9-5-9-5-9 5 9 5z' />
-              <path d='M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z' />
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                d='M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222'
-              />
-            </svg>
-          </a>
-        </Link>
-      </div>
-
-      <div
-        className={`my-5 mt-auto ${
-          isActive(`/tg/settings`)
-            ? "bg-purple-500 rounded-md p-2 text-white"
-            : ""
-        }`}>
-        <Link href={`/tg/settings`}>
-          <a>
+        <Link href={`/hos/settings`}>
+          <a className='flex items-center'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               className='h-7 w-7'
@@ -152,31 +182,40 @@ const TgSidebar = () => {
                 d='M15 12a3 3 0 11-6 0 3 3 0 016 0z'
               />
             </svg>
+            <p className='lg:hidden text-[1.5rem] ml-2'>Settings</p>
           </a>
         </Link>
       </div>
 
       <div
-        className={`my-5 ${
-          isActive("/logout") ? "bg-purple-500 rounded-md p-2 text-white" : ""
+        className={`my-5 p-2 ${
+          isActive("/logout") ? "bg-purple-500 rounded-md text-white" : ""
         }`}>
-        <Link href={session?.user ? `/api/auth/signout` : `/api/tg/auth/login`}>
-          <a>
+        <Link
+          href={
+            session?.user
+              ? `/api/incharge/auth/signout`
+              : `/api/incharge/auth/signin`
+          }>
+          <a className='flex items-center'>
             {session?.user ? (
-              <svg
-                id='logout'
-                xmlns='http://www.w3.org/2000/svg'
-                className='h-7 w-7'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-                strokeWidth={2}>
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1'
-                />
-              </svg>
+              <>
+                <svg
+                  id='logout'
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='h-7 w-7'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
+                  strokeWidth={2}>
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    d='M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1'
+                  />
+                </svg>
+                <p className='lg:hidden text-[1.5rem] ml-2'>Logout</p>
+              </>
             ) : (
               <svg
                 id='login'
@@ -200,4 +239,4 @@ const TgSidebar = () => {
   );
 };
 
-export default TgSidebar;
+export default InchargesSidebar;
