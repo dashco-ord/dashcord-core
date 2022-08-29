@@ -17,7 +17,8 @@ const createTg = async (req: NextApiRequest, res: NextApiResponse) => {
             email: email,
             department: department,
             gender: gender,
-            passHash: await bcrypt.hash(email, 10),
+            role: UserRole.TG,
+            passHash: await bcrypt.hash("password123", 10),
           },
         });
         res.send(tg);
