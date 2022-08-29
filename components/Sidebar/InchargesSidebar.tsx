@@ -131,14 +131,14 @@ const InchargesSidebar = () => {
       </div>
 
       <div
-        className={`my-5
+        className={`my-5 p-2
          ${
            isActive(`/incharge/create`)
-             ? "bg-purple-500 rounded-md p-2 text-white"
+             ? "bg-purple-500 rounded-md text-white"
              : ""
          }`}>
         <Link href={`/incharge/create`}>
-          <a>
+          <a className='flex items-center'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               className='h-6 w-6'
@@ -152,6 +152,7 @@ const InchargesSidebar = () => {
                 d='M12 4v16m8-8H4'
               />
             </svg>
+            <p className='lg:hidden text-[1.5rem] ml-2'>Create TG</p>
           </a>
         </Link>
       </div>
