@@ -47,11 +47,13 @@ export async function getServerSideProps(context: any) {
     },
   });
   return checkUserRoleAndRedirect(context, UserRole.HOD, {
-    student: JSON.parse(JSON.stringify(rawStudent)),
-    familyDetails: JSON.parse(JSON.stringify(rawStudent?.familyDetails)),
-    friends: JSON.parse(JSON.stringify(rawStudent?.Friends)),
-    goals: JSON.parse(JSON.stringify(rawStudent?.Goals)),
-    assesments: JSON.parse(JSON.stringify(rawStudent?.Assesments)),
+    extra: {
+      student: JSON.parse(JSON.stringify(rawStudent)),
+      familyDetails: JSON.parse(JSON.stringify(rawStudent?.familyDetails)),
+      friends: JSON.parse(JSON.stringify(rawStudent?.Friends)),
+      goals: JSON.parse(JSON.stringify(rawStudent?.Goals)),
+      assesments: JSON.parse(JSON.stringify(rawStudent?.Assesments)),
+    },
   });
 }
 
