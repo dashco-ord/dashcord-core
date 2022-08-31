@@ -2,7 +2,6 @@ import HodsLayout from "components/Layouts/HodsLayout";
 import { prisma } from "lib/prisma";
 import {
   Student,
-  Subjects,
   FamilyDetails,
   Friends,
   Attendance,
