@@ -7,7 +7,6 @@ import Card from "components/Cards/Card";
 import Toast, { ToastParams } from "components/Toast";
 import Link from "next/link";
 import readXlsxFile from "read-excel-file";
-import { AssesmentSchema as schema } from "lib/xlSchema";
 
 const StudentsPage = () => {
   const [students, setStudents] = useState<Student[]>([]);
@@ -44,12 +43,38 @@ const StudentsPage = () => {
   };
 
   const handleAssesmnetSheet = async () => {
+    const schema = {
+      "ROLL NO": {
+        prop: "studentId",
+      },
+      "STUDENT NAME": {
+        prop: "name",
+      },
+      "SUBJECT 1": {
+        prop: "score1",
+      },
+      "SUBJECT 2": {
+        prop: "score2",
+      },
+      "SUBJECT 3": {
+        prop: "score3",
+      },
+      "SUBJECT 4": {
+        prop: "score4",
+      },
+      "SUBJECT 5": {
+        prop: "score5",
+      },
+      "SUBJECT 6": {
+        prop: "score6",
+      },
+    };
     //@ts-ignore
     const data = await readXlsxFile(xlFile, { schema }).then(({ rows }) => {
       return rows;
     });
     if (assesmentType != "") {
-      const res = await axios.post("/api/tg/students/updateAssesment", {
+      const res = await axios.post("/api/tg/students/updateAssesments", {
         data,
         assesmentType,
         year,

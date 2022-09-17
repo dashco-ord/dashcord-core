@@ -55,7 +55,11 @@ const SingleTgPage = ({ tg, students }: TgPageProps) => {
                     className="p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75"
                     type="text"
                     placeholder="Enter your Name"
-                    defaultValue={tg?.name}
+                    defaultValue={
+                      tg.gender == "Male"
+                        ? `Mr. ${tg?.name}`
+                        : `Ms. ${tg?.name}`
+                    }
                     required
                   />
                 </div>
