@@ -285,7 +285,7 @@ const StudentsPage = () => {
         <h2 className="font-bold mb-5">Sheet Format's</h2>
         <div className="flex flex-wrap">
           <a
-            href=""
+            href="https://github.com/TakshakRamteke/dashcord/blob/Takshak/static/Dashcord_Assesment_Format.xlsx?raw=true"
             download="Dashcord_Assesment_Format.xls"
             className="p-3 bg-blue-600 font-semibold text-white rounded mr-4 text-sm flex w-max items-center"
           >
@@ -306,7 +306,7 @@ const StudentsPage = () => {
             Assesment Format
           </a>
           <a
-            href=""
+            href="https://github.com/TakshakRamteke/dashcord/blob/Takshak/static/Dashcord_Attendance_Format.xlsx?raw=true"
             download="Dashcord_Attendance_Format.xls"
             className="p-3 bg-blue-600 font-semibold text-white rounded mr-4 text-sm flex w-max items-center"
           >
