@@ -144,6 +144,7 @@ const StudentsPage = () => {
       type: "warning",
       message: "The file is under processing please wait...",
     });
+
     try {
       switch (sheetType) {
         case "assesment":
@@ -255,6 +256,7 @@ const StudentsPage = () => {
             </select>
           )}
         </div>
+
         <form onSubmit={handelXls}>
           <input
             className="rounded-sm border p-1 border-gray-400"
@@ -277,6 +279,54 @@ const StudentsPage = () => {
             disabled={xlFile ? false : true}
           />
         </form>
+      </div>
+
+      <div className="mt-6">
+        <h2 className="font-bold mb-5">Sheet Format's</h2>
+        <div className="flex flex-wrap">
+          <a
+            href=""
+            download="Dashcord_Assesment_Format.xls"
+            className="p-3 bg-blue-600 font-semibold text-white rounded mr-4 text-sm flex w-max items-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6 mr-2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+              />
+            </svg>
+            Assesment Format
+          </a>
+          <a
+            href=""
+            download="Dashcord_Attendance_Format.xls"
+            className="p-3 bg-blue-600 font-semibold text-white rounded mr-4 text-sm flex w-max items-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6 mr-2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+              />
+            </svg>
+            Attendance Format
+          </a>
+        </div>
       </div>
     </TgsLayout>
   );
