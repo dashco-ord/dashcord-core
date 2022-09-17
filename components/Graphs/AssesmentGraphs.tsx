@@ -112,42 +112,104 @@ export default function AssesmentGraphs({ assesments, student }: chartData) {
     },
   };
 
-  assesments.map((assesment) =>
-    TAEdata.datasets.push(
-      //@ts-ignore
-      assesment.name == AssesmentType.TAE
-        ? {
-            //@ts-ignore
-            label: assesment.name,
-            //@ts-ignore
-            data: [
-              assesment.score1,
-              assesment.score2,
-              assesment.score3,
-              assesment.score4,
-              assesment.score5,
-            ],
-            backgroundColor: "rgba(128, 0, 128, 0.5)",
-            pointHoverBackgroundColor: "#fff",
-            borderColor: "rgba(128, 0, 128, 0.3)",
-            datalabels: {
-              color: "gray",
-              anchor: "end",
-              align: "end",
-            },
-          }
-        : {}
-    )
-  );
+  // assesments.map((assesment) =>
+  //   TAEdata.datasets.push(
+  //     //@ts-ignore
+  //     assesment.name == AssesmentType.TAE1
+  //       ? {
+  //           //@ts-ignore
+  //           label: assesment.name,
+  //           //@ts-ignore
+  //           data: [
+  //             assesment.score1,
+  //             assesment.score2,
+  //             assesment.score3,
+  //             assesment.score4,
+  //             assesment.score5,
+  //           ],
+  //           backgroundColor: "rgba(128, 0, 128, 0.5)",
+  //           pointHoverBackgroundColor: "#fff",
+  //           borderColor: "rgba(128, 0, 128, 0.3)",
+  //           datalabels: {
+  //             color: "gray",
+  //             anchor: "end",
+  //             align: "end",
+  //           },
+  //         }
+  //       : assesment.name == AssesmentType.TAE2
+  //       ? {
+  //           //@ts-ignore
+  //           label: assesment.name,
+  //           //@ts-ignore
+  //           data: [
+  //             assesment.score1,
+  //             assesment.score2,
+  //             assesment.score3,
+  //             assesment.score4,
+  //             assesment.score5,
+  //           ],
+  //           backgroundColor: "rgba(128, 0, 128, 0.5)",
+  //           pointHoverBackgroundColor: "#fff",
+  //           borderColor: "rgba(128, 0, 128, 0.3)",
+  //           datalabels: {
+  //             color: "gray",
+  //             anchor: "end",
+  //             align: "end",
+  //           },
+  //         }
+  //       : assesment.name == AssesmentType.TAE3
+  //       ? {
+  //           //@ts-ignore
+  //           label: assesment.name,
+  //           //@ts-ignore
+  //           data: [
+  //             assesment.score1,
+  //             assesment.score2,
+  //             assesment.score3,
+  //             assesment.score4,
+  //             assesment.score5,
+  //           ],
+  //           backgroundColor: "rgba(128, 0, 128, 0.5)",
+  //           pointHoverBackgroundColor: "#fff",
+  //           borderColor: "rgba(128, 0, 128, 0.3)",
+  //           datalabels: {
+  //             color: "gray",
+  //             anchor: "end",
+  //             align: "end",
+  //           },
+  //         }
+  //       : assesment.name == AssesmentType.TAE4
+  //       ? {
+  //           //@ts-ignore
+  //           label: assesment.name,
+  //           //@ts-ignore
+  //           data: [
+  //             assesment.score1,
+  //             assesment.score2,
+  //             assesment.score3,
+  //             assesment.score4,
+  //             assesment.score5,
+  //           ],
+  //           backgroundColor: "rgba(128, 0, 128, 0.5)",
+  //           pointHoverBackgroundColor: "#fff",
+  //           borderColor: "rgba(128, 0, 128, 0.3)",
+  //           datalabels: {
+  //             color: "gray",
+  //             anchor: "end",
+  //             align: "end",
+  //           },
+  //         }
+  //       : null
+  //   )
+  // );
 
-  assesments.map((assesment) =>
-    data.datasets.push(
-      //@ts-ignore
-      assesment.name == AssesmentType.CAE1
-        ? {
-            //@ts-ignore
+  assesments.map((assesment) => {
+    switch (assesment.name) {
+      case AssesmentType.CAE1:
+        data.datasets.push(
+          //@ts-ignore
+          {
             label: assesment.name,
-            //@ts-ignore
             data: [
               assesment.score1,
               assesment.score2,
@@ -164,11 +226,14 @@ export default function AssesmentGraphs({ assesments, student }: chartData) {
               align: "end",
             },
           }
-        : assesment.name == AssesmentType.CAE2
-        ? {
-            //@ts-ignore
+        );
+        break;
+
+      case AssesmentType.CAE2:
+        data.datasets.push(
+          //@ts-ignore
+          {
             label: assesment.name,
-            //@ts-ignore
             data: [
               assesment.score1,
               assesment.score2,
@@ -185,9 +250,110 @@ export default function AssesmentGraphs({ assesments, student }: chartData) {
               align: "end",
             },
           }
-        : {}
-    )
-  );
+        );
+        break;
+
+      case AssesmentType.TAE1:
+        TAEdata.datasets.push(
+          //@ts-ignore
+          {
+            label: assesment.name,
+
+            data: [
+              assesment.score1,
+              assesment.score2,
+              assesment.score3,
+              assesment.score4,
+              assesment.score5,
+            ],
+            backgroundColor: "rgba(128, 0, 128, 0.5)",
+            pointHoverBackgroundColor: "#fff",
+            borderColor: "rgba(128, 0, 128, 0.3)",
+            datalabels: {
+              color: "gray",
+              anchor: "end",
+              align: "end",
+            },
+          }
+        );
+        break;
+
+      case AssesmentType.TAE2:
+        TAEdata.datasets.push(
+          //@ts-ignore
+          {
+            label: assesment.name,
+
+            data: [
+              assesment.score1,
+              assesment.score2,
+              assesment.score3,
+              assesment.score4,
+              assesment.score5,
+            ],
+            backgroundColor: "rgba(128, 0, 128, 0.5)",
+            pointHoverBackgroundColor: "#fff",
+            borderColor: "rgba(128, 0, 128, 0.3)",
+            datalabels: {
+              color: "gray",
+              anchor: "end",
+              align: "end",
+            },
+          }
+        );
+        break;
+
+      case AssesmentType.TAE3:
+        TAEdata.datasets.push(
+          //@ts-ignore
+          {
+            label: assesment.name,
+
+            data: [
+              assesment.score1,
+              assesment.score2,
+              assesment.score3,
+              assesment.score4,
+              assesment.score5,
+            ],
+            backgroundColor: "rgba(128, 0, 128, 0.5)",
+            pointHoverBackgroundColor: "#fff",
+            borderColor: "rgba(128, 0, 128, 0.3)",
+            datalabels: {
+              color: "gray",
+              anchor: "end",
+              align: "end",
+            },
+          }
+        );
+        break;
+
+      case AssesmentType.TAE4:
+        TAEdata.datasets.push(
+          //@ts-ignore
+          {
+            label: assesment.name,
+
+            data: [
+              assesment.score1,
+              assesment.score2,
+              assesment.score3,
+              assesment.score4,
+              assesment.score5,
+            ],
+            backgroundColor: "rgba(128, 0, 128, 0.5)",
+            pointHoverBackgroundColor: "#fff",
+            borderColor: "rgba(128, 0, 128, 0.3)",
+            datalabels: {
+              color: "gray",
+              anchor: "end",
+              align: "end",
+            },
+          }
+        );
+        break;
+    }
+  });
 
   return (
     <>
