@@ -18,6 +18,7 @@ import AttendanceTable from "components/Tables/AttendanceTable";
 import { useState } from "react";
 import { checkUserRoleAndRedirect } from "lib/checks";
 import AssesmentGraphs from "components/Graphs/AssesmentGraphs";
+import MeetingsComponent from "components/meetings";
 
 export async function getServerSideProps(context: any) {
   const { params } = context;
@@ -198,6 +199,9 @@ const SingleStudentPage = ({
           <div className={`flex flex-col ${statsView ? "" : "hidden"}`}>
             <AssesmentGraphs assesments={assesments} student={student} />
           </div>
+
+          {/* Meetings */}
+          <MeetingsComponent meetings={meetings} />
 
           {/* Goals */}
           <div
