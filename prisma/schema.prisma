@@ -192,17 +192,16 @@ model Assesments {
 }
 
 model Tasks {
-  id           String   @id @default(cuid())
+  id           String    @id @default(cuid())
   title        String
   description  String
   deadlineDate String
   deadlineTime String
-  TG           Tg?      @relation(fields: [createdBy], references: [id])
+  TG           Tg?       @relation(fields: [createdBy], references: [id])
   createdBy    String?
   taskStatus   Status
-  createdAt    DateTime @default(now())
-  Student      Student? @relation(fields: [rollNo], references: [rollNo])
-  rollNo       String?
+  createdAt    DateTime  @default(now())
+  Student      Student[]
 }
 
 model Goals {
