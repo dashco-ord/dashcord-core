@@ -70,7 +70,7 @@ export default function AssesmentGraphs({ assesments, student }: chartData) {
     },
   };
 
-  let data = {
+  let data: any = {
     labels: [Subjects.AI, Subjects.CN, Subjects.DP, Subjects.FE, Subjects.SEPM],
     datasets: [],
     options: {
@@ -91,7 +91,7 @@ export default function AssesmentGraphs({ assesments, student }: chartData) {
     },
   };
 
-  let TAEdata = {
+  let TAEdata: any = {
     labels: [Subjects.AI, Subjects.CN, Subjects.DP, Subjects.FE, Subjects.SEPM],
     datasets: [],
     options: {
@@ -112,14 +112,13 @@ export default function AssesmentGraphs({ assesments, student }: chartData) {
     },
   };
 
-  assesments.map((assesment) =>
-    TAEdata.datasets.push(
-      //@ts-ignore
-      assesment.name == AssesmentType.TAE
-        ? {
-            //@ts-ignore
+  assesments.map((assesment) => {
+    switch (assesment.name) {
+      case AssesmentType.CAE1:
+        data.datasets.push(
+          //@ts-ignore
+          {
             label: assesment.name,
-            //@ts-ignore
             data: [
               assesment.score1,
               assesment.score2,
@@ -136,39 +135,14 @@ export default function AssesmentGraphs({ assesments, student }: chartData) {
               align: "end",
             },
           }
-        : {}
-    )
-  );
+        );
+        break;
 
-  assesments.map((assesment) =>
-    data.datasets.push(
-      //@ts-ignore
-      assesment.name == AssesmentType.CAE1
-        ? {
-            //@ts-ignore
+      case AssesmentType.CAE2:
+        data.datasets.push(
+          //@ts-ignore
+          {
             label: assesment.name,
-            //@ts-ignore
-            data: [
-              assesment.score1,
-              assesment.score2,
-              assesment.score3,
-              assesment.score4,
-              assesment.score5,
-            ],
-            backgroundColor: "rgba(128, 0, 128, 0.5)",
-            pointHoverBackgroundColor: "#fff",
-            borderColor: "rgba(128, 0, 128, 0.3)",
-            datalabels: {
-              color: "gray",
-              anchor: "end",
-              align: "end",
-            },
-          }
-        : assesment.name == AssesmentType.CAE2
-        ? {
-            //@ts-ignore
-            label: assesment.name,
-            //@ts-ignore
             data: [
               assesment.score1,
               assesment.score2,
@@ -185,27 +159,128 @@ export default function AssesmentGraphs({ assesments, student }: chartData) {
               align: "end",
             },
           }
-        : {}
-    )
-  );
+        );
+        break;
+
+      case AssesmentType.TAE1:
+        TAEdata.datasets.push(
+          //@ts-ignore
+          {
+            label: assesment.name,
+
+            data: [
+              assesment.score1,
+              assesment.score2,
+              assesment.score3,
+              assesment.score4,
+              assesment.score5,
+            ],
+            backgroundColor: "rgba(128, 0, 128, 0.5)",
+            pointHoverBackgroundColor: "#fff",
+            borderColor: "rgba(128, 0, 128, 0.3)",
+            datalabels: {
+              color: "gray",
+              anchor: "end",
+              align: "end",
+            },
+          }
+        );
+        break;
+
+      case AssesmentType.TAE2:
+        TAEdata.datasets.push(
+          //@ts-ignore
+          {
+            label: assesment.name,
+
+            data: [
+              assesment.score1,
+              assesment.score2,
+              assesment.score3,
+              assesment.score4,
+              assesment.score5,
+            ],
+            backgroundColor: "rgba(128, 0, 128, 0.5)",
+            pointHoverBackgroundColor: "#fff",
+            borderColor: "rgba(128, 0, 128, 0.3)",
+            datalabels: {
+              color: "gray",
+              anchor: "end",
+              align: "end",
+            },
+          }
+        );
+        break;
+
+      case AssesmentType.TAE3:
+        TAEdata.datasets.push(
+          //@ts-ignore
+          {
+            label: assesment.name,
+
+            data: [
+              assesment.score1,
+              assesment.score2,
+              assesment.score3,
+              assesment.score4,
+              assesment.score5,
+            ],
+            backgroundColor: "rgba(128, 0, 128, 0.5)",
+            pointHoverBackgroundColor: "#fff",
+            borderColor: "rgba(128, 0, 128, 0.3)",
+            datalabels: {
+              color: "gray",
+              anchor: "end",
+              align: "end",
+            },
+          }
+        );
+        break;
+
+      case AssesmentType.TAE4:
+        TAEdata.datasets.push(
+          //@ts-ignore
+          {
+            label: assesment.name,
+
+            data: [
+              assesment.score1,
+              assesment.score2,
+              assesment.score3,
+              assesment.score4,
+              assesment.score5,
+            ],
+            backgroundColor: "rgba(128, 0, 128, 0.5)",
+            pointHoverBackgroundColor: "#fff",
+            borderColor: "rgba(128, 0, 128, 0.3)",
+            datalabels: {
+              color: "gray",
+              anchor: "end",
+              align: "end",
+            },
+          }
+        );
+        break;
+    }
+  });
 
   return (
     <>
-      <h1 className="text-2xl font-semibold mb-4">Stats : </h1>
-      <div className="flex">
-        <div className="w-[30rem] mr-5">
-          <h1 className="text-xl font-bold">Overall assesment Stats : </h1>
+      <h1 className='text-2xl font-semibold mb-4'>Stats : </h1>
+      <div className='flex'>
+        <div className='w-[30rem] mr-5'>
+          <h1 className='text-xl font-bold'>Overall assesment Stats : </h1>
           <Bar
             //@ts-ignore
             data={overallData}
           />
         </div>
-        <div className="w-[30rem] mr-5">
-          <h1 className="text-xl font-bold">Continous Assesment Stats : </h1>
+        <div className='w-[30rem] mr-5'>
+          <h1 className='text-xl font-bold'>Continous Assesment Stats : </h1>
           <Bar data={data} />
         </div>
-        <div className="w-[30rem] mr-5">
-          <h1 className="text-xl font-bold">Teacher Assesment Stats : </h1>
+        <div className='w-[30rem] mr-5'>
+          <h1 className='text-xl font-bold'>Teacher Assesment Stats : </h1>
           <Bar data={TAEdata} />
         </div>
       </div>

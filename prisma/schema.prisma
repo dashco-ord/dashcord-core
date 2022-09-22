@@ -38,9 +38,9 @@ model TgIncharge {
 }
 
 model Tg {
-  id         String    @id @default(cuid())
+  id         String     @id @default(cuid())
   name       String
-  email      String    @unique
+  email      String     @unique
   passHash   String
   phoneNo    String
   pictureUrl String?
@@ -48,10 +48,11 @@ model Tg {
   department String
   bio        String?
   role       UserRole?
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
   Student    Student[]
   Tasks      Tasks[]
+  Meetings   Meetings[]
 }
 
 model Teacher {
@@ -153,6 +154,7 @@ model Student {
   Attendance             Attendance?
   Assesments             Assesments[]
   MedicalHistory         MedicalHistory?
+  Meetings               Meetings[]
 }
 
 model Friends {
@@ -192,17 +194,16 @@ model Assesments {
 }
 
 model Tasks {
-  id           String   @id @default(cuid())
+  id           String    @id @default(cuid())
   title        String
   description  String
   deadlineDate String
   deadlineTime String
-  TG           Tg?      @relation(fields: [createdBy], references: [id])
+  TG           Tg?       @relation(fields: [createdBy], references: [id])
   createdBy    String?
   taskStatus   Status
-  createdAt    DateTime @default(now())
-  Student      Student? @relation(fields: [rollNo], references: [rollNo])
-  rollNo       String?
+  createdAt    DateTime  @default(now())
+  Student      Student[]
 }
 
 model Goals {
@@ -213,6 +214,18 @@ model Goals {
   type        GoalType
   Student     Student? @relation(fields: [rollNo], references: [rollNo])
   rollNo      String?
+}
+
+model Meetings {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  createdBy   String
+  studentId   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  TG          Tg       @relation(fields: [createdBy], references: [id])
+  Student     Student  @relation(fields: [studentId], references: [rollNo])
 }
 
 enum UserRole {
