@@ -25,41 +25,41 @@ const updateAttendance = async (req: NextApiRequest, res: NextApiResponse) => {
               lecture2:
                 attendance.lecture2 == "present"
                   ? AttendanceType.PRESENT
-                  : attendance.lecture1 == "absent"
+                  : attendance.lecture2 == "absent"
                   ? AttendanceType.ABSENT
-                  : attendance.lecture1 == "informed"
+                  : attendance.lecture2 == "informed"
                   ? AttendanceType.INFORMED
                   : null,
               lecture3:
                 attendance.lecture3 == "present"
                   ? AttendanceType.PRESENT
-                  : attendance.lecture1 == "absent"
+                  : attendance.lecture3 == "absent"
                   ? AttendanceType.ABSENT
-                  : attendance.lecture1 == "informed"
+                  : attendance.lecture3 == "informed"
                   ? AttendanceType.INFORMED
                   : null,
               lecture4:
                 attendance.lecture4 == "present"
                   ? AttendanceType.PRESENT
-                  : attendance.lecture1 == "absent"
+                  : attendance.lecture4 == "absent"
                   ? AttendanceType.ABSENT
-                  : attendance.lecture1 == "informed"
+                  : attendance.lecture4 == "informed"
                   ? AttendanceType.INFORMED
                   : null,
               lecture5:
                 attendance.lecture5 == "present"
                   ? AttendanceType.PRESENT
-                  : attendance.lecture1 == "absent"
+                  : attendance.lecture5 == "absent"
                   ? AttendanceType.ABSENT
-                  : attendance.lecture1 == "informed"
+                  : attendance.lecture5 == "informed"
                   ? AttendanceType.INFORMED
                   : null,
               lecture6:
                 attendance.lecture6 == "present"
                   ? AttendanceType.PRESENT
-                  : attendance.lecture1 == "absent"
+                  : attendance.lecture6 == "absent"
                   ? AttendanceType.ABSENT
-                  : attendance.lecture1 == "informed"
+                  : attendance.lecture6 == "informed"
                   ? AttendanceType.INFORMED
                   : null,
             },
