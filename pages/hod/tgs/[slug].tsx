@@ -152,7 +152,7 @@ const SingleTgPage = ({ tg, students }: TgPageProps) => {
                   key={student.rollNo}
                   className="text-xl font-semibold mr-4 border border-black w-fit p-3 rounded-md"
                 >
-                  <Link href={`/INCHARGE/students/${student.rollNo}`}>
+                  <Link href={`/hod/students/${student.rollNo}`}>
                     <a className="hover:text-purple-700">{student.name}</a>
                   </Link>
                 </li>
