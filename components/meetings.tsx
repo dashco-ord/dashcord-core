@@ -103,7 +103,10 @@ export default function MeetingsComponent({
                 <div className=" text-slate-700">{`Recorded At : ${moment(
                   meeting.createdAt
                 ).format("MMMM Do YYYY, h:mm:ss a")}`}</div>
-                <div className=" text-slate-700">{`Created By : ${meeting?.TG.name}`}</div>
+                <div className=" text-slate-700">{`Created By : ${
+                  //@ts-ignore
+                  meeting?.TG.name
+                }`}</div>
 
                 <div className="mt-2 text-justify text-lg">
                   {meeting.description}
