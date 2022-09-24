@@ -151,7 +151,7 @@ model Student {
   friendsId              String?
   Goals                  Goals[]
   Tasks                  Tasks[]
-  Attendance             Attendance?
+  Attendance             Attendance[]
   Assesments             Assesments[]
   MedicalHistory         MedicalHistory?
   Meetings               Meetings[]
@@ -170,9 +170,10 @@ model Attendance {
   lecture4 AttendanceType?
   lecture5 AttendanceType?
   lecture6 AttendanceType?
+  date     String?
   total    Int?
-  student  Student?        @relation(fields: [rollNo], references: [rollNo])
-  rollNo   String?         @unique
+  student  Student         @relation(fields: [rollNo], references: [rollNo])
+  rollNo   String
 }
 
 model Assesments {

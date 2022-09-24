@@ -114,7 +114,7 @@ const HomePage: NextPage = ({ tg }: any) => {
               attendance.Attendance ? (
                 <tr key={attendance.Attendance.id}>
                   <td className="pl-5 p-2 whitespace-nowrap text-violet-500">
-                    <Link href={`TG/students/${attendance.id}`}>
+                    <Link href={`tg/students/${attendance.id}`}>
                       <a>{attendance.name}</a>
                     </Link>
                   </td>
