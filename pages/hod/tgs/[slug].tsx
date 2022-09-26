@@ -55,11 +55,7 @@ const SingleTgPage = ({ tg, students }: TgPageProps) => {
                     className="p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75"
                     type="text"
                     placeholder="Enter your Name"
-                    defaultValue={
-                      tg.gender == "Male"
-                        ? `Mr. ${tg?.name}`
-                        : `Ms. ${tg?.name}`
-                    }
+                    defaultValue={tg?.name}
                     required
                   />
                 </div>
@@ -152,7 +148,7 @@ const SingleTgPage = ({ tg, students }: TgPageProps) => {
                   key={student.rollNo}
                   className="text-xl font-semibold mr-4 border border-black w-fit p-3 rounded-md"
                 >
-                  <Link href={`/hod/students/${student.rollNo}`}>
+                  <Link href={`/INCHARGE/students/${student.rollNo}`}>
                     <a className="hover:text-purple-700">{student.name}</a>
                   </Link>
                 </li>

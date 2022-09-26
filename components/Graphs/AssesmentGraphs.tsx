@@ -70,7 +70,7 @@ export default function AssesmentGraphs({ assesments, student }: chartData) {
     },
   };
 
-  let data: any = {
+  let data = {
     labels: [Subjects.AI, Subjects.CN, Subjects.DP, Subjects.FE, Subjects.SEPM],
     datasets: [],
     options: {
@@ -91,7 +91,7 @@ export default function AssesmentGraphs({ assesments, student }: chartData) {
     },
   };
 
-  let TAEdata: any = {
+  let TAEdata = {
     labels: [Subjects.AI, Subjects.CN, Subjects.DP, Subjects.FE, Subjects.SEPM],
     datasets: [],
     options: {
@@ -112,13 +112,14 @@ export default function AssesmentGraphs({ assesments, student }: chartData) {
     },
   };
 
-  assesments.map((assesment) => {
-    switch (assesment.name) {
-      case AssesmentType.CAE1:
-        data.datasets.push(
-          //@ts-ignore
-          {
+  assesments.map((assesment) =>
+    TAEdata.datasets.push(
+      //@ts-ignore
+      assesment.name == AssesmentType.TAE
+        ? {
+            //@ts-ignore
             label: assesment.name,
+            //@ts-ignore
             data: [
               assesment.score1,
               assesment.score2,
@@ -126,7 +127,7 @@ export default function AssesmentGraphs({ assesments, student }: chartData) {
               assesment.score4,
               assesment.score5,
             ],
-            backgroundColor: "rgba(51, 102, 255, 0.65)",
+            backgroundColor: "rgba(128, 0, 128, 0.5)",
             pointHoverBackgroundColor: "#fff",
             borderColor: "rgba(128, 0, 128, 0.3)",
             datalabels: {
@@ -135,14 +136,18 @@ export default function AssesmentGraphs({ assesments, student }: chartData) {
               align: "end",
             },
           }
-        );
-        break;
+        : {}
+    )
+  );
 
-      case AssesmentType.CAE2:
-        data.datasets.push(
-          //@ts-ignore
-          {
+  assesments.map((assesment) =>
+    data.datasets.push(
+      //@ts-ignore
+      assesment.name == AssesmentType.CAE1
+        ? {
+            //@ts-ignore
             label: assesment.name,
+            //@ts-ignore
             data: [
               assesment.score1,
               assesment.score2,
@@ -150,7 +155,7 @@ export default function AssesmentGraphs({ assesments, student }: chartData) {
               assesment.score4,
               assesment.score5,
             ],
-            backgroundColor: "rgba(204, 0, 0, 0.65)",
+            backgroundColor: "rgba(128, 0, 128, 0.5)",
             pointHoverBackgroundColor: "#fff",
             borderColor: "rgba(128, 0, 128, 0.3)",
             datalabels: {
@@ -159,15 +164,11 @@ export default function AssesmentGraphs({ assesments, student }: chartData) {
               align: "end",
             },
           }
-        );
-        break;
-
-      case AssesmentType.TAE1:
-        TAEdata.datasets.push(
-          //@ts-ignore
-          {
+        : assesment.name == AssesmentType.CAE2
+        ? {
+            //@ts-ignore
             label: assesment.name,
-
+            //@ts-ignore
             data: [
               assesment.score1,
               assesment.score2,
@@ -175,7 +176,7 @@ export default function AssesmentGraphs({ assesments, student }: chartData) {
               assesment.score4,
               assesment.score5,
             ],
-            backgroundColor: "rgba(0, 204, 102, 0.65)",
+            backgroundColor: "rgba(128, 0, 254, 0.5)",
             pointHoverBackgroundColor: "#fff",
             borderColor: "rgba(128, 0, 128, 0.3)",
             datalabels: {
@@ -184,85 +185,9 @@ export default function AssesmentGraphs({ assesments, student }: chartData) {
               align: "end",
             },
           }
-        );
-        break;
-
-      case AssesmentType.TAE2:
-        TAEdata.datasets.push(
-          //@ts-ignore
-          {
-            label: assesment.name,
-
-            data: [
-              assesment.score1,
-              assesment.score2,
-              assesment.score3,
-              assesment.score4,
-              assesment.score5,
-            ],
-            backgroundColor: "rgba(255, 204, 0, 0.65)",
-            pointHoverBackgroundColor: "#fff",
-            borderColor: "rgba(128, 0, 128, 0.3)",
-            datalabels: {
-              color: "gray",
-              anchor: "end",
-              align: "end",
-            },
-          }
-        );
-        break;
-
-      case AssesmentType.TAE3:
-        TAEdata.datasets.push(
-          //@ts-ignore
-          {
-            label: assesment.name,
-
-            data: [
-              assesment.score1,
-              assesment.score2,
-              assesment.score3,
-              assesment.score4,
-              assesment.score5,
-            ],
-            backgroundColor: "rgba(51, 102, 255, 0.65)",
-            pointHoverBackgroundColor: "#fff",
-            borderColor: "rgba(128, 0, 128, 0.3)",
-            datalabels: {
-              color: "gray",
-              anchor: "end",
-              align: "end",
-            },
-          }
-        );
-        break;
-
-      case AssesmentType.TAE4:
-        TAEdata.datasets.push(
-          //@ts-ignore
-          {
-            label: assesment.name,
-
-            data: [
-              assesment.score1,
-              assesment.score2,
-              assesment.score3,
-              assesment.score4,
-              assesment.score5,
-            ],
-            backgroundColor: "rgba(204, 0, 0, 0.65)",
-            pointHoverBackgroundColor: "#fff",
-            borderColor: "rgba(128, 0, 128, 0.3)",
-            datalabels: {
-              color: "gray",
-              anchor: "end",
-              align: "end",
-            },
-          }
-        );
-        break;
-    }
-  });
+        : {}
+    )
+  );
 
   return (
     <>

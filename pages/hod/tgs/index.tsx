@@ -77,11 +77,7 @@ const TgsPage = () => {
           <tr key={tg.id}>
             <td className="pl-5 p-2 whitespace-nowrap text-violet-400">
               <Link href={`/hod/tgs/${tg.id}`}>
-                {tg.gender == "Male" ? (
-                  <a>Mr. {tg.name}</a>
-                ) : (
-                  <a>Ms. {tg.name}</a>
-                )}
+                <a>{tg.name}</a>
               </Link>
             </td>
             <td className="p-2 whitespace-nowrap text-indigo-300">
