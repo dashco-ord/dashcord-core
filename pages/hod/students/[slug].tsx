@@ -161,7 +161,7 @@ const SingleStudentPage = ({
             <AttendanceTable
               attendances={
                 //@ts-ignore
-                student.Attendances
+                attendances
               }
             />
           </div>
