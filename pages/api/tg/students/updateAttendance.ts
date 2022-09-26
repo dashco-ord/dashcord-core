@@ -10,7 +10,7 @@ const updateAttendance = async (req: NextApiRequest, res: NextApiResponse) => {
       const { data, year, date } = await req.body;
       data.map(async (attendance: any) => {
         try {
-          await prisma.attendance.create({
+          await prisma.attendances.create({
             data: {
               rollNo: attendance.rollNo,
               date: date,
