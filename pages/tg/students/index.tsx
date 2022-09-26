@@ -7,7 +7,6 @@ import Card from "components/Cards/Card";
 import Toast, { ToastParams } from "components/Toast";
 import Link from "next/link";
 import readXlsxFile from "read-excel-file";
-import { AssesmentSchema as schema } from "lib/xlSchema";
 
 const StudentsPage = () => {
   const [students, setStudents] = useState<Student[]>([]);
@@ -16,6 +15,7 @@ const StudentsPage = () => {
   const [year, setYear] = useState(0);
   const [sheetType, setsheetType] = useState("");
   const [assesmentType, setAssesmentType] = useState("");
+  const [date, setDate] = useState("");
 
   const fetchStudents = async () => {
     try {
@@ -44,12 +44,38 @@ const StudentsPage = () => {
   };
 
   const handleAssesmnetSheet = async () => {
+    const schema = {
+      "ROLL NO": {
+        prop: "studentId",
+      },
+      "STUDENT NAME": {
+        prop: "name",
+      },
+      "SUBJECT 1": {
+        prop: "score1",
+      },
+      "SUBJECT 2": {
+        prop: "score2",
+      },
+      "SUBJECT 3": {
+        prop: "score3",
+      },
+      "SUBJECT 4": {
+        prop: "score4",
+      },
+      "SUBJECT 5": {
+        prop: "score5",
+      },
+      "SUBJECT 6": {
+        prop: "score6",
+      },
+    };
     //@ts-ignore
     const data = await readXlsxFile(xlFile, { schema }).then(({ rows }) => {
       return rows;
     });
     if (assesmentType != "") {
-      const res = await axios.post("/api/tg/students/updateAssesment", {
+      const res = await axios.post("/api/tg/students/updateAssesments", {
         data,
         assesmentType,
         year,
@@ -103,6 +129,7 @@ const StudentsPage = () => {
     const res = await axios.post("/api/tg/students/updateAttendance", {
       data,
       year,
+      date,
     });
     if (res.status == 200) {
       setToast({
@@ -119,6 +146,7 @@ const StudentsPage = () => {
       type: "warning",
       message: "The file is under processing please wait...",
     });
+
     try {
       switch (sheetType) {
         case "assesment":
@@ -229,7 +257,16 @@ const StudentsPage = () => {
               <option value="CAE2">CAE2</option>
             </select>
           )}
+
+          {sheetType == "attendance" && (
+            <input
+              className="mr-2 rounded-sm border-b-2 border-b-gray-300 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 bg-slate-100 duration-75"
+              type="date"
+              onChange={(e) => setDate(e.target.value)}
+            />
+          )}
         </div>
+
         <form onSubmit={handelXls}>
           <input
             className="rounded-sm border p-1 border-gray-400"
@@ -252,6 +289,54 @@ const StudentsPage = () => {
             disabled={xlFile ? false : true}
           />
         </form>
+      </div>
+
+      <div className="mt-6">
+        <h2 className="font-bold mb-5">Sheet Formats</h2>
+        <div className="flex flex-wrap">
+          <a
+            href="https://github.com/TakshakRamteke/dashcord/blob/Takshak/static/Dashcord_Assesment_Format.xlsx?raw=true"
+            download="Dashcord_Assesment_Format.xls"
+            className="p-3 bg-blue-600 font-semibold text-white rounded mr-4 text-sm flex w-max items-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6 mr-2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+              />
+            </svg>
+            Assesment Format
+          </a>
+          <a
+            href="https://github.com/TakshakRamteke/dashcord/blob/Takshak/static/Dashcord_Attendance_Format.xlsx?raw=true"
+            download="Dashcord_Attendance_Format.xls"
+            className="p-3 bg-blue-600 font-semibold text-white rounded mr-4 text-sm flex w-max items-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6 mr-2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+              />
+            </svg>
+            Attendance Format
+          </a>
+        </div>
       </div>
     </TgsLayout>
   );

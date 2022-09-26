@@ -10,11 +10,11 @@ const updateAssesment = async (req: NextApiRequest, res: NextApiResponse) => {
       const { data, assesmentType, year } = await req.body;
       try {
         data.map(
-          async (assesment: Assesments) =>
+          async (assesment: any) =>
             await prisma.assesments.create({
               data: {
                 name: assesmentType,
-                rollNo: assesment.rollNo,
+                rollNo: assesment.studentId,
                 score1: assesment.score1,
                 score2: assesment.score2,
                 score3: assesment.score3,

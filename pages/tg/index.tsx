@@ -10,9 +10,20 @@ import Toast from "components/Toast";
 import attendanceColors from "components/AttendanceColor";
 import Table from "components/Tables/Table";
 import Link from "next/link";
+import { getSession } from "next-auth/react";
+import { prisma } from "lib/prisma";
 
 export const getServerSideProps = async (context: any) => {
-  return checkUserRoleAndRedirect(context, UserRole.TG, {});
+  const session = await getSession(context);
+  const tg = await prisma.tg.findUnique({
+    where: {
+      //@ts-ignore
+      id: session?.id,
+    },
+  });
+  return checkUserRoleAndRedirect(context, UserRole.TG, {
+    extra: { tg: JSON.parse(JSON.stringify(tg)) },
+  });
 };
 
 type attendanceProps = {
@@ -22,7 +33,7 @@ type attendanceProps = {
   Attendance: Attendance;
 };
 
-const HomePage: NextPage = ({ user }: any) => {
+const HomePage: NextPage = ({ tg }: any) => {
   const [attendances, setAttendances] = useState<attendanceProps[]>([]);
   const [toast, setToast] = useState<ToastParams>();
 
@@ -57,7 +68,9 @@ const HomePage: NextPage = ({ user }: any) => {
         )}
       </div>
       <div className="h-screen">
-        <h1 className="font-semibold text-lg mb-4">Welcome, {user.name}!</h1>
+        <h1 className="font-semibold text-lg mb-4">
+          Welcome, {tg.gender == "Male" ? `Mr. ${tg.name}` : `Ms. ${tg.name}`}!
+        </h1>
         <div className="flex overflow-x-scroll ">
           <div className="shrink-0">
             <Card title="All Students" value={attendances.length} />
@@ -101,7 +114,7 @@ const HomePage: NextPage = ({ user }: any) => {
               attendance.Attendance ? (
                 <tr key={attendance.Attendance.id}>
                   <td className="pl-5 p-2 whitespace-nowrap text-violet-500">
-                    <Link href={`TG/students/${attendance.id}`}>
+                    <Link href={`tg/students/${attendance.id}`}>
                       <a>{attendance.name}</a>
                     </Link>
                   </td>

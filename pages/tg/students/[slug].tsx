@@ -9,6 +9,7 @@ import {
   GoalType,
   Assesments,
   UserRole,
+  Meetings,
 } from "@prisma/client";
 import PersonalDetailForm from "components/DataForms/PersonalDetail";
 import FamilyDetailForm from "components/DataForms/FamilyDetail";
@@ -17,6 +18,7 @@ import AttendanceTable from "components/Tables/AttendanceTable";
 import { useState } from "react";
 import { checkUserRoleAndRedirect } from "lib/checks";
 import AssesmentGraphs from "components/Graphs/AssesmentGraphs";
+import MeetingsComponent from "components/meetings";
 
 export async function getServerSideProps(context: any) {
   const { params } = context;
@@ -32,6 +34,12 @@ export async function getServerSideProps(context: any) {
       Assesments: true,
     },
   });
+  const meetings = await prisma.meetings.findMany({
+    where: { studentId: params.slug },
+    include: {
+      TG: true,
+    },
+  });
   return checkUserRoleAndRedirect(context, UserRole.TG, {
     extra: {
       student: JSON.parse(JSON.stringify(rawStudent)),
@@ -39,6 +47,7 @@ export async function getServerSideProps(context: any) {
       friends: JSON.parse(JSON.stringify(rawStudent?.Friends)),
       goals: JSON.parse(JSON.stringify(rawStudent?.Goals)),
       assesments: JSON.parse(JSON.stringify(rawStudent?.Assesments)),
+      meetings: JSON.parse(JSON.stringify(meetings)),
     },
   });
 }
@@ -49,10 +58,12 @@ const SingleStudentPage = ({
   friends,
   goals,
   assesments,
+  meetings,
 }: StudentPageProps) => {
   const [personalView, setPersonalView] = useState(true);
   const [statsView, setStatsView] = useState(false);
   const [goalsView, setGoalsView] = useState(false);
+  const [meetingView, setMeetingView] = useState(false);
 
   return (
     <TgsLayout>
@@ -65,6 +76,7 @@ const SingleStudentPage = ({
             onClick={() => {
               setGoalsView(false);
               setStatsView(false);
+              setMeetingView(false);
               setPersonalView(true);
             }}
           >
@@ -91,6 +103,7 @@ const SingleStudentPage = ({
             onClick={() => {
               setPersonalView(false);
               setGoalsView(false);
+              setMeetingView(false);
               setStatsView(true);
             }}
           >
@@ -116,12 +129,40 @@ const SingleStudentPage = ({
             Stats
           </li>
           <li
+            className={`p-2 px-2 cursor-pointer flex ${
+              meetingView ? "bg-white rounded-t-md text-purple-600" : ""
+            }`}
+            onClick={() => {
+              setPersonalView(false);
+              setGoalsView(false);
+              setStatsView(false);
+              setMeetingView(true);
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+              />
+            </svg>
+            Meeting Details
+          </li>
+          <li
             className={`p-2 pr-2 px-2 cursor-pointer flex ${
               goalsView ? "bg-white rounded-t-md text-purple-600" : ""
             }`}
             onClick={() => {
               setStatsView(false);
               setPersonalView(false);
+              setMeetingView(false);
               setGoalsView(true);
             }}
           >
@@ -170,6 +211,11 @@ const SingleStudentPage = ({
           {/* Graph's */}
           <div className={`flex flex-col ${statsView ? "" : "hidden"}`}>
             <AssesmentGraphs assesments={assesments} student={student} />
+          </div>
+
+          {/* Meetings */}
+          <div className={`flex flex-col ${meetingView ? "" : "hidden"}`}>
+            <MeetingsComponent meetings={meetings} studentId={student.rollNo} />
           </div>
 
           {/* Goals */}
@@ -239,4 +285,5 @@ type StudentPageProps = {
   attendance: Attendance;
   goals: Goals[];
   assesments: Assesments[];
+  meetings: Meetings[];
 };
