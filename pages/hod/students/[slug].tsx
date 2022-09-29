@@ -14,6 +14,7 @@ import PersonalDetailForm from "components/DataForms/PersonalDetail";
 import FamilyDetailForm from "components/DataForms/FamilyDetail";
 import FriendsDetailForm from "components/DataForms/FriendsDetail";
 import AttendanceTable from "components/Tables/AttendanceTable";
+import AttendanceHistory from "components/Tables/AttendanceHistory";
 import { useState } from "react";
 import { checkUserRoleAndRedirect } from "lib/checks";
 import AssesmentGraphs from "components/Graphs/AssesmentGraphs";
@@ -169,6 +170,7 @@ const SingleStudentPage = ({
           {/* Graph's */}
           <div className={`flex flex-col ${statsView ? "" : "hidden"}`}>
             <AssesmentGraphs assesments={assesments} student={student} />
+            <AttendanceHistory attendances={attendances} />
           </div>
 
           {/* Goals */}
