@@ -75,25 +75,24 @@ const StudentsPage = () => {
         {toast && (
           <Toast
             type={toast.type}
-            className="mb-5"
+            className='mb-5'
             open={true}
-            setOpen={() => setToast(undefined)}
-          >
+            setOpen={() => setToast(undefined)}>
             {toast.message}
           </Toast>
         )}
       </div>
-      <div className="flex mb-10 overflow-x-scroll">
-        <Card title="All Students" value={stats.total} />
-        <Card title="All 2nd year students" value={stats.totalSecond} />
-        <Card title="All 3rd year Students" value={stats.totalThird} />
-        <Card title="All 4th year Students" value={stats.totalForth} />
+      <div className='flex mb-10 overflow-x-scroll'>
+        <Card title='All Students' value={stats.total} />
+        <Card title='All 2nd year students' value={stats.totalSecond} />
+        <Card title='All 3rd year Students' value={stats.totalThird} />
+        <Card title='All 4th year Students' value={stats.totalForth} />
       </div>
 
-      <div className="sm:flex sm:justify-between sm:items-center mb-10">
+      <div className='sm:flex sm:justify-between sm:items-center mb-10'>
         {/* Left side */}
-        <div className="mb-4 sm:mb-0">
-          <ul className="flex flex-wrap -m-1">
+        <div className='mb-4 sm:mb-0'>
+          <ul className='flex flex-wrap -m-1'>
             <NumericFilterItem
               name={"All"}
               label={0}
@@ -120,8 +119,8 @@ const StudentsPage = () => {
             />
           </ul>
         </div>
-        <div className="ml-auto">
-          <ul className="flex flex-wrap -m-1">
+        <div className='ml-auto'>
+          <ul className='flex flex-wrap -m-1'>
             <StringFilterItem
               name={"All"}
               label={"all"}
@@ -145,7 +144,7 @@ const StudentsPage = () => {
       </div>
 
       <Table
-        title="All Students"
+        title='All Students'
         headings={[
           "name",
           "rollNo",
@@ -154,30 +153,28 @@ const StudentsPage = () => {
           "department",
           "year",
           "section",
-        ]}
-      >
+        ]}>
         {students.map((student) => (
           <tr key={student.rollNo}>
-            <td className="pl-5 p-2 whitespace-nowrap text-violet-400">
+            <td className='pl-5 p-2 whitespace-nowrap text-violet-400'>
               <Link href={`/hod/students/${student.rollNo}`}>
                 <a>{student.name}</a>
               </Link>
             </td>
-            <td className="p-2 whitespace-nowrap">{student.rollNo}</td>
-            <td className="p-2 whitespace-nowrap text-indigo-300">
+            <td className='p-2 whitespace-nowrap'>{student.rollNo}</td>
+            <td className='p-2 whitespace-nowrap text-indigo-300'>
               <a href={`mailto:${student.email}`}>{student.email}</a>
             </td>
             <td
               className={`mt-1.5 inline-flex font-medium rounded-full text-center px-2.5 py-0.5 ${genderColor(
                 //@ts-ignore
                 student?.gender
-              )}`}
-            >
+              )}`}>
               {student.gender}
             </td>
-            <td className="p-2 whitespace-nowrap">{student.department}</td>
-            <td className="p-2 whitespace-nowrap">{student.year}</td>
-            <td className="p-2 whitespace-nowrap">{student.section}</td>
+            <td className='p-2 whitespace-nowrap'>{student.department}</td>
+            <td className='p-2 whitespace-nowrap'>{student.year}</td>
+            <td className='p-2 whitespace-nowrap'>{student.section}</td>
           </tr>
         ))}
       </Table>
