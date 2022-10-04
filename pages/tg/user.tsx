@@ -3,6 +3,7 @@ import { prisma } from "lib/prisma";
 import { Tg, UserRole } from "@prisma/client";
 import { checkUserRoleAndRedirect } from "lib/checks";
 import { getSession } from "next-auth/react";
+import Image from "next/image";
 
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
@@ -29,11 +30,12 @@ const User = ({ tg }: userPageProps) => {
           <form className='flex flex-row-reverse'>
             <div>
               <div className='flex w-80 h-80 bg-slate-200  rounded-md ml-60'>
-                <img
+                <Image
                   //@ts-ignore
                   src={tg?.pictureUrl}
                   width={350}
                   height={350}
+                  alt={`${tg.name}`}
                 />
               </div>
             </div>
@@ -47,7 +49,11 @@ const User = ({ tg }: userPageProps) => {
                     className='p-2 pl-0 rounded-sm bg-white text-xl border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
                     type='text'
                     placeholder='Enter your Name'
-                    defaultValue={tg?.name}
+                    defaultValue={
+                      tg.gender == "Male"
+                        ? `Mr. ${tg?.name}`
+                        : `Ms. ${tg?.name}`
+                    }
                     required
                   />
                 </div>

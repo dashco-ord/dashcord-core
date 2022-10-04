@@ -3,6 +3,7 @@ import { getSession } from "next-auth/react";
 import { prisma } from "lib/prisma";
 import { checkUserRoleAndRedirect } from "lib/checks";
 import { UserRole } from "@prisma/client";
+import Image from "next/image";
 
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
@@ -25,11 +26,12 @@ const User = ({ incharge }: any) => {
           <form className='flex flex-row-reverse'>
             <div>
               <div className='flex w-80 h-80 bg-slate-200  rounded-md ml-60'>
-                <img
+                <Image
                   //@ts-ignore
                   src={incharge?.pictureUrl}
                   width={350}
                   height={350}
+                  alt={`${incharge.name}`}
                 />
               </div>
             </div>

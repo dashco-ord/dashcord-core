@@ -150,7 +150,7 @@ model Student {
   friendsId              String?
   Goals                  Goals[]
   Tasks                  Tasks[]
-  Attendance             Attendance?
+  Attendances            Attendances[]
   Assesments             Assesments[]
   MedicalHistory         MedicalHistory?
 }
@@ -160,7 +160,7 @@ model Friends {
   collegeFriend Student[]
 }
 
-model Attendance {
+model Attendances {
   id       String          @id @default(cuid())
   lecture1 AttendanceType?
   lecture2 AttendanceType?

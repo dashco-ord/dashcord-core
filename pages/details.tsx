@@ -30,7 +30,7 @@ const Details: NextPage = () => {
 
       return () =>
         media.removeEventListener("change", (e) => updtateViewPort(e));
-    }, []);
+    }, [updtateViewPort, width]);
 
     return isMobile;
   };
@@ -43,12 +43,11 @@ const Details: NextPage = () => {
         <Head>
           <title>Dashcord - Details</title>
           <meta
-            name="description"
-            content="A student performance Monitor (& more... )"
-          ></meta>
+            name='description'
+            content='A student performance Monitor (& more... )'></meta>
         </Head>
-        <div className="h-screen w-full px-8 py-4">
-          <div className="flex flex-wrap justify-evenly">
+        <div className='h-screen w-full px-8 py-4'>
+          <div className='flex flex-wrap justify-evenly'>
             <PersonalDetailForm />
             <FamilyDetailForm />
             <PastAcademicDetailForm />
@@ -65,21 +64,20 @@ const Details: NextPage = () => {
       <Head>
         <title>Dashcord - Details</title>
         <meta
-          name="description"
-          content="A student performance Monitor (& more... )"
-        ></meta>
+          name='description'
+          content='A student performance Monitor (& more... )'></meta>
       </Head>
-      <div className="h-screen w-full p-3">
-        <div className="columns-2 gap-3">
+      <div className='h-screen w-full p-3'>
+        <div className='columns-2 gap-3'>
           <PersonalDetailForm />
           <FamilyDetailForm />
           <PastAcademicDetailForm />
         </div>
         <CurrentAcademicDetails />
-        <div className="flex">
+        <div className='flex'>
           <FriendsDetailForm />
 
-          <div className="pl-3 ">
+          <div className='pl-3 '>
             <MedicalDetailForm />
           </div>
         </div>
