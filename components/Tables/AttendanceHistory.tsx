@@ -26,7 +26,7 @@ export default function AttendanceHistory({
         ]}
         noShadow={true}
         scroll={true}>
-        {attendances.map((attendance) => (
+        {attendances.map((attendance: Attendances) => (
           <tr className='font-semibold' key={attendance.id}>
             <td className='pl-5 p-2 whitespace-nowrap'>
               <div>{moment(attendance.date).format("MMM Do YYYY")}</div>

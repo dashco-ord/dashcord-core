@@ -3,8 +3,31 @@ import { getSession } from "next-auth/react";
 import { prisma } from "lib/prisma";
 import { Status, Student } from "@prisma/client";
 
+const sendMail = async () => {
+  const mailer = require("@sendgrid/mail");
+  mailer.setApiKey(process.env.SENDGRID_API_KEY);
+
+  const message = {
+    to: "takshakramteke0708@gmail.com",
+    from: "management.dashcoord@gmail.com",
+    subject: "Dashcoord Email tests",
+    text: "Knock knock tera baap aya",
+    html: "<strong>Knock knock tera baap aya</strong>",
+  };
+
+  mailer
+    .send(message)
+    .then(() => {
+      console.log("Email sent");
+    })
+    .catch((error: any) => {
+      console.error(error);
+    });
+};
+
 const createTaskRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method == "POST") {
+    await sendMail();
     const { title, description, deadlineDate, deadlineTime, id } =
       await req.body;
     const session = await getSession({ req });
@@ -17,7 +40,7 @@ const createTaskRoute = async (req: NextApiRequest, res: NextApiResponse) => {
       select: { Student: true },
     });
     //@ts-ignore
-    console.log(tg?.Student);
+    // console.log(tg?.Student);
     try {
       const newTask = await prisma.tasks.create({
         data: {
