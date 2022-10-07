@@ -46,21 +46,20 @@ const TgsPage = () => {
         {toast && (
           <Toast
             type={toast.type}
-            className="mb-5"
+            className='mb-5'
             open={true}
-            setOpen={() => setToast(undefined)}
-          >
+            setOpen={() => setToast(undefined)}>
             {toast.message}
           </Toast>
         )}
       </div>
 
-      <div className="w-full flex flex-row mb-5">
-        <form className=" ml-auto">
+      <div className='w-full flex flex-row mb-5'>
+        <form className=' ml-auto'>
           <input
-            type="search"
+            type='search'
             placeholder={` Search by name or email`}
-            className="p-1 rounded-md shadow-sm"
+            className='p-1 rounded-md shadow-sm'
           />
         </form>
       </div>
@@ -75,26 +74,21 @@ const TgsPage = () => {
           "Gender",
           "No. of Students",
         ]}
-        refresh={() => fetchTgs()}
-      >
+        refresh={() => fetchTgs()}>
         {tgs?.map((tg) => (
           <tr key={tg.id}>
-            <td className="pl-5 p-2 whitespace-nowrap text-violet-400">
+            <td className='pl-5 p-2 whitespace-nowrap text-violet-400'>
               <Link href={`/incharge/tgs/${tg.id}`}>
-                {tg.gender == "Male" ? (
-                  <a>Mr.{tg.name}</a>
-                ) : (
-                  <a>Ms. {tg.name}</a>
-                )}
+                <a>{tg.name}</a>
               </Link>
             </td>
-            <td className="p-2 whitespace-nowrap text-indigo-300">
+            <td className='p-2 whitespace-nowrap text-indigo-300'>
               <a href={`mailto:${tg.email}`}>{tg.email}</a>
             </td>
-            <td className="p-2 whitespace-nowrap">{tg.phoneNo}</td>
-            <td className="p-2 whitespace-nowrap">{tg.department}</td>
-            <td className="p-2 whitespace-nowrap">{tg.gender}</td>
-            <td className="p-2 whitespace-nowrap">
+            <td className='p-2 whitespace-nowrap'>{tg.phoneNo}</td>
+            <td className='p-2 whitespace-nowrap'>{tg.department}</td>
+            <td className='p-2 whitespace-nowrap'>{tg.gender}</td>
+            <td className='p-2 whitespace-nowrap'>
               {
                 //@ts-ignore
                 tg.Student.length

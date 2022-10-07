@@ -10,20 +10,9 @@ import Toast from "components/Toast";
 import attendanceColors from "components/AttendanceColor";
 import Table from "components/Tables/Table";
 import Link from "next/link";
-import { getSession } from "next-auth/react";
-import { prisma } from "lib/prisma";
 
 export const getServerSideProps = async (context: any) => {
-  const session = await getSession(context);
-  const tg = await prisma.tg.findUnique({
-    where: {
-      //@ts-ignore
-      id: session?.id,
-    },
-  });
-  return checkUserRoleAndRedirect(context, UserRole.TG, {
-    extra: { tg: JSON.parse(JSON.stringify(tg)) },
-  });
+  return checkUserRoleAndRedirect(context, UserRole.TG, {});
 };
 
 type attendanceProps = {
@@ -33,7 +22,7 @@ type attendanceProps = {
   Attendances: Attendances;
 };
 
-const HomePage: NextPage = ({ tg }: any) => {
+const HomePage: NextPage = ({ user }: any) => {
   const [attendances, setAttendances] = useState<attendanceProps[]>([]);
   const [toast, setToast] = useState<ToastParams>();
 
