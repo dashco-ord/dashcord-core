@@ -1,0 +1,139 @@
+import { InterviewPost, UserRole } from "@prisma/client";
+import { checkUserRoleAndRedirect } from "lib/checks";
+import { getSession } from "next-auth/react";
+import { prisma } from "lib/prisma";
+import moment from "moment";
+
+type postprops = {
+  posts: InterviewPost[];
+};
+
+// export const getServerSideProps = async (context: any) => {
+//   const session = await getSession(context);
+//   const posts = await prisma.posts.create({
+//     where: {
+//       //@ts-ignore
+//       studentId: session?.id,
+//     },
+//   });
+
+//   return checkUserRoleAndRedirect(context, UserRole.STUDENT, {
+//     extra: { posts: JSON.parse(JSON.stringify(posts)) },
+//   });
+// };
+ 
+export default function CreatePost({ posts }: postprops) {
+  return (
+    <div className="flex-1 flex justify-center my-5">
+    <fieldset className='border border-black p-3 rounded w-1/3'>
+      <legend className='text-2xl font-bold mb-6 px-2'>
+        Interview Experience Details :{" "}
+      </legend>
+        <div className='flex flex-col pb-6 '>
+          <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
+            Post Title: *
+          </label>
+          <input
+            className='p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-purple-500 transition ease-in-out delay-75 duration-75'
+            type='text'
+            placeholder='Ex. Data Analyst Interview Experience at TCS for 4 LPA'
+            required
+          />
+        </div>
+        <div className='flex flex-col pb-6 '>
+          <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
+            Job Description: *
+          </label>
+          <div className='flex items-center justify-evenly'>
+            1.
+            <input
+              className='p-2 pl-0 w-3/4 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-purple-500 transition ease-in-out delay-75 duration-75'
+              type='text'
+              placeholder='Job Title/Role (Ex. Data Analyst)'
+              required
+            />
+          </div>
+          <div className='flex items-center justify-evenly'>
+            2.
+            <input
+              className='p-2 pl-0 w-3/4 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-purple-500 transition ease-in-out delay-75 duration-75'
+              type='text'
+              placeholder='Company Name (Ex. TCS)'
+              required
+            />
+          </div>
+          <div className='flex items-center justify-evenly'>
+            <abbr title='if no criteria enter 35%'>3.</abbr>
+            <input
+              className='p-2 pl-0 w-3/4 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-purple-500 transition ease-in-out delay-75 duration-75'
+              type='number'
+              placeholder='Eligibility Criteria in % (Ex. 60)'
+              required
+            />
+          </div>
+          <div className='flex items-center justify-evenly'>
+            4.
+            <input
+              className='p-2 pl-0 w-3/4 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-purple-500 transition ease-in-out delay-75 duration-75'
+              type='number'
+              placeholder='Package (Ex. 4.5)'
+              required
+            />
+          </div>
+        </div>
+        <div className='flex flex-col pb-6 '>
+          <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
+            Cover Image:
+          </label>
+          <input
+            className='p-2 pl-0 rounded-sm bg-white text-xl md:text-base'
+            type='file'
+            placeholder='Choose File'
+          />
+        </div>
+        <div className='flex flex-col pb-6 '>
+          <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
+            Tags: *
+          </label>
+          <input
+            className='p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-purple-500 transition ease-in-out delay-75 duration-75'
+            id='tags'
+            type='text'
+            placeholder='Enter Tags separated by commas'
+            required
+          />
+        </div>
+        <div className='flex flex-col pb-6 '>
+          <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
+            Video Link for Experience(G-Drive/Youtube/Vimeo):
+          </label>
+          <input
+            className='p-2 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-purple-500 transition ease-in-out delay-75 duration-75'
+            type='text'
+            placeholder='Enter link of short video of your experience'
+          />
+        </div>
+        <div className='flex flex-col pb-6 '>
+          <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
+            Body(Brief Experience): *
+          </label>
+          <textarea
+            className='p-2 rounded-sm bg-white text-xl md:text-base border-2 border-gray-500 focus:outline-none focus:border-purple-500 transition ease-in-out delay-75 duration-75'
+            rows={5}
+            placeholder='Explain your experience along with the questions asked serialwise'
+            required
+          />
+        </div>
+
+      <div>
+        <input
+          className='mb-4 p-2 rounded-xl font-semibold text-md bg-purple-600 hover:bg-purple-700 cursor-pointer text-white'
+          type='submit'
+          value='Save Changes'
+        />
+      </div>
+    </fieldset>
+
+    </div>
+  );
+}

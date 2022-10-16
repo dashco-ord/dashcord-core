@@ -155,6 +155,7 @@ model Student {
   Assesments             Assesments[]
   MedicalHistory         MedicalHistory?
   Meetings               Meetings[]
+  InterviewPost          InterviewPost[]
 }
 
 model Friends {
@@ -227,6 +228,18 @@ model Meetings {
   updatedAt   DateTime @updatedAt
   TG          Tg       @relation(fields: [createdBy], references: [id])
   Student     Student  @relation(fields: [studentId], references: [rollNo])
+}
+
+model InterviewPost {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  tags        String
+  link        String
+  body        String
+  createdBy   Student  @relation(fields: [id], references: [rollNo])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 enum UserRole {

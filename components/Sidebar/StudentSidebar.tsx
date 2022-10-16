@@ -154,7 +154,29 @@ const StudentSidebar = () => {
           </a>
         </Link>
       </div>
+      
+      {/* ShareView */}
+      <div
+        className={`my-5 ${
+          isActive(`/placement-material`) ? "bg-purple-500 rounded-md p-2 text-white" : ""
+        }`}
+      >
+        <Link href={`/placement-material`}>
+          <a>
+            <svg version="1.1" id="Capa_1" className="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke="currentColor" strokeWidth={2}
+              viewBox="0 0 490 490">
+            <g>
+              <polygon points="469.149,247.999 469.149,465.936 20.851,465.936 20.851,247.999 0,247.999 0,486.788 490,486.788 490,247.999 	"/>
+              <path d="M163.316,6.511H38.21v443.116h125.106V6.511z M142.465,428.776H59.061V27.362h83.404V428.776z"/>
+              <path d="M455.079,384.59L288.931,3.212l-114.691,49.97L340.387,434.56L455.079,384.59z M278.14,30.66L427.63,373.797L351.18,407.11
+                L201.689,63.975L278.14,30.66z"/>
+            </g>
+            </svg>
+          </a>
+        </Link>
+      </div>
 
+      {/* Settings  */}
       <div
         className={`my-5 mt-auto ${
           isActive(`/settings`) ? "bg-purple-500 rounded-md p-2 text-white" : ""
