@@ -83,66 +83,85 @@ export default function InterViewExPage({ posts }: postprops) {
         >
           <ShareviewHeader/>
           <a href="./posts/viewPost">
-          <div className="flex flex-col gap-1 shadow-md break-words min-h-fit w-full mb-3 rounded-lg bg-white">
-              <p className="text-md mb-1 font-semibold p-2 py-1 bg-gray-200 rounded-t-lg">PranayK</p>
-              <div className="flex items-center justify-between">
-                <em className="text-xl font-semibold px-2">Interview Experience at Infocepts</em>      
-                <p className="text-justify text-white rounded-lg mx-4 px-2 py-0.5 text-sm bg-gray-500 w-fit">2022</p>
-              </div>
-              <p className="text-justify text-gray-900 px-2">
-                Role:Data Analyst | Company: Infocepts | Eligibility: 60% | Package: 5 LPA
-              </p>
-              <p className="text-justify text-white rounded-lg mx-2 px-2 py-0.5 text-sm bg-purple-500 w-fit">
-                Tags
-              </p>
-              <div className="flex gap-2 py-2">
-                <button className="text-blue-500 hover:text-purple-500 text-left ml-2">like ❤️</button>
-                <button className="text-blue-500 hover:text-purple-500 text-left ml-2">comment 🗨️</button>
-              </div>
-          </div>
-          </a>         
+            <div className="flex flex-col gap-1 shadow-md break-words min-h-fit w-full mb-3 rounded-lg bg-white">
+                <p className="text-md mb-1 font-semibold p-2 py-1 bg-gray-200 rounded-t-lg">👤 PranayK</p>
+                <div className="flex items-center justify-between">
+                  <em className="text-xl font-semibold px-2">Interview Experience at Infocepts</em>      
+                  <p className="text-justify text-white rounded-lg mx-4 px-2 py-0.5 text-sm bg-gray-500 w-fit">2022</p>
+                </div>
+                <p className="text-justify text-gray-900 px-2">
+                  Role: Data Analyst | Company: Infocepts | Eligibility: 60% | Package: 5 LPA
+                </p>
+                <p className="text-justify text-white rounded-lg mx-2 px-2 py-0.5 text-sm bg-purple-500 w-fit">
+                  Tags
+                </p>
+                <div className="flex gap-2 py-2">
+                  <button className="text-blue-500 hover:text-purple-500 text-left ml-2">like ❤️</button>
+                  <button className="text-blue-500 hover:text-purple-500 text-left ml-2">comment 🗨️</button>
+                </div>
+            </div>
+          </a>                  
           <a href="./posts/viewPost">
-          <div className="flex flex-col gap-1 shadow-md break-words min-h-fit w-full mb-3 rounded-lg bg-white">
-              <p className="text-md mb-1 font-semibold p-2 py-1 bg-gray-200 rounded-t-lg">PranayK</p>
-              <div className="flex items-center justify-between">
-                <em className="text-xl font-semibold px-2">Interview Experience at Infocepts</em>      
-                <p className="text-justify text-white rounded-lg mx-4 px-2 py-0.5 text-sm bg-gray-500 w-fit">2022</p>
-              </div>
-              <p className="text-justify text-gray-900 px-2">
-                Role:Data Analyst | Company: Infocepts | Eligibility: 60% | Package: 5 LPA
-              </p>
-              <p className="text-justify text-white rounded-lg mx-2 px-2 py-0.5 text-sm bg-purple-500 w-fit">
-                Tags
-              </p>
-              <div className="flex gap-2 py-2">
-                <button className="text-blue-500 hover:text-purple-500 text-left ml-2">like ❤️</button>
-                <button className="text-blue-500 hover:text-purple-500 text-left ml-2">comment 🗨️</button>
-              </div>
-          </div>
-          </a>         
+            <div className="flex flex-col gap-1 shadow-md break-words min-h-fit w-full mb-3 rounded-lg bg-white">
+                <p className="text-md mb-1 font-semibold p-2 py-1 bg-gray-200 rounded-t-lg">👤 PranayK</p>
+                <div className="flex items-center justify-between">
+                  <em className="text-xl font-semibold px-2">Interview Experience at Infocepts</em>      
+                  <p className="text-justify text-white rounded-lg mx-4 px-2 py-0.5 text-sm bg-gray-500 w-fit">2022</p>
+                </div>
+                <p className="text-justify text-gray-900 px-2">
+                  Role:Data Analyst | Company: Infocepts | Eligibility: 60% | Package: 5 LPA
+                </p>
+                <p className="text-justify text-white rounded-lg mx-2 px-2 py-0.5 text-sm bg-purple-500 w-fit">
+                  Tags
+                </p>
+                <div className="flex gap-2 py-2">
+                  <button className="text-blue-500 hover:text-purple-500 text-left ml-2">like ❤️</button>
+                  <button className="text-blue-500 hover:text-purple-500 text-left ml-2">comment 🗨️</button>
+                </div>
+            </div>
+          </a>                  
           <a href="./posts/viewPost">
-          <div className="flex flex-col gap-1 shadow-md break-words min-h-fit w-full mb-3 rounded-lg bg-white">
-              <p className="text-md mb-1 font-semibold p-2 py-1 bg-gray-200 rounded-t-lg">PranayK</p>
-              <div className="flex items-center justify-between">
-                <em className="text-xl font-semibold px-2">Interview Experience at Infocepts</em>      
-                <p className="text-justify text-white rounded-lg mx-4 px-2 py-0.5 text-sm bg-gray-500 w-fit">2022</p>
-              </div>
-              <p className="text-justify text-gray-900 px-2">
-                Role:Data Analyst | Company: Infocepts | Eligibility: 60% | Package: 5 LPA
-              </p>
-              <p className="text-justify text-white rounded-lg mx-2 px-2 py-0.5 text-sm bg-purple-500 w-fit">
-                Tags
-              </p>
-              <div className="flex gap-2 py-2">
-                <button className="text-blue-500 hover:text-purple-500 text-left ml-2">like ❤️</button>
-                <button className="text-blue-500 hover:text-purple-500 text-left ml-2">comment 🗨️</button>
-              </div>
-          </div>
-          </a>         
+            <div className="flex flex-col gap-1 shadow-md break-words min-h-fit w-full mb-3 rounded-lg bg-white">
+                <p className="text-md mb-1 font-semibold p-2 py-1 bg-gray-200 rounded-t-lg">👤 PranayK</p>
+                <div className="flex items-center justify-between">
+                  <em className="text-xl font-semibold px-2">Interview Experience at Infocepts</em>      
+                  <p className="text-justify text-white rounded-lg mx-4 px-2 py-0.5 text-sm bg-gray-500 w-fit">2022</p>
+                </div>
+                <p className="text-justify text-gray-900 px-2">
+                  Role:Data Analyst | Company: Infocepts | Eligibility: 60% | Package: 5 LPA
+                </p>
+                <p className="text-justify text-white rounded-lg mx-2 px-2 py-0.5 text-sm bg-purple-500 w-fit">
+                  Tags
+                </p>
+                <div className="flex gap-2 py-2">
+                  <button className="text-blue-500 hover:text-purple-500 text-left ml-2">like ❤️</button>
+                  <button className="text-blue-500 hover:text-purple-500 text-left ml-2">comment 🗨️</button>
+                </div>
+            </div>
+          </a>                  
+          <a href="./posts/viewPost">
+            <div className="flex flex-col gap-1 shadow-md break-words min-h-fit w-full mb-3 rounded-lg bg-white">
+                <p className="text-md mb-1 font-semibold p-2 py-1 bg-gray-200 rounded-t-lg">👤 PranayK</p>
+                <div className="flex items-center justify-between">
+                  <em className="text-xl font-semibold px-2">Interview Experience at Infocepts</em>      
+                  <p className="text-justify text-white rounded-lg mx-4 px-2 py-0.5 text-sm bg-gray-500 w-fit">2022</p>
+                </div>
+                <p className="text-justify text-gray-900 px-2">
+                  Role:Data Analyst | Company: Infocepts | Eligibility: 60% | Package: 5 LPA
+                </p>
+                <p className="text-justify text-white rounded-lg mx-2 px-2 py-0.5 text-sm bg-purple-500 w-fit">
+                  Tags
+                </p>
+                <div className="flex gap-2 py-2">
+                  <button className="text-blue-500 hover:text-purple-500 text-left ml-2">like ❤️</button>
+                  <button className="text-blue-500 hover:text-purple-500 text-left ml-2">comment 🗨️</button>
+                </div>
+            </div>
+          </a>                  
         </div>
       {/* ))} */}
 
-    <div className="flex flex-col p-3 text-center rounded h-60  shadow-lg">
+    <div className="flex flex-col p-3 text-center rounded h-60 mt-10 shadow-lg bg-white">
     <p className="text-md shadow text-center mb-1 font-semibold p-1 h-auto bg-gray-100 text-grey-900 border rounded-lg border-gray-500">📌Tags</p>     
       <div className=" overflow-y-auto overflow-x-hidden scrollbar-hide">
         <a href='/pl-material/tags'>
