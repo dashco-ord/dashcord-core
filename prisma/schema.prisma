@@ -151,10 +151,11 @@ model Student {
   friendsId              String?
   Goals                  Goals[]
   Tasks                  Tasks[]
-  Attendance             Attendance?
+  Attendances            Attendances[]
   Assesments             Assesments[]
   MedicalHistory         MedicalHistory?
   Meetings               Meetings[]
+  InterviewPost          InterviewPost[]
 }
 
 model Friends {
@@ -162,7 +163,7 @@ model Friends {
   collegeFriend Student[]
 }
 
-model Attendance {
+model Attendances {
   id       String          @id @default(cuid())
   lecture1 AttendanceType?
   lecture2 AttendanceType?
@@ -170,9 +171,10 @@ model Attendance {
   lecture4 AttendanceType?
   lecture5 AttendanceType?
   lecture6 AttendanceType?
+  date     String?
   total    Int?
-  student  Student?        @relation(fields: [rollNo], references: [rollNo])
-  rollNo   String?         @unique
+  student  Student         @relation(fields: [rollNo], references: [rollNo])
+  rollNo   String
 }
 
 model Assesments {
@@ -226,6 +228,18 @@ model Meetings {
   updatedAt   DateTime @updatedAt
   TG          Tg       @relation(fields: [createdBy], references: [id])
   Student     Student  @relation(fields: [studentId], references: [rollNo])
+}
+
+model InterviewPost {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  tags        String
+  link        String
+  body        String
+  createdBy   Student  @relation(fields: [id], references: [rollNo])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 enum UserRole {

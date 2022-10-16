@@ -2,18 +2,18 @@ import { AttendanceType, UserRole } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 import { prisma } from "lib/prisma";
-import { AttendanceSchema } from "lib/xlSchema";
 
 const updateAttendance = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
   if (req.method == "POST") {
     if (session?.role == UserRole.TG) {
-      const { data, year } = await req.body;
+      const { data, year, date } = await req.body;
       data.map(async (attendance: any) => {
         try {
-          await prisma.attendance.update({
-            where: { rollNo: attendance.rollNo },
+          await prisma.attendances.create({
             data: {
+              rollNo: attendance.rollNo,
+              date: date,
               lecture1:
                 attendance.lecture1 == "present"
                   ? AttendanceType.PRESENT

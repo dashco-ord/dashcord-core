@@ -131,6 +131,53 @@ const StudentSidebar = () => {
       </div>
 
       <div
+        className={`my-5 ${
+          isActive(`/meetings`) ? "bg-purple-500 rounded-md p-2 text-white" : ""
+        }`}
+      >
+        <Link href={`/meetings`}>
+          <a>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-7 h-7"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
+              />
+            </svg>
+          </a>
+        </Link>
+      </div>
+      
+      {/* ShareView */}
+      <div
+        className={`my-5 ${
+          isActive(`/placement-material`) ? "bg-purple-500 rounded-md p-2 text-white" : ""
+        }`}
+      >
+        <Link href={`/placement-material`}>
+          <a>
+            <svg version="1.1" id="Capa_1" className="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke="currentColor" strokeWidth={2}
+              viewBox="0 0 490 490">
+            <g>
+              <polygon points="469.149,247.999 469.149,465.936 20.851,465.936 20.851,247.999 0,247.999 0,486.788 490,486.788 490,247.999 	"/>
+              <path d="M163.316,6.511H38.21v443.116h125.106V6.511z M142.465,428.776H59.061V27.362h83.404V428.776z"/>
+              <path d="M455.079,384.59L288.931,3.212l-114.691,49.97L340.387,434.56L455.079,384.59z M278.14,30.66L427.63,373.797L351.18,407.11
+                L201.689,63.975L278.14,30.66z"/>
+            </g>
+            </svg>
+          </a>
+        </Link>
+      </div>
+
+      {/* Settings  */}
+      <div
         className={`my-5 mt-auto ${
           isActive(`/settings`) ? "bg-purple-500 rounded-md p-2 text-white" : ""
         }`}

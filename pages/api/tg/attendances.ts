@@ -1,3 +1,4 @@
+import { Tg } from "@prisma/client";
 import { prisma } from "lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
@@ -7,6 +8,12 @@ const getAttendenceRoute = async (
   res: NextApiResponse
 ) => {
   if (req.method == "GET") {
+    //Add a filter for today
+    const date = new Date();
+    const today = `${date.getDate()}-${
+      date.getMonth() + 1
+    }-${date.getFullYear()}`;
+
     try {
       const session = await getSession({ req });
       const tg = await prisma.tg.findUnique({
@@ -17,7 +24,7 @@ const getAttendenceRoute = async (
             select: {
               name: true,
               rollNo: true,
-              Attendance: true,
+              Attendances: true,
             },
           },
         },
