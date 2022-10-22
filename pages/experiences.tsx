@@ -1,6 +1,6 @@
 import { UserRole } from "@prisma/client";
 import StudentsLayout from "components/Layouts/StudentsLayout";
-import GlobalFeed from "components/shareview/Global";
+import GlobalFeed from "components/Shareview/Global";
 import { checkUserRoleAndRedirect } from "lib/checks";
 import { useState } from "react";
 
