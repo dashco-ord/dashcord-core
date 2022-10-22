@@ -266,21 +266,21 @@ export default function AssesmentGraphs({ assesments, student }: chartData) {
 
   return (
     <>
-      <h1 className="text-2xl font-semibold mb-4">Stats : </h1>
-      <div className="flex">
-        <div className="w-[30rem] mr-5">
-          <h1 className="text-xl font-bold">Overall assesment Stats : </h1>
+      <h1 className='text-2xl font-semibold mb-4'>Stats : </h1>
+      <div className='flex'>
+        <div className='w-[30rem] mr-5'>
+          <h1 className='text-xl font-bold'>Overall assesment Stats : </h1>
           <Bar
             //@ts-ignore
             data={overallData}
           />
         </div>
-        <div className="w-[30rem] mr-5">
-          <h1 className="text-xl font-bold">Continous Assesment Stats : </h1>
+        <div className='w-[30rem] mr-5'>
+          <h1 className='text-xl font-bold'>Continous Assesment Stats : </h1>
           <Bar data={data} />
         </div>
-        <div className="w-[30rem] mr-5">
-          <h1 className="text-xl font-bold">Teacher Assesment Stats : </h1>
+        <div className='w-[30rem] mr-5'>
+          <h1 className='text-xl font-bold'>Teacher Assesment Stats : </h1>
           <Bar data={TAEdata} />
         </div>
       </div>
