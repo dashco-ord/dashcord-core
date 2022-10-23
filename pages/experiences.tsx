@@ -53,7 +53,7 @@ export default function ExperiencePage({ experiences }: ExperiencePageProps) {
           </p>
         </div>
 
-        {view === "global" && <GlobalFeed experiences={experiences} />}
+        {view === "global" && <GlobalFeed feed={experiences} />}
         {view === "post" && <CreateExperience />}
       </div>
     </StudentsLayout>
