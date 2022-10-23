@@ -1,19 +1,26 @@
 import { Experience } from "@prisma/client";
 import moment from "moment";
+import { useState } from "react";
+import ExperienceModal from "./dataforms/Experience";
 
 type GlobalFeedProps = {
-  experiences: Experience[];
+  feed: Experience[];
 };
 
-export default function GlobalFeed({ experiences }: GlobalFeedProps) {
+export default function GlobalFeed({ feed }: GlobalFeedProps) {
+  const [open, setOpen] = useState<boolean>(false);
+  const [experiences, setExperiences] = useState<Experience[]>(feed);
+
   return (
     <>
       <div className='mt-7'>
         {experiences.map((experience) => (
           <div
             key={experience.id}
-            className='border bg-white rounded p-3 border-slate-700 shadow-sm'>
-            <h1 className='font-bold text-xl lg:text-3xl mb-2'>
+            className='border bg-white rounded p-3 border-slate-700 shadow-sm mt-4'>
+            <h1
+              className='font-bold text-xl lg:text-3xl mb-2 hover:text-purple-500'
+              onClick={() => setOpen(true)}>
               {experience.title}
             </h1>
 
@@ -72,6 +79,16 @@ export default function GlobalFeed({ experiences }: GlobalFeedProps) {
                 on {moment(experience.createdAt).format("MMM Do YYYY")}
               </p>
             </div>
+            {open ? (
+              <div
+                className=' flex items-center justify-center fixed inset-0 z-10 outline-none focus:outline-none'
+                onClick={() => setOpen(false)}>
+                <div className='bg-slate-400 w-full h-full opacity-40'></div>
+                <div className='fixed w-auto my-6 mx-auto max-w-3xl text-black z-50'>
+                  <ExperienceModal experience={experience} />
+                </div>
+              </div>
+            ) : null}
           </div>
         ))}
       </div>
