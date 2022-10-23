@@ -1,4 +1,5 @@
 import { Experience } from "@prisma/client";
+import StringFilterItem from "components/FilterItems/StringFilterItem";
 import moment from "moment";
 import { useState } from "react";
 import ExperienceModal from "./dataforms/Experience";
@@ -10,9 +11,62 @@ type GlobalFeedProps = {
 export default function GlobalFeed({ feed }: GlobalFeedProps) {
   const [open, setOpen] = useState<boolean>(false);
   const [experiences, setExperiences] = useState<Experience[]>(feed);
+  const [selectedFilter, setSelectedFilter] = useState("all");
 
   return (
     <>
+      <div className='ml-auto mt-7'>
+        <ul className='flex flex-wrap m-1'>
+          <StringFilterItem
+            name={"Latest"}
+            label={"latest"}
+            onSelect={setSelectedFilter}
+            selected={selectedFilter == "latest"}
+          />
+
+          <StringFilterItem
+            name={"Most Liked"}
+            label={"most_liked"}
+            onSelect={setSelectedFilter}
+            selected={selectedFilter == "most_liked"}
+          />
+
+          <StringFilterItem
+            name={"Most Commented"}
+            label={"most_commented"}
+            onSelect={setSelectedFilter}
+            selected={selectedFilter == "most_commented"}
+          />
+
+          <StringFilterItem
+            name={"Package Asc"}
+            label={"package_asc"}
+            onSelect={setSelectedFilter}
+            selected={selectedFilter == "package_asc"}
+          />
+
+          <StringFilterItem
+            name={"Package Dec"}
+            label={"package_dec"}
+            onSelect={setSelectedFilter}
+            selected={selectedFilter == "package_dec"}
+          />
+
+          <StringFilterItem
+            name={"Criteria Asc"}
+            label={"criteria_asc"}
+            onSelect={setSelectedFilter}
+            selected={selectedFilter == "criteria_asc"}
+          />
+
+          <StringFilterItem
+            name={"Criteria Dec"}
+            label={"criteria_dec"}
+            onSelect={setSelectedFilter}
+            selected={selectedFilter == "criteria_dec"}
+          />
+        </ul>
+      </div>
       <div className='mt-7'>
         {experiences.map((experience) => (
           <div
