@@ -248,15 +248,16 @@ model Experience {
   body      String   @db.LongText
   role      String
   company   String
-  package   String
+  salary    String
   criteria  String
   link      String
   by        String
-  tag       String
+  tags      String
+  likes     Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Student Student @relation(fields: [by], references: [rollNo])
+  Student Student @relation(fields: [by], references: [email])
 }
 
 enum UserRole {
