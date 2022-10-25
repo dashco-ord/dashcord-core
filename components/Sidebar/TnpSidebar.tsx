@@ -77,11 +77,11 @@ const TnpSidebar = () => {
 
       <div
         className={`my-5 ${
-          isActive(`/tnp/experiences`)
+          isActive(`/tnp/shareview`)
             ? "bg-purple-500 rounded-md p-2 text-white"
             : ""
         }`}>
-        <Link href={`/tnp/experiences`}>
+        <Link href={`/tnp/shareview`}>
           <a>
             <svg
               xmlns='http://www.w3.org/2000/svg'
