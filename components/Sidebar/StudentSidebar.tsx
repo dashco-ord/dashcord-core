@@ -146,11 +146,11 @@ const StudentSidebar = () => {
 
       <div
         className={`my-5 ${
-          isActive(`/experiences`)
+          isActive(`/shareview`)
             ? "bg-purple-500 rounded-md p-2 text-white"
             : ""
         }`}>
-        <Link href={`/experiences`}>
+        <Link href={`/shareview`}>
           <a>
             <svg
               xmlns='http://www.w3.org/2000/svg'
