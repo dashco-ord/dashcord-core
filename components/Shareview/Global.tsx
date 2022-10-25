@@ -1,15 +1,15 @@
 import { Experience } from "@prisma/client";
 import StringFilterItem from "components/FilterItems/StringFilterItem";
 import moment from "moment";
+import Link from "next/link";
 import { useState } from "react";
-import ExperienceModal from "./dataforms/Experience";
 
-type GlobalFeedProps = {
+export type GlobalFeedProps = {
   feed: Experience[];
+  forAdmins: boolean;
 };
 
-export default function GlobalFeed({ feed }: GlobalFeedProps) {
-  const [open, setOpen] = useState<boolean>(false);
+export default function GlobalFeed({ feed, forAdmins }: GlobalFeedProps) {
   const [experiences, setExperiences] = useState<Experience[]>(feed);
   const [selectedFilter, setSelectedFilter] = useState("all");
 
@@ -72,10 +72,15 @@ export default function GlobalFeed({ feed }: GlobalFeedProps) {
           <div
             key={experience.id}
             className='border bg-white rounded p-3 border-slate-700 shadow-sm mt-4'>
-            <h1
-              className='font-bold text-xl lg:text-3xl mb-2 hover:text-purple-500'
-              onClick={() => setOpen(true)}>
-              {experience.title}
+            <h1 className='font-bold text-xl lg:text-3xl mb-2 hover:text-purple-500'>
+              <Link
+                href={`${
+                  forAdmins
+                    ? `/tnp/shareview/${experience.id}`
+                    : `/shareview/${experience.id}`
+                }`}>
+                <a> {experience.title}</a>
+              </Link>
             </h1>
 
             <p className='mb-2 text-sm'>
@@ -133,16 +138,6 @@ export default function GlobalFeed({ feed }: GlobalFeedProps) {
                 on {moment(experience.createdAt).format("MMM Do YYYY")}
               </p>
             </div>
-            {open ? (
-              <div
-                className=' flex items-center justify-center fixed inset-0 z-10 outline-none focus:outline-none'
-                onClick={() => setOpen(false)}>
-                <div className='bg-slate-400 w-full h-full opacity-40'></div>
-                <div className='fixed w-auto my-6 mx-auto max-w-3xl text-black z-50'>
-                  <ExperienceModal experience={experience} />
-                </div>
-              </div>
-            ) : null}
           </div>
         ))}
       </div>
