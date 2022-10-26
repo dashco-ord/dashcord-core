@@ -1,11 +1,11 @@
 import Header from "components/Header";
-import TgSidebar from "components/Sidebar/TGsidebar";
+import TnpSidebar from "components/Sidebar/TnpSidebar";
 
-const TgsLayout = ({ children }: any) => {
+const TnpLayout = ({ children }: any) => {
   return (
     <div className='flex flex-col lg:flex-row'>
       <section className='fixed h-screen overflow-hidden hidden lg:block'>
-        <TgSidebar />
+        <TnpSidebar />
       </section>
       <section className='lg:hidden bg-white w-full h-12 p-2 z-30'>
         <div className='mr-1'>
@@ -19,4 +19,4 @@ const TgsLayout = ({ children }: any) => {
   );
 };
 
-export default TgsLayout;
+export default TnpLayout;

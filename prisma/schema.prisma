@@ -23,7 +23,8 @@ model Hod {
   role       UserRole?
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
-  Student    Student[]
+
+  Student Student[]
 }
 
 model TgIncharge {
@@ -33,14 +34,15 @@ model TgIncharge {
   passHash   String
   pictureUrl String
   role       UserRole?
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Tg {
-  id         String     @id @default(cuid())
+  id         String    @id @default(cuid())
   name       String
-  email      String     @unique
+  email      String    @unique
   passHash   String
   phoneNo    String
   pictureUrl String?
@@ -48,11 +50,12 @@ model Tg {
   department String
   bio        String?
   role       UserRole?
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
-  Student    Student[]
-  Tasks      Tasks[]
-  Meetings   Meetings[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  Student  Student[]
+  Tasks    Tasks[]
+  Meetings Meetings[]
 }
 
 model Teacher {
@@ -63,8 +66,22 @@ model Teacher {
   phoneNo    String
   pictureUrl String
   role       UserRole?
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Tnp {
+  id         String    @id @default(cuid())
+  name       String
+  email      String    @unique
+  passHash   String
+  phoneNo    String
+  pictureUrl String
+  role       UserRole?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model FamilyDetails {
@@ -85,24 +102,26 @@ model FamilyDetails {
   familyIncome      Int?
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
-  Student           Student?
+
+  Student Student?
 }
 
 model MedicalHistory {
   id          String   @id @default(cuid())
+  rollNo      String   @unique
   name        String?
   description String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  Student     Student  @relation(fields: [rollNo], references: [rollNo])
-  rollNo      String   @unique
+
+  Student Student @relation(fields: [rollNo], references: [rollNo])
 }
 
 model Student {
-  rollNo                 String          @id
+  rollNo                 String    @id
   name                   String
   pictureUrl             String?
-  email                  String          @unique
+  email                  String    @unique
   passHash               String
   phoneNo                String
   gender                 String?
@@ -114,8 +133,8 @@ model Student {
   religion               String?
   seatType               String?
   admissionDate          String?
-  achivement             String?         @db.VarChar(200)
-  achivement_description String?         @db.LongText
+  achivement             String?   @db.VarChar(200)
+  achivement_description String?   @db.LongText
   year                   Int?
   section                String?
   bloodGroup             String?
@@ -138,23 +157,25 @@ model Student {
   sem6Score              Float?
   sem7Score              Float?
   sem8Score              Float?
-  createdAt              DateTime        @default(now())
-  updatedAt              DateTime        @updatedAt
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
   role                   UserRole?
-  hod                    Hod?            @relation(fields: [hodId], references: [id])
-  hodId                  String?         @map("hod_id")
-  Tg                     Tg?             @relation(fields: [tgId], references: [id])
-  tgId                   String?         @map("tg_id")
-  familyDetails          FamilyDetails?  @relation(fields: [familyDetailsId], references: [id])
-  familyDetailsId        String?         @unique
-  Friends                Friends?        @relation(fields: [friendsId], references: [id])
+  familyDetailsId        String?   @unique
+  tgId                   String?   @map("tg_id")
+  hodId                  String?   @map("hod_id")
   friendsId              String?
-  Goals                  Goals[]
-  Tasks                  Tasks[]
-  Attendances            Attendances[]
-  Assesments             Assesments[]
-  MedicalHistory         MedicalHistory?
-  Meetings               Meetings[]
+
+  Hod            Hod?            @relation(fields: [hodId], references: [id])
+  Tg             Tg?             @relation(fields: [tgId], references: [id])
+  familyDetails  FamilyDetails?  @relation(fields: [familyDetailsId], references: [id])
+  Friends        Friends?        @relation(fields: [friendsId], references: [id])
+  Goals          Goals[]
+  Tasks          Tasks[]
+  Attendances    Attendances[]
+  Assesments     Assesments[]
+  MedicalHistory MedicalHistory?
+  Meetings       Meetings[]
+  Experience     Experience[]
 }
 
 model Friends {
@@ -164,6 +185,7 @@ model Friends {
 
 model Attendances {
   id       String          @id @default(cuid())
+  rollNo   String
   lecture1 AttendanceType?
   lecture2 AttendanceType?
   lecture3 AttendanceType?
@@ -172,12 +194,13 @@ model Attendances {
   lecture6 AttendanceType?
   date     String?
   total    Int?
-  student  Student         @relation(fields: [rollNo], references: [rollNo])
-  rollNo   String
+
+  student Student @relation(fields: [rollNo], references: [rollNo])
 }
 
 model Assesments {
   id        String        @id @default(cuid())
+  rollNo    String?
   name      AssesmentType
   subject1  Subjects?
   subject2  Subjects?
@@ -190,21 +213,22 @@ model Assesments {
   score4    Int
   score5    Int
   updatedAt DateTime      @updatedAt
-  Student   Student?      @relation(fields: [rollNo], references: [rollNo])
-  rollNo    String?
+
+  Student Student? @relation(fields: [rollNo], references: [rollNo])
 }
 
 model Tasks {
-  id           String    @id @default(cuid())
+  id           String   @id @default(cuid())
   title        String
   description  String
   deadlineDate String
   deadlineTime String
-  TG           Tg?       @relation(fields: [createdBy], references: [id])
   createdBy    String?
   taskStatus   Status
-  createdAt    DateTime  @default(now())
-  Student      Student[]
+  createdAt    DateTime @default(now())
+
+  Student Student[]
+  TG      Tg?       @relation(fields: [createdBy], references: [id])
 }
 
 model Goals {
@@ -213,8 +237,9 @@ model Goals {
   description String
   deadline    String
   type        GoalType
-  Student     Student? @relation(fields: [rollNo], references: [rollNo])
   rollNo      String?
+
+  Student Student? @relation(fields: [rollNo], references: [rollNo])
 }
 
 model Meetings {
@@ -225,8 +250,29 @@ model Meetings {
   studentId   String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  TG          Tg       @relation(fields: [createdBy], references: [id])
-  Student     Student  @relation(fields: [studentId], references: [rollNo])
+
+  TG      Tg      @relation(fields: [createdBy], references: [id])
+  Student Student @relation(fields: [studentId], references: [rollNo])
+}
+
+// Schema for ShareView [Note to Team Dashcord : Do not modify on without permission !!!]
+
+model Experience {
+  id        String   @id @default(cuid())
+  title     String
+  body      String   @db.LongText
+  role      String
+  company   String
+  salary    String
+  criteria  String
+  link      String
+  by        String
+  tags      String
+  likes     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Student Student @relation(fields: [by], references: [email])
 }
 
 enum UserRole {
@@ -236,6 +282,7 @@ enum UserRole {
   TEACHER
   PARENT
   STUDENT
+  TNP
 }
 
 enum AttendanceType {

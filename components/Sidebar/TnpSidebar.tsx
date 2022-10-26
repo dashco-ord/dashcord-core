@@ -1,8 +1,9 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { UserRole } from "@prisma/client";
 
-const StudentSidebar = () => {
+const TnpSidebar = () => {
   const router = useRouter();
   const isActive = (route: string) => {
     if (route === router.pathname) {
@@ -30,9 +31,9 @@ const StudentSidebar = () => {
       </div>
       <div
         className={`my-5 ${
-          isActive(`/`) ? "bg-purple-500 rounded-md p-2 text-white" : ""
+          isActive(`/tnp`) ? "bg-purple-500 rounded-md p-2 text-white" : ""
         }`}>
-        <Link href={`/`}>
+        <Link href={`/tnp`}>
           <a>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -53,9 +54,9 @@ const StudentSidebar = () => {
 
       <div
         className={`my-5 ${
-          isActive(`/user`) ? "bg-purple-500 rounded-md p-2 text-white" : ""
+          isActive(`/tnp/user`) ? "bg-purple-500 rounded-md p-2 text-white" : ""
         }`}>
-        <Link href={`/user`}>
+        <Link href={`/tnp/user`}>
           <a>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -75,82 +76,12 @@ const StudentSidebar = () => {
       </div>
 
       <div
-        className={`my-5
-         ${
-           isActive(`/tasks`) ? "bg-purple-500 rounded-md p-2 text-white" : ""
-         }`}>
-        <Link href={`/tasks`}>
-          <a>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              className='h-7 w-7'
-              fill='none'
-              viewBox='0 0 24 24'
-              stroke='currentColor'
-              strokeWidth={2}>
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                d='M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01'
-              />
-            </svg>
-          </a>
-        </Link>
-      </div>
-
-      <div
         className={`my-5 ${
-          isActive(`/goals`) ? "bg-purple-500 rounded-md p-2 text-white" : ""
-        }`}>
-        <Link href={`/goals`}>
-          <a>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              className='h-7 w-7'
-              fill='none'
-              viewBox='0 0 24 24'
-              stroke='currentColor'
-              strokeWidth={2}>
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                d='M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z'
-              />
-            </svg>
-          </a>
-        </Link>
-      </div>
-
-      <div
-        className={`my-5 ${
-          isActive(`/meetings`) ? "bg-purple-500 rounded-md p-2 text-white" : ""
-        }`}>
-        <Link href={`/meetings`}>
-          <a>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              strokeWidth={1.5}
-              stroke='currentColor'
-              className='w-7 h-7'>
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                d='M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5'
-              />
-            </svg>
-          </a>
-        </Link>
-      </div>
-
-      <div
-        className={`my-5 ${
-          isActive(`/shareview`)
+          isActive(`/tnp/shareview`)
             ? "bg-purple-500 rounded-md p-2 text-white"
             : ""
         }`}>
-        <Link href={`/shareview`}>
+        <Link href={`/tnp/shareview`}>
           <a>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -171,9 +102,11 @@ const StudentSidebar = () => {
 
       <div
         className={`my-5 mt-auto ${
-          isActive(`/settings`) ? "bg-purple-500 rounded-md p-2 text-white" : ""
+          isActive(`/tnp/settings`)
+            ? "bg-purple-500 rounded-md p-2 text-white"
+            : ""
         }`}>
-        <Link href={`/settings`}>
+        <Link href={`/tnp/settings`}>
           <a>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -201,7 +134,8 @@ const StudentSidebar = () => {
         className={`my-5 ${
           isActive("/logout") ? "bg-purple-500 rounded-md p-2 text-white" : ""
         }`}>
-        <Link href={session?.user ? `/api/auth/signout` : `/api/tg/auth/login`}>
+        <Link
+          href={session?.user ? `/api/auth/signout` : `/api/tnp/auth/login`}>
           <a>
             {session?.user ? (
               <svg
@@ -241,4 +175,4 @@ const StudentSidebar = () => {
   );
 };
 
-export default StudentSidebar;
+export default TnpSidebar;

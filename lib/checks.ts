@@ -29,6 +29,11 @@ export const checkUserRoleAndRedirect = async (
           redirect: { destination: "/incharge" },
           props: {},
         };
+      case UserRole.TNP:
+        return {
+          redirect: { destination: "/tnp" },
+          props: {},
+        };
       case UserRole.HOD: {
         return {
           redirect: { destination: "/hod" },
