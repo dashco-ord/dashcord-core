@@ -258,21 +258,32 @@ model Meetings {
 // Schema for ShareView [Note to Team Dashcord : Do not modify on without permission !!!]
 
 model Experience {
-  id        String   @id @default(cuid())
-  title     String
-  body      String   @db.LongText
-  role      String
-  company   String
-  salary    String
-  criteria  String
-  link      String
-  by        String
-  tags      String
-  likes     Int      @default(0)
+  id       String @id @default(cuid())
+  title    String
+  body     String @db.LongText
+  role     String
+  company  String
+  salary   String
+  criteria String
+  link     String
+  by       String
+  tags     String
+  likes    Int    @default(0)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   Student Student @relation(fields: [by], references: [email])
+}
+
+model PlacementMaterial {
+  id    String @id @default(cuid())
+  title String
+  links String
+  body  String @db.LongText
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum UserRole {
