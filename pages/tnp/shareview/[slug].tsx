@@ -1,9 +1,9 @@
-import { Experience, UserRole } from "@prisma/client";
-import TnpLayout from "components/Layouts/TnpLayout";
-import ExperienceModal from "components/Shareview/dataforms/ExperienceModal";
-import { checkUserRoleAndRedirect } from "lib/checks";
-import { prisma } from "lib/prisma";
-import Link from "next/link";
+import { Experience, UserRole } from '@prisma/client';
+import TnpLayout from 'components/Layouts/TnpLayout';
+import ExperienceModal from 'components/Shareview/dataforms/ExperienceModal';
+import { checkUserRoleAndRedirect } from 'lib/checks';
+import { prisma } from 'lib/prisma';
+import Link from 'next/link';
 
 export async function getServerSideProps(context: any) {
   const { params } = context;
@@ -25,7 +25,7 @@ export default function ExperiencePage({ experience }: ExpPageProps) {
       <div className='w-full min-h-full lg:min-w-[40rem] lg:min-h-[20rem] rounded-md shadow-none p-4'>
         <div className=' flex flex-col mb-7'>
           <h1 className='font-bold text-xl'>Shareview</h1>
-          <Link href={"/tnp/shareview"}>
+          <Link href={'/tnp/shareview'}>
             <a className='mt-7 text-blue-800 font-semibold rounded flex items-center'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -45,7 +45,7 @@ export default function ExperiencePage({ experience }: ExpPageProps) {
           </Link>
         </div>
 
-        <ExperienceModal experience={experience} forAdmin={true} />
+        <ExperienceModal experience={experience} forAdmin={true} tnp={true} />
       </div>
     </TnpLayout>
   );
