@@ -176,6 +176,7 @@ model Student {
   MedicalHistory MedicalHistory?
   Meetings       Meetings[]
   Experience     Experience[]
+  Events         Events[]
 }
 
 model Friends {
@@ -286,6 +287,27 @@ model PlacementMaterial {
   updatedAt DateTime @updatedAt
 }
 
+// End of Shareview Schema
+
+// Schema for Dashcord-Events [Note to Team Dashcord : Do not modify on without permission !!!]
+
+model Events {
+  id      String  @id @default(cuid())
+  title   String
+  regLink String
+  date    String
+  staus   Status
+  body    String  @db.LongText
+  winner  String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Student Student? @relation(fields: [winner], references: [email])
+}
+
+// End of Events Schema
+
 enum UserRole {
   HOD
   INCHARGE
@@ -320,6 +342,7 @@ enum AssesmentType {
 }
 
 enum Status {
+  Upcoming
   InProgress
   Done
 }
