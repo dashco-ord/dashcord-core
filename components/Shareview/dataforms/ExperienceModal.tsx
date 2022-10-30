@@ -1,25 +1,27 @@
-import { Experience } from "@prisma/client";
-import axios from "axios";
-import Router from "next/router";
-import { useState } from "react";
+import { Experience } from '@prisma/client';
+import axios from 'axios';
+import Router from 'next/router';
+import { useState } from 'react';
 
 export type ExperienceModalProps = {
   experience: Experience;
   forAdmin: boolean;
+  tnp: boolean;
 };
 
 export default function ExperienceModal({
   experience,
   forAdmin,
+  tnp,
 }: ExperienceModalProps) {
-  const [title, setTitle] = useState("");
-  const [role, setRole] = useState("");
-  const [company, setCompany] = useState("");
-  const [salary, setSalary] = useState(""); // package is reserved word in typescript strict mode
-  const [criteria, setCriteria] = useState("");
-  const [tags, setTags] = useState("");
-  const [link, setLink] = useState("");
-  const [body, setBody] = useState("");
+  const [title, setTitle] = useState('');
+  const [role, setRole] = useState('');
+  const [company, setCompany] = useState('');
+  const [salary, setSalary] = useState(''); // package is reserved word in typescript strict mode
+  const [criteria, setCriteria] = useState('');
+  const [tags, setTags] = useState('');
+  const [link, setLink] = useState('');
+  const [body, setBody] = useState('');
 
   async function handleUpdate(e: any) {
     e.preventDefault();
@@ -35,9 +37,9 @@ export default function ExperienceModal({
       body: body ? body : experience.body,
     };
     try {
-      const res = await axios.post("/api/shareview/updatePost", data);
+      const res = await axios.post('/api/shareview/updatePost', data);
       if (res.status == 200) {
-        Router.push("/tnp/shareview");
+        tnp ? Router.push('/tnp/shareview') : Router.push('/shareview');
       }
     } catch (error) {
       console.log(error);
@@ -50,9 +52,9 @@ export default function ExperienceModal({
       id: experience.id,
     };
     try {
-      const res = await axios.post("/api/shareview/deletePost", data);
+      const res = await axios.post('/api/shareview/deletePost', data);
       if (res.status == 200) {
-        Router.push("/tnp/shareview");
+        Router.push('/tnp/shareview');
       }
     } catch (error) {
       console.log(error);
