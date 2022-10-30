@@ -176,6 +176,7 @@ model Student {
   MedicalHistory MedicalHistory?
   Meetings       Meetings[]
   Experience     Experience[]
+  Events         Events[]
 }
 
 model Friends {
@@ -258,22 +259,54 @@ model Meetings {
 // Schema for ShareView [Note to Team Dashcord : Do not modify on without permission !!!]
 
 model Experience {
-  id        String   @id @default(cuid())
-  title     String
-  body      String   @db.LongText
-  role      String
-  company   String
-  salary    String
-  criteria  String
-  link      String
-  by        String
-  tags      String
-  likes     Int      @default(0)
+  id       String @id @default(cuid())
+  title    String
+  body     String @db.LongText
+  role     String
+  company  String
+  salary   String
+  criteria String
+  link     String
+  by       String
+  tags     String
+  likes    Int    @default(0)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   Student Student @relation(fields: [by], references: [email])
 }
+
+model PlacementMaterial {
+  id    String @id @default(cuid())
+  title String
+  links String
+  body  String @db.LongText
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// End of Shareview Schema
+
+// Schema for Dashcord-Events [Note to Team Dashcord : Do not modify on without permission !!!]
+
+model Events {
+  id      String  @id @default(cuid())
+  title   String
+  regLink String
+  date    String
+  status  Status
+  body    String  @db.LongText
+  winner  String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Student Student? @relation(fields: [winner], references: [email])
+}
+
+// End of Events Schema
 
 enum UserRole {
   HOD
@@ -309,6 +342,7 @@ enum AssesmentType {
 }
 
 enum Status {
+  Upcoming
   InProgress
   Done
 }

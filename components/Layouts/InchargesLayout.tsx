@@ -1,14 +1,14 @@
-import Header from "components/Header";
-import InchargesSidebar from "components/Sidebar/InchargesSidebar";
-import { useState } from "react";
+import Header from 'components/Header';
+import InchargesSidebar from 'components/Sidebar/InchargesSidebar';
+import { useState } from 'react';
 
 const InchargesLayout = ({ children }: any) => {
   const [show, setShow] = useState(false);
   return (
     <div className='flex flex-col lg:flex-row'>
       <section
-        className={`overflow-y-scroll fixed h-screen overflow-hidden lg:block ${
-          show ? "block z-50" : "hidden"
+        className={`overflow-y-scroll fixed h-screen overflow-x-hidden lg:block ${
+          show ? 'block z-50' : 'hidden'
         }`}>
         <InchargesSidebar />
       </section>
@@ -34,7 +34,7 @@ const InchargesLayout = ({ children }: any) => {
       </section>
       <section
         className={`flex flex-col flex-1 overflow-y-auto overflow-x-hidden p-8 lg:p-10 h-screen bg-slate-100 lg:ml-16 lg:justify-center lg:block ${
-          show ? "hidden" : "block"
+          show ? 'hidden' : 'block'
         }`}>
         <main>{children}</main>
       </section>

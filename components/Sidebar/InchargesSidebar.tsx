@@ -1,6 +1,6 @@
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
 const InchargesSidebar = () => {
   const router = useRouter();
@@ -30,7 +30,7 @@ const InchargesSidebar = () => {
       </div>
       <div
         className={`my-5 p-2 ${
-          isActive(`/incharge`) ? "bg-purple-500 rounded-md text-white" : ""
+          isActive(`/incharge`) ? 'bg-purple-500 rounded-md text-white' : ''
         }`}>
         <Link href={`/incharge`}>
           <a className='flex items-center'>
@@ -55,8 +55,8 @@ const InchargesSidebar = () => {
       <div
         className={`my-5 p-2 ${
           isActive(`/incharge/user`)
-            ? "bg-purple-500 rounded-md  text-white"
-            : ""
+            ? 'bg-purple-500 rounded-md  text-white'
+            : ''
         }`}>
         <Link href={`/incharge/user`}>
           <a className='flex items-center'>
@@ -80,7 +80,7 @@ const InchargesSidebar = () => {
 
       <div
         className={`my-5 p-2 ${
-          isActive(`/incharge/tgs`) ? "bg-purple-500 rounded-md text-white" : ""
+          isActive(`/incharge/tgs`) ? 'bg-purple-500 rounded-md text-white' : ''
         }`}>
         <Link href={`/incharge/tgs`}>
           <a className='flex items-center'>
@@ -105,8 +105,8 @@ const InchargesSidebar = () => {
       <div
         className={`my-5 p-2 ${
           isActive(`/incharge/students`)
-            ? "bg-purple-500 rounded-md text-white"
-            : ""
+            ? 'bg-purple-500 rounded-md text-white'
+            : ''
         }`}>
         <Link href={`/incharge/students`}>
           <a className='flex items-center'>
@@ -134,8 +134,8 @@ const InchargesSidebar = () => {
         className={`my-5 p-2
          ${
            isActive(`/incharge/create`)
-             ? "bg-purple-500 rounded-md text-white"
-             : ""
+             ? 'bg-purple-500 rounded-md text-white'
+             : ''
          }`}>
         <Link href={`/incharge/create`}>
           <a className='flex items-center'>
@@ -158,10 +158,35 @@ const InchargesSidebar = () => {
       </div>
 
       <div
+        className={`my-5 ${
+          isActive(`/incharge/events`)
+            ? 'bg-purple-500 rounded-md p-2 text-white'
+            : ''
+        }`}>
+        <Link href={`/incharge/events`}>
+          <a>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
+              className='w-7 h-7'>
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z'
+              />
+            </svg>
+          </a>
+        </Link>
+      </div>
+
+      <div
         className={`my-5 mt-auto p-2 ${
           isActive(`/incharge/settings`)
-            ? "bg-purple-500 rounded-md text-white"
-            : ""
+            ? 'bg-purple-500 rounded-md text-white'
+            : ''
         }`}>
         <Link href={`/hos/settings`}>
           <a className='flex items-center'>
@@ -190,7 +215,7 @@ const InchargesSidebar = () => {
 
       <div
         className={`my-5 p-2 ${
-          isActive("/logout") ? "bg-purple-500 rounded-md text-white" : ""
+          isActive('/logout') ? 'bg-purple-500 rounded-md text-white' : ''
         }`}>
         <Link
           href={
