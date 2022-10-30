@@ -17,7 +17,7 @@ export default async function CreateEvent(
             title: title,
             regLink: link,
             date: date,
-            staus: status,
+            status: status,
             body: body,
           },
         });
