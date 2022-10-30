@@ -11,13 +11,13 @@ import ConcludedEventsPage from 'components/Events/Concluded';
 
 export async function getServerSideProps(context: any) {
   const upcoming = await prisma.events.findMany({
-    where: { staus: Status.Upcoming },
+    where: { status: Status.Upcoming },
   });
   const ongoing = await prisma.events.findMany({
-    where: { staus: Status.InProgress },
+    where: { status: Status.InProgress },
   });
   const concluded = await prisma.events.findMany({
-    where: { staus: Status.Done },
+    where: { status: Status.Done },
     include: { Student: { select: { name: true, rollNo: true } } },
   });
   console.log(concluded);
