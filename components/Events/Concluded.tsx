@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import StatusColourBadge from 'components/StatusColorBadge';
-import { EventsComponentsProps } from './Upcoming';
+import { EventsComponentsProps } from 'lib/types';
 
 export default function ConcludedEventsPage({
   events,
