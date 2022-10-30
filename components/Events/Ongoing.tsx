@@ -1,7 +1,7 @@
 import { Events } from '@prisma/client';
 import Link from 'next/link';
 import StatusColourBadge from 'components/StatusColorBadge';
-import { EventsComponentsProps } from './Upcoming';
+import { EventsComponentsProps } from 'lib/types';
 
 export default function OngoingEventsPage({
   events,
