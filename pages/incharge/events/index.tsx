@@ -1,4 +1,5 @@
-import { Events, Status, UserRole } from '@prisma/client';
+import { Status, UserRole } from '@prisma/client';
+import { EventsPageProps } from 'lib/types';
 import InchargesLayout from 'components/Layouts/InchargesLayout';
 import { checkUserRoleAndRedirect } from 'lib/checks';
 import { useState } from 'react';
@@ -29,12 +30,6 @@ export async function getServerSideProps(context: any) {
     },
   });
 }
-
-export type EventsPageProps = {
-  upcoming: Events[];
-  ongoing: Events[];
-  concluded: Events[];
-};
 
 export default function EventsPage({
   upcoming,
