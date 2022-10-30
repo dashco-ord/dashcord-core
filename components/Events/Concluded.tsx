@@ -16,9 +16,9 @@ export default function ConcludedEventsPage({
             <h2 className='text-xl font-bold'>{event.title}</h2>
             <div
               className={`px-2 ml-auto border rounded-full p-1 text-sm ${StatusColourBadge(
-                event.staus
+                event.status
               )}`}>
-              {event.staus}
+              {event.status}
             </div>
           </div>
           <p className='text-sm my-2 italic text-slate-600'>
@@ -36,13 +36,15 @@ export default function ConcludedEventsPage({
               </a>
             </Link>
           </div>
-          <p className='mt-1 italic'>
-            Won by{' '}
-            {
-              //@ts-ignore
-              event?.Student.name
-            }
-          </p>
+          {event?.Student != null && (
+            <p className='mt-2 italic'>
+              Won by{' '}
+              {
+                //@ts-ignore
+                event?.Student.name
+              }
+            </p>
+          )}
         </div>
       ))}
     </div>
