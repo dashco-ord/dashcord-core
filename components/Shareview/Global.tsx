@@ -15,7 +15,9 @@ export default function GlobalFeed({ feed, forAdmins }: GlobalFeedProps) {
 
   return (
     <>
+
       {/* <div className='ml-auto mt-7'>
+
         <ul className='flex flex-wrap m-1'>
           <StringFilterItem
             name={"Latest"}
