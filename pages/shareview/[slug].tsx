@@ -3,6 +3,7 @@ import StudentsLayout from 'components/Layouts/StudentsLayout';
 import ExperienceDetails from 'components/Shareview/dataforms/ExperienceDetails';
 import ExperienceModal from 'components/Shareview/dataforms/ExperienceModal';
 import { checkUserRoleAndRedirect } from 'lib/checks';
+import { ModifiedExperienceType } from 'lib/interfaces';
 import { prisma } from 'lib/prisma';
 import Link from 'next/link';
 
@@ -10,6 +11,7 @@ export async function getServerSideProps(context: any) {
   const { params } = context;
   const experience = await prisma.experience.findUnique({
     where: { id: params.slug },
+    include: { Student: { select: { name: true } } },
   });
   return checkUserRoleAndRedirect(context, UserRole.STUDENT, {
     extra: { experience: JSON.parse(JSON.stringify(experience)) },
@@ -17,16 +19,15 @@ export async function getServerSideProps(context: any) {
 }
 
 type ExpPageProps = {
-  experience: Experience;
+  experience: ModifiedExperienceType;
   user: Student;
 };
 
 export default function ExperiencePage({ experience, user }: ExpPageProps) {
   return (
-    <>
+    <StudentsLayout>
       <div className='w-full min-h-full lg:min-w-[40rem] lg:min-h-[20rem] rounded-md shadow-none'>
         <div className=' flex flex-col bg-slate-100'>
-          {/* <h1 className='font-bold text-xl'>Shareview</h1> */}
           <Link href={'/shareview'}>
             <a className='my-5 ml-28 text-blue-800 font-semibold rounded flex items-center'>
               <svg
@@ -52,13 +53,7 @@ export default function ExperiencePage({ experience, user }: ExpPageProps) {
           forAdmin={experience.by === user.email ? true : false}
           tnp={false}
         />
-
-        {/* <ExperienceModal
-          experience={experience}
-          forAdmin={experience.by === user.email ? true : false}
-          tnp={false}
-        /> */}
       </div>
-    </>
+    </StudentsLayout>
   );
 }

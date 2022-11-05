@@ -1,8 +1,9 @@
-import { Experience, UserRole } from "@prisma/client";
-import TnpLayout from "components/Layouts/TnpLayout";
-import { checkUserRoleAndRedirect } from "lib/checks";
-import { prisma } from "lib/prisma";
-import GlobalFeed from "components/Shareview/Global";
+import { UserRole } from '@prisma/client';
+import TnpLayout from 'components/Layouts/TnpLayout';
+import { checkUserRoleAndRedirect } from 'lib/checks';
+import { prisma } from 'lib/prisma';
+import GlobalFeed from 'components/Shareview/Global';
+import { ModifiedExperienceType } from 'lib/interfaces';
 
 export async function getServerSideProps(context: any) {
   const experiences = await prisma.experience.findMany({
@@ -14,7 +15,7 @@ export async function getServerSideProps(context: any) {
 }
 
 type ShareviewAdminPageProps = {
-  experiences: Experience[];
+  experiences: ModifiedExperienceType[];
 };
 
 export default function ShareviewAdminPage({

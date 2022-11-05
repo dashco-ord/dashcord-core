@@ -2,6 +2,7 @@ import { Experience, Student, UserRole } from '@prisma/client';
 import StudentsLayout from 'components/Layouts/StudentsLayout';
 import ExperienceModal from 'components/Shareview/dataforms/ExperienceModal';
 import { checkUserRoleAndRedirect } from 'lib/checks';
+import { ModifiedExperienceType } from 'lib/interfaces';
 import { prisma } from 'lib/prisma';
 import Link from 'next/link';
 
@@ -9,18 +10,23 @@ export async function getServerSideProps(context: any) {
   const { params } = context;
   const experience = await prisma.experience.findUnique({
     where: { id: params.slug },
+    include: { Student: { select: { name: true } } },
   });
+
   return checkUserRoleAndRedirect(context, UserRole.STUDENT, {
     extra: { experience: JSON.parse(JSON.stringify(experience)) },
   });
 }
 
 type ExpPageProps = {
-  experience: Experience;
+  experience: ModifiedExperienceType;
   user: Student;
 };
 
-export default function UpdateExperiencePage({ experience, user }: ExpPageProps) {
+export default function UpdateExperiencePage({
+  experience,
+  user,
+}: ExpPageProps) {
   return (
     <StudentsLayout>
       <div className='w-full min-h-full lg:min-w-[40rem] lg:min-h-[20rem] rounded-md shadow-none p-4'>
