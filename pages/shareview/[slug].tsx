@@ -25,7 +25,7 @@ type ExpPageProps = {
 
 export default function ExperiencePage({ experience, user }: ExpPageProps) {
   return (
-    <StudentsLayout>
+    <>
       <div className='w-full min-h-full lg:min-w-[40rem] lg:min-h-[20rem] rounded-md shadow-none'>
         <div className=' flex flex-col bg-slate-100'>
           <Link href={'/shareview'}>
@@ -54,6 +54,6 @@ export default function ExperiencePage({ experience, user }: ExpPageProps) {
           tnp={false}
         />
       </div>
-    </StudentsLayout>
+    </>
   );
 }
