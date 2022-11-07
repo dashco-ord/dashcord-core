@@ -43,7 +43,7 @@ export default function ExperienceDetails({
   }
 
   return (
-    <div className='w-4/3 h-screen bg-slate-100' key={experience.id}>
+    <div className='w-4/3 bg-slate-100' key={experience.id}>
       <div className='flex justify-center gap-10'>
         <div className='w-60 shadow-lg rounded h-fit p-4 py-8 bg-white'>
           <div className='flex flex-col gap-1'>
