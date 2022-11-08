@@ -177,6 +177,7 @@ model Student {
   Meetings       Meetings[]
   Experience     Experience[]
   Events         Events[]
+  Comments       Comments[]
 }
 
 model Friends {
@@ -274,7 +275,8 @@ model Experience {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Student Student @relation(fields: [by], references: [email])
+  Student  Student    @relation(fields: [by], references: [email])
+  Comments Comments[]
 }
 
 model PlacementMaterial {
@@ -285,6 +287,18 @@ model PlacementMaterial {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Comments {
+  id           String  @id @default(cuid())
+  body         String  @db.LongText
+  by           String
+  experienceId String?
+
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  Student    Student     @relation(fields: [by], references: [email])
+  Experience Experience? @relation(fields: [experienceId], references: [id])
 }
 
 // End of Shareview Schema
