@@ -59,8 +59,8 @@ export default function ExperiencePage({
 
   return (
     <>
-      <div className='w-full min-h-full lg:min-w-[40rem] lg:min-h-[20rem] rounded-md shadow-none'>
-        <div className=' flex flex-col bg-slate-100'>
+      <div className='w-full min-h-full lg:min-w-[40rem] lg:min-h-screen rounded-md shadow-none bg-slate-100'>
+        <div className=' flex flex-col'>
           <Link href={'/shareview'}>
             <a className='my-5 ml-28 text-blue-800 font-semibold rounded flex items-center'>
               <svg
@@ -85,28 +85,39 @@ export default function ExperiencePage({
           experience={experience}
           forAdmin={experience.by === user.email ? true : false}
           tnp={false}
+          user={user}
+          comments={comments}
         />
-        <div className='w-full flex flex-col items-center mt-4'>
-          {/*comments form starts*/}
-          <div>
-            <h3>Comments : </h3>
-            <form onSubmit={handleComments}>
-              <textarea
-                className='shadow'
-                onChange={(e) => setComment(e.target.value)}
-              />
-              <br />
-              <input
-                type='submit'
-                value='comment'
-                className='bg-purple-700 hover:bg-purple-900 text-white rounded p-1'
-              />
-            </form>
-          </div>
-          {/*comments form ends*/}
+        {/*comments form starts*/}
+        {/* <div className='w-full flex flex-col items-center mt-4'>
+          <fieldset className="flex flex-col gap-2 items-start rounded mt-2 p-5 bg-white shadow-lg w-fit">
+              <h1 className="text-sm font-semibold bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full px-2 w-fit">Comments</h1>
+              <div className="flex flex-col items-start rounded mt-2 w-full">
+                
+                <form onSubmit={handleComments}>
+                  <textarea
+                      className='p-2 w-full rounded bg-white text-sm md:text-base border-2 border-gray-500 focus:outline-none focus:border-blue-300 transition ease-in-out delay-75 duration-75'
+                      placeholder='Comment your thoughts'
+                      required
+                  />
+                  <button type='submit' className='text-white text-sm bg-purple-500 border py-0.5 px-3 my-2 rounded'>Comment</button>
+                </form>
+              </div>
+              <div className="flex flex-col ml-1">
+                <div className="flex flex-col my-0.5 gap-2">
+                  <p className="text-sm font-semibold">👤Pranav Purkar <span className="text-blue-500">))</span></p>
+                  <em className="text-sm mt-0.5">Nice post, thank you for posting this</em>
+                </div>
+                <div className="flex flex-col my-0.5 gap-2">
+                  <p className="text-sm font-semibold">👤Aman Ilatkar <span className="text-blue-500">))</span></p>
+                  <em className="text-sm mt-0.5">Nice post, thank you for posting this</em>
+                </div>
+              </div>
+          </fieldset>
 
-          <div>{JSON.stringify(comments)}</div>
-        </div>
+          <div>{comments.body}</div>
+        </div> */}
+          {/*comments form ends*/}
       </div>
     </>
   );

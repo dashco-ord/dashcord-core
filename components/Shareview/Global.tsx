@@ -15,7 +15,7 @@ export default function GlobalFeed({ feed, forAdmins }: GlobalFeedProps) {
 
   return (
     <>
-      <div className='ml-auto mt-7'>
+      {/* <div className='ml-auto mt-7'>
         <ul className='flex flex-wrap m-1'>
           <StringFilterItem
             name={"Latest"}
@@ -66,7 +66,7 @@ export default function GlobalFeed({ feed, forAdmins }: GlobalFeedProps) {
             selected={selectedFilter == "criteria_dec"}
           />
         </ul>
-      </div>
+      </div> */}
       <div className='mt-7'>
         {experiences.map((experience) => (
           // <div
@@ -141,24 +141,37 @@ export default function GlobalFeed({ feed, forAdmins }: GlobalFeedProps) {
           // </div>
 
           <div key={experience.id} className="flex flex-col gap-1 shadow-md break-words min-h-fit w-full mb-3 rounded-lg bg-white">
-                <p className="text-md mb-1 font-semibold p-2 py-1 bg-gray-200 rounded-t-lg">👤 {experience?.Student.name}</p>
-                <div className="flex items-center justify-between">
+                <p className="text-md mb-1 font-semibold p-2 py-1.5 bg-gray-200 rounded-t-lg flex items-center">                  
+                  <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                    viewBox="0 0 60 60" className="w-5 h-5 mx-1 pl-1">
+                    <path d="M48.014,42.889l-9.553-4.776C37.56,37.662,37,36.756,37,35.748v-3.381c0.229-0.28,0.47-0.599,0.719-0.951
+                      c1.239-1.75,2.232-3.698,2.954-5.799C42.084,24.97,43,23.575,43,22v-4c0-0.963-0.36-1.896-1-2.625v-5.319
+                      c0.056-0.55,0.276-3.824-2.092-6.525C37.854,1.188,34.521,0,30,0s-7.854,1.188-9.908,3.53C17.724,6.231,17.944,9.506,18,10.056
+                      v5.319c-0.64,0.729-1,1.662-1,2.625v4c0,1.217,0.553,2.352,1.497,3.109c0.916,3.627,2.833,6.36,3.503,7.237v3.309
+                      c0,0.968-0.528,1.856-1.377,2.32l-8.921,4.866C8.801,44.424,7,47.458,7,50.762V54c0,4.746,15.045,6,23,6s23-1.254,23-6v-3.043
+                      C53,47.519,51.089,44.427,48.014,42.889z"/>
+                    <g>
+                    </g>
+                  </svg>
+                  {experience?.Student.name}
+                </p>
+                <div className="flex items-center justify-between ml-4">
                   <Link
                     href={`${
                       forAdmins
                         ? `/tnp/shareview/${experience.id}`
                         : `/shareview/${experience.id}`
                     }`}>
-                    <a className="text-xl font-semibold px-2"> {experience.title} </a>      
+                    <a className="text-xl font-semibold"> {experience.title} </a>      
                   </Link>
                   <p className="text-justify text-white rounded-lg mx-4 px-2 py-0.5 text-sm bg-gray-500 w-fit">{moment(experience.createdAt).format("MMM Do YYYY")}</p>
                 </div>
-                <p className='ml-2 mb-1 text-sm'>
+                <p className='ml-2 mb-1 text-sm pl-2'>
                   Role : {experience.role} | Company : {experience.company} |
                   Package : {experience.salary} LPA | Criteria :{" "}
                   {experience.criteria}%
                 </p>
-                <p className="text-justify text-white text-xs flex ml-2">
+                <p className="text-justify text-white text-xs flex ml-4">
                   {experience.tags.split(", ").map(tag =>(
                     <p className="bg-purple-500 w-fit rounded-lg px-2 py-0.5 mr-1">{tag}</p>
                   ))}
@@ -168,7 +181,7 @@ export default function GlobalFeed({ feed, forAdmins }: GlobalFeedProps) {
                   <button className="text-blue-500 hover:text-purple-500 text-left ml-2">comment 🗨️</button>
                 </div> */}
 
-              <div className='flex items-center ml-2 my-1'>
+              <div className='flex items-center ml-4 my-1 mb-3'>
                 <p className='flex items-center'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'

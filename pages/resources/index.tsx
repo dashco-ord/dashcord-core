@@ -32,9 +32,16 @@ export default function ResourcesPage({ materials }: ResourcesPageProps) {
                   <a>{material.title}</a>
                 </Link>
               </h1>
+              {
+                material.links.split(", ").map((link) =>
               <p className='lg:ml-auto text-sm text-slate-800 mb-3'>
-                {moment(material.createdAt).format('MMMM Do YYYY')}
+                {link}
               </p>
+                )
+              }
+              {/* <p className='lg:ml-auto text-sm text-slate-800 mb-3'>
+                {moment(material.createdAt).format('MMMM Do YYYY')}
+              </p> */}
             </div>
           ))}
         </div>
