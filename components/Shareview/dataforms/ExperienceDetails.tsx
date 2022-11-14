@@ -17,15 +17,6 @@ export default function ExperienceDetails({
   forAdmin,
   tnp,
 }: ExperienceModalProps) {
-  const [title, setTitle] = useState('');
-  const [role, setRole] = useState('');
-  const [company, setCompany] = useState('');
-  const [salary, setSalary] = useState(''); // package is reserved word in typescript strict mode
-  const [criteria, setCriteria] = useState('');
-  const [tags, setTags] = useState('');
-  const [link, setLink] = useState('');
-  const [body, setBody] = useState('');
-  const [follow, setFollow] = useState(false);
 
   async function handleDelete(e: any) {
     e.preventDefault();
@@ -45,7 +36,7 @@ export default function ExperienceDetails({
   return (
     <div className='w-4/3 bg-slate-100' key={experience.id}>
       <div className='flex justify-center gap-10'>
-        <div className='w-60 shadow-lg rounded h-fit p-4 py-8 bg-white'>
+        {/* <div className='w-60 shadow-lg rounded h-fit p-4 py-8 bg-white'>
           <div className='flex flex-col gap-1'>
             <p className='text-gray-700 text-lg font-semibold'>
               👤{experience?.Student.name}
@@ -61,11 +52,11 @@ export default function ExperienceDetails({
               </button>
             </form>
           </div>
-        </div>
+        </div> */}
 
         <div className='w-2/3'>
-          <div className='shadow-lg rounded bg-white'>
-            <div className='flex flex-col gap-1 p-7 px-12'>
+          <div className='shadow rounded bg-white'>
+            <div className='flex flex-col gap-1 p-4'>
               <div className='flex items-center justify-between'>
                 <em className='font-bold text-3xl text-gray-800'>
                   {experience.title}
