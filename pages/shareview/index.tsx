@@ -37,15 +37,6 @@ export default function ShareviewHome({ experiences }: ShareviewHomeProps) {
             Global Feed
           </p>
           <p
-            className={`border-r-2 pr-1 p-1 cursor-pointer ${
-              view === 'personal'
-                ? 'bg-purple-500 text-white'
-                : 'text-slate-600'
-            }`}
-            onClick={() => setView('personal')}>
-            Personal Feed
-          </p>
-          <p
             className={` pr-1 p-1 cursor-pointer ${
               view === 'post' ? 'bg-purple-500 text-white' : 'text-slate-600'
             }`}
