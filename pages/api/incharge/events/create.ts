@@ -2,6 +2,7 @@ import { UserRole } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 import { prisma } from 'lib/prisma';
+import { type } from 'os';
 
 export default async function CreateEvent(
   req: NextApiRequest,
@@ -10,7 +11,7 @@ export default async function CreateEvent(
   const session = await getSession({ req });
   if (session?.role === UserRole.INCHARGE) {
     if (req.method == 'POST') {
-      const { title, link, date, status, body } = await req.body;
+      const { title, link, date, status, body, type } = await req.body;
       try {
         await prisma.events.create({
           data: {
@@ -18,6 +19,7 @@ export default async function CreateEvent(
             regLink: link,
             date: date,
             status: status,
+            type: type,
             body: body,
           },
         });

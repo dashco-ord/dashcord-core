@@ -1,13 +1,17 @@
 import Link from 'next/link';
 import StatusColourBadge from 'components/StatusColorBadge';
 import { EventsComponentsProps } from 'lib/types';
+import { useEffect, useState } from 'react';
+import StringFilterItem from 'components/FilterItems/StringFilterItem';
+import axios from 'axios';
+import { ModifiedEventType } from 'lib/interfaces';
 
 export default function UpcomingEventsPage({
   events,
   forAdmin,
 }: EventsComponentsProps) {
   return (
-    <div className='mt-4 flex flex-col justify-center'>
+    <div className='mt-2 flex flex-col justify-center'>
       {events.map((event) => (
         <div
           key={event.id}

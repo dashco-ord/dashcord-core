@@ -11,6 +11,8 @@ import OngoingEventsPage from 'components/Events/Ongoing';
 import ConcludedEventsPage from 'components/Events/Concluded';
 import Link from 'next/link';
 import StatusColourBadge from 'components/StatusColorBadge';
+import StringFilterItem from 'components/FilterItems/StringFilterItem';
+import { ModifiedEventType } from 'lib/interfaces';
 
 export async function getServerSideProps(context: any) {
   const upcoming = await prisma.events.findMany({
@@ -47,6 +49,8 @@ export default function EventsPage({
 
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [searchResults, setSearchresults] = useState<Events[]>();
+  const [selectedFilter, setSelectedFilter] = useState('all');
+  const [filterResults, setFilterResults] = useState<ModifiedEventType[]>();
 
   const router = useRouter();
 
@@ -83,6 +87,19 @@ export default function EventsPage({
       handleSearch();
     }
   }, [searchQuery]);
+
+  async function handleFilter() {
+    const res = await axios.post('/api/events/filter', {
+      data: selectedFilter,
+    });
+    if (res.status === 200) {
+      setFilterResults(JSON.parse(JSON.stringify(res.data)));
+    }
+  }
+
+  useEffect(() => {
+    handleFilter();
+  }, [selectedFilter]);
 
   return (
     <InchargesLayout>
@@ -163,14 +180,65 @@ export default function EventsPage({
             </div>
           </div>
 
+          <div className='mt-3 list-none flex'>
+            <StringFilterItem
+              name='All'
+              label='all'
+              onSelect={setSelectedFilter}
+              selected={selectedFilter == 'all'}
+            />
+            <StringFilterItem
+              name='Sports'
+              label='sports'
+              onSelect={setSelectedFilter}
+              selected={selectedFilter == 'sports'}
+            />
+            <StringFilterItem
+              name='Webinars'
+              label='webinars'
+              onSelect={setSelectedFilter}
+              selected={selectedFilter == 'webinars'}
+            />
+            <StringFilterItem
+              name='Festivals'
+              label='festivals'
+              onSelect={setSelectedFilter}
+              selected={selectedFilter == 'festivals'}
+            />
+            <StringFilterItem
+              name='Forum'
+              label='forum'
+              onSelect={setSelectedFilter}
+              selected={selectedFilter == 'forum'}
+            />
+            <StringFilterItem
+              name='IEEE'
+              label='ieee'
+              onSelect={setSelectedFilter}
+              selected={selectedFilter == 'ieee'}
+            />
+          </div>
+
           {view === 'upcoming' ? (
-            <UpcomingEventsPage events={upcoming} forAdmin={true} />
+            <UpcomingEventsPage
+              //@ts-ignore
+              events={filterResults ? filterResults : upcoming}
+              forAdmin={true}
+            />
           ) : null}
           {view === 'ongoing' ? (
-            <OngoingEventsPage events={ongoing} forAdmin={true} />
+            <OngoingEventsPage
+              //@ts-ignore
+              events={filterResults ? filterResults : ongoing}
+              forAdmin={true}
+            />
           ) : null}
           {view === 'concluded' ? (
-            <ConcludedEventsPage events={concluded} forAdmin={true} />
+            <ConcludedEventsPage
+              //@ts-ignore
+              events={filterResults ? filterResults : concluded}
+              forAdmin={true}
+            />
           ) : null}
 
           {view === 'create' ? (
