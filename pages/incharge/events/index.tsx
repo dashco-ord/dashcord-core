@@ -1,14 +1,16 @@
-import { Status, UserRole } from '@prisma/client';
+import { Events, Status, UserRole } from '@prisma/client';
 import { EventsPageProps } from 'lib/types';
 import InchargesLayout from 'components/Layouts/InchargesLayout';
 import { checkUserRoleAndRedirect } from 'lib/checks';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { prisma } from 'lib/prisma';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import UpcomingEventsPage from 'components/Events/Upcoming';
 import OngoingEventsPage from 'components/Events/Ongoing';
 import ConcludedEventsPage from 'components/Events/Concluded';
+import Link from 'next/link';
+import StatusColourBadge from 'components/StatusColorBadge';
 
 export async function getServerSideProps(context: any) {
   const upcoming = await prisma.events.findMany({
@@ -21,7 +23,6 @@ export async function getServerSideProps(context: any) {
     where: { status: Status.Done },
     include: { Student: { select: { name: true, rollNo: true } } },
   });
-  console.log(concluded);
   return checkUserRoleAndRedirect(context, UserRole.INCHARGE, {
     extra: {
       upcoming: JSON.parse(JSON.stringify(upcoming)),
@@ -42,6 +43,9 @@ export default function EventsPage({
   const [date, setDate] = useState<string>();
   const [status, setStatus] = useState<string>();
   const [body, setBody] = useState<string>();
+
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchResults, setSearchresults] = useState<Events[]>();
 
   const router = useRouter();
 
@@ -64,6 +68,19 @@ export default function EventsPage({
       alert(error);
     }
   };
+
+  async function handleSearch() {
+    const res = await axios.post('/api/searchEvents', { data: searchQuery });
+    if (res.status === 200) {
+      setSearchresults(res.data);
+    }
+  }
+
+  useEffect(() => {
+    if (searchQuery.length >= 3) {
+      handleSearch();
+    }
+  }, [searchQuery]);
 
   return (
     <InchargesLayout>
@@ -118,7 +135,29 @@ export default function EventsPage({
                 type='search'
                 className='rounded border border-slate-400 bg-slate-100 px-2'
                 placeholder='Search event by name'
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
+              {searchResults && (
+                <div className='bg-white z-50 border border-slate-400 fixed w-60 rounded mt-1 p-2'>
+                  {searchResults.map((event) => (
+                    <div
+                      key={event.id}
+                      className='flex border-b border-t py-2 border-slate-400'>
+                      <Link href={`/events/${event.id}`}>
+                        <a className='text-md font-semibold hover:text-purple-600'>
+                          {event.title}
+                        </a>
+                      </Link>
+                      <div
+                        className={`ml-auto border rounded-full p-1 text-[0.7rem] ${StatusColourBadge(
+                          event.status
+                        )}`}>
+                        {event.status}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
