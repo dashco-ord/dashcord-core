@@ -61,7 +61,7 @@ export default function EventsPage({
   const [searchResults, setSearchresults] = useState<Events[]>();
 
   async function handleSearch() {
-    const res = await axios.post('/api/searchEvents', { data: searchQuery });
+    const res = await axios.post('/api/events/search', { data: searchQuery });
     if (res.status === 200) {
       setSearchresults(res.data);
     }

@@ -42,6 +42,7 @@ export default function EventsPage({
   const [link, setLink] = useState<string>();
   const [date, setDate] = useState<string>();
   const [status, setStatus] = useState<string>();
+  const [type, setType] = useState<string>();
   const [body, setBody] = useState<string>();
 
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -56,6 +57,7 @@ export default function EventsPage({
       link,
       date,
       status,
+      type,
       body,
     };
 
@@ -70,7 +72,7 @@ export default function EventsPage({
   };
 
   async function handleSearch() {
-    const res = await axios.post('/api/searchEvents', { data: searchQuery });
+    const res = await axios.post('/api/events/search', { data: searchQuery });
     if (res.status === 200) {
       setSearchresults(res.data);
     }
@@ -175,9 +177,9 @@ export default function EventsPage({
             <div className='mt-4'>
               <h1 className='font-bold text-2xl'>Create Event</h1>
               <form
-                className='w-fit h-fit bg-white p-4 rounded mt-4'
+                className='w-full h-fit bg-white p-4 rounded mt-4'
                 onSubmit={handleCreate}>
-                <div className='flex'>
+                <div className='flex flex-wrap'>
                   <div className='flex flex-col pb-6 mr-8'>
                     <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
                       Event Title :
@@ -228,6 +230,22 @@ export default function EventsPage({
                       <option value={Status.Upcoming}>Upcoming</option>
                       <option value={Status.InProgress}>Ongoing</option>
                       <option value={Status.Done}>Concluded</option>
+                    </select>
+                  </div>
+
+                  <div className='flex flex-col pb-6 mr-8'>
+                    <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
+                      Event Type :
+                    </label>
+                    <select
+                      className='p-2 pl-0 rounded-sm bg-white text-xl md:text-lg sm:text-sm border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
+                      onChange={(e) => setType(e.target.value)}>
+                      <option>Select Status</option>
+                      <option value='sports'>sports</option>
+                      <option value='festivals'>festivals</option>
+                      <option value='webinars'>webinars</option>
+                      <option value='forum'>forum</option>
+                      <option value='ieee'>ieee</option>
                     </select>
                   </div>
                 </div>
