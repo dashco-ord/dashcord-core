@@ -67,141 +67,156 @@ export default function EventsPage({
 
   return (
     <InchargesLayout>
-      <div className='w-full min-h-full lg:min-w-[40rem] lg:min-h-[20rem] rounded-md shadow-none p-4'>
-        <h1 className='font-bold text-2xl'>Events</h1>
-        <span className='text-sm mt-4 italic text-slate-400'>
-          List of all upcoming and concluded events
-        </span>
+      <div className='w-full h-screen flex justify-center'>
+        <div className='w-[40rem] h-[20rem]'>
+          <h1 className='font-bold text-2xl'>Events</h1>
+          <span className='text-sm mt-4 italic text-slate-400'>
+            List of all upcoming and concluded events
+          </span>
 
-        <div className='mt-4 border border-slate-400 flex rounded w-fit text-sm lg:text-md'>
-          <p
-            className={`border-r-2 pr-1 p-1 cursor-pointer ${
-              view === 'upcoming'
-                ? 'bg-purple-500 text-white'
-                : 'text-slate-600'
-            }`}
-            onClick={() => setView('upcoming')}>
-            Upcoming
-          </p>
-          <p
-            className={`border-r-2 pr-1 p-1 cursor-pointer ${
-              view === 'ongoing' ? 'bg-purple-500 text-white' : 'text-slate-600'
-            }`}
-            onClick={() => setView('ongoing')}>
-            Ongoing
-          </p>
-          <p
-            className={`border-r-2 pr-1 p-1 cursor-pointer ${
-              view === 'concluded'
-                ? 'bg-purple-500 text-white'
-                : 'text-slate-600'
-            }`}
-            onClick={() => setView('concluded')}>
-            Concluded
-          </p>
-          <p
-            className={` pr-1 p-1 cursor-pointer ${
-              view === 'create' ? 'bg-purple-500 text-white' : 'text-slate-600'
-            }`}
-            onClick={() => setView('create')}>
-            Create
-          </p>
-        </div>
-
-        {view === 'upcoming' ? (
-          <UpcomingEventsPage events={upcoming} forAdmin={true} />
-        ) : null}
-        {view === 'ongoing' ? (
-          <OngoingEventsPage events={ongoing} forAdmin={true} />
-        ) : null}
-        {view === 'concluded' ? (
-          <ConcludedEventsPage events={concluded} forAdmin={true} />
-        ) : null}
-
-        {view === 'create' ? (
-          <div className='mt-4'>
-            <h1 className='font-bold text-2xl'>Create Event</h1>
-            <form
-              className='w-fit h-fit bg-white p-4 rounded mt-4'
-              onSubmit={handleCreate}>
-              <div className='flex'>
-                <div className='flex flex-col pb-6 mr-8'>
-                  <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
-                    Event Title :
-                  </label>
-                  <input
-                    className='w-fit p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
-                    type='text'
-                    placeholder='Enter title of the event'
-                    required
-                    onChange={(e) => setTitle(e.target.value)}
-                  />
-                </div>
-
-                <div className='flex flex-col pb-6 mr-8'>
-                  <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
-                    Regestration Link :
-                  </label>
-                  <input
-                    className='w-fit p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
-                    type='text'
-                    placeholder='Enter regestration link for this event'
-                    required
-                    onChange={(e) => setLink(e.target.value)}
-                  />
-                </div>
-
-                <div className='flex flex-col pb-6 mr-8'>
-                  <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
-                    Event Date :
-                  </label>
-                  <input
-                    className='w-fit p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
-                    type='date'
-                    placeholder='Enter regestration link for this event'
-                    required
-                    onChange={(e) => setDate(e.target.value)}
-                  />
-                </div>
-
-                <div className='flex flex-col pb-6 mr-8'>
-                  <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
-                    Event Status :
-                  </label>
-                  <select
-                    className='p-2 pl-0 rounded-sm bg-white text-xl md:text-lg sm:text-sm border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
-                    onChange={(e) => setStatus(e.target.value)}>
-                    <option>Select Status</option>
-                    <option value={Status.Upcoming}>Upcoming</option>
-                    <option value={Status.InProgress}>Ongoing</option>
-                    <option value={Status.Done}>Concluded</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className='flex flex-col pb-6 mr-8'>
-                <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
-                  Event Description :
-                </label>
-                <textarea
-                  className='w-full p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
-                  placeholder='Enter regestration link for this event'
-                  required
-                  onChange={(e) => setBody(e.target.value)}
-                />
-              </div>
-
-              <div className='flex flex-col pb-6 mr-8'>
-                <input
-                  className='mt-2 p-2 w-fit flex items-center text-white text-md font-semibold bg-blue-500 hover:bg-blue-900 rounded'
-                  type='submit'
-                  value='+ Create Event'
-                  required
-                />
-              </div>
-            </form>
+          <div className='flex items-center'>
+            <div className='mt-4 border border-slate-400 flex rounded w-fit text-sm lg:text-md'>
+              <p
+                className={`border-r-2 pr-1 p-1 cursor-pointer ${
+                  view === 'upcoming'
+                    ? 'bg-purple-500 text-white'
+                    : 'text-slate-600'
+                }`}
+                onClick={() => setView('upcoming')}>
+                Upcoming
+              </p>
+              <p
+                className={`border-r-2 pr-1 p-1 cursor-pointer ${
+                  view === 'ongoing'
+                    ? 'bg-purple-500 text-white'
+                    : 'text-slate-600'
+                }`}
+                onClick={() => setView('ongoing')}>
+                Ongoing
+              </p>
+              <p
+                className={`border-r-2 pr-1 p-1 cursor-pointer ${
+                  view === 'concluded'
+                    ? 'bg-purple-500 text-white'
+                    : 'text-slate-600'
+                }`}
+                onClick={() => setView('concluded')}>
+                Concluded
+              </p>
+              <p
+                className={` pr-1 p-1 cursor-pointer ${
+                  view === 'create'
+                    ? 'bg-purple-500 text-white'
+                    : 'text-slate-600'
+                }`}
+                onClick={() => setView('create')}>
+                Create
+              </p>
+            </div>
+            <div className='mt-4 ml-auto'>
+              <input
+                type='search'
+                className='rounded border border-slate-400 bg-slate-100 px-2'
+                placeholder='Search event by name'
+              />
+            </div>
           </div>
-        ) : null}
+
+          {view === 'upcoming' ? (
+            <UpcomingEventsPage events={upcoming} forAdmin={true} />
+          ) : null}
+          {view === 'ongoing' ? (
+            <OngoingEventsPage events={ongoing} forAdmin={true} />
+          ) : null}
+          {view === 'concluded' ? (
+            <ConcludedEventsPage events={concluded} forAdmin={true} />
+          ) : null}
+
+          {view === 'create' ? (
+            <div className='mt-4'>
+              <h1 className='font-bold text-2xl'>Create Event</h1>
+              <form
+                className='w-fit h-fit bg-white p-4 rounded mt-4'
+                onSubmit={handleCreate}>
+                <div className='flex'>
+                  <div className='flex flex-col pb-6 mr-8'>
+                    <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
+                      Event Title :
+                    </label>
+                    <input
+                      className='w-fit p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
+                      type='text'
+                      placeholder='Enter title of the event'
+                      required
+                      onChange={(e) => setTitle(e.target.value)}
+                    />
+                  </div>
+
+                  <div className='flex flex-col pb-6 mr-8'>
+                    <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
+                      Regestration Link :
+                    </label>
+                    <input
+                      className='w-fit p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
+                      type='text'
+                      placeholder='Enter regestration link for this event'
+                      required
+                      onChange={(e) => setLink(e.target.value)}
+                    />
+                  </div>
+
+                  <div className='flex flex-col pb-6 mr-8'>
+                    <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
+                      Event Date :
+                    </label>
+                    <input
+                      className='w-fit p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
+                      type='date'
+                      placeholder='Enter regestration link for this event'
+                      required
+                      onChange={(e) => setDate(e.target.value)}
+                    />
+                  </div>
+
+                  <div className='flex flex-col pb-6 mr-8'>
+                    <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
+                      Event Status :
+                    </label>
+                    <select
+                      className='p-2 pl-0 rounded-sm bg-white text-xl md:text-lg sm:text-sm border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
+                      onChange={(e) => setStatus(e.target.value)}>
+                      <option>Select Status</option>
+                      <option value={Status.Upcoming}>Upcoming</option>
+                      <option value={Status.InProgress}>Ongoing</option>
+                      <option value={Status.Done}>Concluded</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className='flex flex-col pb-6 mr-8'>
+                  <label className='text-2xl font-semibold mr-5 pb-2 md:text-lg'>
+                    Event Description :
+                  </label>
+                  <textarea
+                    className='w-full p-2 pl-0 rounded-sm bg-white text-xl md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-blue-500 transition ease-in-out delay-75 duration-75'
+                    placeholder='Enter regestration link for this event'
+                    required
+                    onChange={(e) => setBody(e.target.value)}
+                  />
+                </div>
+
+                <div className='flex flex-col pb-6 mr-8'>
+                  <input
+                    className='mt-2 p-2 w-fit flex items-center text-white text-md font-semibold bg-blue-500 hover:bg-blue-900 rounded'
+                    type='submit'
+                    value='+ Create Event'
+                    required
+                  />
+                </div>
+              </form>
+            </div>
+          ) : null}
+        </div>
       </div>
     </InchargesLayout>
   );
