@@ -8,7 +8,7 @@ export default function OngoingEventsPage({
   forAdmin,
 }: EventsComponentsProps) {
   return (
-    <div className='mt-4 flex flex-wrap'>
+    <div className='mt-4 flex flex-col justify-center'>
       {events.map((event) => (
         <div
           key={event.id}
