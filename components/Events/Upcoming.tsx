@@ -11,9 +11,9 @@ export default function UpcomingEventsPage({
       {events.map((event) => (
         <div
           key={event.id}
-          className='w-fit min-w-[16rem] h-fit border border-black p-2 rounded m-3 bg-white'>
+          className='min-w-[30rem] h-fit border border-black p-2 rounded mt-2 bg-white'>
           <div className='flex items-center'>
-            <h2 className='text-xl font-bold'>{event.title}</h2>
+            <h2 className='text-2xl font-bold'>{event.title}</h2>
             <div
               className={`px-2 ml-auto border rounded-full p-1 text-sm ${StatusColourBadge(
                 event.status
@@ -21,7 +21,7 @@ export default function UpcomingEventsPage({
               {event.status}
             </div>
           </div>
-          <p className='text-sm my-2 italic text-slate-600'>
+          <p className='text-md my-2 italic text-slate-600'>
             Date : {event.date}
           </p>
           <div className='flex flex-wrap'>
@@ -31,8 +31,8 @@ export default function UpcomingEventsPage({
                   ? `/incharge/events/${event.id}`
                   : `/events/${event.id}`
               }>
-              <a className='border rounded p-1 text-sm w-fit border-dashed text-slate-500 border-slate-400'>
-                Details
+              <a className='p-1 text-sm underline text-slate-500 border-slate-400 mt-auto'>
+                Read more
               </a>
             </Link>
 
@@ -40,7 +40,7 @@ export default function UpcomingEventsPage({
               href={event.regLink}
               target='_blank'
               rel='noreferrer'
-              className='ml-auto rounded p-1 text-sm w-fit bg-blue-500 text-white hover:bg-blue-700'>
+              className='ml-auto rounded p-2 text-md w-fit bg-blue-500 text-white hover:bg-blue-700'>
               Register
             </a>
           </div>
