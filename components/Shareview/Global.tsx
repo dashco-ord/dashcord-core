@@ -16,7 +16,7 @@ export default function GlobalFeed({ feed, forAdmins }: GlobalFeedProps) {
 
   return (
     <>
-      <div className='mt-7'>
+      <div className='mt-4'>
         {experiences.map((experience) => (
           <div
             key={experience.id}
