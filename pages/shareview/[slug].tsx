@@ -1,13 +1,11 @@
-import { Comments, Student, UserRole } from '@prisma/client';
-import axios from 'axios';
+import { UserRole } from '@prisma/client';
 import StudentsLayout from 'components/Layouts/StudentsLayout';
 import ExperienceDetails from 'components/Shareview/dataforms/ExperienceDetails';
+import Comments from 'components/Shareview/forms/Comments';
 import { checkUserRoleAndRedirect } from 'lib/checks';
-import { ModifiedExperienceType } from 'lib/interfaces';
 import { prisma } from 'lib/prisma';
 import Link from 'next/link';
-import { useState } from 'react';
-import Router from 'next/router';
+import { ExperiencePageProps } from 'lib/types';
 
 export async function getServerSideProps(context: any) {
   const { params } = context;
@@ -17,6 +15,7 @@ export async function getServerSideProps(context: any) {
   });
   const comments = await prisma.comments.findMany({
     where: { experienceId: experience?.id },
+    include: { Student: { select: { name: true } } },
   });
   return checkUserRoleAndRedirect(context, UserRole.STUDENT, {
     extra: {
@@ -26,37 +25,11 @@ export async function getServerSideProps(context: any) {
   });
 }
 
-type ExpPageProps = {
-  experience: ModifiedExperienceType;
-  user: Student;
-  comments: Comments;
-};
-
 export default function ExperiencePage({
   experience,
   user,
   comments,
-}: ExpPageProps) {
-  const [comment, setComment] = useState<string>();
-
-  async function handleComments(e: any) {
-    e.preventDefault();
-    const data = {
-      by: user.email,
-      body: comment,
-      experienceId: experience.id,
-    };
-
-    try {
-      const res = await axios.post('/api/shareview/createComment', data);
-      if (res.status == 200) {
-        Router.reload();
-      }
-    } catch (error) {
-      alert(error);
-    }
-  }
-
+}: ExperiencePageProps) {
   return (
     <>
       <div className='w-full min-h-full lg:min-w-[40rem] lg:min-h-screen rounded-md shadow-none bg-slate-100'>
@@ -88,36 +61,14 @@ export default function ExperiencePage({
           user={user}
           comments={comments}
         />
-        {/*comments form starts*/}
-        {/* <div className='w-full flex flex-col items-center mt-4'>
-          <fieldset className="flex flex-col gap-2 items-start rounded mt-2 p-5 bg-white shadow-lg w-fit">
-              <h1 className="text-sm font-semibold bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full px-2 w-fit">Comments</h1>
-              <div className="flex flex-col items-start rounded mt-2 w-full">
-                
-                <form onSubmit={handleComments}>
-                  <textarea
-                      className='p-2 w-full rounded bg-white text-sm md:text-base border-2 border-gray-500 focus:outline-none focus:border-blue-300 transition ease-in-out delay-75 duration-75'
-                      placeholder='Comment your thoughts'
-                      required
-                  />
-                  <button type='submit' className='text-white text-sm bg-purple-500 border py-0.5 px-3 my-2 rounded'>Comment</button>
-                </form>
-              </div>
-              <div className="flex flex-col ml-1">
-                <div className="flex flex-col my-0.5 gap-2">
-                  <p className="text-sm font-semibold">👤Pranav Purkar <span className="text-blue-500">))</span></p>
-                  <em className="text-sm mt-0.5">Nice post, thank you for posting this</em>
-                </div>
-                <div className="flex flex-col my-0.5 gap-2">
-                  <p className="text-sm font-semibold">👤Aman Ilatkar <span className="text-blue-500">))</span></p>
-                  <em className="text-sm mt-0.5">Nice post, thank you for posting this</em>
-                </div>
-              </div>
-          </fieldset>
-
-          <div>{comments.body}</div>
-        </div> */}
-          {/*comments form ends*/}
+        <div>
+          <Comments
+            userEmail={user.email}
+            //@ts-ignore
+            comments={comments}
+            experienceID={experience.id}
+          />
+        </div>
       </div>
     </>
   );

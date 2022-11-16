@@ -33,26 +33,6 @@ export default function ExperienceDetails({
   const [link, setLink] = useState('');
   const [body, setBody] = useState('');
   const [follow, setFollow] = useState(false);
-  const [comment, setComment] = useState<string>();
-
-  async function handleComments(e: any) {
-    e.preventDefault();
-    const data = {
-      by: user.email,
-      body: comment,
-      experienceId: experience.id,
-    };
-
-    try {
-      const res = await axios.post('/api/shareview/createComment', data);
-      if (res.status == 200) {
-        Router.reload();
-      }
-    } catch (error) {
-      alert(error);
-    }
-  }
-  
 
   async function handleDelete(e: any) {
     e.preventDefault();
@@ -110,8 +90,8 @@ export default function ExperienceDetails({
         </div>
 
         <div className='w-2/3'>
-          <div className='shadow-md rounded bg-white'>
-            <div className='flex flex-col gap-1 p-7 px-5'>
+          <div className='shadow rounded bg-white'>
+            <div className='flex flex-col gap-1 p-4'>
               <div className='flex items-center justify-between'>
                 <h1 className='font-bold text-3xl text-gray-800 w-5/6'>
                   {experience.title}

@@ -311,6 +311,7 @@ model Events {
   regLink String
   date    String
   status  Status
+  type    String
   body    String  @db.LongText
   winner  String?
 
