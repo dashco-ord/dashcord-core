@@ -27,18 +27,25 @@ export default function ResourcesPage({ materials }: ResourcesPageProps) {
             <div
               key={material.id}
               className='border bg-white rounded p-3 border-slate-700 shadow-sm mt-4'>
-              <h1 className='font-bold text-xl lg:text-3xl mb-2 hover:text-purple-500'>
-                <Link href={`/resources/${material.id}`}>
-                  <a>{material.title}</a>
-                </Link>
-              </h1>
+                <div className='flex justify-between items-center'>
+                  <h1 className='font-bold text-xl lg:text-2xl mb-2 text-gray-700 hover:text-purple-500'>
+                    <Link href={`/resources/${material.id}`}>
+                      <a>{material.title}</a>
+                    </Link>
+                  </h1>
+                  <p className='text-xs text-gray-50 bg-gray-700 p-[0.15rem] px-1.5 rounded-md'>
+                    {moment(material.createdAt).format('MMMM YYYY')}
+                  </p>
+                </div>
+              <div className='flex gap-1'>
               {
                 material.links.split(", ").map((link) =>
-              <p className='lg:ml-auto text-sm text-slate-800 mb-3'>
-                {link}
-              </p>
+              <a href={`${link}`} target="_blank" className='px-2 text-sm mb-3 bg-purple-500 rounded-lg w-fit text-white'>
+                Resource
+              </a>
                 )
               }
+              </div>
               {/* <p className='lg:ml-auto text-sm text-slate-800 mb-3'>
                 {moment(material.createdAt).format('MMMM Do YYYY')}
               </p> */}
