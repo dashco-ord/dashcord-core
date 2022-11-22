@@ -8,9 +8,11 @@ import { prisma } from 'lib/prisma';
 import { ModifiedExperienceType } from 'lib/interfaces';
 import axios from 'axios';
 import Link from 'next/link';
+import StringFilterItem from 'components/FilterItems/StringFilterItem';
 
 export async function getServerSideProps(context: any) {
   const experiences = await prisma.experience.findMany({
+    orderBy: { createdAt: 'desc' },
     include: { Student: { select: { name: true } } },
   });
   return checkUserRoleAndRedirect(context, UserRole.STUDENT, {
@@ -28,6 +30,10 @@ export default function ShareviewHome({ experiences }: ShareviewHomeProps) {
   const [searchResults, setSearchResults] =
     useState<ModifiedExperienceType[]>();
 
+  const [selectedFilter, setSelectedFilter] = useState<string>('latest');
+  const [filterResults, setFilterResults] =
+    useState<ModifiedExperienceType[]>();
+
   async function handleSearch() {
     const res = await axios.post('/api/shareview/search', {
       data: searchQuery,
@@ -43,12 +49,24 @@ export default function ShareviewHome({ experiences }: ShareviewHomeProps) {
     }
   }, [searchQuery]);
 
+  async function handleFilter() {
+    const res = await axios.post('/api/shareview/filter', {
+      data: selectedFilter,
+    });
+    if (res.status === 200) {
+      setFilterResults(JSON.parse(JSON.stringify(res.data)));
+    }
+  }
+
+  useEffect(() => {
+    handleFilter();
+  }, [selectedFilter]);
+
   return (
     <StudentsLayout>
       <div className='w-full min-h-full lg:min-w-[40rem] lg:min-h-[20rem] rounded-md shadow-none p-4'>
         <h1 className='font-bold text-xl'>Shareview</h1>
         <em className='text-sm text-slate-400'>Interview Experiences straight from college students</em>
-
         <div className='flex items-center'>
           <div className='mt-5 border border-slate-400 flex rounded w-fit text-sm lg:text-md'>
             <p
@@ -96,6 +114,45 @@ export default function ShareviewHome({ experiences }: ShareviewHomeProps) {
               </div>
             )}
           </div>
+        </div>
+
+        <div className='mt-4 list-none flex overflow-x-scroll'>
+          <StringFilterItem
+            name='Latest'
+            label='latest'
+            selected={selectedFilter == 'latest'}
+            onSelect={setSelectedFilter}
+          />
+          <StringFilterItem
+            name='Oldest'
+            label='oldest'
+            selected={selectedFilter == 'oldest'}
+            onSelect={setSelectedFilter}
+          />
+          <StringFilterItem
+            name='Package High'
+            label='packageHigh'
+            selected={selectedFilter == 'packageHigh'}
+            onSelect={setSelectedFilter}
+          />
+          <StringFilterItem
+            name='Package Low'
+            label='packageLow'
+            selected={selectedFilter == 'packageLow'}
+            onSelect={setSelectedFilter}
+          />
+          <StringFilterItem
+            name='Criteria High'
+            label='criteriaHigh'
+            selected={selectedFilter == 'criteriaHigh'}
+            onSelect={setSelectedFilter}
+          />
+          <StringFilterItem
+            name='Criteria Low'
+            label='criteriaLow'
+            selected={selectedFilter == 'criteriaLow'}
+            onSelect={setSelectedFilter}
+          />
         </div>
 
         {view === 'global' && (
