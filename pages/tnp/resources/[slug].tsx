@@ -89,13 +89,10 @@ export default function ResourceAdminPage({ material }: ResourcePageProps) {
             <label className='text-lg font-semibold mr-5 pb-2 md:text-lg'>
               Links: *
             </label>
-            {material.links.split(',').map((link) => (
               <input
-                key={link}
                 className='p-2 pl-0 rounded-sm bg-white text-sm md:text-base border-b-2 border-b-gray-500 focus:outline-none focus:border-purple-500 transition ease-in-out delay-75 duration-75'
-                defaultValue={link}
+                defaultValue={material.links}
               />
-            ))}
           </div>
 
           <div className='flex flex-col pb-6 '>
