@@ -7,9 +7,11 @@ import { ModifiedExperienceType } from 'lib/interfaces';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import StringFilterItem from 'components/FilterItems/StringFilterItem';
 
 export async function getServerSideProps(context: any) {
   const experiences = await prisma.experience.findMany({
+    orderBy: { createdAt: 'desc' },
     include: { Student: { select: { name: true } } },
   });
   return checkUserRoleAndRedirect(context, UserRole.TNP, {
@@ -26,6 +28,10 @@ export default function ShareviewAdminPage({
 }: ShareviewAdminPageProps) {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [searchResults, setSearchResults] =
+    useState<ModifiedExperienceType[]>();
+
+  const [selectedFilter, setSelectedFilter] = useState<string>('latest');
+  const [filterResults, setFilterResults] =
     useState<ModifiedExperienceType[]>();
 
   async function handleSearch() {
@@ -74,6 +80,44 @@ export default function ShareviewAdminPage({
               ))}
             </div>
           )}
+        </div>
+        <div className='mt-4 list-none flex overflow-x-scroll'>
+          <StringFilterItem
+            name='Latest'
+            label='latest'
+            selected={selectedFilter == 'latest'}
+            onSelect={setSelectedFilter}
+          />
+          <StringFilterItem
+            name='Oldest'
+            label='oldest'
+            selected={selectedFilter == 'oldest'}
+            onSelect={setSelectedFilter}
+          />
+          <StringFilterItem
+            name='Package High'
+            label='packageHigh'
+            selected={selectedFilter == 'packageHigh'}
+            onSelect={setSelectedFilter}
+          />
+          <StringFilterItem
+            name='Package Low'
+            label='packageLow'
+            selected={selectedFilter == 'packageLow'}
+            onSelect={setSelectedFilter}
+          />
+          <StringFilterItem
+            name='Criteria High'
+            label='criteriaHigh'
+            selected={selectedFilter == 'criteriaHigh'}
+            onSelect={setSelectedFilter}
+          />
+          <StringFilterItem
+            name='Criteria Low'
+            label='criteriaLow'
+            selected={selectedFilter == 'criteriaLow'}
+            onSelect={setSelectedFilter}
+          />
         </div>
         <GlobalFeed feed={experiences} forAdmins={true} />
       </div>

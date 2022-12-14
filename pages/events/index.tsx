@@ -202,21 +202,21 @@ export default function EventsPage({
           <UpcomingEventsPage
             //@ts-ignore
             events={filterResults ? filterResults : upcoming}
-            forAdmin={true}
+            forAdmin={false}
           />
         ) : null}
         {view === 'ongoing' ? (
           <OngoingEventsPage
             //@ts-ignore
             events={filterResults ? filterResults : ongoing}
-            forAdmin={true}
+            forAdmin={false}
           />
         ) : null}
         {view === 'concluded' ? (
           <ConcludedEventsPage
             //@ts-ignore
             events={filterResults ? filterResults : concluded}
-            forAdmin={true}
+            forAdmin={false}
           />
         ) : null}
 
