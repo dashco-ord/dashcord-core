@@ -31,9 +31,9 @@ export default function ExperiencePage({
   comments,
 }: ExperiencePageProps) {
   return (
-    <StudentsLayout>
-      <div className='w-full min-h-full lg:min-w-[40rem] lg:min-h-[20rem] rounded-md shadow-none'>
-        <div className=' flex flex-col bg-slate-100'>
+    <>
+      <div className='w-full min-h-full lg:min-w-[40rem] lg:min-h-screen rounded-md shadow-none bg-slate-100'>
+        <div className=' flex flex-col'>
           <Link href={'/shareview'}>
             <a className='my-5 ml-28 text-blue-800 font-semibold rounded flex items-center'>
               <svg
@@ -58,6 +58,8 @@ export default function ExperiencePage({
           experience={experience}
           forAdmin={experience.by === user.email ? true : false}
           tnp={false}
+          user={user}
+          comments={comments}
         />
         <div>
           <Comments
@@ -68,6 +70,6 @@ export default function ExperiencePage({
           />
         </div>
       </div>
-    </StudentsLayout>
+    </>
   );
 }

@@ -1,5 +1,6 @@
 import { Experience, UserRole } from '@prisma/client';
 import TnpLayout from 'components/Layouts/TnpLayout';
+import ExperienceDetails from 'components/Shareview/dataforms/ExperienceDetails';
 import ExperienceModal from 'components/Shareview/dataforms/ExperienceModal';
 import { checkUserRoleAndRedirect } from 'lib/checks';
 import { prisma } from 'lib/prisma';
@@ -44,6 +45,14 @@ export default function ExperiencePage({ experience }: ExpPageProps) {
             </a>
           </Link>
         </div>
+
+        {/* <ExperienceDetails
+          experience={experience}
+          forAdmin={true}
+          tnp={true}
+          user={user}
+          comments={comments}
+        /> */}
 
         <ExperienceModal experience={experience} forAdmin={true} tnp={true} />
       </div>
