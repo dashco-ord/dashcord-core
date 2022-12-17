@@ -64,14 +64,17 @@ export default function ResourcesAdminPage({ materials }: ResourcesPageProps) {
                   </p>
                 </div>
                 <div className='flex gap-1'>
-              {
-                material.links.split(", ").map((link) =>
-              <a href={`${link}`} target="_blank" className='px-2 text-sm mb-3 bg-purple-500 rounded-lg w-fit text-white'>
-                Resource
-              </a>
-                )
-              }
-              </div>
+                  {material.links.split(', ').map((link) => (
+                    <a
+                      key={link}
+                      href={`${link}`}
+                      target='_blank'
+                      rel='noreferrer'
+                      className='px-2 text-sm mb-3 bg-purple-500 rounded-lg w-fit text-white'>
+                      Resource
+                    </a>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
