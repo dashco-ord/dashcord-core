@@ -66,7 +66,7 @@ export default function ShareviewHome({ experiences }: ShareviewHomeProps) {
     <StudentsLayout>
       <div className='w-full min-h-full lg:min-w-[40rem] lg:min-h-[20rem] rounded-md shadow-none p-4'>
         <h1 className='font-bold text-xl'>Shareview</h1>
-
+        <em className='text-sm text-slate-400'>Interview Experiences straight from college students</em>
         <div className='flex items-center'>
           <div className='mt-5 border border-slate-400 flex rounded w-fit text-sm lg:text-md'>
             <p
