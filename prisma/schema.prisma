@@ -1,12 +1,10 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider             = "mysql"
-  url                  = env("DATABASE_URL")
-  referentialIntegrity = "prisma"
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model Hod {
@@ -134,7 +132,7 @@ model Student {
   seatType               String?
   admissionDate          String?
   achivement             String?   @db.VarChar(200)
-  achivement_description String?   @db.LongText
+  achivement_description String?   @db.VarChar(400)
   year                   Int?
   section                String?
   bloodGroup             String?
@@ -262,7 +260,7 @@ model Meetings {
 model Experience {
   id       String @id @default(cuid())
   title    String
-  body     String @db.LongText
+  body     String @db.VarChar(400)
   role     String
   company  String
   salary   String
@@ -283,7 +281,7 @@ model PlacementMaterial {
   id    String @id @default(cuid())
   title String
   links String
-  body  String @db.LongText
+  body  String @db.VarChar(400)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -291,7 +289,7 @@ model PlacementMaterial {
 
 model Comments {
   id           String  @id @default(cuid())
-  body         String  @db.LongText
+  body         String  @db.VarChar(400)
   by           String
   experienceId String?
 
@@ -312,7 +310,7 @@ model Events {
   date    String
   status  Status
   type    String
-  body    String  @db.LongText
+  body    String  @db.VarChar(400)
   winner  String?
 
   createdAt DateTime @default(now())
