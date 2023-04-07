@@ -1,5 +1,5 @@
-# Dashcord
-The in house student performance monitor made specificly with our college needs in mind
+# Dashcord-Core
+A in Highly customized student performance monitor made specificly for our college needs in mind
 
 ## ❔ What is this project about ? 
 This is a student performance monitor for Teacher Guardian scheme at our college
