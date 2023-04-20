@@ -1,0 +1,7 @@
+build
+coverage
+
+{
+    singleQuote=true
+    tabWidth=4
+}
