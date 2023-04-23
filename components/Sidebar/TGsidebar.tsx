@@ -31,7 +31,7 @@ const TgSidebar = () => {
                     <circle cx={30} cy={30} r={20} fill='#000028' />
                 </svg>
             </div>
-            <div className={`my-5 ${isActive(`/tg`) ? "bg-purple-500 rounded-md p-2 text-white" : ""}`}>
+            <div className={`my-5 ${isActive(`/tg`) ? "rounded-md bg-purple-500 p-1 text-white" : "hover:bg-purple-300 hover:rounded-md p-1"}`}>
                 <Link href={`/tg`}>
                     <a className="flex items-center">
                         <svg
@@ -53,7 +53,7 @@ const TgSidebar = () => {
             </div>
 
             <div
-                className={`my-5 ${isActive(`/tg/user`) ? "bg-purple-500 rounded-md p-2 text-white" : ""
+                className={`my-5 ${isActive(`/tg/user`) ? "rounded-md bg-purple-500 p-1 text-white" : "hover:bg-purple-300 hover:rounded-md p-1"
                     }`}>
                 <Link href={`/tg/user`}>
                     <a className="flex items-center">
@@ -76,8 +76,7 @@ const TgSidebar = () => {
             </div>
 
             <div
-                className={`my-5
-         ${isActive(`/tg/task`) ? "bg-purple-500 rounded-md p-2 text-white" : ""
+                className={`my-5 ${isActive(`/tg/task`) ? "rounded-md bg-purple-500 p-1 text-white" : "hover:bg-purple-300 hover:rounded-md p-1"
                     }`}>
                 <Link href={`/tg/task`}>
                     <a className="flex items-center">
@@ -100,10 +99,7 @@ const TgSidebar = () => {
             </div>
 
             <div
-                className={`my-5 ${isActive(`/tg/students`)
-                    ? "bg-purple-500 rounded-md p-2 text-white"
-                    : ""
-                    }`}>
+                className={`my-5 ${isActive(`/tg/students`) ? "rounded-md bg-purple-500 p-1 text-white" : "hover:bg-purple-300 hover:rounded-md p-1"}`}>
                 <Link href={`/tg/students`}>
                     <a className="flex items-center">
                         <svg
@@ -127,10 +123,7 @@ const TgSidebar = () => {
             </div>
 
             <div
-                className={`my-5 mt-auto ${isActive(`/tg/settings`)
-                    ? "bg-purple-500 rounded-md p-2 text-white"
-                    : ""
-                    }`}>
+                className={`my-5 mt-auto ${isActive(`/tg/settings`) ? "rounded-md bg-purple-500 p-1 text-white" : "hover:bg-purple-300 hover:rounded-md p-1"}`}>
                 <Link href={`/tg/settings`}>
                     <a className="flex items-center">
                         <svg
@@ -157,7 +150,7 @@ const TgSidebar = () => {
             </div>
 
             <div
-                className={`my-5 ${isActive("/logout") ? "bg-purple-500 rounded-md p-2 text-white" : ""
+                className={`my-5 ${isActive("/logout") ? "rounded-md bg-purple-500 p-1 text-white" : "hover:bg-purple-300 hover:rounded-md p-1"
                     }`}>
                 <Link href={session?.user ? `/api/auth/signout` : `/api/tg/auth/login`}>
                     <a className="flex items-center">
